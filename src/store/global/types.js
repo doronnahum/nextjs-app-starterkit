@@ -1,0 +1,4 @@
+export default {
+  CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
+  PRESS_BUTTON: 'PRESS_BUTTON',
+};

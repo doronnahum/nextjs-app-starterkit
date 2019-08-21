@@ -1,0 +1,15 @@
+//////////////////////
+// general app declaration
+//////////////////////
+$darkSkyBlue: #31afd6;
+
+@mixin grid($gap: 10px,$justify: initial,$alignItems: initial,$template-cols: initial,$template-rows: initial,$areas: initial) {
+  display: grid;
+  grid-gap: $gap;
+  justify-content: $justify;
+  align-items: $alignItems;
+  grid-template-columns: $template-cols;
+  grid-template-rows: $template-rows;
+  grid-template-areas: $areas;
+}
+
