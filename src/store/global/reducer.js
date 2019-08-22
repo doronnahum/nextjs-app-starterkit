@@ -4,7 +4,7 @@ import produce from 'immer';
 
 export default function globalReducer(state = initialState, action) {
   switch (action.type) {
-    case EXAMPLE: {
+    case types.EXAMPLE: {
       const nextState = produce(state, draftState => {
         draftState.buttonfromstate = true;
       })

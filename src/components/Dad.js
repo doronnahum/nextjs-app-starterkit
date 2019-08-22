@@ -1,26 +1,35 @@
 import React, { Component } from 'react'
 import Draggable from 'react-draggable';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 export default class Dad extends Component {
 
 
 
     render() {
-        const { style, type, handleStart, handleDrag, handleStop } = this.props
+        const { style, type, handleStart, handleDrag, handleStop, deleteRoom, bin, position } = this.props
         return (
-            <div style={style}>
+            <div>
                 <Draggable
                     axis="both"
                     handle=".handle"
-                    defaultPosition={{ x: 0, y: 0 }}
-                    position={null}
-                    grid={[25, 25]}
+                    defaultPosition={position}
+                    // position={position}
+                    grid={[5, 5]}
                     scale={1}
-                    onStart={(event, data) => handleStart(event, data, type)}
-                    onDrag={(event, data) => handleDrag(event, data, type)}
-                    onStop={(event, data) => handleStop(event, data, type)}>
-                    <div className={`item-${type} handle`}>
-                        {/* <div className="handle">Drag from here</div> */}
-                        {/* <div>This readme is really dragging on...</div> */}
+                    onStart={handleStart && handleStart}
+                    onDrag={handleDrag && handleDrag}
+                    onStop={handleStop && handleStop}>
+                    <div style={style}>
+
+                        {/* {bin && <button onClick={deleteRoom}>
+                            <DeleteIcon fontSize='small' />
+                        </button>} */}
+                        <div className={`item-${type} handle`}>
+
+                            {/* <div className="handle">Drag from here</div> */}
+                            {/* <div>This readme is really dragging on...</div> */}
+                        </div>
                     </div>
                 </Draggable>
             </div>
