@@ -40,3 +40,40 @@
   width: 150px;
   height: 50px;
 }
+.item-square {
+  background: green;
+  width: 50px;
+  height: 50px;
+}
+.item-circle {
+  background: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.item-rectangle {
+  background: green;
+  width: 150px;
+  height: 50px;
+}
+
+// .dragging-area-when-enter {
+//   background: green;
+//   border: 3px solid pink;
+// }
+// .dragClass {
+//   background: lightgreen;
+//   border: 3px solid pink;
+// }
+
+.smooth-dnd-container{
+  // background: lightblue
+}
+.smooth-dnd-draggable-wrapper {
+  // background: orange
+}
+
+.smooth-dnd-container.horizontal {
+  display: flex !important;
+  // justify-content: space-between;
+}

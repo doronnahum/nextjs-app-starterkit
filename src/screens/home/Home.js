@@ -51,20 +51,24 @@ class Home extends Component {
         const _data = await JSON.parse(data)
         // this.setState({ placedrooms: _data.elements })
     }
+    // createNewElement() {
+    //     return React.createElement('div', { style: { background: 'red', height: 30, width: 30 } })
+    // }
 
-    handleStart = (event, data) => {
-        console.log('----------------');
-        // console.log('event', event);
+    handleStart = (event, data, type) => {
+        console.log('------start----------');
+        console.log('event', event);
         console.log('----------------');
 
-        // this.setState({
-        //     createNewElement: true
-        // })
+        this.setState({
+            createNewElement: true
+        })
         logger.info('start drag');
     }
 
     handleDrag = (event, data) => {
-        // console.log('----------handleDrag----------');
+        // console.log('------dragging----------');
+        // console.log('event', event);
         // console.log('event', event);
         // console.log('data:', data);
         // console.log('-----------------------------');
@@ -81,11 +85,15 @@ class Home extends Component {
 
         this.setState({ placedrooms: arr })
     }
+    onCopy(data, event) {
+        console.log('------co!!!!!!!!!!!!!!!!!!!!!!!py----------');
 
-    handleStop = (event, data, type, stop) => {
-        console.log('data', data);
+    }
+
+    handleStop = (event, data, type) => {
+        console.log('------Stop----------');
         console.log('event', event);
-
+        console.log('data', data);
         // debugger
 
         const obj = {
@@ -103,6 +111,9 @@ class Home extends Component {
             "reference_id": "4567",
             "parent_id": "1234"
         }
+        this.setState({
+            // createNewElement: false
+        })
         this.updateData(obj)
         // this.openDialog()
     }
@@ -123,9 +134,10 @@ class Home extends Component {
             position={room.position}
             style={{ marginBottom: 5, background: 'black' }}
             type={room.type}
-            handleStart={this.handleStart}
+            handleStart={(x, y) => this.handleStart(x, y, room.type)}
             handleDrag={this.handleDrag}
-            handleStop={(x, y) => this.handleStop(x, y, room.type)} />)
+            handleStop={(x, y) => this.handleStop(x, y, room.type)}
+            onCopy={this.onCopy} />)
     }
 
     // rendeNewElements() {
@@ -162,12 +174,13 @@ class Home extends Component {
     }
 
     render() {
-        const { textValue, dialogOpen, placedrooms } = this.state
+        const { textValue, dialogOpen, placedrooms, createNewElement } = this.state
         console.log('placedrooms', placedrooms);
 
         return (
             <div className='drop-and-drag' style={{ position: 'relative' }}>
                 <div className='drop-and-drag__elements'>
+                    {/* {createNewElement && this.createNewElement()} */}
                     {this.renderItems()}
                 </div>
                 <div style={{}}>

@@ -1,88 +1,140 @@
 import React, { Component } from 'react'
+import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
+import 'src/styles/dad.scss'
 
-import { Draggable, Droppable } from 'react-drag-and-drop'
-
-
-class Demo extends React.Component {
-
+const ELEMENTS = [
+    {
+        id: 1,
+        title: 'classroom',
+        type: 'square',
+        width: 50,
+        height: 50
+    },
+    {
+        id: 2,
+        title: 'kitchen',
+        type: 'circle',
+        width: 50,
+        height: 50
+    },
+    {
+        id: 3,
+        title: 'bathroom',
+        type: 'rectangle',
+        width: 150,
+        height: 50
+    },
+]
+export default class Example extends Component {
     state = {
-        draggable: [{ yolo: 'drag' }, { yolo: 'us' }, { yolo: 'plz' }],
-        droppedItems: [],
-        hovering: false
+        items: [],
+        isDraggableElement: false
+    }
+    onDragStart = (x) => {
+        console.log('start');
+        console.log('x', x);
+
+    }
+    onDropItem = (event) => {
+        const { isDraggableElement } = this.state
+        console.log('onDropItem');
+        console.log('event', event);
+        event.srcElement.style.visibility = 'hidden';
+        // offsetHeight
+        // offsetLeft
+        // this.setState({ isDraggableElement: true })
     }
 
-    onDragEnter() {
-        this.setState({ hovering: true })
-    }
-    onDragLeave() {
-        this.setState({ hovering: false })
-    }
-    onDrop(e) {
-        console.log('e', e);
-        const { droppedItems } = this.state
-        let arr = [...droppedItems]
-        arr.push({ yolo: e.yolo })
-        this.setState({ droppedItems: arr, hovering: false, })
-    }
-    renderDropItems() {
-        const { droppedItems } = this.state
-        return droppedItems.map(item => <Draggable type="yolo"
-            data={item.yolo}
-            style={{ background: 'blue', height: 50, width: 50, marginBottom: 10 }}>{item.yolo} </Draggable>)
-    }
 
-    renderElements() {
-        return this.state.draggable.map((item, index) => {
-            return (
-                <Draggable type="yolo" data={item.yolo}>
-                    <div key={index} style={{ background: 'blue', height: 50, width: 50, marginRight: 10 }}>
-                        {item.yolo}
-                    </div>
-                </Draggable>
-            )
-        })
-    }
-    render() {
-        const { droppedItems } = this.state
-        console.log('droppedItems', droppedItems);
+    dropData(event) {
+        console.log('event', event);
 
 
-        let droppableStyle = {
-            background: 'orange',
-            height: '200px',
-            width: 400
+    }
+    onDragEnter(data) {
+        console.log('onDragEnter');
+
+    }
+    onDragLeave(data) {
+        console.log('onDragLeave');
+        console.log('data', data);
+
+    }
+
+    onHit = (event) => {
+        const { items, isDraggableElement } = this.state
+        console.log('onHit');
+        console.log('event', event);
+        const newItem = {
+            ...event.dragData,
+            age: event.dragData.age,
+            height: event.dragData.height,
+            id: event.dragData.id,
+            title: event.dragData.title,
+            type: event.dragData.type,
+            width: event.dragData.width,
+            x: event.x,
+            y: event.y
         }
-        if (this.state.hovering) droppableStyle.backgroundColor = 'pink'
+        // if (!event.dragData.movableItem) {
+        //     debugger
+        this.setState({ items: [...items, newItem] })
+        // event.containerElem.style.visibility = 'hidden';
+        // }
+
+    }
+    renderItems() {
+        const { items, isDraggableElement } = this.state
+        return items.map((item, i) => {
+            return <DragDropContainer targetKey="foo" key={i}
+                dragData={{ ...item, movableItem: true }}
+                onDragStart={this.onDragStart}
+                onDrop={this.onDropItem}
+            >
+                <div className={`item-${item.type}`}
+                    style={{ background: 'yellow', position: 'absolute', top: item.y - item.height, left: item.x - item.width }}>
+                    {item.title}
+                </div>
+            </DragDropContainer>
+        })
+        // <div key={i} style={{ background: 'yellow', width: 50, height: 50, position: 'absolute', top: item.y, left: item.x }}>{item.name}</div>)
+    }
+    renderElements() {
+        return ELEMENTS.map((ELEMENT) => <DragDropContainer targetKey="foo" dragClone key={ELEMENT.type}
+            dragData={{ ...ELEMENT }}
+        // onDragStart={this.onDragStart}
+        >
+            <div className={`item-${ELEMENT.type}`} style={{ background: 'yellow' }}>{ELEMENT.title}</div>
+        </DragDropContainer>)
+    }
+
+    render() {
+        const { items } = this.state
+        console.log('items&&&&&&&&&&&&', items);
+
         return (
             <div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>{this.renderElements()}</div>
-                <div style={{ border: '1px solid red', width: '200px', height: '200px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', float: 'left' }}>Drop here...</span>
-                    <Droppable
-                        types={['yolo']}
-                        style={droppableStyle}
-                        onDrop={this.onDrop.bind(this)}
-                        onDragEnter={this.onDragEnter.bind(this)}
-                        onDragLeave={this.onDragLeave.bind(this)}>
-                        <div style={{ textAlign: 'center', lineHeight: '100px', background: 'orange', height: 400, width: 400, display: 'flex', flexDirection: 'row' }}>
-                            {this.renderDropItems()}
-                        </div>
-                    </Droppable>
-                </div>
-                {/* <div style={{ border: '1px solid red', width: '200px', height: '200px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', float: 'left' }}>But not here...</span>
-                    <Droppable
-                        enabled={false}
-                        style={{ height: '200px' }}
-                        types={['yolo']}
-                        onDrop={this.onDrop.bind(this)}>
-                        <div style={{ textAlign: 'center', lineHeight: '100px' }}>{this.state.dropped}</div>
-                    </Droppable>
-                </div> */}
-            </div>
+                {ELEMENTS.map((ELEMENT) => <DragDropContainer targetKey="foo" dragClone key={ELEMENT.type}
+                    dragData={{ ...ELEMENT }}
+                // onDragStart={this.onDragStart}
+                >
+                    <div className={`item-${ELEMENT.type}`} style={{ background: 'yellow' }}>{ELEMENT.title}</div>
+                </DragDropContainer>
+                )}
+                <DropTarget targetKey="foo"
+                    dropData={{ name: 'wzazaaaaaaa' }}
+                    onDragEnter={this.onDragEnter}
+                    onDragLeave={this.onDragLeave}
+                    onHit={this.onHit}
+
+                >
+                    <div style={{ background: 'blue', height: 400 }}>
+                        {this.renderItems()}
+                        {/* I'm a valid drop target for the object above since we both have the same targetKey! */}
+                    </div>
+                </DropTarget >
+            </div >
         )
     }
-
 }
 
-export default Demo

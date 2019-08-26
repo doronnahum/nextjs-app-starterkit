@@ -7,19 +7,20 @@ export default class Dad extends Component {
 
 
     render() {
-        const { style, type, handleStart, handleDrag, handleStop, deleteRoom, bin, position } = this.props
+        const { style, type, handleStart, handleDrag, handleStop, deleteRoom, bin, position, onCopy } = this.props
         return (
             <div>
                 <Draggable
                     axis="both"
                     handle=".handle"
-                    defaultPosition={position}
+                    defaultPosition={{ x: 10, y: 10 }}
                     // position={position}
                     grid={[5, 5]}
                     scale={1}
                     onStart={handleStart && handleStart}
                     onDrag={handleDrag && handleDrag}
-                    onStop={handleStop && handleStop}>
+                    onStop={handleStop && handleStop}
+                    onCopy={onCopy && onCopy}>
                     <div style={style}>
 
                         {/* {bin && <button onClick={deleteRoom}>

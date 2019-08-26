@@ -1,41 +1,24 @@
 import React, { useState, useCallback } from 'react'
 import Container from './Container'
-import CustomDragLayer from './CustomDragLayer'
-const DragAroundCustomDragLayer = () => {
-  const [snapToGridAfterDrop, setSnapToGridAfterDrop] = useState(false)
-  const [snapToGridWhileDragging, setSnapToGridWhileDragging] = useState(false)
-  const handleSnapToGridAfterDropChange = useCallback(() => {
-    setSnapToGridAfterDrop(!snapToGridAfterDrop)
-  }, [snapToGridAfterDrop])
-  const handleSnapToGridWhileDraggingChange = useCallback(() => {
-    setSnapToGridWhileDragging(!snapToGridWhileDragging)
-  }, [snapToGridWhileDragging])
+export default function DragAroundNaive() {
+  const [hideSourceOnDrag, setHideSourceOnDrag] = useState(true)
+  const toggle = useCallback(() => setHideSourceOnDrag(!hideSourceOnDrag), [
+    hideSourceOnDrag,
+  ])
   return (
     <div>
-      <Container snapToGrid={snapToGridAfterDrop} />
-      <CustomDragLayer snapToGrid={snapToGridWhileDragging} />
+      <Container hideSourceOnDrag={hideSourceOnDrag} />
       <p>
-        <label htmlFor="snapToGridWhileDragging">
+        <label htmlFor="hideSourceOnDrag">
           <input
-            id="snapToGridWhileDragging"
+            id="hideSourceOnDrag"
             type="checkbox"
-            checked={snapToGridWhileDragging}
-            onChange={handleSnapToGridWhileDraggingChange}
+            checked={hideSourceOnDrag}
+            onChange={toggle}
           />
-          <small>Snap to grid while dragging</small>
-        </label>
-        <br />
-        <label htmlFor="snapToGridAfterDrop">
-          <input
-            id="snapToGridAfterDrop"
-            type="checkbox"
-            checked={snapToGridAfterDrop}
-            onChange={handleSnapToGridAfterDropChange}
-          />
-          <small>Snap to grid after drop</small>
+          <small>Hide the source item while dragging</small>
         </label>
       </p>
     </div>
   )
 }
-export default DragAroundCustomDragLayer
