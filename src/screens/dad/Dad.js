@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
+import DaD from 'src/components/dad/DaD'
+import Header from 'src/components/layout/Header'
 import 'src/styles/dad.scss'
-import Example from 'src/components/example4/Example'
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
 
 class Dad extends Component {
     render() {
-        return <div style={{ background: 'red' }}>
-            {/* <DndProvider backend={HTML5Backend}> */}
-                <Example />
-            {/* </DndProvider> */}
+        return <div className='dad-Screen'>
+            <Header />
+            <DaD />
         </div >
 
     }
