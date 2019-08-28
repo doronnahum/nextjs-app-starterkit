@@ -1,80 +1,56 @@
 import React, { Component } from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
-import { applyDrag, ELEMENTS } from './utils';
+import { applyDrag, ROOMS, makeGrid, onClickUp, onClickDown, onDragEnter, onDragLeave, TOOLS } from './utils';
 import Arrows from 'src/components/dad/Arrows';
 import { Delete } from '@material-ui/icons';
-
+import produce from "immer"
 class DaD extends Component {
   constructor() {
     super();
-
     this.state = {
       rows: [],
       grid: 3,
       dragEnter: false,
       text: '',
-      elementsEdited: []
+      elementsEdited: [],
+      allowDropInGrid: true
     }
+    this.makeGrid = makeGrid.bind(this)
+    this.onClickUp = onClickUp.bind(this)
+    this.onClickDown = onClickDown.bind(this)
+    this.onDragEnter = onDragEnter.bind(this)
+    this.onDragLeave = onDragLeave.bind(this)
   }
 
   componentDidMount() {
     this.makeGrid()
   }
 
-
-  onClickUp(rows) {
-    let arr = [...rows]
-    arr.push(Array())
-    this.setState({ rows: arr })
-  }
-
-  onClickDown(rows) {
-    let arr = [...rows]
-    arr.pop()
-    this.setState({ rows: arr })
-  }
-
-  makeGrid() {
-    const { grid } = this.state
-    let arr = []
-    let i = 1
-    while (i <= grid) {
-      arr.push(Array())
-      i++
-    }
-    this.setState({ rows: arr })
-  }
-
-  onDragEnter = () => {
-    this.setState({ dragEnter: true })
-  }
-  onDragLeave = () => {
-    this.setState({ dragEnter: false })
-  }
-  renderToolBar() {
-    return ELEMENTS.map((element, i) => {
+  renderToolBar(items) {
+    return items.map((element, i) => {
       return (
         <Draggable key={i}
           className='dad-container__elements-toolbar__element'
           style={{ width: element.width, height: element.height }}>
-          <div className={`element-${element.type}`} style={{ width: element.width, height: element.height }}>
+          <div className={`room room-${element.shape}`}
+            style={{ width: element.width, height: element.height }}>
             {element.room}
           </div>
         </Draggable>
       );
     })
-
   }
+
   onSubmit = (event, indexOfRow, indexOfElement, id) => {
     event.preventDefault()
     const { rows } = this.state
     let _rows = [...rows]
     _rows[indexOfRow][indexOfElement] = {
-      ..._rows[indexOfRow][indexOfElement], title: this.state[`${indexOfRow}${indexOfElement}`],
+      ..._rows[indexOfRow][indexOfElement], title: this.state[id],
     }
     this.setState({
       rows: _rows,
-      [`${indexOfRow}${indexOfElement}`]: ''
+      // [`${indexOfRow}${indexOfElement}`]: ''
     })
   }
 
@@ -83,26 +59,40 @@ class DaD extends Component {
     this.setState({ [event.target.id]: text })
   }
 
-  deleteElement(indexOfRow, indexOfElement) {
+  deleteroom(indexOfRow, indexOfElement) {
     const { rows } = this.state
     let _rows = [...rows]
-
     const indexOfTheElement = _rows[indexOfRow].indexOf(rows[indexOfRow][indexOfElement])
     _rows[indexOfRow].splice(indexOfTheElement, 1)
-
     this.setState({
       rows: _rows
     })
   }
+  onDragEnter1() {
+    console.log('aaaaaa');
 
-  renderElementsInGrid(rows) {
+  }
+  onDragLeave1() {
+
+    console.log('zzzzzzz');
+  }
+  // onDragStart({ isSource, payload, willAcceptDrop }) {
+  //   console.log('startttttttt');
+  // }
+  shouldAcceptDrop(sourceContainerOptions, payload) {
+    console.log('sourceContainerOptions', sourceContainerOptions);
+    console.log('payload', payload);
+    return true //contine here!
+  }
+  renderRoomsInGrid(rows) {
     if (!rows.length) {
       return <div>empty for now....</div>
     }
     return rows.map((row, j) => {
       return <div key={j}>
         {j + 1}
-        <Container
+        <Container onDragStart={this.onDragStart}
+          // shouldAcceptDrop={() => this.state.allowDropInGrid ? true : false}
           orientation='horizontal'
           style={{ width: 800, height: 200 }}
           groupName="1"
@@ -113,28 +103,46 @@ class DaD extends Component {
           // removeOnDropOut
           onDrop={e => {
             let arr = [...rows]
-            arr[j] = applyDrag(row, e) //contunuie here
+            arr[j] = applyDrag(row, e)
             this.setState({ rows: arr, dragEnter: false })
-          }}>
+          }}
+        >
           {
-            row.map((element, i) => {
+            row.map((room, i) => {
 
               return (
                 <Draggable key={i}
-                  style={{ width: element.width, height: element.height }}>
-                  <div className={`element element-${element.type}`} style={{ width: element.width, height: element.height }}>
+                  style={{ width: room.width, height: room.height }}>
+                  <div className={`room room-${room.shape}`} style={{ width: room.width, height: room.height }}>
 
-                    {element.title
-                      ? element.title
-                      : < form onSubmit={(e) => this.onSubmit(e, j, i)} >
+                    {room.title
+                      ? <div>
+                        <button onClick={() => this.setState({ allowDropInGrid: false })}>press to put items</button>
+                        {room.title}
+                        <Container
+                          groupName="2"
+                          style={{ width: 100, height: 100, background: 'red' }}
+                          onDragEnter={this.onDragEnter1}
+                          onDragLeave={this.onDragLeave1}
+                          shouldAcceptDrop={this.shouldAcceptDrop}
+                        // getChildPayload={i => room.items[i]}
+                        // onDrop={e => {
+                        //   let arr = [...itemsToDrop]
+                        //   arr[j] = applyDrag(row, e) //contunuie here
+                        //   this.setState({ rows: arr, dragEnter: false })
+                        // }}
+                        >
+                        </Container>
+                      </div>
+                      : < form onSubmit={(e) => this.onSubmit(e, j, i, room.id)} >
                         <input style={{ width: 80 }}
-                          id={`${j}${i}`}
+                          id={room.id}
                           onChange={(e) => this.handleTextChange(e)}
-                          value={this.state[`${j}${i}`]} />
+                          value={this.state[room.id]} />
                         <input type="submit" />
                       </form>
                     }
-                    <button onClick={() => this.deleteElement(j, i)}>
+                    <button onClick={() => this.deleteroom(j, i)}>
                       <Delete />
                     </button>
 
@@ -153,24 +161,34 @@ class DaD extends Component {
 
   render() {
     const { rows, dragEnter } = this.state
-    console.log('rows', rows.map(row => row.map(obj => obj.title)));
+    console.log('rows', rows);
 
+    // console.log('rows', rows.map(row => row.map(obj => obj.title)));
+    // console.log('rows', rows.map(row => row.map(obj => obj.title)));
     return (
       <div className='dad-container'>
         <div className='dad-container__elements-toolbar'>
           <Container
             groupName="1"
             behaviour="copy"
-            getChildPayload={i => ELEMENTS[i]}
+            getChildPayload={i => ROOMS[i]}
           >
-            {this.renderToolBar()}
+            {this.renderToolBar(ROOMS)}
+
+          </Container>
+          <Container
+            // groupName="2"
+            behaviour="copy"
+            getChildPayload={i => TOOLS[i]}
+          >
+            {this.renderToolBar(TOOLS)}
 
           </Container>
         </div>
         <div>
 
           <div style={{ background: dragEnter ? 'black' : 'brown' }}>
-            {this.renderElementsInGrid(rows)}
+            {this.renderRoomsInGrid(rows)}
           </div>
         </div>
         <div>

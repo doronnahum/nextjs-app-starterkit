@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Home from '../src/screens/home/Home'
+import Home from '../src/screens/home/Example'
 
 const DATA = {
     "container": {
