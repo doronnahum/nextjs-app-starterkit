@@ -85,7 +85,8 @@ class DaD extends Component {
     return payload.type === 'element'
   }
   renderElementsInRoom(elements) {
-    return elements.map(element => <div style={{ height: 20, background: 'blue' }}>
+    if (!elements.length) return 'drop elements here...'
+    return elements.map(element => <div style={{ height: 20, background: 'blue', width: '100%' }}>
       {element.name}
     </div>
     )

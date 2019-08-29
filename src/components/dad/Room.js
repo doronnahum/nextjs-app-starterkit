@@ -11,18 +11,14 @@ export default class Room extends Component {
             <Draggable
                 style={{ width: room.width, height: room.height }}>
                 <div className={`room room-${room.shape}`}
-                    style={{ width: room.width, height: room.height, background: dragEnterRoom === room.id ? 'red' : 'orange' }}>
-                    <button onClick={onClickDeleteRoom}>
-                        <Delete />
-                    </button>
+                    style={{ width: room.width, height: room.height, background: dragEnterRoom === room.id ? 'black' : 'orange' }}>
 
                     {room.title
                         ? <div>
-                            {room.title}
-
+                            <div>{room.title}</div>
                             <Container
                                 groupName="2"
-                                style={{ width: 100, height: 100, background: 'red' }}
+                                style={{ height: 100, background: 'red', width: room.width - 20 }}
                                 onDragEnter={onDragEnterRoom}
                                 onDragLeave={onDragLeaveRoom}
                                 dropPlaceholder
@@ -30,19 +26,24 @@ export default class Room extends Component {
                                 getChildPayload={i => room.items[i]}
                                 onDrop={onDropElementInRoom}
                             >
+                                {/* <div> */}
                                 {children}
+                                {/* </div> */}
 
                             </Container>
                         </div>
                         : < form onSubmit={onSubmitName} >
+                            <h3>Set A Title</h3>
                             <input style={{ width: 80 }}
                                 id={room.id}
                                 onChange={handleTextChange}
                                 value={textValue} />
-                            <input type="submit" />
+                            <input type="submit" value='set' />
                         </form>
                     }
-
+                    <button onClick={onClickDeleteRoom} style={{ position: 'absolute', bottom: 10 }}>
+                        <Delete />
+                    </button>
                 </div>
             </Draggable>
         )
