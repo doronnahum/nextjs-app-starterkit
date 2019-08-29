@@ -1,43 +1,43 @@
 export const ROOMS = [
     {
         type: 'room',
-        room: 'classroom',
+        name: 'classroom',
         shape: 'square',
         width: 200,
         height: 200,
-        items: []
+        elements: []
     },
     {
         type: 'room',
-        room: 'kitchen',
+        name: 'kitchen',
         shape: 'circle',
         width: 200,
         height: 200,
-        items: []
+        elements: []
     },
     {
         type: 'room',
-        room: 'bathroom',
+        name: 'bathroom',
         shape: 'rectangle',
         width: 300,
         height: 100,
-        items: []
+        elements: []
     }
 ]
-export const TOOLS = [
+export const ELEMENTS = [
     {
-        tool: 'aircon',
-        type: 'square',
+        type: 'element',
+        name: 'aircon',
+        shape: 'square',
         width: 50,
         height: 50,
-        items: []
     },
     {
-        tool: 'lamp',
-        type: 'circle',
+        type: 'element',
+        name: 'lamp',
+        shape: 'circle',
         width: 50,
         height: 50,
-        items: []
     }
 ]
 
@@ -82,9 +82,9 @@ export function onClickDown(rows) {
 
 
 export function onDragEnter() {
-    this.setState({ dragEnter: true })
+    this.setState({ dragEnterGrid: true })
 }
 
 export function onDragLeave() {
-    this.setState({ dragEnter: false })
+    this.setState({ dragEnterGrid: false })
 }

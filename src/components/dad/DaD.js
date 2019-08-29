@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
-import { applyDrag, ROOMS, makeGrid, onClickUp, onClickDown, onDragEnter, onDragLeave, TOOLS } from './utils';
+import { applyDrag, ROOMS, makeGrid, onClickUp, onClickDown, onDragEnter, onDragLeave, ELEMENTS } from './utils';
 import Arrows from 'src/components/dad/Arrows';
+import Room from 'src/components/dad/Room';
 import { Delete } from '@material-ui/icons';
 import produce from "immer"
 class DaD extends Component {
@@ -9,11 +10,10 @@ class DaD extends Component {
     super();
     this.state = {
       rows: [],
-      grid: 3,
-      dragEnter: false,
-      text: '',
-      elementsEdited: [],
-      allowDropInGrid: true
+      grid: 2,
+      dragEnterGrid: false,
+      dragEnterRoom: '',
+      // allowDropInGrid: true
     }
     this.makeGrid = makeGrid.bind(this)
     this.onClickUp = onClickUp.bind(this)
@@ -34,7 +34,7 @@ class DaD extends Component {
           style={{ width: element.width, height: element.height }}>
           <div className={`room room-${element.shape}`}
             style={{ width: element.width, height: element.height }}>
-            {element.room}
+            {element.name}
           </div>
         </Draggable>
       );
@@ -59,7 +59,7 @@ class DaD extends Component {
     this.setState({ [event.target.id]: text })
   }
 
-  deleteroom(indexOfRow, indexOfElement) {
+  deleteroom = (indexOfRow, indexOfElement) => {
     const { rows } = this.state
     let _rows = [...rows]
     const indexOfTheElement = _rows[indexOfRow].indexOf(rows[indexOfRow][indexOfElement])
@@ -82,9 +82,24 @@ class DaD extends Component {
   shouldAcceptDrop(sourceContainerOptions, payload) {
     console.log('sourceContainerOptions', sourceContainerOptions);
     console.log('payload', payload);
-    return true //contine here!
+    return payload.type === 'element'
   }
-  renderRoomsInGrid(rows) {
+  renderElementsInRoom(elements) {
+    return elements.map(element => <div style={{ height: 20, background: 'blue' }}>
+      {element.name}
+    </div>
+    )
+  }
+  onDropElementInRoom(e, room) {
+    const { rows } = this.state
+    let arr = [...rows]
+    room.elements = applyDrag(room.elements, e)
+    this.setState({ rows: arr, dragEnterRoom: '' })
+  }
+
+
+  renderRows(rows) {
+    const { dragEnterRoom } = this.state
     if (!rows.length) {
       return <div>empty for now....</div>
     }
@@ -92,7 +107,6 @@ class DaD extends Component {
       return <div key={j}>
         {j + 1}
         <Container onDragStart={this.onDragStart}
-          // shouldAcceptDrop={() => this.state.allowDropInGrid ? true : false}
           orientation='horizontal'
           style={{ width: 800, height: 200 }}
           groupName="1"
@@ -104,51 +118,25 @@ class DaD extends Component {
           onDrop={e => {
             let arr = [...rows]
             arr[j] = applyDrag(row, e)
-            this.setState({ rows: arr, dragEnter: false })
+            this.setState({ rows: arr, dragEnterGrid: false })
           }}
         >
           {
             row.map((room, i) => {
-
-              return (
-                <Draggable key={i}
-                  style={{ width: room.width, height: room.height }}>
-                  <div className={`room room-${room.shape}`} style={{ width: room.width, height: room.height }}>
-
-                    {room.title
-                      ? <div>
-                        <button onClick={() => this.setState({ allowDropInGrid: false })}>press to put items</button>
-                        {room.title}
-                        <Container
-                          groupName="2"
-                          style={{ width: 100, height: 100, background: 'red' }}
-                          onDragEnter={this.onDragEnter1}
-                          onDragLeave={this.onDragLeave1}
-                          shouldAcceptDrop={this.shouldAcceptDrop}
-                        // getChildPayload={i => room.items[i]}
-                        // onDrop={e => {
-                        //   let arr = [...itemsToDrop]
-                        //   arr[j] = applyDrag(row, e) //contunuie here
-                        //   this.setState({ rows: arr, dragEnter: false })
-                        // }}
-                        >
-                        </Container>
-                      </div>
-                      : < form onSubmit={(e) => this.onSubmit(e, j, i, room.id)} >
-                        <input style={{ width: 80 }}
-                          id={room.id}
-                          onChange={(e) => this.handleTextChange(e)}
-                          value={this.state[room.id]} />
-                        <input type="submit" />
-                      </form>
-                    }
-                    <button onClick={() => this.deleteroom(j, i)}>
-                      <Delete />
-                    </button>
-
-                  </div>
-                </Draggable>
-              );
+              return <Room key={i}
+                room={room}
+                onDragEnterRoom={() => this.setState({ dragEnterRoom: room.id })}
+                onDragLeaveRoom={() => this.setState({ dragEnterRoom: '' })}
+                dragEnterRoom={dragEnterRoom}
+                onDropElementInRoom={(e) => this.onDropElementInRoom(e, room)}
+                shouldAcceptDrop={this.shouldAcceptDrop}
+                handleTextChange={this.handleTextChange}
+                onSubmitName={(e) => this.onSubmit(e, j, i, room.id)}
+                textValue={this.state[room.id]}
+                onClickDeleteRoom={(e) => this.deleteroom(j, i)}
+              >
+                {this.renderElementsInRoom(room.elements)}
+              </Room>
             })
           }
 
@@ -160,11 +148,8 @@ class DaD extends Component {
 
 
   render() {
-    const { rows, dragEnter } = this.state
+    const { rows, dragEnterGrid } = this.state
     console.log('rows', rows);
-
-    // console.log('rows', rows.map(row => row.map(obj => obj.title)));
-    // console.log('rows', rows.map(row => row.map(obj => obj.title)));
     return (
       <div className='dad-container'>
         <div className='dad-container__elements-toolbar'>
@@ -177,20 +162,18 @@ class DaD extends Component {
 
           </Container>
           <Container
-            // groupName="2"
             behaviour="copy"
-            getChildPayload={i => TOOLS[i]}
+            getChildPayload={i => ELEMENTS[i]}
           >
-            {this.renderToolBar(TOOLS)}
+            {this.renderToolBar(ELEMENTS)}
 
           </Container>
         </div>
-        <div>
 
-          <div style={{ background: dragEnter ? 'black' : 'brown' }}>
-            {this.renderRoomsInGrid(rows)}
-          </div>
+        <div style={{ background: dragEnterGrid ? 'black' : 'brown' }}>
+          {this.renderRows(rows)}
         </div>
+
         <div>
           numbers of rows: {this.state.rows.length}
           <Arrows className='dad-container__arrows-container'
