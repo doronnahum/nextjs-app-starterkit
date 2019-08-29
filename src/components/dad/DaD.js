@@ -153,7 +153,7 @@ class DaD extends Component {
     console.log('rows', rows);
     return (
       <div className='dad-container'>
-        <div className='dad-container__elements-toolbar'>
+        <section className='dad-container__elements-toolbar'>
           <Container
             groupName="1"
             behaviour="copy"
@@ -169,19 +169,19 @@ class DaD extends Component {
             {this.renderToolBar(ELEMENTS)}
 
           </Container>
-        </div>
+        </section>
 
-        <div style={{ background: dragEnterGrid ? 'black' : 'brown' }}>
+        <section style={{ background: dragEnterGrid ? 'black' : 'brown' }}>
           {this.renderRows(rows)}
-        </div>
+        </section>
 
-        <div>
+        <section>
           numbers of rows: {this.state.rows.length}
           <Arrows className='dad-container__arrows-container'
             onClickUp={() => this.onClickUp(rows)}
             onClickDown={() => this.onClickDown(rows)}
           />
-        </div>
+        </section>
       </div>
     );
   }

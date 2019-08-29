@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd';
 import { Delete } from '@material-ui/icons';
-
+import RoomModal from 'src/components/dad/RoomModal'
 export default class Room extends Component {
     render() {
         const { room, onDragEnterRoom, onDragLeaveRoom, dragEnterRoom, onDropElementInRoom, shouldAcceptDrop,
@@ -11,11 +11,11 @@ export default class Room extends Component {
             <Draggable
                 style={{ width: room.width, height: room.height }}>
                 <div className={`room room-${room.shape}`}
-                    style={{ width: room.width, height: room.height, background: dragEnterRoom === room.id ? 'black' : 'orange' }}>
-
+                    style={{ position: 'relative', width: room.width, height: room.height, background: dragEnterRoom === room.id ? 'black' : 'orange' }}>
                     {room.title
                         ? <div>
                             <div>{room.title}</div>
+                            <RoomModal room={room} />
                             <Container
                                 groupName="2"
                                 style={{ height: 100, background: 'red', width: room.width - 20 }}
