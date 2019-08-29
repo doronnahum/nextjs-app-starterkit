@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import Switch from 'src/components/Switch';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -28,7 +29,10 @@ const useStyles = makeStyles(theme => ({
 
 const renderElements = (elements) => {
     return elements.map(element => {
-        return <div key={element.id}>{element.name}</div>
+        return <div style={{ display: 'flex', flex: 'row' }}>
+            <div key={element.id}>{element.name}</div>
+            <Switch />
+        </div>
     })
 }
 export default function SimpleModal({ room }) {
