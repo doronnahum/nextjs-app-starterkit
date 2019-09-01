@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import DaD from 'src/components/dad/DaD'
+import DraggableExample from 'src/components/draggable/DraggableExample'
 import Header from 'src/components/layout/Header'
 import 'src/styles/dad.scss'
 
@@ -7,7 +8,10 @@ class Dad extends Component {
     render() {
         return <div className='dad-Screen'>
             <Header />
-            <DaD />
+            {/* <DaD /> */}
+            
+            {/* // yossi way */}
+            <DraggableExample />
         </div >
 
     }

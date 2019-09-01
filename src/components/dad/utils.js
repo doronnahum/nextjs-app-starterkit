@@ -42,14 +42,23 @@ export const ELEMENTS = [
 ]
 
 export function makeGrid() {
-    const { grid } = this.state
-    let arr = []
+    const GRID_DEFAULT_VALUE = 2
+    const rowsFromStorage = JSON.parse(localStorage.getItem('rows'))
+    console.log('rowsFromStorage', rowsFromStorage);
+
+    const grid = GRID_DEFAULT_VALUE
     let i = 1
-    while (i <= grid) {
-        arr.push(Array())
-        i++
+
+    let rowsDefault = []
+    if (!rowsFromStorage) {
+        while (i <= grid) {
+            rowsDefault.push(Array())
+            i++
+        }
     }
-    this.setState({ rows: arr })
+    this.setState({
+        rows: rowsFromStorage || rowsDefault
+    })
 }
 
 export const applyDrag = (arr, dragResult) => {

@@ -10,7 +10,6 @@ class DaD extends Component {
     super();
     this.state = {
       rows: [],
-      grid: 2,
       dragEnterGrid: false,
       dragEnterRoom: '',
       // allowDropInGrid: true
@@ -24,6 +23,15 @@ class DaD extends Component {
 
   componentDidMount() {
     this.makeGrid()
+  }
+
+  setDataOnLocalStorage(rows) {
+    try {
+      localStorage.setItem('rows', JSON.stringify(rows))
+    } catch (err) {
+      console.log('err in setDataOnLocalStorage', err);
+    }
+
   }
 
   renderToolBar(items) {
@@ -52,6 +60,7 @@ class DaD extends Component {
       rows: _rows,
       // [`${indexOfRow}${indexOfElement}`]: ''
     })
+    this.setDataOnLocalStorage(rows)
   }
 
   handleTextChange = (event) => {
@@ -67,6 +76,7 @@ class DaD extends Component {
     this.setState({
       rows: _rows
     })
+    this.setDataOnLocalStorage(_rows)
   }
   onDragEnter1() {
     console.log('aaaaaa');
@@ -86,7 +96,7 @@ class DaD extends Component {
   }
   renderElementsInRoom(elements) {
     if (!elements.length) return 'drop elements here...'
-    return elements.map(element => <div style={{ height: 20, background: 'blue', width: '100%' }}>
+    return elements.map((element, i) => <div key={i} style={{ height: 20, background: 'blue', width: '100%' }}>
       {element.name}
     </div>
     )
@@ -96,6 +106,7 @@ class DaD extends Component {
     let arr = [...rows]
     room.elements = applyDrag(room.elements, e)
     this.setState({ rows: arr, dragEnterRoom: '' })
+    this.setDataOnLocalStorage(arr)
   }
 
 
@@ -120,6 +131,7 @@ class DaD extends Component {
             let arr = [...rows]
             arr[j] = applyDrag(row, e)
             this.setState({ rows: arr, dragEnterGrid: false })
+            this.setDataOnLocalStorage(arr)
           }}
         >
           {
@@ -186,9 +198,5 @@ class DaD extends Component {
     );
   }
 }
-
-DaD.propTypes = {
-
-};
 
 export default DaD;

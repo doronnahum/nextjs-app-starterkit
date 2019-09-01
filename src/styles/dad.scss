@@ -67,3 +67,28 @@
   display: flex !important;
   // justify-content: space-between;
 }
+
+// dragablle
+.react-draggable {
+  display: table;
+}
+
+.draggable {
+  @include grid(10px, center, center, 1fr 1fr, auto);
+  margin-right: 100px;
+  margin-left: 100px;
+  background: brown;
+  &__toolbar {
+    // background: orange;
+    height: 100%;
+    // position: relative;
+  }
+  .floor {
+    border: 2px solid black;
+    height: 400px;
+    width:400px;
+    // z-index: 20;
+    // position: relative;
+    // background: lightblue;
+  }
+}
