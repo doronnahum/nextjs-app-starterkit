@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import produce from 'immer';
+
 // import Dad from '../../components/Dad'
 import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
@@ -7,173 +9,297 @@ import { logger } from 'src/services/logger'
 // import connect from './connect';
 // import Dialog from 'src/components/Dialog';
 // trash-alt
-const NEW_ELEMENT = 'NEW_ELEMENT'
-const rooms = [
-    {
-        id: 1,
-        type: 'square',
-        position: {
-            x: 100,
-            y: 0
-        }
-    },
-    {
-        id: 2,
-        type: 'circle',
-        position: {
-            x: 100,
-            y: 50
-        }
-    },
-    {
-        id: 3,
-        type: 'rectangle',
-        position: {
-            x: 100,
-            y: 100
-        }
-    },
-]
-
 
 class Home extends Component {
     state = {
+        dragbleUpdateCounters: {
+
+        },
         placedrooms: [],
-        createNewElement: false,
         type: '',
-        position: { x: 0, y: 0 },
         textValue: '',
-        dialogOpen: false
+        dialogOpen: false,
+        elements: [
+            [{
+                type: 'element',
+                id: 1,
+                title: 'aircon',
+                shape: 'aircon',
+                position: {
+                    x: 0,
+                    y: 50
+                }
+            },
+            {
+                type: 'element',
+                id: 1,
+                title: 'aircon',
+                shape: 'aircon',
+                position: {
+                    x: 0,
+                    y: 50
+                }
+            }],
+            [{
+                type: 'element',
+                id: 2,
+                title: 'lamp',
+                shape: 'lamp',
+                position: {
+                    x: 0,
+                    y: 130
+                }
+            },
+            {
+                type: 'element',
+                id: 2,
+                title: 'lamp',
+                shape: 'lamp',
+                position: {
+                    x: 0,
+                    y: 130
+                }
+            }]
+        ],
+        rooms: [
+            [{
+                id: 1,
+                type: 'room',
+                shape: 'square',
+                title: 'classroom',
+                position: {
+                    x: 100,
+                    y: 0
+                }
+            },
+            {
+                id: 1,
+                type: 'room',
+                shape: 'square',
+                title: 'classroom',
+                position: {
+                    x: 100,
+                    y: 0
+                }
+            }
+            ],
+            [{
+                id: 2,
+                type: 'room',
+                shape: 'circle',
+                title: 'bathroom',
+                position: {
+                    x: 100,
+                    y: 50
+                }
+            }, {
+                id: 2,
+                type: 'room',
+                shape: 'circle',
+                title: 'bathroom',
+                position: {
+                    x: 100,
+                    y: 50
+                }
+            }],
+            [{
+                id: 3,
+                type: 'room',
+                shape: 'rectangle',
+                title: 'teacher room',
+                position: {
+                    x: 100,
+                    y: 100
+                }
+            }, {
+                id: 3,
+                type: 'room',
+                shape: 'rectangle',
+                title: 'teacher room',
+                position: {
+                    x: 100,
+                    y: 100
+                }
+            }]]
     }
 
-    async componentDidMount() {
-        const data = await localStorage.getItem('data')
-        const _data = await JSON.parse(data)
-        // this.setState({ placedrooms: _data.elements })
+    componentDidMount() {
+        try {
+            const data = localStorage.getItem('data')
+            if (!data) {
+                this.setState({ placedrooms: [] })
+                return
+            }
+            const _data = JSON.parse(data)
+            this.setState({ placedrooms: _data })
+        } catch (err) {
+            console.log('err in componentDidMount', err);
+        }
+
     }
-    createNewElement() {
-        return React.createElement('div', { style: { background: 'red', height: 30, width: 30 } })
-    }
+
 
     handleStart = (event, data, type) => {
-        console.log('------start----------');
-        console.log('event', event);
-        this.setState({
-            createNewElement: true
-        })
         logger.info('start drag');
     }
 
     handleDrag = (event, data) => {
+        // console.log('x', event.x);
         // console.log('clientX', event.clientX);
-        // console.log('layerX', event.layerX);
-        // console.log('pageX', event.pageX);
+        // console.log('y', event.y);
+        // console.log('clientY', event.clientY);
 
-        // console.log('------dragging----------');
-        // console.log('event', event);
-        // console.log('event', event);
-        console.log('data:', data);
-        // console.log('-----------------------------');
     }
 
-    updateData(obj) {
+    getUpdateDragbleUpdateCounters = (id) => {
+        const { dragbleUpdateCounters } = this.state
+
+        const _dragbleUpdateCounters = { ...dragbleUpdateCounters };
+        _dragbleUpdateCounters[id] = (_dragbleUpdateCounters[id] || 0) + 1;
+        return _dragbleUpdateCounters;
+    }
+
+    updateData(event, room, id, data) {
+        const { shape, type } = room
         const { placedrooms } = this.state
         let arr = [...placedrooms]
-        // let _data = JSON.parse(localStorage.getItem('data'))
-        // _data.elements.push(JSON.stringify(obj))
-        // localStorage.setItem('data', JSON.stringify(_data));
-        // console.log('updateData', JSON.parse(localStorage.getItem('data')));
-        arr.push(obj)
+        if (id) {
+            // let selectedRoom = arr.find(room => room.id === id)
+            const objIndex = arr.findIndex(obj => obj.id === id)
 
-        this.setState({ placedrooms: arr })
-    }
-    // onCopy(data, event) {
-    //     console.log('------###copy----------');
-
-    // }
-
-    handleStop = (event, data, type, newRoom) => {
-        console.log('------Stop----------');
-        console.log('event', event);
-        console.log('data', data);
-        console.log('event.x - event.layerX', event.x - event.layerX);
-        if (newRoom) {
-            return
-        }
-
-        if (event.target.className === 'floor') {
-            const obj = {
-                "id": Math.random(),
-                "title": 'textValue',
-                "type": type,
-                "position": {
-                    "x": data.x,//200, // event.x - event.layerX,
-                    "y": data.y, // event.y - event.layerY,
-                },
-                "size": {
-                    "w": 58,
-                    "h": 58
-                },
-                "reference_id": "4567",
-                "parent_id": "1234"
+            arr[objIndex].position = {
+                x: event.clientX - event.offsetX,
+                y: event.clientY - event.offsetY,
             }
+
             this.setState({
-                // createNewElement: false
+                placedrooms: arr,
+                dragbleUpdateCounters: this.getUpdateDragbleUpdateCounters(id)
             })
-            this.updateData(obj)
-            // this.openDialog()
+            localStorage.setItem('data', JSON.stringify(arr));
+        } else {
+            function uuidv4() {
+                return 'xxxxxxxx-xxxx'.replace(/[xy]/g, function (c) {
+                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+            const obj = {
+                id: uuidv4(),
+                title: '',
+                shape,
+                type,
+                position: {
+                    x: event.clientX - event.offsetX,
+                    y: event.clientY - event.offsetY,
+                },
+                size: {
+                    w: 58,
+                    h: 58
+                },
+                reference_id: '4567',
+                parent_id: '1234'
+            }
+            arr.push(obj)
+            this.setState({
+                placedrooms: arr
+            });
+            localStorage.setItem('data', JSON.stringify(arr));
         }
-        // debugger
 
     }
 
-    deleteRoom = (id) => {
+    handleStop = (event, data, item, id) => {
+        const { x, screenX, pageX, clientX } = event;
 
+        const { rooms, elements } = this.state
+        const { shape } = item
+        let _rooms = [...rooms]
+        let _elements = [...elements]
+        if (item.type === 'room') {
+            let roomsUsedArr = _rooms.find((arr, i) => arr[0].shape === shape)
+            roomsUsedArr.push(roomsUsedArr[0])
+            this.setState({
+                rooms: _rooms,
+            })
+            this.updateData(event, item, id, data)
+        } else if (item.type === 'element') {
+            let elementsUsedArr = _elements.find((arr, i) => arr[0].shape === shape)
+            elementsUsedArr.push(elementsUsedArr[0])
+            this.setState({
+                elements: _elements
+            })
+            this.updateData(event, item, id, data)
+        }
+    }
+
+    deleteRoom = (e, id) => {
         const { placedrooms } = this.state
         let arr = [...placedrooms]
         const selectedRoom = arr.find(room => room.id === id)
         const selectedRoomIndex = placedrooms.indexOf(selectedRoom)
+        debugger
         arr.splice(selectedRoomIndex, 1)
-
         this.setState({ placedrooms: arr })
+        localStorage.setItem('data', JSON.stringify(arr));
     }
 
-    renderToolbar() {
-        return rooms.map((room, i) => <Dad key={i}
-            position={room.position}
-            style={{ marginBottom: 5, background: 'black' }}
-            type={room.type}
-            handleStart={(x, y) => this.handleStart(x, y, room.type)}
+    renderToolbarRooms() {
+        return this.state.rooms.map((room, i) => room.map((r, j) => <Dad key={j}
+            room={r}
+            position={r.position}
+            style={{
+                marginBottom: 5, background: 'black',
+                position: 'absolute', top: r.position.y
+            }}
+            handleStart={(e, data) => this.handleStart(e, data, r.shape)}
             handleDrag={this.handleDrag}
-            handleStop={(x, y) => this.handleStop(x, y, room.type)}
-            onCopy={this.onCopy} />)
+            handleStop={(e, data) => this.handleStop(e, data, r)}
+            onCopy={this.onCopy} />))
     }
-
-    rendeNewElements() {
+    renderToolbarElements() {
+        const { elements } = this.state
+        return elements.map((arrOfSameElements, i) => arrOfSameElements.map((element, j) => <Dad key={j}
+            room={element}
+            position={element.position}
+            style={{
+                marginBottom: 5,
+                position: 'absolute', top: element.position.y
+            }}
+            handleStart={(e, data) => this.handleStart(e, data, element.shape)}
+            handleDrag={this.handleDrag}
+            handleStop={(e, data) => this.handleStop(e, data, element)}
+            onCopy={this.onCopy} />))
+    }
+    renderAllItems() {
         const { placedrooms } = this.state
-        if (!placedrooms.length) return null
-
+        if (!placedrooms || !placedrooms.length) return null
         return placedrooms.map((room, i) => {
             const style = {
                 position: 'absolute',
                 left: room.position.x,
                 top: room.position.y,
-                background: 'yellow',
-                // zIndex: 30,
-                // height: room.size.h,
-                // width: room.size.w
+                border: '2px solid red',
+                // zIndex: room.type === 'element' ? 50 : 0,
+                // height: 60,
+                backgroundColor: 'yellow'
             }
-            // return <div className={`room-${room.type}`} style={style}></div>
-            return <Dad style={style} key={room.id} type={room.type} className={`room-${room.type}`}
-                // position={{ x: room.position.x, y: room.position.y }}
-                deleteRoom={() => this.deleteRoom(room.id)}
+            const keyEndfix = this.state.dragbleUpdateCounters[room.id] || ''
+            return <Dad key={room.id + keyEndfix}
+                room={room}
+                bin
+                // position={room.position}
+                style={style}
+                // type={room.type}
+                // className={`room-${room.shape}`}
+                deleteRoom={(e) => this.deleteRoom(e, room.id)}
                 handleStart={this.handleStart}
                 handleDrag={this.handleDrag}
-                handleStop={(x, y) => this.handleStop(x, y, room.type, true)}
+                handleStop={(x, y) => this.handleStop(x, y, room, room.id)}
             />
         })
     }
-
+    //     transform: translate(23px, 0px);
     handleChange = (event) => {
         this.setState({ textValue: event.target.value });
     }
@@ -190,18 +316,19 @@ class Home extends Component {
     }
 
     render() {
-        const { textValue, dialogOpen, placedrooms, createNewElement } = this.state
-        console.log('placedrooms', placedrooms);
+        const { placedrooms, dragbleUpdateCounters } = this.state
+        console.log('placedrooms ', placedrooms);
+        console.log('dragbleUpdateCounters', dragbleUpdateCounters);
 
         return (
-            <div className='draggable' style={{ position: 'relative' }}>
-                <div className='draggable__toolbar'>
-                    {/* {createNewElement && this.createNewElement()} */}
-                    {this.renderToolbar()}
+            <div className='draggable' >
+                <div className='draggable__toolbar' style={{ position: 'relative' }}>
+                    {this.renderToolbarRooms()}
+                    {this.renderToolbarElements()}
                 </div>
-                <Floor style={{ position: 'relative' }}>
+                {this.renderAllItems()}
+                <Floor style={{}}>
                 </Floor >
-                {this.rendeNewElements()}
                 {/* <Dialog
                     dialogOpen={dialogOpen}
                     dialogOkClick={this.dialogOkClick}
@@ -209,7 +336,7 @@ class Home extends Component {
                     closeDialog={this.closeDialog}
                     textValue={textValue}
                     handleChange={this.handleChange} /> */}
-            </div>
+            </div >
         )
     }
 }

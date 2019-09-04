@@ -1,6 +1,8 @@
 @import "./tools.scss";
 .dad-Screen {
   background: red;
+  position: relative;
+  // width: 90%;
   .dad-container {
     @include grid(10px, center, center, 300px 3fr 1fr, auto);
     margin-right: 20px;
@@ -35,15 +37,15 @@
 }
 .room-square {
   background: green;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
 }
 .room-circle {
   background: green;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -51,6 +53,20 @@
 .room-rectangle {
   background: green;
   width: 150px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.room-aircon {
+  background: yellow;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.room-lamp {
+  background: yellow;
+  width: 100px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -71,22 +87,25 @@
 // dragablle
 .react-draggable {
   display: table;
+
 }
 
 .draggable {
   @include grid(10px, center, center, 1fr 1fr, auto);
-  margin-right: 100px;
-  margin-left: 100px;
+  // width: 1500px;
+  // margin-right: 100px;
+  // margin-left: 100px;
+  height: 800px;
   background: brown;
   &__toolbar {
-    // background: orange;
-    height: 100%;
-    // position: relative;
+    background: orange;
+    height: 400px;
+    width: 400px;
   }
   .floor {
     border: 2px solid black;
     height: 400px;
-    width:400px;
+    width: 600px;
     // z-index: 20;
     // position: relative;
     // background: lightblue;

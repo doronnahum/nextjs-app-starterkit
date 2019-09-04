@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd';
 import { Delete } from '@material-ui/icons';
-import RoomModal from 'src/components/dad/RoomModal'
+import RoomModal from 'src/components/dad-smooth/RoomModal'
 export default class Room extends Component {
     render() {
         const { room, onDragEnterRoom, onDragLeaveRoom, dragEnterRoom, onDropElementInRoom, shouldAcceptDrop,
