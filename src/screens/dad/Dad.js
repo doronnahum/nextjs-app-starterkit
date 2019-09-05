@@ -10,7 +10,6 @@ class Dad extends Component {
             {/* <Header /> */}
             {/* <DaD /> */}
             
-            {/* // yossi way */}
             <DraggableExample />
         </div >
 

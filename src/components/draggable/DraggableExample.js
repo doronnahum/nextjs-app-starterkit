@@ -1,189 +1,65 @@
 import React, { Component } from 'react'
-import produce from 'immer';
-
-// import Dad from '../../components/Dad'
+// import produce from 'immer';
 import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
 import 'src/styles/dad.scss'
 import { logger } from 'src/services/logger'
-// import connect from './connect';
-// import Dialog from 'src/components/Dialog';
-// trash-alt
+import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag } from './utils';
+import Dialog from 'src/components/Dialog';
 
 class Home extends Component {
-    state = {
-        dragbleUpdateCounters: {
-
-        },
-        placedrooms: [],
-        type: '',
-        textValue: '',
-        dialogOpen: false,
-        elements: [
-            [{
-                type: 'element',
-                id: 1,
-                title: 'aircon',
-                shape: 'aircon',
-                position: {
-                    x: 0,
-                    y: 50
-                }
-            },
-            {
-                type: 'element',
-                id: 1,
-                title: 'aircon',
-                shape: 'aircon',
-                position: {
-                    x: 0,
-                    y: 50
-                }
-            }],
-            [{
-                type: 'element',
-                id: 2,
-                title: 'lamp',
-                shape: 'lamp',
-                position: {
-                    x: 0,
-                    y: 130
-                }
-            },
-            {
-                type: 'element',
-                id: 2,
-                title: 'lamp',
-                shape: 'lamp',
-                position: {
-                    x: 0,
-                    y: 130
-                }
-            }]
-        ],
-        rooms: [
-            [{
-                id: 1,
-                type: 'room',
-                shape: 'square',
-                title: 'classroom',
-                position: {
-                    x: 100,
-                    y: 0
-                }
-            },
-            {
-                id: 1,
-                type: 'room',
-                shape: 'square',
-                title: 'classroom',
-                position: {
-                    x: 100,
-                    y: 0
-                }
-            }
-            ],
-            [{
-                id: 2,
-                type: 'room',
-                shape: 'circle',
-                title: 'bathroom',
-                position: {
-                    x: 100,
-                    y: 50
-                }
-            }, {
-                id: 2,
-                type: 'room',
-                shape: 'circle',
-                title: 'bathroom',
-                position: {
-                    x: 100,
-                    y: 50
-                }
-            }],
-            [{
-                id: 3,
-                type: 'room',
-                shape: 'rectangle',
-                title: 'teacher room',
-                position: {
-                    x: 100,
-                    y: 100
-                }
-            }, {
-                id: 3,
-                type: 'room',
-                shape: 'rectangle',
-                title: 'teacher room',
-                position: {
-                    x: 100,
-                    y: 100
-                }
-            }]]
+    constructor() {
+        super();
+        this.state = {
+            dragbleUpdateCounters: {},
+            placedItems: [],
+            dialogIsOpen: false,
+            elements: ELEMENTS,
+            rooms: ROOMS
+        }
+        this.handleStart = handleStart.bind(this)
+        this.handleDrag = handleDrag.bind(this)
     }
 
     componentDidMount() {
         try {
             const data = localStorage.getItem('data')
             if (!data) {
-                this.setState({ placedrooms: [] })
+                this.setState({ placedItems: [] })
                 return
             }
             const _data = JSON.parse(data)
-            this.setState({ placedrooms: _data })
+            this.setState({ placedItems: _data })
         } catch (err) {
             console.log('err in componentDidMount', err);
         }
-
     }
 
 
-    handleStart = (event, data, type) => {
-        logger.info('start drag');
-    }
-
-    handleDrag = (event, data) => {
-        // console.log('x', event.x);
-        // console.log('clientX', event.clientX);
-        // console.log('y', event.y);
-        // console.log('clientY', event.clientY);
-
-    }
 
     getUpdateDragbleUpdateCounters = (id) => {
         const { dragbleUpdateCounters } = this.state
-
         const _dragbleUpdateCounters = { ...dragbleUpdateCounters };
         _dragbleUpdateCounters[id] = (_dragbleUpdateCounters[id] || 0) + 1;
         return _dragbleUpdateCounters;
     }
 
-    updateData(event, room, id, data) {
+    updateData = (event, room, id) => {
         const { shape, type } = room
-        const { placedrooms } = this.state
-        let arr = [...placedrooms]
-        if (id) {
-            // let selectedRoom = arr.find(room => room.id === id)
+        const { placedItems } = this.state
+        let arr = [...placedItems]
+        if (id) { // if the item has an id, that means that the item is placed, and we gonna update it.
             const objIndex = arr.findIndex(obj => obj.id === id)
-
             arr[objIndex].position = {
                 x: event.clientX - event.offsetX,
                 y: event.clientY - event.offsetY,
             }
-
             this.setState({
-                placedrooms: arr,
+                placedItems: arr,
                 dragbleUpdateCounters: this.getUpdateDragbleUpdateCounters(id)
             })
             localStorage.setItem('data', JSON.stringify(arr));
-        } else {
-            function uuidv4() {
-                return 'xxxxxxxx-xxxx'.replace(/[xy]/g, function (c) {
-                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                });
-            }
+        } else { // creating a new item in the placedItems
             const obj = {
                 id: uuidv4(),
                 title: '',
@@ -202,16 +78,13 @@ class Home extends Component {
             }
             arr.push(obj)
             this.setState({
-                placedrooms: arr
+                placedItems: arr
             });
             localStorage.setItem('data', JSON.stringify(arr));
         }
-
     }
 
     handleStop = (event, data, item, id) => {
-        const { x, screenX, pageX, clientX } = event;
-
         const { rooms, elements } = this.state
         const { shape } = item
         let _rooms = [...rooms]
@@ -222,104 +95,98 @@ class Home extends Component {
             this.setState({
                 rooms: _rooms,
             })
-            this.updateData(event, item, id, data)
         } else if (item.type === 'element') {
             let elementsUsedArr = _elements.find((arr, i) => arr[0].shape === shape)
             elementsUsedArr.push(elementsUsedArr[0])
             this.setState({
                 elements: _elements
             })
-            this.updateData(event, item, id, data)
+        } else {
+            alert('You are in handleStop function, The item doesnt have a type "room" or "element"!')
         }
+        this.updateData(event, item, id)
     }
 
+
     deleteRoom = (e, id) => {
-        const { placedrooms } = this.state
-        let arr = [...placedrooms]
-        const selectedRoom = arr.find(room => room.id === id)
-        const selectedRoomIndex = placedrooms.indexOf(selectedRoom)
-        debugger
+        const { placedItems } = this.state
+        let arr = [...placedItems]
+        const selectedRoomIndex = arr.findIndex(room => room.id === id)
         arr.splice(selectedRoomIndex, 1)
-        this.setState({ placedrooms: arr })
+        this.setState({ placedItems: arr })
         localStorage.setItem('data', JSON.stringify(arr));
     }
 
     renderToolbarRooms() {
-        return this.state.rooms.map((room, i) => room.map((r, j) => <Dad key={j}
-            room={r}
-            position={r.position}
+        return this.state.rooms.map((arrOfrooms, i) => arrOfrooms.map((room, j) => <Dad key={j}
+            item={room}
+            position={room.position}
             style={{
                 marginBottom: 5, background: 'black',
-                position: 'absolute', top: r.position.y
+                position: 'absolute', top: room.position.y, zIndex: 0
             }}
-            handleStart={(e, data) => this.handleStart(e, data, r.shape)}
+            handleStart={this.handleStart}
             handleDrag={this.handleDrag}
-            handleStop={(e, data) => this.handleStop(e, data, r)}
-            onCopy={this.onCopy} />))
+            handleStop={(e, data) => this.handleStop(e, data, room)}
+        />
+        ))
     }
     renderToolbarElements() {
         const { elements } = this.state
-        return elements.map((arrOfSameElements, i) => arrOfSameElements.map((element, j) => <Dad key={j}
-            room={element}
+        return elements.map((arrOfSameElements) => arrOfSameElements.map((element, j) => <Dad key={j}
+            item={element}
             position={element.position}
             style={{
-                marginBottom: 5,
+                marginBottom: 5, zIndex: 1,
                 position: 'absolute', top: element.position.y
             }}
-            handleStart={(e, data) => this.handleStart(e, data, element.shape)}
+            handleStart={this.handleStart}
             handleDrag={this.handleDrag}
             handleStop={(e, data) => this.handleStop(e, data, element)}
-            onCopy={this.onCopy} />))
+        />
+        ))
     }
     renderAllItems() {
-        const { placedrooms } = this.state
-        if (!placedrooms || !placedrooms.length) return null
-        return placedrooms.map((room, i) => {
+        const { placedItems } = this.state
+        if (!placedItems || !placedItems.length) return null
+        return placedItems.map((item, i) => {
             const style = {
                 position: 'absolute',
-                left: room.position.x,
-                top: room.position.y,
+                left: item.position.x,
+                top: item.position.y,
                 border: '2px solid red',
-                // zIndex: room.type === 'element' ? 50 : 0,
-                // height: 60,
+                zIndex: item.type === 'element' ? 1 : 0,
                 backgroundColor: 'yellow'
             }
-            const keyEndfix = this.state.dragbleUpdateCounters[room.id] || ''
-            return <Dad key={room.id + keyEndfix}
-                room={room}
+            const keyEndfix = this.state.dragbleUpdateCounters[item.id] || ''
+            return <Dad key={item.id + keyEndfix}
+                item={item}
                 bin
-                // position={room.position}
                 style={style}
-                // type={room.type}
-                // className={`room-${room.shape}`}
-                deleteRoom={(e) => this.deleteRoom(e, room.id)}
+                deleteRoom={(e) => this.deleteRoom(e, item.id)}
                 handleStart={this.handleStart}
                 handleDrag={this.handleDrag}
-                handleStop={(x, y) => this.handleStop(x, y, room, room.id)}
+                handleStop={(x, y) => this.handleStop(x, y, item, item.id)}
             />
         })
     }
-    //     transform: translate(23px, 0px);
     handleChange = (event) => {
         this.setState({ textValue: event.target.value });
     }
     openDialog = () => {
-        this.setState({ dialogOpen: true })
+        this.setState({ dialogIsOpen: true })
     }
     closeDialog = () => {
-        this.setState({ dialogOpen: false })
+        this.setState({ dialogIsOpen: false })
     }
     dialogOkClick = () => {
         const { type, position, textValue } = this.state
-
         this.closeDialog()
     }
 
     render() {
-        const { placedrooms, dragbleUpdateCounters } = this.state
-        console.log('placedrooms ', placedrooms);
-        console.log('dragbleUpdateCounters', dragbleUpdateCounters);
-
+        const { placedItems, dialogIsOpen } = this.state
+        console.log('placedItems ', placedItems);
         return (
             <div className='draggable' >
                 <div className='draggable__toolbar' style={{ position: 'relative' }}>
@@ -330,11 +197,11 @@ class Home extends Component {
                 <Floor style={{}}>
                 </Floor >
                 {/* <Dialog
-                    dialogOpen={dialogOpen}
-                    dialogOkClick={this.dialogOkClick}
-                    openDialog={this.openDialog}
-                    closeDialog={this.closeDialog}
-                    textValue={textValue}
+                    dialogIsOpen={dialogIsOpen}
+                    openModal={this.openDialog}
+                    closeModal={this.closeDialog}
+                    onOkModalClick={this.dialogOkClick}
+                    // textValue={textValue}
                     handleChange={this.handleChange} /> */}
             </div >
         )

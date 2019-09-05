@@ -7,10 +7,11 @@ export default class Dad extends Component {
 
 
     render() {
-        const { style, type, handleStart, handleDrag, handleStop, deleteRoom, bin, position,
-            onCopy, defaultPosition, positionOffset, left, top, room } = this.props
+        const { style, handleStart, handleDrag,
+            handleStop, deleteRoom, bin, position,
+            defaultPosition, item } = this.props
+        if (!item) return <div style={{ background: 'red', width: 50, height: 50 }}></div>;
         return (
-
             <Draggable
                 axis="both"
                 handle=".handle"
@@ -22,22 +23,18 @@ export default class Dad extends Component {
                 onStart={handleStart && handleStart}
                 onDrag={handleDrag && handleDrag}
                 onStop={handleStop && handleStop}
-            // scale={1}
+                // scale={1}
             >
                 <div style={{ ...style }} >
-
-                    <div className={`room-${room.shape} handle`}>
+                    <div className={`room-${item.shape} handle`}>
                         <div>
-                            {room.title}
-                            {room.id}
+                            {item.title}
+                            {item.id}
                         </div>
-                        {bin && <button onClick={deleteRoom} style={{ zIndex: 5, position: 'absolute', bottom: 0 }}>
-                            <DeleteIcon fontSize='small' />
-                        </button>}
-
-                        {/* <div className="handle">Drag from here</div> */}
-                        {/* <div>This readme is really dragging on...</div> */}
                     </div>
+                    {bin && <button onClick={deleteRoom} style={{ zIndex: 5, position: 'absolute', bottom: 0, backgroundColor: 'red' }}>
+                        <DeleteIcon fontSize='small' />
+                    </button>}
                 </div>
             </Draggable >
         )
