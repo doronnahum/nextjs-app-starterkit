@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function FormDialog({ dialogIsOpen, openModal, closeModal, onOkModalClick }) {
+export default function FormDialog({ dialogIsOpen, openModal, closeModal, onOkModalClick, onChangeText, textValue }) {
 
 
     return (
@@ -23,6 +23,8 @@ export default function FormDialog({ dialogIsOpen, openModal, closeModal, onOkMo
                         occasionally.
           </DialogContentText>
                     <TextField
+                        onChange={onChangeText}
+                        value={textValue}
                         autoFocus
                         margin="dense"
                         id="name"

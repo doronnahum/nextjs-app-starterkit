@@ -4,9 +4,9 @@ import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
 import 'src/styles/dad.scss'
 import { logger } from 'src/services/logger'
-import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag } from './utils';
+import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters } from './utils';
 import Dialog from 'src/components/Dialog';
-
+import { PLACED_ITEM } from 'src/enums'
 class Home extends Component {
     constructor() {
         super();
@@ -15,10 +15,15 @@ class Home extends Component {
             placedItems: [],
             dialogIsOpen: false,
             elements: ELEMENTS,
-            rooms: ROOMS
+            rooms: ROOMS,
+            textValue: '',
+            dataToUpdate: {}
         }
         this.handleStart = handleStart.bind(this)
         this.handleDrag = handleDrag.bind(this)
+        this.updateData = updateData.bind(this)
+        this.deleteRoom = deleteRoom.bind(this)
+        this.getUpdateDragbleUpdateCounters = getUpdateDragbleUpdateCounters.bind(this)
     }
 
     componentDidMount() {
@@ -35,56 +40,7 @@ class Home extends Component {
         }
     }
 
-
-
-    getUpdateDragbleUpdateCounters = (id) => {
-        const { dragbleUpdateCounters } = this.state
-        const _dragbleUpdateCounters = { ...dragbleUpdateCounters };
-        _dragbleUpdateCounters[id] = (_dragbleUpdateCounters[id] || 0) + 1;
-        return _dragbleUpdateCounters;
-    }
-
-    updateData = (event, room, id) => {
-        const { shape, type } = room
-        const { placedItems } = this.state
-        let arr = [...placedItems]
-        if (id) { // if the item has an id, that means that the item is placed, and we gonna update it.
-            const objIndex = arr.findIndex(obj => obj.id === id)
-            arr[objIndex].position = {
-                x: event.clientX - event.offsetX,
-                y: event.clientY - event.offsetY,
-            }
-            this.setState({
-                placedItems: arr,
-                dragbleUpdateCounters: this.getUpdateDragbleUpdateCounters(id)
-            })
-            localStorage.setItem('data', JSON.stringify(arr));
-        } else { // creating a new item in the placedItems
-            const obj = {
-                id: uuidv4(),
-                title: '',
-                shape,
-                type,
-                position: {
-                    x: event.clientX - event.offsetX,
-                    y: event.clientY - event.offsetY,
-                },
-                size: {
-                    w: 58,
-                    h: 58
-                },
-                reference_id: '4567',
-                parent_id: '1234'
-            }
-            arr.push(obj)
-            this.setState({
-                placedItems: arr
-            });
-            localStorage.setItem('data', JSON.stringify(arr));
-        }
-    }
-
-    handleStop = (event, data, item, id) => {
+    handleStop = (event, data, item, isItemPlaced) => {
         const { rooms, elements } = this.state
         const { shape } = item
         let _rooms = [...rooms]
@@ -104,17 +60,20 @@ class Home extends Component {
         } else {
             alert('You are in handleStop function, The item doesnt have a type "room" or "element"!')
         }
-        this.updateData(event, item, id)
-    }
 
-
-    deleteRoom = (e, id) => {
-        const { placedItems } = this.state
-        let arr = [...placedItems]
-        const selectedRoomIndex = arr.findIndex(room => room.id === id)
-        arr.splice(selectedRoomIndex, 1)
-        this.setState({ placedItems: arr })
-        localStorage.setItem('data', JSON.stringify(arr));
+        const position = {
+            x: event.clientX - event.offsetX,
+            y: event.clientY - event.offsetY
+        }
+        this.setState({
+            dataToUpdate: {
+                position,
+                item,
+                isItemPlaced
+            }
+        })
+        this.updateData(position, item, isItemPlaced)
+        this.openDialog()
     }
 
     renderToolbarRooms() {
@@ -149,6 +108,7 @@ class Home extends Component {
     renderAllItems() {
         const { placedItems } = this.state
         if (!placedItems || !placedItems.length) return null
+        
         return placedItems.map((item, i) => {
             const style = {
                 position: 'absolute',
@@ -162,11 +122,16 @@ class Home extends Component {
             return <Dad key={item.id + keyEndfix}
                 item={item}
                 bin
+                EditTitle={() => {
+                    this.setState({ itemIdToEdit: item.id })
+                    this.openDialog()
+                }
+                }
                 style={style}
                 deleteRoom={(e) => this.deleteRoom(e, item.id)}
                 handleStart={this.handleStart}
                 handleDrag={this.handleDrag}
-                handleStop={(x, y) => this.handleStop(x, y, item, item.id)}
+                handleStop={(x, y) => this.handleStop(x, y, item, PLACED_ITEM)}
             />
         })
     }
@@ -179,13 +144,34 @@ class Home extends Component {
     closeDialog = () => {
         this.setState({ dialogIsOpen: false })
     }
-    dialogOkClick = () => {
-        const { type, position, textValue } = this.state
-        this.closeDialog()
+    setTitle = (title, id) => {
+        const { placedItems } = this.state
+        let arr = [...placedItems]
+        if (id) { // witch means the item is alreadyt exist
+            const indexOfItem = arr.findIndex(item => item.id === id)
+            arr[indexOfItem].title = title
+        } else { // when creating the item
+            arr[arr.length - 1].title = title
+        }
+        this.setState({ placedItems: arr })
     }
 
+    dialogOkClick = () => {
+        const { dataToUpdate, textValue, itemIdToEdit } = this.state
+        const { position, item } = dataToUpdate
+        
+        const title = textValue
+        this.setTitle(title, itemIdToEdit)
+        // this.setState({ dataToUpdate: null })
+        this.setState({ textValue: '', itemIdToEdit: '' })
+        this.closeDialog()
+    }
+    onChangeText = (e) => {
+        const textValue = e.target.value
+        this.setState({ textValue })
+    }
     render() {
-        const { placedItems, dialogIsOpen } = this.state
+        const { placedItems, dialogIsOpen, textValue } = this.state
         console.log('placedItems ', placedItems);
         return (
             <div className='draggable' >
@@ -196,13 +182,14 @@ class Home extends Component {
                 {this.renderAllItems()}
                 <Floor style={{}}>
                 </Floor >
-                {/* <Dialog
+                <Dialog
                     dialogIsOpen={dialogIsOpen}
                     openModal={this.openDialog}
                     closeModal={this.closeDialog}
                     onOkModalClick={this.dialogOkClick}
-                    // textValue={textValue}
-                    handleChange={this.handleChange} /> */}
+                    onChangeText={this.onChangeText}
+                    textValue={textValue}
+                    handleChange={this.handleChange} />
             </div >
         )
     }

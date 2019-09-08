@@ -123,3 +123,60 @@ export function handleDrag(event, data) {
 
 }
 
+export function updateData(position, item, PLACED_ITEM, title) {
+    const { placedItems } = this.state
+    const { shape, type } = item
+    let arr = [...placedItems]
+    if (PLACED_ITEM) { // item is placed, and we gonna update it.
+        const objIndex = arr.findIndex(obj => obj.id === item.id)
+        if (position) {
+            arr[objIndex].position = position
+        }
+        debugger
+        if (title) {
+            arr[objIndex].title = title
+        }
+        this.setState({
+            placedItems: arr,
+            dragbleUpdateCounters: this.getUpdateDragbleUpdateCounters(item.id)
+        })
+        localStorage.setItem('data', JSON.stringify(arr));
+    } else { // creating a new item in the placedItems
+        debugger
+        const obj = {
+            id: uuidv4(),
+            title,
+            shape,
+            type,
+            position: position,
+            size: {
+                w: 58,
+                h: 58
+            },
+            reference_id: '4567',
+            parent_id: '1234'
+        }
+        arr.push(obj)
+        this.setState({
+            placedItems: arr,
+        });
+        localStorage.setItem('data', JSON.stringify(arr));
+    }
+}
+
+
+export function deleteRoom(e, id) {
+    const { placedItems } = this.state
+    let arr = [...placedItems]
+    const selectedRoomIndex = arr.findIndex(room => room.id === id)
+    arr.splice(selectedRoomIndex, 1)
+    this.setState({ placedItems: arr })
+    localStorage.setItem('data', JSON.stringify(arr));
+}
+
+export function getUpdateDragbleUpdateCounters(id) {
+    const { dragbleUpdateCounters } = this.state
+    const _dragbleUpdateCounters = { ...dragbleUpdateCounters };
+    _dragbleUpdateCounters[id] = (_dragbleUpdateCounters[id] || 0) + 1;
+    return _dragbleUpdateCounters;
+}
