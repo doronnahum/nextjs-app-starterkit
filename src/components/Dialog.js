@@ -7,41 +7,42 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function FormDialog({ dialogIsOpen, openModal, closeModal, onOkModalClick, onChangeText, textValue }) {
 
-
+export default function FormDialog({ dialogIsOpen, closeModal, onOkModalClick, onChangeText, textValue }) {
     return (
-        < div >
-            <Button variant="outlined" color="primary" onClick={openModal}>
-                Open form dialog
-      </Button>
-            <Dialog open={dialogIsOpen} onClose={closeModal} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
-          </DialogContentText>
-                    <TextField
-                        onChange={onChangeText}
-                        value={textValue}
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Email Address"
-                        type="email"
-                        fullWidth
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={closeModal} color="primary">
-                        Cancel
+        <Dialog open={dialogIsOpen} onClose={closeModal} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">set a title</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    {/* To subscribe to this website, please enter your email address here. We will send updates
+                    occasionally. */}
+                </DialogContentText>
+                <TextField
+                    onChange={onChangeText}
+                    value={textValue}
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Title"
+                    type="text"
+                    fullWidth
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            console.log('do validate');
+                            onOkModalClick()
+                        }
+                    }}
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={closeModal} color="primary">
+                    Cancel
           </Button>
-                    <Button onClick={onOkModalClick} color="primary">
-                        Subscribe
+                <Button onClick={onOkModalClick} color="primary">
+                    Ok
           </Button>
-                </DialogActions>
-            </Dialog>
-        </div >
+            </DialogActions>
+        </Dialog>
+
     );
 }

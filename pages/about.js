@@ -26,7 +26,6 @@ export default function About() {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
-        <Dad />
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js example
         </Typography>

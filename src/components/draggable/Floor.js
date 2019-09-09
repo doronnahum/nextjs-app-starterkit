@@ -6,7 +6,6 @@ export default class Floor extends Component {
         return (
             <div className='floor' style={style}>
                 <div style={{ background: 'green', width: 80, heigth: 80, position: 'absolute', left: 50, top: 50 }}>
-                    whataup
                 </div>
                 {children}
             </div>

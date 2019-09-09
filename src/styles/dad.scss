@@ -2,7 +2,7 @@
 .dad-Screen {
   background: red;
   position: relative;
-  // width: 90%;
+  height: 100vh;
   .dad-container {
     @include grid(10px, center, center, 300px 3fr 1fr, auto);
     margin-right: 20px;
@@ -37,23 +37,23 @@
 }
 .room-square {
   background: green;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   display: flex;
   align-items: center;
 }
 .room-circle {
   background: green;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   display: flex;
   align-items: center;
 }
 .room-rectangle {
   background: green;
-  width: 150px;
-  height: 100px;
+  width: 200px;
+  height: 150px;
   display: flex;
   align-items: center;
 }
@@ -87,27 +87,34 @@
 // dragablle
 .react-draggable {
   display: table;
-
 }
 
 .draggable {
   @include grid(10px, center, center, 1fr 1fr, auto);
   // width: 1500px;
-  // margin-right: 100px;
+  padding-right: 100px;
   // margin-left: 100px;
-  height: 800px;
+  height: 100%;
   background: brown;
   &__toolbar {
     background: orange;
-    height: 400px;
+    height: 100%;
     width: 400px;
   }
   .floor {
     border: 2px solid black;
-    height: 400px;
-    width: 600px;
+    height: 50em;
+    width: 100em;
     // z-index: 20;
     // position: relative;
     // background: lightblue;
+  }
+  .clear-button {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    width: 150px;
+    height: 100px;
+    font-size: 24px;
   }
 }

@@ -1,0 +1,19 @@
+.floors-container {
+  background: red;
+  height: 100vh;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  &__floor {
+    background: orange;
+    height: 100px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    &__name {
+      margin-right: 50px;
+    }
+  }
+}

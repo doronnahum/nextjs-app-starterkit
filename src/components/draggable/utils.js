@@ -7,8 +7,8 @@ export const ELEMENTS = [
         title: 'aircon',
         shape: 'aircon',
         position: {
-            x: 0,
-            y: 50
+            x: 100,
+            y: 300
         }
     },
     {
@@ -17,8 +17,8 @@ export const ELEMENTS = [
         title: 'aircon',
         shape: 'aircon',
         position: {
-            x: 0,
-            y: 50
+            x: 100,
+            y: 300
         }
     }],
     [{
@@ -27,8 +27,8 @@ export const ELEMENTS = [
         title: 'lamp',
         shape: 'lamp',
         position: {
-            x: 0,
-            y: 130
+            x: 100,
+            y: 350
         }
     },
     {
@@ -37,8 +37,8 @@ export const ELEMENTS = [
         title: 'lamp',
         shape: 'lamp',
         position: {
-            x: 0,
-            y: 130
+            x: 100,
+            y: 350
         }
     }]
 ]
@@ -72,7 +72,7 @@ export const ROOMS = [
         title: 'bathroom',
         position: {
             x: 100,
-            y: 50
+            y: 100
         }
     }, {
         id: 2,
@@ -81,7 +81,7 @@ export const ROOMS = [
         title: 'bathroom',
         position: {
             x: 100,
-            y: 50
+            y: 100
         }
     }],
     [{
@@ -91,7 +91,7 @@ export const ROOMS = [
         title: 'teacher room',
         position: {
             x: 100,
-            y: 100
+            y: 200
         }
     }, {
         id: 3,
@@ -100,7 +100,7 @@ export const ROOMS = [
         title: 'teacher room',
         position: {
             x: 100,
-            y: 100
+            y: 200
         }
     }]]
 
@@ -132,7 +132,6 @@ export function updateData(position, item, PLACED_ITEM, title) {
         if (position) {
             arr[objIndex].position = position
         }
-        debugger
         if (title) {
             arr[objIndex].title = title
         }
@@ -142,7 +141,6 @@ export function updateData(position, item, PLACED_ITEM, title) {
         })
         localStorage.setItem('data', JSON.stringify(arr));
     } else { // creating a new item in the placedItems
-        debugger
         const obj = {
             id: uuidv4(),
             title,

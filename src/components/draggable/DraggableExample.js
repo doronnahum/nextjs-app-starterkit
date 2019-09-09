@@ -7,6 +7,8 @@ import { logger } from 'src/services/logger'
 import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters } from './utils';
 import Dialog from 'src/components/Dialog';
 import { PLACED_ITEM } from 'src/enums'
+import Router from 'next/router'
+import { ClearAll } from '@material-ui/icons';
 class Home extends Component {
     constructor() {
         super();
@@ -17,7 +19,6 @@ class Home extends Component {
             elements: ELEMENTS,
             rooms: ROOMS,
             textValue: '',
-            dataToUpdate: {}
         }
         this.handleStart = handleStart.bind(this)
         this.handleDrag = handleDrag.bind(this)
@@ -68,12 +69,13 @@ class Home extends Component {
         this.setState({
             dataToUpdate: {
                 position,
-                item,
-                isItemPlaced
+                item
             }
         })
         this.updateData(position, item, isItemPlaced)
-        this.openDialog()
+        if (!isItemPlaced) { // we want the modal to open only when we drag element fot the first time
+            this.openDialog()
+        }
     }
 
     renderToolbarRooms() {
@@ -108,7 +110,6 @@ class Home extends Component {
     renderAllItems() {
         const { placedItems } = this.state
         if (!placedItems || !placedItems.length) return null
-        
         return placedItems.map((item, i) => {
             const style = {
                 position: 'absolute',
@@ -157,12 +158,9 @@ class Home extends Component {
     }
 
     dialogOkClick = () => {
-        const { dataToUpdate, textValue, itemIdToEdit } = this.state
-        const { position, item } = dataToUpdate
-        
+        const { textValue, itemIdToEdit } = this.state
         const title = textValue
         this.setTitle(title, itemIdToEdit)
-        // this.setState({ dataToUpdate: null })
         this.setState({ textValue: '', itemIdToEdit: '' })
         this.closeDialog()
     }
@@ -170,11 +168,21 @@ class Home extends Component {
         const textValue = e.target.value
         this.setState({ textValue })
     }
+    clearAll() {
+        this.setState({ placedItems: [] })
+        localStorage.removeItem('data');
+
+    }
     render() {
         const { placedItems, dialogIsOpen, textValue } = this.state
+        const { name } = Router.query
+        console.log('name', name);
         console.log('placedItems ', placedItems);
         return (
             <div className='draggable' >
+                <button className='clear-button' onClick={() => this.clearAll()}>
+                    Clear all
+                </button>
                 <div className='draggable__toolbar' style={{ position: 'relative' }}>
                     {this.renderToolbarRooms()}
                     {this.renderToolbarElements()}

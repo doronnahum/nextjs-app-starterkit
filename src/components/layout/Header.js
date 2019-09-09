@@ -22,9 +22,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ title }) {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -33,8 +32,8 @@ export default function ButtonAppBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Electric
-          </Typography>
+                        {title}
+                    </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
