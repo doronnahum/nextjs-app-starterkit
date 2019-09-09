@@ -30,6 +30,7 @@ export default function FormDialog({ dialogIsOpen, closeModal, onOkModalClick, o
                         if (e.key === 'Enter') {
                             console.log('do validate');
                             onOkModalClick()
+                            closeModal()
                         }
                     }}
                 />

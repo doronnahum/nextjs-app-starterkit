@@ -3,12 +3,10 @@ import React, { Component } from 'react'
 import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
 import 'src/styles/dad.scss'
-import { logger } from 'src/services/logger'
 import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters } from './utils';
 import Dialog from 'src/components/Dialog';
 import { PLACED_ITEM } from 'src/enums'
 import Router from 'next/router'
-import { ClearAll } from '@material-ui/icons';
 class Home extends Component {
     constructor() {
         super();
@@ -42,6 +40,8 @@ class Home extends Component {
     }
 
     handleStop = (event, data, item, isItemPlaced) => {
+        console.log('stop!!!', event.target.className);
+        console.log('event.target.className', event.target.className);
         const { rooms, elements } = this.state
         const { shape } = item
         let _rooms = [...rooms]
@@ -176,8 +176,7 @@ class Home extends Component {
     render() {
         const { placedItems, dialogIsOpen, textValue } = this.state
         const { name } = Router.query
-        console.log('name', name);
-        console.log('placedItems ', placedItems);
+        // console.log('placedItems ', placedItems);
         return (
             <div className='draggable' >
                 <button className='clear-button' onClick={() => this.clearAll()}>

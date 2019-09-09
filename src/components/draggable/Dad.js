@@ -30,12 +30,13 @@ export default class Dad extends Component {
         if (!item) return <div style={{ background: 'red', width: 50, height: 50 }}></div>;
         return (
             <Draggable
+                // bounds='.floor'
                 axis="both"
                 handle=".handle"
                 defaultPosition={defaultPosition}
                 position={position}
                 // positionOffset={positionOffset}
-                grid={[5, 5]}
+                grid={[1, 1]}
                 scale={1}
                 onStart={handleStart && handleStart}
                 onDrag={handleDrag && handleDrag}

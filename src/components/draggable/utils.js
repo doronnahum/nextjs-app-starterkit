@@ -120,10 +120,14 @@ export function handleStart(event, data) {
 
 export function handleDrag(event, data) {
     logger.info('dragging');
+    // console.log('event', event);
+    console.log('event.target.className', event.target.className);
 
 }
 
 export function updateData(position, item, PLACED_ITEM, title) {
+    console.log(item);
+
     const { placedItems } = this.state
     const { shape, type } = item
     let arr = [...placedItems]
@@ -146,13 +150,17 @@ export function updateData(position, item, PLACED_ITEM, title) {
             title,
             shape,
             type,
-            position: position,
+            position: {
+                x: position.x,
+                y: position.y
+            },
             size: {
                 w: 58,
                 h: 58
             },
             reference_id: '4567',
-            parent_id: '1234'
+            parent_id: '1234',
+            // zIndex: item.zIndex
         }
         arr.push(obj)
         this.setState({

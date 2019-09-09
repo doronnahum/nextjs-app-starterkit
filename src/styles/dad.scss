@@ -90,21 +90,21 @@
 }
 
 .draggable {
-  @include grid(10px, center, center, 1fr 1fr, auto);
+  @include grid(100px, center, center, 400px 1fr, auto);
   // width: 1500px;
   padding-right: 100px;
-  // margin-left: 100px;
+  // padding-left: 100px;
   height: 100%;
   background: brown;
   &__toolbar {
     background: orange;
     height: 100%;
-    width: 400px;
+    // width: 400px;
   }
   .floor {
     border: 2px solid black;
     height: 50em;
-    width: 100em;
+    // width: 120em;
     // z-index: 20;
     // position: relative;
     // background: lightblue;
