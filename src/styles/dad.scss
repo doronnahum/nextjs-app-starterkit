@@ -30,46 +30,36 @@
     }
   }
 }
-.room {
+.item {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   padding: 10px;
 }
-.room-square {
-  background: green;
+.item-square {
+  background: #03caf4;
   width: 150px;
   height: 150px;
-  display: flex;
-  align-items: center;
 }
-.room-circle {
-  background: green;
+.item-circle {
+  background: #03caf4;
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
 }
-.room-rectangle {
-  background: green;
+.item-rectangle {
+  background: #03caf4;
   width: 200px;
   height: 150px;
-  display: flex;
-  align-items: center;
 }
-.room-aircon {
-  background: yellow;
+.item-aircon {
   width: 100px;
   height: 50px;
-  display: flex;
-  align-items: center;
 }
-.room-lamp {
-  background: yellow;
+.item-lamp {
   width: 100px;
   height: 50px;
-  display: flex;
-  align-items: center;
 }
 
 .smooth-dnd-container {
@@ -91,13 +81,17 @@
 
 .draggable {
   @include grid(100px, center, center, 400px 1fr, auto);
+  button {
+    @include clean-button();
+    cursor: pointer;
+  }
   // width: 1000px;
   // padding-right: 100px;
   // padding-left: 100px;
   height: calc(100%);
-  background: brown;
+  background: #980064;
   &__toolbar {
-    background: orange;
+    background: #f9780d;
     height: 100%;
     // width: 400px;
   }

@@ -28,20 +28,20 @@ export default function FormDialog({ dialogIsOpen, closeModal, onOkModalClick, o
                     fullWidth
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
+                            e.preventDefault()
                             console.log('do validate');
                             onOkModalClick()
-                            closeModal()
                         }
                     }}
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={closeModal} color="primary">
+            <Button onClick={closeModal} color="primary">
                     Cancel
-          </Button>
+            </Button>
                 <Button onClick={onOkModalClick} color="primary">
                     Ok
-          </Button>
+             </Button>
             </DialogActions>
         </Dialog>
 

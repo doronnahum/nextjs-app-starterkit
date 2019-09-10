@@ -1,9 +1,16 @@
 //////////////////////
 // general app declaration
 //////////////////////
-$PurpleHaze: #7D7098;
+$PurpleHaze: #7d7098;
 
-@mixin grid($gap: 10px,$justify: initial,$alignItems: initial,$template-cols: initial,$template-rows: initial,$areas: initial) {
+@mixin grid(
+  $gap: 10px,
+  $justify: initial,
+  $alignItems: initial,
+  $template-cols: initial,
+  $template-rows: initial,
+  $areas: initial
+) {
   display: grid;
   grid-gap: $gap;
   justify-content: $justify;
@@ -13,3 +20,9 @@ $PurpleHaze: #7D7098;
   grid-template-areas: $areas;
 }
 
+@mixin clean-button {
+  border: none;
+  :focus {
+    outline: 0;
+  }
+}

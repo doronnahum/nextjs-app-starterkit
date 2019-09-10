@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
 import 'src/styles/dad.scss'
-import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters } from './utils';
+import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters, getElementPosition, clearAll } from './utils';
 import Dialog from 'src/components/Dialog';
 import { PLACED_ITEM } from 'src/enums'
 import Router from 'next/router'
@@ -23,6 +23,7 @@ class Home extends Component {
         this.handleDrag = handleDrag.bind(this)
         this.updateData = updateData.bind(this)
         this.deleteRoom = deleteRoom.bind(this)
+        this.clearAll = clearAll.bind(this)
         this.getUpdateDragbleUpdateCounters = getUpdateDragbleUpdateCounters.bind(this)
     }
 
@@ -40,55 +41,21 @@ class Home extends Component {
         }
     }
 
-    handleStop = (event, data, item, isItemPlaced) => {
-        console.log('stop!!!', event.target.className);
-        console.log('event', event);
-        const floor_element = document.getElementById('floor_element')
-        const { clientWidth, clientHeight, offsetTop, offsetLeft } = floor_element;
-        let positionX = event.clientX - event.offsetX; // position of the item we place
-        let positionY = event.clientY - event.offsetY; // position of the item we place
-        const elementHeight = event.srcElement.clientHeight
-        const elementWidth = event.srcElement.clientWidth
-        console.log({
-            clientWidth,
-            clientHeight,
-            offsetTop,
-            offsetLeft,
-            elementHeight,
-            elementWidth
-        });
-
-        if (positionY < offsetTop) {
-            positionY = offsetTop
-        }
-        if (positionY > clientHeight + offsetTop-elementHeight) {
-            positionY = clientHeight + offsetTop - elementHeight
-        }
-        if (positionX < offsetLeft) {
-            positionX = offsetLeft
-        }
-        if (positionX > clientWidth + offsetLeft) {
-            positionX = clientWidth + offsetLeft - elementWidth
-        }
-        
-        const position = {
-            x: positionX,
-            y: positionY
-        }
-        
-
+    dropItem = (event, data, item, isItemPlaced) => {
+        const { clientX, offsetX, clientY, offsetY, srcElement } = event
+        const position = getElementPosition({ clientX, offsetX, clientY, offsetY, srcElement })
         const { rooms, elements } = this.state
-        const { shape } = item
+
         let _rooms = [...rooms]
         let _elements = [...elements]
         if (item.type === 'room') {
-            let roomsUsedArr = _rooms.find((arr, i) => arr[0].shape === shape)
+            let roomsUsedArr = _rooms.find((arr, i) => arr[0].shape === item.shape)
             roomsUsedArr.push(roomsUsedArr[0])
             this.setState({
                 rooms: _rooms,
             })
         } else if (item.type === 'element') {
-            let elementsUsedArr = _elements.find((arr, i) => arr[0].shape === shape)
+            let elementsUsedArr = _elements.find((arr, i) => arr[0].shape === item.shape)
             elementsUsedArr.push(elementsUsedArr[0])
             this.setState({
                 elements: _elements
@@ -97,16 +64,11 @@ class Home extends Component {
             alert('You are in handleStop function, The item doesnt have a type "room" or "element"!')
         }
 
-        this.setState({
-            dataToUpdate: {
-                position,
-                item
-            }
-        })
         this.updateData(position, item, isItemPlaced)
-        if (!isItemPlaced) { // we want the modal to open only when we drag element fot the first time
+        if (!isItemPlaced) { // we want the modal to open only when we drag element from the tool bar
             this.openDialog()
         }
+        this.setState({ isInside: false })
     }
 
     renderToolbarRooms() {
@@ -119,10 +81,11 @@ class Home extends Component {
             }}
             handleStart={this.handleStart}
             handleDrag={this.handleDrag}
-            handleStop={(e, data) => this.handleStop(e, data, room)}
+            handleStop={(e, data) => this.dropItem(e, data, room)}
         />
         ))
     }
+
     renderToolbarElements() {
         const { elements } = this.state
         return elements.map((arrOfSameElements) => arrOfSameElements.map((element, j) => <Dad key={j}
@@ -134,10 +97,17 @@ class Home extends Component {
             }}
             handleStart={this.handleStart}
             handleDrag={this.handleDrag}
-            handleStop={(e, data) => this.handleStop(e, data, element)}
+            handleStop={(e, data) => this.dropItem(e, data, element)}
         />
         ))
     }
+
+    editTitle(item) {
+        debugger
+        this.setState({ itemIdToEdit: item.id })
+        this.openDialog()
+    }
+
     renderAllItems() {
         const { placedItems } = this.state
         if (!placedItems || !placedItems.length) return null
@@ -146,24 +116,20 @@ class Home extends Component {
                 position: 'absolute',
                 left: item.position.x,
                 top: item.position.y,
-                border: '2px solid red',
+                // border: '2px solid red',
                 zIndex: item.type === 'element' ? 1 : 0,
-                backgroundColor: 'yellow'
+                // backgroundColor: 'yellow'
             }
             const keyEndfix = this.state.dragbleUpdateCounters[item.id] || ''
             return <Dad key={item.id + keyEndfix}
                 item={item}
-                bin
-                EditTitle={() => {
-                    this.setState({ itemIdToEdit: item.id })
-                    this.openDialog()
-                }
+                EditTitle={() => this.editTitle(item)
                 }
                 style={style}
                 deleteRoom={(e) => this.deleteRoom(e, item.id)}
                 handleStart={this.handleStart}
                 handleDrag={this.handleDrag}
-                handleStop={(x, y) => this.handleStop(x, y, item, PLACED_ITEM)}
+                handleStop={(x, y) => this.dropItem(x, y, item, PLACED_ITEM)}
             />
         })
     }
@@ -192,23 +158,16 @@ class Home extends Component {
         const { textValue, itemIdToEdit } = this.state
         const title = textValue
         this.setTitle(title, itemIdToEdit)
-        this.setState({ textValue: '', itemIdToEdit: '' })
-        this.closeDialog()
+        this.setState({ textValue: '', itemIdToEdit: '', dialogIsOpen: false })
+
     }
     onChangeText = (e) => {
         const textValue = e.target.value
         this.setState({ textValue })
     }
-    clearAll() {
-        this.setState({ placedItems: [] })
-        localStorage.removeItem('data');
 
-    }
     render() {
-        const { placedItems, dialogIsOpen, textValue } = this.state
-        const { name } = Router.query
-        // console.log('placedItems ', placedItems);
-
+        const { dialogIsOpen, textValue, isInside } = this.state
         return (
             <div className='draggable' >
                 <button className='clear-button' onClick={() => this.clearAll()}>
@@ -219,7 +178,7 @@ class Home extends Component {
                     {this.renderToolbarElements()}
                 </div>
                 {this.renderAllItems()}
-                <Floor style={{ background: this.state.isInside ? 'yellow' : 'red' }}>
+                <Floor style={{ background: isInside ? '#ff18b0' : '#ffa4e0' }}>
                 </Floor >
                 <Dialog
                     dialogIsOpen={dialogIsOpen}

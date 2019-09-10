@@ -2,29 +2,24 @@ import React, { Component } from 'react'
 import Draggable from 'react-draggable';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-// const aircon = require('./aircon.jpg')
-// const lamp = require('../../images/lamp.png')
-
+const aircon = 'static/images/aircon.png'
+const lamp = 'static/images/lamp.png'
 export default class Dad extends Component {
 
-    // renderIcon(shape) {
-    //     debugger
-    //     switch (shape) {
-    //         case 'aircon':
-    //             return <img src={aircon} style={{ width: 50, height: 50 }} alt='pic' />
-    //             break;
-    //         case 'lamp':
-    //             // return <img src={require(lamp)} style={{ width: 50, height: 50 }} alt='pic' />
-    //             break;
-
-    //         default:
-    //             break;
-    //     }
-    // }
+    renderIcon(shape) {
+        switch (shape) {
+            case 'aircon':
+                return <img src={aircon} style={{ width: 50, height: 50 }} alt='pic' />
+            case 'lamp':
+                return <img src={lamp} style={{ width: 50, height: 50 }} alt='pic' />
+            default:
+                break;
+        }
+    }
 
     render() {
         const { style, handleStart, handleDrag,
-            handleStop, deleteRoom, bin, position,
+            handleStop, deleteRoom, position,
             defaultPosition, item, EditTitle } = this.props
 
         if (!item) return <div style={{ background: 'red', width: 50, height: 50 }}></div>;
@@ -44,25 +39,25 @@ export default class Dad extends Component {
             // scale={1}
             >
                 <div style={{ ...style }} >
-                    <div className={`room-${item.shape} handle`} >
+                    <div className={`item item-${item.shape} handle`} >
                         <div style={{ pointerEvents: 'none' }}>
-                            <div>
-                                {/* {this.renderIcon(item.shape)} */}
-                            </div>
                             <div style={{ fontSize: 24 }}>
                                 {item.title}
                             </div>
                             <div>
-                                {item.id}
+                                {this.renderIcon(item.shape)}
                             </div>
+                            {/* <div>
+                                {item.id}
+                            </div> */}
                         </div>
                     </div>
 
-                    {bin && <button onClick={deleteRoom} style={{ zIndex: 5, position: 'absolute', bottom: 0, left: 0, backgroundColor: 'red' }}>
+                    {deleteRoom && <button onClick={deleteRoom} style={{ zIndex: 5, position: 'absolute', bottom: 0, left: 0 }}>
                         <DeleteIcon fontSize='small' />
                     </button>}
 
-                    {EditTitle && <button onClick={EditTitle} style={{ zIndex: 5, position: 'absolute', bottom: 0, right: 0, backgroundColor: 'green' }}>
+                    {EditTitle && <button onClick={EditTitle} style={{ zIndex: 5, position: 'absolute', bottom: 0, right: 0 }}>
                         <EditIcon fontSize='small' />
                     </button>}
 

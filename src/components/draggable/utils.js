@@ -139,27 +139,27 @@ export function handleStart(event, data) {
 }
 
 export function handleDrag(event, data) {
-    logger.info('dragging');
-    // console.log('event', event);
-    console.log('event.target.className', event.target.className);
+
+    const { clientX, offsetX, clientY, offsetY, srcElement } = event
     const floor_element = document.getElementById('floor_element')
-    const { clientHeight, offsetTop } = floor_element
-    const position = {
-        x: event.clientX - event.offsetX,
-        y: event.clientY - event.offsetY
-    }
-    if (position.y > (offsetTop) && position.y < (clientHeight + offsetTop)) {
-        console.log('###--inside')
+    const { clientWidth, clientHeight, offsetTop, offsetLeft } = floor_element;
+    let positionX = clientX - offsetX; // position of the item we place
+    let positionY = clientY - offsetY; // position of the item we place
+    const elementHeight = srcElement.clientHeight // height of the item we place
+    const elementWidth = srcElement.clientWidth // width of the item we place
+    const insideArea = positionY < clientHeight + offsetTop - elementHeight
+        && positionY > offsetTop
+        && positionX > offsetLeft
+        && positionX < clientWidth + offsetLeft - elementWidth
+    if (insideArea) {
         this.setState({ isInside: true })
     } else {
-        console.log('###--out')
         this.setState({ isInside: false })
     }
+
 }
 
 export function updateData(position, item, PLACED_ITEM, title) {
-    // console.log(item);
-
     const { placedItems } = this.state
     const { shape, type } = item
     let arr = [...placedItems]
@@ -195,13 +195,10 @@ export function updateData(position, item, PLACED_ITEM, title) {
             // zIndex: item.zIndex
         }
         arr.push(obj)
-        this.setState({
-            placedItems: arr,
-        });
+        this.setState({ placedItems: arr });
         localStorage.setItem('data', JSON.stringify(arr));
     }
 }
-
 
 export function deleteRoom(e, id) {
     const { placedItems } = this.state
@@ -217,4 +214,36 @@ export function getUpdateDragbleUpdateCounters(id) {
     const _dragbleUpdateCounters = { ...dragbleUpdateCounters };
     _dragbleUpdateCounters[id] = (_dragbleUpdateCounters[id] || 0) + 1;
     return _dragbleUpdateCounters;
+}
+
+export function getElementPosition({ clientX, offsetX, clientY, offsetY, srcElement }) {
+    const floor_element = document.getElementById('floor_element')
+    const { clientWidth, clientHeight, offsetTop, offsetLeft } = floor_element;
+    let positionX = clientX - offsetX; // position of the item we place
+    let positionY = clientY - offsetY; // position of the item we place
+    const elementHeight = srcElement.clientHeight // height of the item we place
+    const elementWidth = srcElement.clientWidth // width of the item we place
+    // console.log({ clientWidth, clientHeight, offsetTop, offsetLeft, elementHeight, elementWidth });
+    if (positionY < offsetTop) { // if we drop item above the area
+        positionY = offsetTop
+    }
+    if (positionY > clientHeight + offsetTop - elementHeight) { // if we drop item under the area
+        positionY = clientHeight + offsetTop - elementHeight
+    }
+    if (positionX < offsetLeft) { // if we drop item left to the area  
+        positionX = offsetLeft
+    }
+    if (positionX > clientWidth + offsetLeft - elementWidth) { // if we drop item right to the area 
+        positionX = clientWidth + offsetLeft - elementWidth
+    }
+    const position = {
+        x: positionX,
+        y: positionY
+    }
+    return position
+}
+
+export function clearAll() {
+    this.setState({ placedItems: [] })
+    localStorage.removeItem('data');
 }
