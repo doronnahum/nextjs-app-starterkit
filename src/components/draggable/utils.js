@@ -152,17 +152,17 @@ export function handleDrag(event, data) {
         && positionX > offsetLeft
         && positionX < clientWidth + offsetLeft - elementWidth
     if (insideArea) {
-        this.setState({ isInside: true })
+        this.setState({ isItemHovered: true })
     } else {
-        this.setState({ isInside: false })
+        this.setState({ isItemHovered: false })
     }
 
 }
 
 export function updateData(position, item, PLACED_ITEM, title) {
-    const { placedItems } = this.state
+    const { droppedItems } = this.state
     const { shape, type } = item
-    let arr = [...placedItems]
+    let arr = [...droppedItems]
     if (PLACED_ITEM) { // item is placed, and we gonna update it.
         const objIndex = arr.findIndex(obj => obj.id === item.id)
         if (position) {
@@ -172,11 +172,11 @@ export function updateData(position, item, PLACED_ITEM, title) {
             arr[objIndex].title = title
         }
         this.setState({
-            placedItems: arr,
+            droppedItems: arr,
             dragbleUpdateCounters: this.getUpdateDragbleUpdateCounters(item.id)
         })
         localStorage.setItem('data', JSON.stringify(arr));
-    } else { // creating a new item in the placedItems
+    } else { // creating a new item in the droppedItems
         const obj = {
             id: uuidv4(),
             title,
@@ -195,17 +195,17 @@ export function updateData(position, item, PLACED_ITEM, title) {
             // zIndex: item.zIndex
         }
         arr.push(obj)
-        this.setState({ placedItems: arr });
+        this.setState({ droppedItems: arr });
         localStorage.setItem('data', JSON.stringify(arr));
     }
 }
 
 export function deleteRoom(e, id) {
-    const { placedItems } = this.state
-    let arr = [...placedItems]
+    const { droppedItems } = this.state
+    let arr = [...droppedItems]
     const selectedRoomIndex = arr.findIndex(room => room.id === id)
     arr.splice(selectedRoomIndex, 1)
-    this.setState({ placedItems: arr })
+    this.setState({ droppedItems: arr })
     localStorage.setItem('data', JSON.stringify(arr));
 }
 
@@ -244,6 +244,42 @@ export function getElementPosition({ clientX, offsetX, clientY, offsetY, srcElem
 }
 
 export function clearAll() {
-    this.setState({ placedItems: [] })
+    this.setState({ droppedItems: [] })
     localStorage.removeItem('data');
+}
+
+export function editTitle(item) {
+    this.setState({ itemIdToEdit: item.id })
+    this.openDialog()
+}
+
+export function openDialog() {
+    this.setState({ dialogIsOpen: true })
+}
+export function closeDialog() {
+    this.setState({ dialogIsOpen: false })
+}
+
+export function setTitle(title, id) {
+    const { droppedItems } = this.state
+    let arr = [...droppedItems]
+    if (id) { // witch means the item is alreadyt exist
+        const indexOfItem = arr.findIndex(item => item.id === id)
+        arr[indexOfItem].title = title
+    } else { // when creating the item
+        arr[arr.length - 1].title = title
+    }
+    this.setState({ droppedItems: arr })
+}
+
+export function dialogOkClick() {
+    const { textValue, itemIdToEdit } = this.state
+    const title = textValue
+    this.setTitle(title, itemIdToEdit)
+    this.setState({ textValue: '', itemIdToEdit: '', dialogIsOpen: false })
+
+}
+export function onChangeText(e) {
+    const textValue = e.target.value
+    this.setState({ textValue })
 }
