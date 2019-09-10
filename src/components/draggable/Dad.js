@@ -44,8 +44,8 @@ export default class Dad extends Component {
             // scale={1}
             >
                 <div style={{ ...style }} >
-                    <div className={`room-${item.shape} handle`}>
-                        <div>
+                    <div className={`room-${item.shape} handle`} >
+                        <div style={{ pointerEvents: 'none' }}>
                             <div>
                                 {/* {this.renderIcon(item.shape)} */}
                             </div>

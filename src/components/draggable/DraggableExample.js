@@ -17,6 +17,7 @@ class Home extends Component {
             elements: ELEMENTS,
             rooms: ROOMS,
             textValue: '',
+            isInside: false
         }
         this.handleStart = handleStart.bind(this)
         this.handleDrag = handleDrag.bind(this)
@@ -41,7 +42,41 @@ class Home extends Component {
 
     handleStop = (event, data, item, isItemPlaced) => {
         console.log('stop!!!', event.target.className);
-        console.log('event.target.className', event.target.className);
+        console.log('event', event);
+        const floor_element = document.getElementById('floor_element')
+        const { clientWidth, clientHeight, offsetTop, offsetLeft } = floor_element;
+        let positionX = event.clientX - event.offsetX; // position of the item we place
+        let positionY = event.clientY - event.offsetY; // position of the item we place
+        const elementHeight = event.srcElement.clientHeight
+        const elementWidth = event.srcElement.clientWidth
+        console.log({
+            clientWidth,
+            clientHeight,
+            offsetTop,
+            offsetLeft,
+            elementHeight,
+            elementWidth
+        });
+
+        if (positionY < offsetTop) {
+            positionY = offsetTop
+        }
+        if (positionY > clientHeight + offsetTop-elementHeight) {
+            positionY = clientHeight + offsetTop - elementHeight
+        }
+        if (positionX < offsetLeft) {
+            positionX = offsetLeft
+        }
+        if (positionX > clientWidth + offsetLeft) {
+            positionX = clientWidth + offsetLeft - elementWidth
+        }
+        
+        const position = {
+            x: positionX,
+            y: positionY
+        }
+        
+
         const { rooms, elements } = this.state
         const { shape } = item
         let _rooms = [...rooms]
@@ -62,10 +97,6 @@ class Home extends Component {
             alert('You are in handleStop function, The item doesnt have a type "room" or "element"!')
         }
 
-        const position = {
-            x: event.clientX - event.offsetX,
-            y: event.clientY - event.offsetY
-        }
         this.setState({
             dataToUpdate: {
                 position,
@@ -177,6 +208,7 @@ class Home extends Component {
         const { placedItems, dialogIsOpen, textValue } = this.state
         const { name } = Router.query
         // console.log('placedItems ', placedItems);
+
         return (
             <div className='draggable' >
                 <button className='clear-button' onClick={() => this.clearAll()}>
@@ -187,7 +219,7 @@ class Home extends Component {
                     {this.renderToolbarElements()}
                 </div>
                 {this.renderAllItems()}
-                <Floor style={{}}>
+                <Floor style={{ background: this.state.isInside ? 'yellow' : 'red' }}>
                 </Floor >
                 <Dialog
                     dialogIsOpen={dialogIsOpen}

@@ -9,7 +9,9 @@ export const ELEMENTS = [
         position: {
             x: 100,
             y: 300
-        }
+        },
+        width: 100,
+        height: 50
     },
     {
         type: 'element',
@@ -19,7 +21,9 @@ export const ELEMENTS = [
         position: {
             x: 100,
             y: 300
-        }
+        },
+        width: 100,
+        height: 50
     }],
     [{
         type: 'element',
@@ -29,7 +33,9 @@ export const ELEMENTS = [
         position: {
             x: 100,
             y: 350
-        }
+        },
+        width: 100,
+        height: 50
     },
     {
         type: 'element',
@@ -39,7 +45,9 @@ export const ELEMENTS = [
         position: {
             x: 100,
             y: 350
-        }
+        },
+        width: 100,
+        height: 50
     }]
 ]
 
@@ -52,7 +60,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 0
-        }
+        },
+        width: 150,
+        height: 150
     },
     {
         id: 1,
@@ -62,7 +72,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 0
-        }
+        },
+        width: 150,
+        height: 150
     }
     ],
     [{
@@ -73,7 +85,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 100
-        }
+        },
+        width: 150,
+        height: 150
     }, {
         id: 2,
         type: 'room',
@@ -82,7 +96,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 100
-        }
+        },
+        width: 150,
+        height: 150
     }],
     [{
         id: 3,
@@ -92,7 +108,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 200
-        }
+        },
+        width: 200,
+        height: 150
     }, {
         id: 3,
         type: 'room',
@@ -101,7 +119,9 @@ export const ROOMS = [
         position: {
             x: 100,
             y: 200
-        }
+        },
+        width: 200,
+        height: 150
     }]]
 
 // create an id
@@ -122,11 +142,23 @@ export function handleDrag(event, data) {
     logger.info('dragging');
     // console.log('event', event);
     console.log('event.target.className', event.target.className);
-
+    const floor_element = document.getElementById('floor_element')
+    const { clientHeight, offsetTop } = floor_element
+    const position = {
+        x: event.clientX - event.offsetX,
+        y: event.clientY - event.offsetY
+    }
+    if (position.y > (offsetTop) && position.y < (clientHeight + offsetTop)) {
+        console.log('###--inside')
+        this.setState({ isInside: true })
+    } else {
+        console.log('###--out')
+        this.setState({ isInside: false })
+    }
 }
 
 export function updateData(position, item, PLACED_ITEM, title) {
-    console.log(item);
+    // console.log(item);
 
     const { placedItems } = this.state
     const { shape, type } = item

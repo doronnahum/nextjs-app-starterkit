@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
     header: {
-        // background: '#7D7098'
+        height: '65px'
     },
     menuButton: {
         marginRight: theme.spacing(2),

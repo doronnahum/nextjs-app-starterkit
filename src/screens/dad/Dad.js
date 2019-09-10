@@ -12,7 +12,7 @@ class Dad extends Component {
         const { name } = Router.query
         console.log('name from the screen', name);
         return <div className='dad-Screen'>
-            <Header title={name} />
+            {/* <Header title={name} /> */}
             {/* <DaD /> */}
 
             <DraggableExample />
