@@ -3,21 +3,25 @@ import React, { Component } from 'react'
 import Dad from 'src/components/draggable/Dad'
 import Floor from 'src/components/draggable/Floor'
 import 'src/styles/dad.scss'
-import { ELEMENTS, ROOMS, uuidv4, handleStart, handleDrag, updateData, deleteRoom, getUpdateDragbleUpdateCounters, getElementPosition, clearAll } from './utils';
+import {
+    ELEMENTS, ROOMS, handleStart, handleDrag, updateData, deleteRoom,
+    getUpdateDragbleUpdateCounters, getElementPosition, clearAll,
+    editTitle, openDialog, closeDialog, setTitle,
+    dialogOkClick, onChangeText
+} from './utils';
 import Dialog from 'src/components/Dialog';
 import { PLACED_ITEM } from 'src/enums'
-import Router from 'next/router'
 class Home extends Component {
     constructor() {
         super();
         this.state = {
             dragbleUpdateCounters: {},
-            placedItems: [],
-            dialogIsOpen: false,
+            droppedItems: [],
             elements: ELEMENTS,
             rooms: ROOMS,
             textValue: '',
-            isInside: false
+            dialogIsOpen: false,
+            isItemHovered: false
         }
         this.handleStart = handleStart.bind(this)
         this.handleDrag = handleDrag.bind(this)
@@ -25,27 +29,32 @@ class Home extends Component {
         this.deleteRoom = deleteRoom.bind(this)
         this.clearAll = clearAll.bind(this)
         this.getUpdateDragbleUpdateCounters = getUpdateDragbleUpdateCounters.bind(this)
+        this.editTitle = editTitle.bind(this)
+        this.openDialog = openDialog.bind(this)
+        this.closeDialog = closeDialog.bind(this)
+        this.setTitle = setTitle.bind(this)
+        this.dialogOkClick = dialogOkClick.bind(this)
+        this.onChangeText = onChangeText.bind(this)
     }
 
     componentDidMount() {
         try {
             const data = localStorage.getItem('data')
             if (!data) {
-                this.setState({ placedItems: [] })
+                this.setState({ droppedItems: [] })
                 return
             }
             const _data = JSON.parse(data)
-            this.setState({ placedItems: _data })
+            this.setState({ droppedItems: _data })
         } catch (err) {
             console.log('err in componentDidMount', err);
         }
     }
 
-    dropItem = (event, data, item, isItemPlaced) => {
+    dropItem = (event, item, isItemPlaced) => {
         const { clientX, offsetX, clientY, offsetY, srcElement } = event
         const position = getElementPosition({ clientX, offsetX, clientY, offsetY, srcElement })
         const { rooms, elements } = this.state
-
         let _rooms = [...rooms]
         let _elements = [...elements]
         if (item.type === 'room') {
@@ -68,7 +77,7 @@ class Home extends Component {
         if (!isItemPlaced) { // we want the modal to open only when we drag element from the tool bar
             this.openDialog()
         }
-        this.setState({ isInside: false })
+        this.setState({ isItemHovered: false })
     }
 
     renderToolbarRooms() {
@@ -81,7 +90,7 @@ class Home extends Component {
             }}
             handleStart={this.handleStart}
             handleDrag={this.handleDrag}
-            handleStop={(e, data) => this.dropItem(e, data, room)}
+            handleStop={(e) => this.dropItem(e, room)}
         />
         ))
     }
@@ -97,21 +106,16 @@ class Home extends Component {
             }}
             handleStart={this.handleStart}
             handleDrag={this.handleDrag}
-            handleStop={(e, data) => this.dropItem(e, data, element)}
+            handleStop={(e) => this.dropItem(e, element)}
         />
         ))
     }
 
-    editTitle(item) {
-        debugger
-        this.setState({ itemIdToEdit: item.id })
-        this.openDialog()
-    }
 
     renderAllItems() {
-        const { placedItems } = this.state
-        if (!placedItems || !placedItems.length) return null
-        return placedItems.map((item, i) => {
+        const { droppedItems } = this.state
+        if (!droppedItems || !droppedItems.length) return null
+        return droppedItems.map((item, i) => {
             const style = {
                 position: 'absolute',
                 left: item.position.x,
@@ -129,45 +133,13 @@ class Home extends Component {
                 deleteRoom={(e) => this.deleteRoom(e, item.id)}
                 handleStart={this.handleStart}
                 handleDrag={this.handleDrag}
-                handleStop={(x, y) => this.dropItem(x, y, item, PLACED_ITEM)}
+                handleStop={(e) => this.dropItem(e, item, PLACED_ITEM)}
             />
         })
     }
-    handleChange = (event) => {
-        this.setState({ textValue: event.target.value });
-    }
-    openDialog = () => {
-        this.setState({ dialogIsOpen: true })
-    }
-    closeDialog = () => {
-        this.setState({ dialogIsOpen: false })
-    }
-    setTitle = (title, id) => {
-        const { placedItems } = this.state
-        let arr = [...placedItems]
-        if (id) { // witch means the item is alreadyt exist
-            const indexOfItem = arr.findIndex(item => item.id === id)
-            arr[indexOfItem].title = title
-        } else { // when creating the item
-            arr[arr.length - 1].title = title
-        }
-        this.setState({ placedItems: arr })
-    }
-
-    dialogOkClick = () => {
-        const { textValue, itemIdToEdit } = this.state
-        const title = textValue
-        this.setTitle(title, itemIdToEdit)
-        this.setState({ textValue: '', itemIdToEdit: '', dialogIsOpen: false })
-
-    }
-    onChangeText = (e) => {
-        const textValue = e.target.value
-        this.setState({ textValue })
-    }
 
     render() {
-        const { dialogIsOpen, textValue, isInside } = this.state
+        const { dialogIsOpen, textValue, isItemHovered } = this.state
         return (
             <div className='draggable' >
                 <button className='clear-button' onClick={() => this.clearAll()}>
@@ -178,7 +150,7 @@ class Home extends Component {
                     {this.renderToolbarElements()}
                 </div>
                 {this.renderAllItems()}
-                <Floor style={{ background: isInside ? '#ff18b0' : '#ffa4e0' }}>
+                <Floor style={{ background: isItemHovered ? '#ff18b0' : '#ffa4e0' }}>
                 </Floor >
                 <Dialog
                     dialogIsOpen={dialogIsOpen}
@@ -186,8 +158,7 @@ class Home extends Component {
                     closeModal={this.closeDialog}
                     onOkModalClick={this.dialogOkClick}
                     onChangeText={this.onChangeText}
-                    textValue={textValue}
-                    handleChange={this.handleChange} />
+                    textValue={textValue} />
             </div >
         )
     }
