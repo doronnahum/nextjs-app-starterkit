@@ -7,8 +7,8 @@ export const ELEMENTS = [
         title: 'aircon',
         shape: 'aircon',
         position: {
-            x: 100,
-            y: 300
+            x: 50,
+            y: 100
         },
         width: 100,
         height: 50
@@ -19,8 +19,8 @@ export const ELEMENTS = [
         title: 'aircon',
         shape: 'aircon',
         position: {
-            x: 100,
-            y: 300
+            x: 50,
+            y: 100
         },
         width: 100,
         height: 50
@@ -31,8 +31,8 @@ export const ELEMENTS = [
         title: 'lamp',
         shape: 'lamp',
         position: {
-            x: 100,
-            y: 350
+            x: 50,
+            y: 200
         },
         width: 100,
         height: 50
@@ -43,8 +43,8 @@ export const ELEMENTS = [
         title: 'lamp',
         shape: 'lamp',
         position: {
-            x: 100,
-            y: 350
+            x: 50,
+            y: 200
         },
         width: 100,
         height: 50
@@ -58,7 +58,7 @@ export const ROOMS = [
         shape: 'square',
         title: 'classroom',
         position: {
-            x: 100,
+            x: 50,
             y: 0
         },
         width: 150,
@@ -70,7 +70,7 @@ export const ROOMS = [
         shape: 'square',
         title: 'classroom',
         position: {
-            x: 100,
+            x: 50,
             y: 0
         },
         width: 150,
@@ -83,7 +83,7 @@ export const ROOMS = [
         shape: 'circle',
         title: 'bathroom',
         position: {
-            x: 100,
+            x: 50,
             y: 100
         },
         width: 150,
@@ -94,7 +94,7 @@ export const ROOMS = [
         shape: 'circle',
         title: 'bathroom',
         position: {
-            x: 100,
+            x: 50,
             y: 100
         },
         width: 150,
@@ -106,7 +106,7 @@ export const ROOMS = [
         shape: 'rectangle',
         title: 'teacher room',
         position: {
-            x: 100,
+            x: 50,
             y: 200
         },
         width: 200,
@@ -117,7 +117,7 @@ export const ROOMS = [
         shape: 'rectangle',
         title: 'teacher room',
         position: {
-            x: 100,
+            x: 50,
             y: 200
         },
         width: 200,

@@ -34,13 +34,13 @@ class DaD extends Component {
 
   }
 
-  renderToolBar(items) {
+  renderItems(items) {
     return items.map((element, i) => {
       return (
         <Draggable key={i}
           className='dad-container__elements-toolbar__element'
           style={{ width: element.width, height: element.height }}>
-          <div className={`room room-${element.shape}`}
+          <div className={`item item-${element.shape}`}
             style={{ width: element.width, height: element.height }}>
             {element.name}
           </div>
@@ -96,7 +96,7 @@ class DaD extends Component {
   }
   renderElementsInRoom(elements) {
     if (!elements.length) return 'drop elements here...'
-    return elements.map((element, i) => <div key={i} style={{ height: 20, background: 'blue', width: '100%' }}>
+    return elements.map((element, i) => <div key={i} style={{ height: 20, background: 'lightblue', width: '100%', marginBotom: 10 }}>
       {element.name}
     </div>
     )
@@ -126,6 +126,8 @@ class DaD extends Component {
           dropPlaceholder
           onDragEnter={this.onDragEnter}
           onDragLeave={this.onDragLeave}
+          dropClass='cont'
+          // autoScrollEnabled
           // removeOnDropOut
           onDrop={e => {
             let arr = [...rows]
@@ -166,19 +168,26 @@ class DaD extends Component {
     return (
       <div className='dad-container'>
         <section className='dad-container__elements-toolbar'>
+          <div style={{ fontSize: 26, marginBottom: 20 }}>מתחמים</div>
           <Container
             groupName="1"
             behaviour="copy"
             getChildPayload={i => ROOMS[i]}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
           >
-            {this.renderToolBar(ROOMS)}
+            {this.renderItems(ROOMS)}
 
           </Container>
+          <div style={{ fontSize: 26, marginBottom: 20 }}>אלמנטים</div>
           <Container
             behaviour="copy"
             getChildPayload={i => ELEMENTS[i]}
           >
-            {this.renderToolBar(ELEMENTS)}
+            {this.renderItems(ELEMENTS)}
 
           </Container>
         </section>
@@ -188,13 +197,18 @@ class DaD extends Component {
         </section>
 
         <section>
+          <div>
+            <button onClick={() => this.setState({ rows: [] })}>
+              נקה הכל
+            </button>
+          </div>
           numbers of rows: {this.state.rows.length}
           <Arrows className='dad-container__arrows-container'
             onClickUp={() => this.onClickUp(rows)}
             onClickDown={() => this.onClickDown(rows)}
           />
         </section>
-      </div>
+      </div >
     );
   }
 }

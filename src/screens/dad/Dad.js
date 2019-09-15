@@ -3,8 +3,8 @@ import DaD from 'src/components/dad-smooth/DaD'
 import DraggableExample from 'src/components/draggable/DraggableExample'
 import Header from 'src/components/layout/Header'
 import Router from 'next/router'
-
-import 'src/styles/dad.scss'
+import DoronExample from 'src/components/doron/Main'
+// import 'src/styles/dad.scss'
 
 class Dad extends Component {
 
@@ -12,10 +12,10 @@ class Dad extends Component {
         const { name } = Router.query
         console.log('name from the screen', name);
         return <div className='dad-Screen'>
-            {/* <Header title={name} /> */}
+            <Header title={'חשמל הברק'} />
             {/* <DaD /> */}
-
-            <DraggableExample />
+            <DoronExample />
+            {/* <DraggableExample /> */}
         </div >
 
     }

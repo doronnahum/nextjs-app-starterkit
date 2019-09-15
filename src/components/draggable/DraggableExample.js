@@ -61,7 +61,6 @@ class Home extends Component {
 
     dropItem = (event, item, isItemPlaced) => {
         const { clientX, offsetX, clientY, offsetY, srcElement } = event
-        debugger
         const position = getElementPosition({ clientX, offsetX, clientY, offsetY, srcElement })
         const { rooms, elements } = this.state
         let _rooms = [...rooms]
@@ -150,24 +149,26 @@ class Home extends Component {
     render() {
         const { dialogIsOpen, textValue, isItemHovered } = this.state
         return (
-            <div className='draggable' >
+            <div className='draggable'>
                 <button className='clear-button' onClick={() => this.clearAll()}>
                     Clear all
                 </button>
-                <div className='draggable__toolbar' style={{ position: 'relative' }}>
-                    {this.renderToolbarRooms()}
-                    {this.renderToolbarElements()}
+                <div className='draggable__toolbar' >
+                    <div style={{ position: 'relative' }}>
+                        {this.renderToolbarRooms()}
+                    </div>
+                    <div style={{ position: 'relative' }}>
+                        {this.renderToolbarElements()}
+                    </div>
                 </div>
-                <div style={{ backgroundColor: 'red' }}>
-                    <Floor style={{
-                        background: isItemHovered ? '#ff18b0' : '#ffa4e0',
-                        height: 292,
-                        width: 600,
-                        position: 'relative'
-                    }}>
-                        {this.renderAllItems()}
-                    </Floor >
-                </div>
+                <Floor style={{
+                    background: isItemHovered ? '#ff18b0' : '#ffa4e0',
+                    // height: 292,
+                    // width: 600,
+                    // position: 'relative'
+                }}>
+                    {this.renderAllItems()}
+                </Floor >
                 <Dialog
                     dialogIsOpen={dialogIsOpen}
                     openModal={this.openDialog}

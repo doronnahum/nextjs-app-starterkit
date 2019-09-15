@@ -10,7 +10,7 @@ export default class Room extends Component {
         return (
             <Draggable
                 style={{ width: room.width, height: room.height }}>
-                <div className={`room room-${room.shape}`}
+                <div className={`item item-${room.shape}`}
                     style={{ position: 'relative', width: room.width, height: room.height, background: dragEnterRoom === room.id ? 'black' : 'orange' }}>
                     {room.title
                         ? <div>
