@@ -3,6 +3,7 @@
   background: red;
   position: relative;
   height: 100vh;
+  // width: 100vh;
   .dad-container {
     @include grid(10px, center, center, 300px 3fr 1fr, auto);
     margin-right: 20px;
@@ -80,13 +81,13 @@
 }
 
 .draggable {
-  @include grid(100px, center, center, 400px 1fr, auto);
+  @include grid(100px, flex-start, center, 400px 1fr, auto);
   button {
     @include clean-button();
     cursor: pointer;
   }
   // width: 1000px;
-  // padding-right: 100px;
+  padding-right: 100px;
   // padding-left: 100px;
   height: calc(100%);
   background: #980064;
@@ -97,9 +98,6 @@
   }
   .floor {
     border: 2px solid black;
-    height: 50em;
-    width: 120em;
-    // width: 50vw;
     // z-index: 20;
     // position: relative;
     // background: lightblue;

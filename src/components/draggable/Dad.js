@@ -36,7 +36,6 @@ export default class Dad extends Component {
                 onStart={handleStart && handleStart}
                 onDrag={handleDrag && handleDrag}
                 onStop={handleStop && handleStop}
-            // scale={1}
             >
                 <div style={{ ...style }} >
                     <div className={`item item-${item.shape} handle`} >

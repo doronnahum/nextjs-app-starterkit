@@ -147,7 +147,8 @@ export function handleDrag(event, data) {
     let positionY = clientY - offsetY; // position of the item we place
     const elementHeight = srcElement.clientHeight // height of the item we place
     const elementWidth = srcElement.clientWidth // width of the item we place
-    const insideArea = positionY < clientHeight + offsetTop - elementHeight
+    const insideArea =
+        positionY < clientHeight + offsetTop - elementHeight
         && positionY > offsetTop
         && positionX > offsetLeft
         && positionX < clientWidth + offsetLeft - elementWidth

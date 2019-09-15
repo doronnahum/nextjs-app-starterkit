@@ -38,6 +38,14 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        console.log('window', window);
+        const { width, height } = window.screen
+        console.log({
+            width,
+            height
+        });
+
+
         try {
             const data = localStorage.getItem('data')
             if (!data) {
@@ -53,6 +61,7 @@ class Home extends Component {
 
     dropItem = (event, item, isItemPlaced) => {
         const { clientX, offsetX, clientY, offsetY, srcElement } = event
+        debugger
         const position = getElementPosition({ clientX, offsetX, clientY, offsetY, srcElement })
         const { rooms, elements } = this.state
         let _rooms = [...rooms]
@@ -149,9 +158,16 @@ class Home extends Component {
                     {this.renderToolbarRooms()}
                     {this.renderToolbarElements()}
                 </div>
-                {this.renderAllItems()}
-                <Floor style={{ background: isItemHovered ? '#ff18b0' : '#ffa4e0' }}>
-                </Floor >
+                <div style={{ backgroundColor: 'red' }}>
+                    <Floor style={{
+                        background: isItemHovered ? '#ff18b0' : '#ffa4e0',
+                        height: 292,
+                        width: 600,
+                        position: 'relative'
+                    }}>
+                        {this.renderAllItems()}
+                    </Floor >
+                </div>
                 <Dialog
                     dialogIsOpen={dialogIsOpen}
                     openModal={this.openDialog}
