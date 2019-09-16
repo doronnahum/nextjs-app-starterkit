@@ -3,6 +3,7 @@ import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { useDrop } from 'react-dnd'
 import update from 'immutability-helper'
+import { Delete } from '@material-ui/icons';
 
 const contstyles = {
     width: '100%',
@@ -10,44 +11,22 @@ const contstyles = {
     border: '1px solid black',
     position: 'relative',
 }
-const Container = ({ hideSourceOnDrag }) => {
-    const [elements, setElemetns] = useState([])
+const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements=[], roomId }) => {
     const [, drop] = useDrop({
         accept: ItemTypes.ELEMENT,
         drop(item, monitor) {
-            console.log('item in box', item);
-
-            const delta = monitor.getDifferenceFromInitialOffset()
-            const left = Math.round(item.left + delta.x)
-            const top = Math.round(item.top + delta.y)
-            // console.log('getDropResult', getDropResult);
-            let obj={
-              ...item,
-              left,
-              top
-            }
-            moveBox(obj)
+          onDropElement && onDropElement(roomId, item)
             return undefined
         },
     })
 
-    const moveBox = (obj) => {
-      let _elements =[...elements] 
-      _elements.push(obj) 
-      setElemetns(_elements)
-    }
-
-    console.log(elements);
     return (
-      
         <div ref={drop} style={contstyles}>
             {elements.map(item => {
-              console.log(item);
-              
-                const { left, top, title } = item
+                const { left, top, title ,id} = item
                 return (
-                   <div style={{}}>
-                        {title}
+                   <div key={id} style={{}}>
+                        {title} 
                    </div>
                 )
             })}
@@ -55,7 +34,7 @@ const Container = ({ hideSourceOnDrag }) => {
     )
 }
 
-const style = {
+const boxStyle = {
   height:'80px',
   width:'80px',
   position: 'absolute',
@@ -64,9 +43,9 @@ const style = {
   padding: '0.5rem 1rem',
   cursor: 'move',
 }
-const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
+const Box = ({ id, left, top, hideSourceOnDrag, children,duplicate, source, elements, onDropElement,deleteRoom}) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { id, left, top, type: ItemTypes.BOX },
+    item: { id,left, top, type: ItemTypes.BOX ,duplicate, source},
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -79,8 +58,14 @@ const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
     return <div ref={drag} />
   }
   return (
-    <div ref={drag} style={{ ...style, left, top }}>
-      <Container/>
+    <div ref={drag} style={{ ...boxStyle, left, top }}>
+     {deleteRoom&& <button onClick={()=>deleteRoom(id)}>
+      <Delete/>
+      </button>}
+      <BoxDropArea 
+        elements={elements}
+        onDropElement={onDropElement}
+        roomId={id}/>
     </div>
   )
 }

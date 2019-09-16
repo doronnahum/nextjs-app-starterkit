@@ -11,15 +11,23 @@ const styles = {
     position: 'relative',
 }
 const Container = ({ hideSourceOnDrag }) => {
-    const [boxes, setBoxes] = useState({
-        a: { top: 20, left: 0, title: 'Drag me around' },
-        b: { top: 120, left: 0, title: 'Drag me too' },
-        c: { top: 220, left: 0, title: 'Drag me too' },
-    })
-    const [elements, seEelements] = useState([
-        { id: 1, title: 'mzdan', top: 20, left: 200 },
-        { id: 2, title: 'asas', top: 120, left: 200 },
-        { id: 3, title: 'ssss', top: 220, left: 200 }
+
+    // 
+    const [boxes, setBoxes] = useState([
+        { id: 1, top: 20, left: 0, title: 'Drag me around' },
+        { id: 2, top: 120, left: 0, title: 'Drag me too' },
+        { id: 3, top: 220, left: 0, title: 'Drag me too' },
+    ])
+
+    // Rooms 
+    const [boxesRendered, setBoxesRendered] = useState([
+    ])
+
+    // Elements
+    const [elements, setEelements] = useState([
+        { id: 4, top: 20, left: 200, title: 'mzdan' },
+        { id: 5, top: 120, left: 200, title: 'asas' },
+        { id: 6, top: 220, left: 200, title: 'ssss' }
     ]
     )
     const [, drop] = useDrop({
@@ -31,45 +39,78 @@ const Container = ({ hideSourceOnDrag }) => {
             const left = Math.round(item.left + delta.x)
             const top = Math.round(item.top + delta.y)
             // console.log('getDropResult', getDropResult);
-
-            moveBox(item.id, left, top, item.type)
+            let obj = {
+                ...item,
+                left,
+                top,
+            }
+            moveBox(obj)
             return undefined
         },
     })
 
-    const moveBox = (id, left, top, type) => {
-        console.log('type', type);
-
-        if (type === 'BOX') {
-            setBoxes(
-                update(boxes, {
-                    [id]: {
-                        $merge: { left, top },
-                    },
-                }),
-            )
+    const onDropElement = (roomId, item) => {
+        item.id = Math.random()
+        let _boxesRendered = [...boxesRendered]
+        const roomToUpdate = _boxesRendered.find(room => room.id === roomId)
+        roomToUpdate.elements.push(item);
+        setBoxesRendered(_boxesRendered)
+    }
+    const moveBox = (obj) => {
+        let _boxesRendered = [...boxesRendered]
+        if (!obj.duplicate) {
+            const roomToUpdate = _boxesRendered.find(room => room.id === obj.id)
+            roomToUpdate.left = obj.left
+            roomToUpdate.top = obj.top
+            setBoxesRendered(_boxesRendered)
         } else {
-            seEelements(
-                update(elements, {
-                    [id]: {
-                        $merge: { left, top },
-                    },
-                }),
-            )
+            obj.id = Math.random()
+            obj.elements = [{ title: 'dsfsdf', id: 1321 }]
+            _boxesRendered.push(obj)
+            setBoxesRendered(_boxesRendered)
         }
     }
+    const deleteRoom = (id) => {
+        let _boxesRendered = [...boxesRendered]
+        const indexOfRoom = _boxesRendered.indexOf(_boxesRendered)
+        _boxesRendered.splice(indexOfRoom, 1)
+        setBoxesRendered(_boxesRendered)
+    }
+
+
+    console.log('boxesRendered', boxesRendered);
 
     return (
         <div ref={drop} style={styles}>
-            {Object.keys(boxes).map(key => {
-                const { left, top, title } = boxes[key]
+            {boxes.map(box => {
+                const { left, top, title, id } = box
                 return (
                     <Box
-                        key={key}
-                        id={key}
+                        key={id}
+                        id={id}
+                        left={left}
+                        top={top}
+                        hideSourceOnDrag={false}
+                        duplicate
+                    >
+                        {title}
+
+                    </Box>
+                )
+            })}
+            {boxesRendered.map(box => {
+                const { left, top, title, id, elements } = box
+                return (
+                    <Box
+                        key={id}
+                        id={id}
                         left={left}
                         top={top}
                         hideSourceOnDrag={hideSourceOnDrag}
+                        duplicate={false}
+                        onDropElement={onDropElement}
+                        elements={elements}
+                        deleteRoom={deleteRoom}
                     >
                         {title}
 
@@ -77,7 +118,7 @@ const Container = ({ hideSourceOnDrag }) => {
                 )
             })}
             {elements.map((item, key) => {
-                const { left, top, title ,id} = item
+                const { left, top, title, id } = item
                 return (
                     <Element
                         key={id}
