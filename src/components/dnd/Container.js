@@ -15,8 +15,8 @@ const Container = ({ hideSourceOnDrag }) => {
     // 
     const [boxes, setBoxes] = useState([
         { id: 1, top: 20, left: 0, title: 'Drag me around' },
-        { id: 2, top: 120, left: 0, title: 'Drag me too' },
-        { id: 3, top: 220, left: 0, title: 'Drag me too' },
+        { id: 2, top: 180, left: 0, title: 'Drag me too' },
+        { id: 3, top: 340, left: 0, title: 'Drag me too' },
     ])
 
     // Rooms 
@@ -72,8 +72,15 @@ const Container = ({ hideSourceOnDrag }) => {
     }
     const deleteRoom = (id) => {
         let _boxesRendered = [...boxesRendered]
-        const indexOfRoom = _boxesRendered.indexOf(_boxesRendered)
+        const indexOfRoom = _boxesRendered.findIndex(obj => obj.id === id)
         _boxesRendered.splice(indexOfRoom, 1)
+        setBoxesRendered(_boxesRendered)
+    }
+    const deleteElement = (roomId, ElementId) => {
+        let _boxesRendered = [...boxesRendered]
+        const roomToDelete = _boxesRendered.find(obj => obj.id === roomId)
+        const indexOfElement = roomToDelete.elements.findIndex(element => element.id === ElementId)
+        roomToDelete.elements.splice(indexOfElement, 1)
         setBoxesRendered(_boxesRendered)
     }
 
@@ -111,6 +118,7 @@ const Container = ({ hideSourceOnDrag }) => {
                         onDropElement={onDropElement}
                         elements={elements}
                         deleteRoom={deleteRoom}
+                        deleteElement={deleteElement}
                     >
                         {title}
 

@@ -9,9 +9,9 @@ const contstyles = {
     width: '100%',
     height: '100%',
     border: '1px solid black',
-    position: 'relative',
+    // position: 'relative',
 }
-const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements=[], roomId }) => {
+const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements=[], roomId ,deleteElement}) => {
     const [, drop] = useDrop({
         accept: ItemTypes.ELEMENT,
         drop(item, monitor) {
@@ -26,6 +26,9 @@ const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements=[], roomId }) =
                 const { left, top, title ,id} = item
                 return (
                    <div key={id} style={{}}>
+                         {deleteElement&& <button onClick={()=>deleteElement(roomId,id)} style={{}}>
+      <Delete fontSize='small'/>
+      </button>}
                         {title} 
                    </div>
                 )
@@ -35,22 +38,19 @@ const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements=[], roomId }) =
 }
 
 const boxStyle = {
-  height:'80px',
-  width:'80px',
+  height:'120px',
+  width:'120px',
   position: 'absolute',
   border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem 1rem',
+  backgroundColor: 'orange',
+  // padding: '0.5rem 1rem',
   cursor: 'move',
 }
-const Box = ({ id, left, top, hideSourceOnDrag, children,duplicate, source, elements, onDropElement,deleteRoom}) => {
+const Box = ({ id, left, top, hideSourceOnDrag, children,duplicate, source, elements, onDropElement,deleteRoom,deleteElement}) => {
   const [{ isDragging }, drag] = useDrag({
     item: { id,left, top, type: ItemTypes.BOX ,duplicate, source},
     collect: monitor => ({
       isDragging: monitor.isDragging(),
-    }),
-    end:(item,monitor)=>({
-      getDropResult : monitor.getDropResult()
     })
   })
   
@@ -59,13 +59,14 @@ const Box = ({ id, left, top, hideSourceOnDrag, children,duplicate, source, elem
   }
   return (
     <div ref={drag} style={{ ...boxStyle, left, top }}>
-     {deleteRoom&& <button onClick={()=>deleteRoom(id)}>
-      <Delete/>
-      </button>}
       <BoxDropArea 
         elements={elements}
+        deleteElement={deleteElement}
         onDropElement={onDropElement}
         roomId={id}/>
+     {deleteRoom&& <button onClick={()=>deleteRoom(id)} style={{position:'absolute',bottom:0}}>
+      <Delete/>
+      </button>}
     </div>
   )
 }
