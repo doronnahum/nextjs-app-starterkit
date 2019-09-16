@@ -5,10 +5,11 @@ import Box from './Box'
 import Element from './Element'
 import update from 'immutability-helper'
 const styles = {
+    marginLeft: '500px',
     width: 600,
     height: 600,
     border: '1px solid black',
-    position: 'relative',
+    // position: 'relative',
 }
 const Container = ({ hideSourceOnDrag }) => {
 
@@ -84,11 +85,10 @@ const Container = ({ hideSourceOnDrag }) => {
         setBoxesRendered(_boxesRendered)
     }
 
-
     console.log('boxesRendered', boxesRendered);
 
     return (
-        <div ref={drop} style={styles}>
+        <div style={{ backgroundColor: 'red' }}>
             {boxes.map(box => {
                 const { left, top, title, id } = box
                 return (
@@ -99,26 +99,6 @@ const Container = ({ hideSourceOnDrag }) => {
                         top={top}
                         hideSourceOnDrag={false}
                         duplicate
-                    >
-                        {title}
-
-                    </Box>
-                )
-            })}
-            {boxesRendered.map(box => {
-                const { left, top, title, id, elements } = box
-                return (
-                    <Box
-                        key={id}
-                        id={id}
-                        left={left}
-                        top={top}
-                        hideSourceOnDrag={hideSourceOnDrag}
-                        duplicate={false}
-                        onDropElement={onDropElement}
-                        elements={elements}
-                        deleteRoom={deleteRoom}
-                        deleteElement={deleteElement}
                     >
                         {title}
 
@@ -141,6 +121,28 @@ const Container = ({ hideSourceOnDrag }) => {
                     </Element>
                 )
             })}
+            <div ref={drop} style={styles}>
+                {boxesRendered.map(box => {
+                    const { left, top, title, id, elements } = box
+                    return (
+                        <Box
+                            key={id}
+                            id={id}
+                            left={left}
+                            top={top}
+                            hideSourceOnDrag={hideSourceOnDrag}
+                            duplicate={false}
+                            onDropElement={onDropElement}
+                            elements={elements}
+                            deleteRoom={deleteRoom}
+                            deleteElement={deleteElement}
+                        >
+                            {title}
+
+                        </Box>
+                    )
+                })}
+            </div>
         </div>
     )
 }

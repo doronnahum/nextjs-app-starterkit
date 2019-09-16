@@ -19,6 +19,7 @@ export default function DragAroundNaive() {
           <small>Hide the source item while dragging</small>
         </label>
       </p>
+      {/* <Container hideSourceOnDrag={hideSourceOnDrag} /> */}
     </div>
   )
 }
