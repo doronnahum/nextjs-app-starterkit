@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useDrag } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import { useDrop } from 'react-dnd'
-import { Delete } from '@material-ui/icons';
+import { Edit, ArrowForward, Delete } from '@material-ui/icons';
+
 
 const contstyles = {
   width: '100%',
@@ -46,7 +47,7 @@ const boxStyle = {
   cursor: 'move',
 }
 const Box = ({ id, left, top, hideSourceOnDrag, title, toDuplicate, alsoDropabble, source,
-  elements, onDropElement, deleteRoom, deleteElement }) => {
+  elements, onDropElement, deleteRoom, editRoom, deleteElement }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { id, left, top, type: ItemTypes.BOX, toDuplicate, source, title },
     collect: monitor => ({
@@ -68,6 +69,9 @@ const Box = ({ id, left, top, hideSourceOnDrag, title, toDuplicate, alsoDropabbl
 
       {deleteRoom && <button onClick={() => deleteRoom(id)} style={{ position: 'absolute', bottom: 0 }}>
         <Delete />
+      </button>}
+      {editRoom && <button onClick={() => editRoom(id)} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+        <Edit />
       </button>}
     </div>
   )

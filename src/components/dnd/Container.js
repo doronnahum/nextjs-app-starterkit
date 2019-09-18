@@ -4,14 +4,24 @@ import ItemTypes from './ItemTypes'
 import Box from './Box'
 import snapToGrid from './snapToGrid'
 import Element from './Element'
+import Dialog from 'src/components/Dialog';
+
 const styles = {
     marginLeft: '500px',
     width: 600,
     height: 600,
     border: '1px solid black',
 }
+
 const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragging }) => {
     const [boxesRendered, setBoxesRendered] = useState([])
+    const [roomTitle, changeRoomTitle] = useState('')
+    const [dialogIsOpen, setDialog] = useState(false)
+    const [roomIdChosen, chooseRoomId] = useState('')
+    const [roomToCreate, saveRoomDetailesOnState] = useState({})
+
+    const openDialog = () => setDialog(true)
+    const closeDialog = () => setDialog(false)
 
     const boxes = [
         { id: 1, top: 20, left: 0, title: 'Drag me around' },
@@ -59,13 +69,19 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                 ;[left, top] = snapToGrid(left, top)
             }
 
-            let obj = {
+            let room = {
                 ...item,
                 left,
                 top,
                 elements: []
             }
-            moveBox(obj)
+            if (room.toDuplicate) {
+                saveRoomDetailesOnState(room)
+                openDialog()
+            } else {
+                dropExistedRoom(room)
+            }
+
             return undefined
         },
     })
@@ -79,19 +95,44 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
         setInStorage(_boxesRendered)
     }
 
-    const moveBox = (obj) => {
+    const createNewRoom = () => {
         let _boxesRendered = [...boxesRendered]
-        if (!obj.toDuplicate) { // remove room witch already placed
-            const roomToUpdate = _boxesRendered.find(room => room.id === obj.id)
-            roomToUpdate.left = obj.left
-            roomToUpdate.top = obj.top
-        } else { // create new room
-            obj.id = Math.random()
-            _boxesRendered.push(obj)
+        const newRoom = {
+            ...roomToCreate,
+            id: Math.random(),
+            title: roomTitle
         }
+        _boxesRendered.push(newRoom)
+        setBoxesRendered(_boxesRendered)
+        setInStorage(_boxesRendered)
+        saveRoomDetailesOnState({})
+    }
+
+    const dropExistedRoom = (roomToUpdate) => {
+        let _boxesRendered = [...boxesRendered]
+        let selectedRoom = _boxesRendered.find(room => room.id === roomToUpdate.id)
+        selectedRoom.left = roomToUpdate.left
+        selectedRoom.top = roomToUpdate.top
         setBoxesRendered(_boxesRendered)
         setInStorage(_boxesRendered)
     }
+
+
+
+    // const moveBox = (obj) => {
+    //     let _boxesRendered = [...boxesRendered]
+    //     if (!obj.toDuplicate) { // remove room witch already placed
+    //         const roomToUpdate = _boxesRendered.find(room => room.id === obj.id)
+    //         roomToUpdate.left = obj.left
+    //         roomToUpdate.top = obj.top
+    //     } else { // create new room
+    //         obj.id = Math.random()
+    //         _boxesRendered.push(obj)
+    //     }
+    //     setBoxesRendered(_boxesRendered)
+    //     setInStorage(_boxesRendered)
+    // }
+
     const deleteRoom = (id) => {
         let _boxesRendered = [...boxesRendered]
         const indexOfRoom = _boxesRendered.findIndex(obj => obj.id === id)
@@ -99,6 +140,21 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
         setBoxesRendered(_boxesRendered)
         setInStorage(_boxesRendered)
     }
+
+    const onPressEditRoom = (id) => {
+        openDialog()
+        chooseRoomId(id)
+    }
+
+    const editRoom = () => {
+        let _boxesRendered = [...boxesRendered]
+        let roomToEdit = _boxesRendered.find(obj => obj.id === roomIdChosen)
+        roomToEdit.title = roomTitle
+        setBoxesRendered(_boxesRendered)
+        setInStorage(_boxesRendered)
+        chooseRoomId('')
+    }
+
     const deleteElement = (roomId, ElementId) => {
         let _boxesRendered = [...boxesRendered]
         const roomToDelete = _boxesRendered.find(obj => obj.id === roomId)
@@ -110,6 +166,15 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
 
     console.log('boxesRendered', boxesRendered);
 
+    const OnOkDialog = () => {
+        if (roomIdChosen) { // rename existed title room
+            editRoom()
+        } else { // create new room
+            createNewRoom()
+        }
+        changeRoomTitle('')
+        closeDialog()
+    }
     return (
         <div style={{ backgroundColor: 'red' }}>
             {boxes.map(box => {
@@ -160,6 +225,7 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                             onDropElement={onDropElement}
                             elements={elements}
                             deleteRoom={deleteRoom}
+                            editRoom={onPressEditRoom}
                             deleteElement={deleteElement}
                             title={title}
                         />
@@ -169,8 +235,15 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
             <button onClick={() => clearAll()}>
                 <div>
                     clearAll
-          </div>
+                </div>
             </button>
+            <Dialog
+                dialogIsOpen={dialogIsOpen}
+                closeModal={closeDialog}
+                onOkModalClick={OnOkDialog}
+                onChangeText={(e) => changeRoomTitle(e.target.value)}
+                textValue={roomTitle}
+            />
         </div>
     )
 }

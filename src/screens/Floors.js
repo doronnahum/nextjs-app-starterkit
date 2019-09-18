@@ -22,7 +22,7 @@ const FLOORS = [
 const Floors = () => {
     const [floors, setFloors] = useState(FLOORS)
     const [dialogIsOpen, setDialog] = useState(false)
-    const [textValue, changeText] = useState('')
+    const [textValue, changeTitle] = useState('')
     const [floorIdChosen, chooseFloorId] = useState('')
 
     const openDialog = () => setDialog(true)
@@ -53,9 +53,10 @@ const Floors = () => {
         }
         setFloors(_floors)
         closeDialog()
-        changeText('')
+        changeTitle('')
         chooseFloorId('')
     }
+    
     const onClickAddFloor = () => {
         openDialog()
     }
@@ -83,7 +84,7 @@ const Floors = () => {
                 dialogIsOpen={dialogIsOpen}
                 closeModal={closeDialog}
                 onOkModalClick={OnOkDialog}
-                onChangeText={(e) => changeText(e.target.value)}
+                onChangeText={(e) => changeTitle(e.target.value)}
                 textValue={textValue}
             />
         </div>
