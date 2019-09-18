@@ -18,6 +18,7 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
         { id: 2, top: 180, left: 0, title: 'Drag me too' },
         { id: 3, top: 340, left: 0, title: 'Drag me too' },
     ]
+
     const elements = [
         { id: 4, top: 20, left: 200, title: 'mzdan' },
         { id: 5, top: 120, left: 200, title: 'asas' },
@@ -27,6 +28,7 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
     const setInStorage = (data) => {
         localStorage.setItem('data', JSON.stringify(data));
     }
+
     const getFromStorage = () => {
         const data = JSON.parse(localStorage.getItem('data'))
         setBoxesRendered(data || [])
@@ -38,13 +40,11 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
 
     }
 
-
     useEffect(
         () => {
             getFromStorage()
         }, []
     )
-
 
     const [, drop] = useDrop({
         accept: ItemTypes.BOX,
@@ -54,7 +54,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
             const delta = monitor.getDifferenceFromInitialOffset()
             let left = Math.round(item.left + delta.x)
             let top = Math.round(item.top + delta.y)
-
 
             if (snapToGridAfterDrop) {
                 ;[left, top] = snapToGrid(left, top)
@@ -79,13 +78,14 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
         setBoxesRendered(_boxesRendered)
         setInStorage(_boxesRendered)
     }
+
     const moveBox = (obj) => {
         let _boxesRendered = [...boxesRendered]
-        if (!obj.duplicate) {
+        if (!obj.toDuplicate) { // remove room witch already placed
             const roomToUpdate = _boxesRendered.find(room => room.id === obj.id)
             roomToUpdate.left = obj.left
             roomToUpdate.top = obj.top
-        } else {
+        } else { // create new room
             obj.id = Math.random()
             _boxesRendered.push(obj)
         }
@@ -121,13 +121,11 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                         left={left}
                         top={top}
                         hideSourceOnDrag={false}
-                        duplicate
+                        toDuplicate
                         snapToGridWhileDragging={snapToGridWhileDragging}
+                        title={title}
+                    />
 
-                    >
-                        {title}
-
-                    </Box>
                 )
             })}
             {elements.map((item) => {
@@ -144,7 +142,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                     // hideSourceOnDrag={hideSourceOnDrag}
                     >
                         {title}
-
                     </Element>
                 )
             })}
@@ -158,15 +155,14 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                             left={left}
                             top={top}
                             hideSourceOnDrag={hideSourceOnDrag}
-                            duplicate={false}
+                            toDuplicate={false}
+                            alsoDropabble
                             onDropElement={onDropElement}
                             elements={elements}
                             deleteRoom={deleteRoom}
                             deleteElement={deleteElement}
-                        >
-                            {title}
-
-                        </Box>
+                            title={title}
+                        />
                     )
                 })}
             </div>
