@@ -24,8 +24,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
         { id: 6, top: 220, left: 200, title: 'ssss' }
     ]
 
-
-
     const setInStorage = (data) => {
         localStorage.setItem('data', JSON.stringify(data));
     }
@@ -66,6 +64,7 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                 ...item,
                 left,
                 top,
+                elements: []
             }
             moveBox(obj)
             return undefined
@@ -88,7 +87,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
             roomToUpdate.top = obj.top
         } else {
             obj.id = Math.random()
-            obj.elements = [{ title: 'dsfsdf', id: 1321 }]
             _boxesRendered.push(obj)
         }
         setBoxesRendered(_boxesRendered)

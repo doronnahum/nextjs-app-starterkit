@@ -8,7 +8,7 @@ import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
 import createStore from 'src/store/createStore';
-// import 'src/styles/tools.scss'
+import 'src/styles/tools.scss'
 class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.

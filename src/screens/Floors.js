@@ -1,36 +1,93 @@
-import React, { Component } from 'react'
-import Link from 'next/link'
-import EditIcon from '@material-ui/icons/Edit';
+import React, { useState, useEffect } from 'react'
+import Floor from 'src/components/Floor';
+import Dialog from 'src/components/Dialog';
+import { AddCircle } from '@material-ui/icons';
 import './floors.scss'
+
 const FLOORS = [
     {
         id: 1,
-        name: 'Floor 1'
+        title: 'Floor 1'
     },
     {
         id: 2,
-        name: 'Floor 2'
+        title: 'Floor 2'
     },
     {
         id: 3,
-        name: 'Floor 3'
+        title: 'Floor 3'
     }
 ]
 
-export default class Floors extends Component {
-    renderFloors() {
-        return FLOORS.map(floor => <div key={floor.id} className='floors-container__floor'>
-            <div className='floors-container__floor__name'>{floor.name}</div>
-            <Link href={{ pathname: '/dad', query: { name: floor.name } }}>
-                <EditIcon fontSize='large' />
-            </Link>
-        </div>)
+const Floors = () => {
+    const [floors, setFloors] = useState(FLOORS)
+    const [dialogIsOpen, setDialog] = useState(false)
+    const [textValue, changeText] = useState('')
+    const [floorIdChosen, chooseFloorId] = useState('')
+
+    const openDialog = () => setDialog(true)
+    const closeDialog = () => setDialog(false)
+
+    const onClickEdit = (floorId) => {
+        chooseFloorId(floorId)
+        openDialog()
     }
-    render() {
-        return (
-            <div className='floors-container'>
-                {this.renderFloors()}
-            </div>
+    const deleteFloor = (floorId) => {
+        const _floors = [...floors]
+        const chosenFloorIndex = _floors.findIndex(floor => floor.id === floorId)
+        _floors.splice(chosenFloorIndex, 1)
+        setFloors(_floors)
+    }
+
+    const OnOkDialog = () => {
+        let _floors = [...floors]
+        if (floorIdChosen) { // rename excisted floor
+            let chosenFloor = _floors.find(floor => floor.id === floorIdChosen)
+            chosenFloor.title = textValue
+        } else { // create new floor
+            const newFloor = {
+                id: Math.random(),
+                title: textValue
+            }
+            _floors.push(newFloor)
+        }
+        setFloors(_floors)
+        closeDialog()
+        changeText('')
+        chooseFloorId('')
+    }
+    const onClickAddFloor = () => {
+        openDialog()
+    }
+
+    const renderFloors = () => {
+        return floors.map(floor => <Floor
+            key={floor.id}
+            className='floors-container__floor'
+            floor={floor}
+            onClickEdit={() => onClickEdit(floor.id)}
+            onClickDelete={() => deleteFloor(floor.id)}
+        />
         )
     }
+
+    return (
+        <div className='floors-container' >
+            <button style={{ display: 'flex', marginLeft: 'auto', marginBottom: '2em' }}
+                onClick={onClickAddFloor}>
+                <AddCircle color="blue"
+                    style={{ fontSize: 50 }} />
+            </button>
+            {renderFloors()}
+            <Dialog
+                dialogIsOpen={dialogIsOpen}
+                closeModal={closeDialog}
+                onOkModalClick={OnOkDialog}
+                onChangeText={(e) => changeText(e.target.value)}
+                textValue={textValue}
+            />
+        </div>
+    )
 }
+
+export default Floors

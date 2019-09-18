@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag, ROOMS, makeGrid, onClickUp, onClickDown, onDragEnter, onDragLeave, ELEMENTS } from './utils';
-import Arrows from 'src/components/dad-smooth/Arrows';
-import Room from 'src/components/dad-smooth/Room';
+import Arrows from 'src/components/trys/dad-smooth/Arrows';
+import Room from 'src/components/trys/dad-smooth/Room';
 import { Delete } from '@material-ui/icons';
 import produce from "immer"
 class DaD extends Component {

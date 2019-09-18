@@ -19,9 +19,17 @@ $PurpleHaze: #7d7098;
   grid-template-rows: $template-rows;
   grid-template-areas: $areas;
 }
+button {
+  border: none;
+  background: transparent;
+  :focus {
+    outline: 0;
+  }
+}
 
 @mixin clean-button {
   border: none;
+  background: transparent;
   :focus {
     outline: 0;
   }

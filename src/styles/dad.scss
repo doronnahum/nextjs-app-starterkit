@@ -89,7 +89,6 @@
 .draggable {
   @include grid(100px, flex-start, center, 400px 1fr, auto);
   button {
-    @include clean-button();
     cursor: pointer;
   }
   // width: 1000px;

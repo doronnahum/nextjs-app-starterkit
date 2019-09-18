@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import produce from 'immer';
-import Dad from 'src/components/draggable/Dad'
-import Floor from 'src/components/draggable/Floor'
+import Dad from 'src/components/trys/draggable/Dad'
+import Floor from 'src/components/trys/draggable/Floor'
 import 'src/styles/dad.scss'
 import {
     ELEMENTS, ROOMS, handleStart, handleDrag, updateData, deleteRoom,
