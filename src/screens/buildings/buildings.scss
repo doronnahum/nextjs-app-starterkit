@@ -1,0 +1,25 @@
+.buildings-container {
+  background: lightpink;
+  height: 100vh;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  &__building {
+    background: lightsalmon;
+    height: 100px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__name-and-edit {
+      display: flex;
+      align-items: center;
+    }
+    &__name {
+      margin-right: 50px;
+    }
+  }
+}

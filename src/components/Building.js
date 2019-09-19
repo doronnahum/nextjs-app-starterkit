@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { Edit, ArrowForward, Delete } from '@material-ui/icons';
 export default class Floor extends Component {
     render() {
-        const { className, floor, onClickEdit, onClickDelete } = this.props
+        const { className, building, onClickEdit, onClickDelete } = this.props
         return (
             <div className={className}>
                 <section className={className + '__name-and-edit'}>
-                    <div className='floors-container__floor__name'>
-                        {floor.title}
+                    <div className='buildings-container__building__name'>
+                        {building.title}
                     </div>
                     <button onClick={onClickEdit}>
                         <Edit fontSize='large' />
@@ -18,7 +18,7 @@ export default class Floor extends Component {
                     <button onClick={onClickDelete}>
                         <Delete />
                     </button>
-                    <Link href={{ pathname: '/dnd', query: { name: floor.title } }}>
+                    <Link href={{ pathname: '/floors', query: { buildingName: building.title } }}>
                         <ArrowForward />
                     </Link>
                 </section>

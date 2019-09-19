@@ -15,7 +15,7 @@ export default function DragAroundNaive() {
     <div>
       <Container
         hideSourceOnDrag={hideSourceOnDrag}
-        snapToGridAfterDrop={snapToGridAfterDrop}
+        // snapToGridAfterDrop={snapToGridAfterDrop}
       />
       <p>
         <label htmlFor="hideSourceOnDrag">
@@ -28,7 +28,7 @@ export default function DragAroundNaive() {
           <small>Hide the source item while dragging</small>
         </label>
       </p>
-      <label htmlFor="snapToGridAfterDrop">
+      {/* <label htmlFor="snapToGridAfterDrop">
         <input
           id="snapToGridAfterDrop"
           type="checkbox"
@@ -36,7 +36,7 @@ export default function DragAroundNaive() {
           onChange={handleSnapToGridAfterDropChange}
         />
         <small>Snap to grid after drop</small>
-      </label>
+      </label> */}
 
 
     </div>

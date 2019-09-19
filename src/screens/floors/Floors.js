@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Floor from 'src/components/Floor';
 import Dialog from 'src/components/Dialog';
 import { AddCircle } from '@material-ui/icons';
+import Router from 'next/router'
 import './floors.scss'
-
 const FLOORS = [
     {
         id: 1,
@@ -24,6 +24,8 @@ const Floors = () => {
     const [dialogIsOpen, setDialog] = useState(false)
     const [textValue, changeTitle] = useState('')
     const [floorIdChosen, chooseFloorId] = useState('')
+
+    const { buildingName } = Router.query
 
     const openDialog = () => setDialog(true)
     const closeDialog = () => setDialog(false)
@@ -56,7 +58,7 @@ const Floors = () => {
         changeTitle('')
         chooseFloorId('')
     }
-    
+
     const onClickAddFloor = () => {
         openDialog()
     }
@@ -74,9 +76,11 @@ const Floors = () => {
 
     return (
         <div className='floors-container' >
+            <h1>{buildingName}</h1>
+            <h2>Floors</h2>
             <button style={{ display: 'flex', marginLeft: 'auto', marginBottom: '2em' }}
                 onClick={onClickAddFloor}>
-                <AddCircle color="blue"
+                <AddCircle
                     style={{ fontSize: 50 }} />
             </button>
             {renderFloors()}

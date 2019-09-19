@@ -13,7 +13,7 @@ const styles = {
     border: '1px solid black',
 }
 
-const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragging }) => {
+const Container = ({ hideSourceOnDrag }) => {
     const [boxesRendered, setBoxesRendered] = useState([])
     const [roomTitle, changeRoomTitle] = useState('')
     const [dialogIsOpen, setDialog] = useState(false)
@@ -47,7 +47,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
     const clearAll = () => {
         localStorage.removeItem('data');
         setBoxesRendered([])
-
     }
 
     useEffect(
@@ -65,9 +64,9 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
             let left = Math.round(item.left + delta.x)
             let top = Math.round(item.top + delta.y)
 
-            if (snapToGridAfterDrop) {
+                // if (snapToGridAfterDrop) {
                 ;[left, top] = snapToGrid(left, top)
-            }
+            // }
 
             let room = {
                 ...item,
@@ -187,7 +186,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                         top={top}
                         hideSourceOnDrag={false}
                         toDuplicate
-                        snapToGridWhileDragging={snapToGridWhileDragging}
                         title={title}
                     />
 
@@ -202,9 +200,6 @@ const Container = ({ hideSourceOnDrag, snapToGridAfterDrop, snapToGridWhileDragg
                         left={left}
                         top={top}
                         title={title}
-                        snapToGridWhileDragging={snapToGridWhileDragging}
-
-                    // hideSourceOnDrag={hideSourceOnDrag}
                     >
                         {title}
                     </Element>
