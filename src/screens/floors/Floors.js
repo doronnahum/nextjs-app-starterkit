@@ -23,9 +23,14 @@ const Floors = () => {
     const [floors, setFloors] = useState(FLOORS)
     const [dialogIsOpen, setDialog] = useState(false)
     const [textValue, changeTitle] = useState('')
-    const [floorIdChosen, chooseFloorId] = useState('')
+    const [buildingName, setBuildingName] = useState('')
 
-    const { buildingName } = Router.query
+    useEffect(
+        () => {
+            const { buildingName } = Router.query || {}
+            setBuildingName(buildingName)
+        }, []
+    )
 
     const openDialog = () => setDialog(true)
     const closeDialog = () => setDialog(false)

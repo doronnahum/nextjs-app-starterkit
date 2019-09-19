@@ -5,13 +5,13 @@ import Router from 'next/router'
 export default class Login extends Component {
 
     onLogin() {
-        Router.push({ pathname: '/buildings' })
+        Router.push({ pathname: '/schools' })
     }
 
     render() {
         return (<div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', paddingTop: 200 }}>
 
-            <h1>login</h1>
+            <h1>Login</h1>
             <form noValidate autoComplete="off">
                 <div>
                     <TextField
