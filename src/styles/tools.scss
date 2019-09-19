@@ -25,6 +25,9 @@ button {
   :focus {
     outline: 0;
   }
+  :hover {
+    cursor: pointer;
+  }
 }
 
 @mixin clean-button {
