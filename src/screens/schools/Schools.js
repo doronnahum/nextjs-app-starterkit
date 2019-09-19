@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import School from 'src/components/School';
-import Dialog from 'src/components/Dialog';
+import SchoolDialog from 'src/components/SchoolDialog';
 import { AddCircle } from '@material-ui/icons';
+import Tooltip from '@material-ui/core/Tooltip';
 import './schools.scss'
 
 const SCHOOLS = [
@@ -24,6 +25,7 @@ const Schools = () => {
     const [dialogIsOpen, setDialog] = useState(false)
     const [textValue, changeTitle] = useState('')
     const [schoolIdChosen, chooseSchoolId] = useState('')
+    const [hoveredItems, setHoveredItems] = useState([]);
 
 
     const openDialog = () => setDialog(true)
@@ -40,15 +42,37 @@ const Schools = () => {
         setSchool(_schools)
     }
 
-    const OnOkDialog = () => {
+    const OnOkDialog = (schoolInputs) => {
+        console.log('schoolInputs', schoolInputs);
+
+        const { schoolTitle, city, street, zipCode, country } = schoolInputs
         let _schools = [...schools]
         if (schoolIdChosen) { // rename excisted school
             let chosenSchool = _schools.find(school => school.id === schoolIdChosen)
-            chosenSchool.title = textValue
+            if (schoolTitle) {
+                chosenSchool.title = schoolTitle
+            }
+            if (city) {
+                chosenSchool.city = city
+            }
+            if (schoolTitle) {
+                chosenSchool.street = street
+            }
+            if (schoolTitle) {
+                chosenSchool.zipCode = zipCode
+            }
+            if (schoolTitle) {
+                chosenSchool.country = country
+            }
+
         } else { // create new school
             const newSchool = {
                 id: Math.random(),
-                title: textValue
+                title: schoolTitle,
+                city,
+                street,
+                zipCode,
+                country
             }
             _schools.push(newSchool)
         }
@@ -62,16 +86,41 @@ const Schools = () => {
         openDialog()
     }
 
+    const onMouseEnterSchool = (schoolId) => {
+        const arr = [...hoveredItems]
+        if (arr.includes(schoolId)) return;
+        arr.push(schoolId)
+        setHoveredItems(arr);
+    }
+
+    const onMouseLeaveSchool = (schoolId) => {
+        const arr = [...hoveredItems]
+        const indexOfSchool = arr.indexOf(schoolId)
+        arr.splice(indexOfSchool, 1)
+        setHoveredItems(arr);
+    }
+    const renderToolTipTitle = (school) => {
+        let title = ''
+        if (school.street && school.city) {
+            title = `${school.street} ${school.city}`
+        }
+        return title
+    }
+
     const renderSchool = () => {
-        return schools.map(school => <School
-            key={school.id}
-            className='schools-container__school'
-            school={school}
-            onClickEdit={() => onClickEdit(school.id)}
-            onClickDelete={() => deleteSchool(school.id)}
-        />
+        return schools.map(school => <Tooltip key={school.id} open={hoveredItems.includes(school.id)} title={renderToolTipTitle(school)} placement="top">
+            <School
+                onMouseEnter={() => onMouseEnterSchool(school.id)}
+                onMouseLeave={() => onMouseLeaveSchool(school.id)}
+                className='schools-container__school'
+                school={school}
+                onClickEdit={() => onClickEdit(school.id)}
+                onClickDelete={() => deleteSchool(school.id)}
+            />
+        </Tooltip>
         )
     }
+    console.log('schools', schools);
 
     return (
         <div className='schools-container' >
@@ -82,7 +131,7 @@ const Schools = () => {
                     style={{ fontSize: 50 }} />
             </button>
             {renderSchool()}
-            <Dialog
+            <SchoolDialog
                 dialogIsOpen={dialogIsOpen}
                 closeModal={closeDialog}
                 onOkModalClick={OnOkDialog}

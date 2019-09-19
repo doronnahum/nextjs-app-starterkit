@@ -25,5 +25,10 @@
     &__name {
       margin-right: 50px;
     }
+    &__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
