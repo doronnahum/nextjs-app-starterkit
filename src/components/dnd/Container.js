@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
 import ItemTypes from './ItemTypes'
-import Box from './Box'
+import Room from './Room'
 import snapToGrid from './snapToGrid'
 import Element from './Element'
 import Dialog from 'src/components/Dialog';
 
-const styles = {
-    marginLeft: '500px',
-    width: 600,
-    height: 600,
-    border: '1px solid black',
-}
+// const styles = {
+//     marginLeft: '500px',
+//     width: 600,
+//     height: 600,
+//     border: '1px solid black',
+// }
 
 const Container = ({ hideSourceOnDrag }) => {
     const [boxesRendered, setBoxesRendered] = useState([])
@@ -24,15 +24,15 @@ const Container = ({ hideSourceOnDrag }) => {
     const closeDialog = () => setDialog(false)
 
     const boxes = [
-        { id: 1, top: 20, left: 0, title: 'Drag me around' },
-        { id: 2, top: 180, left: 0, title: 'Drag me too' },
-        { id: 3, top: 340, left: 0, title: 'Drag me too' },
+        { id: 1, top: 40, left: 0, title: 'Drag me around' },
+        { id: 2, top: 340, left: 0, title: 'Drag me too' },
+        { id: 3, top: 640, left: 0, title: 'Drag me too' },
     ]
 
     const elements = [
-        { id: 4, top: 20, left: 200, title: 'mzdan' },
-        { id: 5, top: 120, left: 200, title: 'asas' },
-        { id: 6, top: 220, left: 200, title: 'ssss' }
+        { id: 4, top: 40, left: 250, title: 'aircon' },
+        { id: 5, top: 130, left: 250, title: 'lamp' },
+        { id: 6, top: 220, left: 250, title: 'ssss' }
     ]
 
     const setInStorage = (data) => {
@@ -84,6 +84,16 @@ const Container = ({ hideSourceOnDrag }) => {
             return undefined
         },
     })
+
+    const OnOkDialog = () => {
+        if (roomIdChosen) { // rename existed title room
+            editRoom()
+        } else { // create new room
+            createNewRoom()
+        }
+        changeRoomTitle('')
+        closeDialog()
+    }
 
     const onDropElement = (roomId, item) => {
         item.id = Math.random()
@@ -163,53 +173,47 @@ const Container = ({ hideSourceOnDrag }) => {
         setInStorage(_boxesRendered)
     }
 
-    console.log('boxesRendered', boxesRendered);
 
-    const OnOkDialog = () => {
-        if (roomIdChosen) { // rename existed title room
-            editRoom()
-        } else { // create new room
-            createNewRoom()
-        }
-        changeRoomTitle('')
-        closeDialog()
-    }
     return (
-        <div style={{ backgroundColor: 'red' }}>
-            {boxes.map(box => {
-                const { left, top, title, id } = box
-                return (
-                    <Box
-                        key={id}
-                        id={id}
-                        left={left}
-                        top={top}
-                        hideSourceOnDrag={false}
-                        toDuplicate
-                        title={title}
-                    />
+        <div className='dnd-container'>
+            <content className='tool-bar'>
+                {boxes.map(box => {
+                    const { left, top, title, id } = box
+                    return (
+                        <Room
+                            key={id}
+                            id={id}
+                            left={left}
+                            top={top}
+                            hideSourceOnDrag={false}
+                            toDuplicate
+                            title={title}
+                        />
 
-                )
-            })}
-            {elements.map((item) => {
-                const { left, top, title, id } = item
-                return (
-                    <Element
-                        key={id}
-                        id={id}
-                        left={left}
-                        top={top}
-                        title={title}
-                    >
-                        {title}
-                    </Element>
-                )
-            })}
-            <div ref={drop} style={styles}>
+                    )
+                })}
+                {elements.map((item) => {
+                    const { left, top, title, id } = item
+                    return (
+                        <Element
+                            key={id}
+                            id={id}
+                            left={left}
+                            top={top}
+                            title={title}
+                        >
+                            {title}
+                        </Element>
+                    )
+                })}
+            </content>
+            <content ref={drop} className='floor'
+            // style={styles}
+            >
                 {boxesRendered.map(box => {
                     const { left, top, title, id, elements } = box
                     return (
-                        <Box
+                        <Room
                             key={id}
                             id={id}
                             left={left}
@@ -226,8 +230,8 @@ const Container = ({ hideSourceOnDrag }) => {
                         />
                     )
                 })}
-            </div>
-            <button onClick={() => clearAll()}>
+            </content>
+            <button onClick={() => clearAll()} style={{ position: 'absolute', right: 50, top: 50, backgroundColor: 'lightblue' }}>
                 <div>
                     clearAll
                 </div>

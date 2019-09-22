@@ -8,15 +8,7 @@ import './schools.scss'
 const SCHOOLS = [
     {
         id: 1,
-        title: 'School 1'
-    },
-    {
-        id: 2,
-        title: 'School 2'
-    },
-    {
-        id: 3,
-        title: 'School 3'
+        title: 'Example'
     }
 ]
 

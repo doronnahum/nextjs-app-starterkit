@@ -12,10 +12,10 @@ export default function DragAroundNaive() {
 
 
   return (
-    <div>
+    <div id='dnd'>
       <Container
         hideSourceOnDrag={hideSourceOnDrag}
-        // snapToGridAfterDrop={snapToGridAfterDrop}
+      // snapToGridAfterDrop={snapToGridAfterDrop}
       />
       <p>
         <label htmlFor="hideSourceOnDrag">

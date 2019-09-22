@@ -5,9 +5,8 @@ const DynamicComponent = dynamic(() => import('./dnd'),
     { ssr: false })
 export default class dnd extends Component {
     render() {
-        return (<div>
+        return (
             <DynamicComponent />
-        </div>
         )
     }
 }

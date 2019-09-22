@@ -23,9 +23,12 @@ export default class Floor extends Component {
                     <button onClick={onClickDelete}>
                         <Delete />
                     </button>
-                    <Link href={{ pathname: '/buildings', query: { schoolTitle: school.title } }}>
-                        <ArrowForward fontSize='large' />
-                    </Link>
+                    <button>
+                        <Link href={{ pathname: '/buildings', query: { schoolTitle: school.title } }}>
+                            <ArrowForward fontSize='large' />
+                        </Link>
+                    </button>
+
                 </section>
             </div >
         )

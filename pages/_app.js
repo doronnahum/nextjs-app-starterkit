@@ -9,6 +9,7 @@ import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
 import createStore from 'src/store/createStore';
 import 'src/styles/tools.scss'
+import 'src/styles/theme.scss'
 import Router from 'next/router';
 
 class MyApp extends App {
@@ -19,7 +20,7 @@ class MyApp extends App {
       jssStyles.parentNode.removeChild(jssStyles);
     }
 
-    Router.events.on('routeChangeComplete', () => { // 
+    Router.events.on('routeChangeComplete', () => { // workaround from https://github.com/zeit/next-plugins/issues/263
       if (process.env.NODE_ENV !== 'production') {
         const els = document.querySelectorAll('link[href*="/_next/static/css/styles.chunk.css"]');
         const timestamp = new Date().valueOf();

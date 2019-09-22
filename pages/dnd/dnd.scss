@@ -1,0 +1,22 @@
+@import "src/styles/tools.scss";
+#dnd {
+  background-color: #eb7c7c;
+  height: 100%;
+  padding: 20px;
+  .dnd-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: red;
+    @include grid(100px, flex-start, center, 400px 1fr, auto);
+    .tool-bar {
+      background-color: black;
+      height: 100%;
+    }
+    .floor {
+      width: 600px;
+      height: 500px;
+      border: 1px solid black;
+    }
+  }
+}

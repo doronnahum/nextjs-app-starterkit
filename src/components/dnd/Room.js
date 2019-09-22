@@ -38,8 +38,8 @@ const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements = [], roomId, d
 }
 
 const boxStyle = {
-  height: '120px',
-  width: '120px',
+  height: '200px',
+  width: '200px',
   position: 'absolute',
   border: '1px dashed gray',
   backgroundColor: 'orange',

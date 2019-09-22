@@ -24,15 +24,15 @@ const BUILDINGS = [
 const Floors = () => {
     const [buildings, setFloors] = useState(BUILDINGS)
     const [dialogIsOpen, setDialog] = useState(false)
-    const [textValue, changeTitle] = useState('')
-    const [buildingIdChosen, chooseFloorId] = useState('')
+    const [buildingTitle, changeBuildingTitle] = useState('')
+    const [buildingIdChosen, chooseBuildingId] = useState('')
     const { schoolTitle } = Router.query
 
     const openDialog = () => setDialog(true)
     const closeDialog = () => setDialog(false)
 
     const onClickEdit = (buildingId) => {
-        chooseFloorId(buildingId)
+        chooseBuildingId(buildingId)
         openDialog()
     }
     const deleteFloor = (buildingId) => {
@@ -46,18 +46,20 @@ const Floors = () => {
         let _buildings = [...buildings]
         if (buildingIdChosen) { // rename excisted building
             let chosenFloor = _buildings.find(building => building.id === buildingIdChosen)
-            chosenFloor.title = textValue
+            if (buildingTitle) {
+                chosenFloor.title = buildingTitle
+            }
         } else { // create new building
             const newFloor = {
                 id: Math.random(),
-                title: textValue
+                title: buildingTitle
             }
             _buildings.push(newFloor)
         }
         setFloors(_buildings)
         closeDialog()
-        changeTitle('')
-        chooseFloorId('')
+        changeBuildingTitle('')
+        chooseBuildingId('')
     }
 
     const onClickAddFloor = () => {
@@ -88,8 +90,8 @@ const Floors = () => {
                 dialogIsOpen={dialogIsOpen}
                 closeModal={closeDialog}
                 onOkModalClick={OnOkDialog}
-                onChangeText={(e) => changeTitle(e.target.value)}
-                textValue={textValue}
+                onChangeText={(e) => changeBuildingTitle(e.target.value)}
+                buildingTitle={buildingTitle}
             />
         </div>
     )
