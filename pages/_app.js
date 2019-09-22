@@ -9,6 +9,8 @@ import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
 import createStore from 'src/store/createStore';
 import 'src/styles/tools.scss'
+import Router from 'next/router';
+
 class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
@@ -16,6 +18,14 @@ class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    Router.events.on('routeChangeComplete', () => { // 
+      if (process.env.NODE_ENV !== 'production') {
+        const els = document.querySelectorAll('link[href*="/_next/static/css/styles.chunk.css"]');
+        const timestamp = new Date().valueOf();
+        els[0].href = '/_next/static/css/styles.chunk.css?v=' + timestamp;
+      }
+    })
   }
 
   render() {

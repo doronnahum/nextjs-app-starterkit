@@ -108,7 +108,10 @@ const Schools = () => {
     }
 
     const renderSchool = () => {
-        return schools.map(school => <Tooltip key={school.id} open={hoveredItems.includes(school.id)} title={renderToolTipTitle(school)} placement="top">
+        return schools.map(school => <Tooltip key={school.id}
+            open={hoveredItems.includes(school.id)}
+            title={renderToolTipTitle(school)}
+            placement="top">
             <School
                 onMouseEnter={() => onMouseEnterSchool(school.id)}
                 onMouseLeave={() => onMouseLeaveSchool(school.id)}
