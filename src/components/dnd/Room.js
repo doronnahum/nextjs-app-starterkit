@@ -6,9 +6,10 @@ import { Edit, ArrowForward, Delete } from '@material-ui/icons';
 
 
 const contstyles = {
-  width: '100%',
-  height: '70px',
-  border: '1px solid black',
+  // padding: 10,
+  // width: '100%',
+  // height: '100%',
+  // border: '1px solid black',
   // position: 'relative',
 }
 const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements = [], roomId, deleteElement }) => {
@@ -21,14 +22,14 @@ const BoxDropArea = ({ hideSourceOnDrag, onDropElement, elements = [], roomId, d
   })
 
   return (
-    <div ref={drop} style={contstyles}>
+    <div ref={drop} style={contstyles} className='room-dropArea'>
       {elements.map(item => {
         const { left, top, title, id } = item
         return (
-          <div key={id} style={{}}>
-            {deleteElement && <button onClick={() => deleteElement(roomId, id)} style={{}}>
+          <div key={id} style={{ backgroundColor: 'lightblue' }}>
+            {/* {deleteElement && <button onClick={() => deleteElement(roomId, id)} style={{}}>
               <Delete fontSize='small' />
-            </button>}
+            </button>} */}
             {title}
           </div>
         )
@@ -43,7 +44,7 @@ const boxStyle = {
   position: 'absolute',
   border: '1px dashed gray',
   backgroundColor: 'orange',
-  // padding: '0.5rem 1rem',
+  padding: '1.5rem 1rem',
   cursor: 'move',
 }
 const Box = ({ id, left, top, hideSourceOnDrag, title, toDuplicate, alsoDropabble, source,
@@ -60,20 +61,26 @@ const Box = ({ id, left, top, hideSourceOnDrag, title, toDuplicate, alsoDropabbl
   }
   return (
     <div ref={drag} style={{ ...boxStyle, left, top }}>
-      {title}
-      {alsoDropabble && <BoxDropArea
-        elements={elements}
-        deleteElement={deleteElement}
-        onDropElement={onDropElement}
-        roomId={id} />}
+      <div style={{ position: 'absolute', top: 2 }}>{title}</div>
+      {
+        alsoDropabble && <BoxDropArea
+          elements={elements}
+          deleteElement={deleteElement}
+          onDropElement={onDropElement}
+          roomId={id} />
+      }
 
-      {deleteRoom && <button onClick={() => deleteRoom(id)} style={{ position: 'absolute', bottom: 0 }}>
-        <Delete />
-      </button>}
-      {editRoom && <button onClick={() => editRoom(id)} style={{ position: 'absolute', bottom: 0, right: 0 }}>
-        <Edit />
-      </button>}
-    </div>
+      {
+        deleteRoom && <button onClick={() => deleteRoom(id)} style={{ position: 'absolute', bottom: 0 }}>
+          <Delete />
+        </button>
+      }
+      {
+        editRoom && <button onClick={() => editRoom(id)} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+          <Edit />
+        </button>
+      }
+    </div >
   )
 }
 export default Box

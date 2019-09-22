@@ -75,8 +75,9 @@ const Container = ({ hideSourceOnDrag }) => {
                 elements: []
             }
             if (room.toDuplicate) {
-                saveRoomDetailesOnState(room)
+                createNewRoom(room)
                 openDialog()
+
             } else {
                 dropExistedRoom(room)
             }
@@ -86,10 +87,16 @@ const Container = ({ hideSourceOnDrag }) => {
     })
 
     const OnOkDialog = () => {
+        const _boxesRendered = [...boxesRendered]
         if (roomIdChosen) { // rename existed title room
             editRoom()
         } else { // create new room
-            createNewRoom()
+            // createNewRoom()
+            const lastElement = _boxesRendered[_boxesRendered.length - 1]
+            if (roomTitle) {
+                lastElement.title = roomTitle
+            }
+            setBoxesRendered(_boxesRendered)
         }
         changeRoomTitle('')
         closeDialog()
@@ -104,10 +111,10 @@ const Container = ({ hideSourceOnDrag }) => {
         setInStorage(_boxesRendered)
     }
 
-    const createNewRoom = () => {
+    const createNewRoom = (room) => {
         let _boxesRendered = [...boxesRendered]
         const newRoom = {
-            ...roomToCreate,
+            ...room,
             id: Math.random(),
             title: roomTitle
         }
@@ -173,6 +180,7 @@ const Container = ({ hideSourceOnDrag }) => {
         setInStorage(_boxesRendered)
     }
 
+    console.log('boxesRendered', boxesRendered);
 
     return (
         <div className='dnd-container'>
