@@ -4,7 +4,7 @@ import ItemTypes from './ItemTypes'
 import Room from './Room'
 import snapToGrid from './snapToGrid'
 import Element from './Element'
-import Dialog from 'src/components/Dialog';
+import RoomDialog from 'src/components/RoomDialog';
 
 // const styles = {
 //     marginLeft: '500px',
@@ -18,7 +18,6 @@ const Container = ({ hideSourceOnDrag }) => {
     const [roomTitle, changeRoomTitle] = useState('')
     const [dialogIsOpen, setDialog] = useState(false)
     const [roomIdChosen, chooseRoomId] = useState('')
-    const [roomToCreate, saveRoomDetailesOnState] = useState({})
 
     const openDialog = () => setDialog(true)
     const closeDialog = () => setDialog(false)
@@ -104,8 +103,13 @@ const Container = ({ hideSourceOnDrag }) => {
 
     const onDropElement = (roomId, item) => {
         item.id = Math.random()
+        const MAX_ELEMENTS_IN_ROOM = 6
         let _boxesRendered = [...boxesRendered]
         const roomToUpdate = _boxesRendered.find(room => room.id === roomId)
+        if (roomToUpdate.elements.length === MAX_ELEMENTS_IN_ROOM) {
+            alert('you can\'t places more than 6 elements in a room')
+            return;
+        }
         roomToUpdate.elements.push(item);
         setBoxesRendered(_boxesRendered)
         setInStorage(_boxesRendered)
@@ -121,7 +125,6 @@ const Container = ({ hideSourceOnDrag }) => {
         _boxesRendered.push(newRoom)
         setBoxesRendered(_boxesRendered)
         setInStorage(_boxesRendered)
-        saveRoomDetailesOnState({})
     }
 
     const dropExistedRoom = (roomToUpdate) => {
@@ -244,7 +247,7 @@ const Container = ({ hideSourceOnDrag }) => {
                     clearAll
                 </div>
             </button>
-            <Dialog
+            <RoomDialog
                 dialogIsOpen={dialogIsOpen}
                 closeModal={closeDialog}
                 onOkModalClick={OnOkDialog}

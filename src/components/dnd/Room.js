@@ -61,25 +61,21 @@ const Box = ({ id, left, top, hideSourceOnDrag, title, toDuplicate, alsoDropabbl
   }
   return (
     <div ref={drag} style={{ ...boxStyle, left, top }}>
-      <div style={{ position: 'absolute', top: 2 }}>{title}</div>
-      {
-        alsoDropabble && <BoxDropArea
-          elements={elements}
-          deleteElement={deleteElement}
-          onDropElement={onDropElement}
-          roomId={id} />
-      }
+      <div style={{ position: 'absolute', top: 2 }}>
+        {title}
+      </div>
+      {alsoDropabble && <BoxDropArea
+        elements={elements}
+        deleteElement={deleteElement}
+        onDropElement={onDropElement}
+        roomId={id} />}
 
-      {
-        deleteRoom && <button onClick={() => deleteRoom(id)} style={{ position: 'absolute', bottom: 0 }}>
-          <Delete />
-        </button>
-      }
-      {
-        editRoom && <button onClick={() => editRoom(id)} style={{ position: 'absolute', bottom: 0, right: 0 }}>
-          <Edit />
-        </button>
-      }
+      {deleteRoom && <button onClick={() => deleteRoom(id)} style={{ position: 'absolute', bottom: 0 }}>
+        <Delete />
+      </button>}
+      {editRoom && <button onClick={() => editRoom(id)} style={{ position: 'absolute', bottom: 0, right: 0 }}>
+        <Edit />
+      </button>}
     </div >
   )
 }

@@ -4,7 +4,7 @@ import SchoolDialog from 'src/components/SchoolDialog';
 import { AddCircle } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import './schools.scss'
-
+import Header from 'src/components/layout/Header'
 const SCHOOLS = [
     {
         id: 1,
@@ -119,6 +119,7 @@ const Schools = () => {
 
     return (
         <div className='schools-container' >
+            
             <h2>Schools</h2>
             <button style={{ display: 'flex', marginLeft: 'auto', marginBottom: '2em' }}
                 onClick={onClickAddSchool}>
