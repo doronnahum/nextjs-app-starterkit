@@ -8,9 +8,10 @@ import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
 import createStore from 'src/store/createStore';
+import Router from 'next/router';
+import { appWithTranslation } from 'src/services/i18n'
 import 'src/styles/tools.scss'
 import 'src/styles/theme.scss'
-import Router from 'next/router';
 
 class MyApp extends App {
   componentDidMount() {
@@ -49,4 +50,4 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(createStore)(withReduxSaga(MyApp));
+export default withRedux(createStore)(withReduxSaga(appWithTranslation(MyApp)))

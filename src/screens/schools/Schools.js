@@ -4,6 +4,8 @@ import SchoolDialog from 'src/components/SchoolDialog';
 import { AddCircle } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import './schools.scss'
+import { withTranslation } from 'src/services/i18n'
+
 import Header from 'src/components/layout/Header'
 const SCHOOLS = [
     {
@@ -12,7 +14,7 @@ const SCHOOLS = [
     }
 ]
 
-const Schools = () => {
+const Schools = (props) => {
     const [schools, setSchool] = useState(SCHOOLS)
     const [dialogIsOpen, setDialog] = useState(false)
     const [textValue, changeTitle] = useState('')
@@ -115,12 +117,12 @@ const Schools = () => {
         </Tooltip>
         )
     }
-    console.log('schools', schools);
+    console.log('props', props);
 
     return (
         <div className='schools-container' >
-            
-            <h2>Schools</h2>
+
+            <h2>{props.t('schools')}</h2>
             <button style={{ display: 'flex', marginLeft: 'auto', marginBottom: '2em' }}
                 onClick={onClickAddSchool}>
                 <AddCircle
@@ -138,4 +140,6 @@ const Schools = () => {
     )
 }
 
-export default Schools
+
+export default withTranslation('common')(Schools)
+
