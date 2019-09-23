@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { withTranslation } from 'src/services/i18n'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,21 +23,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ButtonAppBar({ title }) {
+function ButtonAppBar({ title, t }) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.header} >
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+                    <Button color="inherit">{t('login')}</Button>
                     <Typography variant="h6" className={classes.title}>
                         {title}
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
+
+export default withTranslation('common')(ButtonAppBar)

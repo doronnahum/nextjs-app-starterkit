@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import Schools from 'src/screens/schools/Schools'
-import Header from 'src/components/layout/Header'
+import Organizations from 'src/screens/organizations/Organizations'
 export default class BuildingsPage extends Component {
     render() {
         return (
             <div>
-                <Header />
-                <Schools />
+                <Organizations />
             </div>
         )
     }

@@ -40,11 +40,11 @@ export default function FormDialog({ dialogIsOpen, closeModal, onOkModalClick, t
 
                 <TextField
                     onChange={onChangeText}
-                    value={inputs['schoolTitle']}
+                    value={inputs['orgName']}
                     autoFocus
                     margin="dense"
-                    id="schoolTitle"
-                    label="Title"
+                    id="orgName"
+                    label="Name"
                     type="text"
                     fullWidth
                     onKeyDown={onKeyDown}
