@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withTranslation } from 'src/services/i18n'
-
+const logo = 'static/images/Logo.png'
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -29,9 +29,10 @@ function ButtonAppBar({ title, t }) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.header} >
-                    <Button color="inherit">{t('login')}</Button>
+                    <Button color="inherit"><img src={logo} alt='logo' /></Button>
+
                     <Typography variant="h6" className={classes.title}>
-                        {title}
+                        UET
                     </Typography>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />

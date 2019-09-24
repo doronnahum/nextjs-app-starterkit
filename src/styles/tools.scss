@@ -35,3 +35,31 @@ button {
     outline: 0;
   }
 }
+
+@mixin xs {
+  @media (max-width: 566px) {
+    @content;
+  }
+}
+@mixin uptoSm {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin uptoMd {
+  @media (max-width: 960px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: 1920px) {
+    @content;
+  }
+}

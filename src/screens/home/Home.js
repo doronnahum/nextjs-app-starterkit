@@ -8,10 +8,10 @@ export default class Home extends Component {
     render() {
         return (
             <div className='home-screen'>
-                <Header />
-                <section className='home-screen__body'>
+                {/* <Header /> */}
+                <div className='home-screen__body'>
                     <Swiper className='swiper-container' />
-                    <Tables className='tables'/>
+                    <Tables className='tables' />
                     <div style={{
                         height: 100,
                         backgroundColor: 'lightblue',
@@ -21,7 +21,7 @@ export default class Home extends Component {
                     }}>
                         start save today
                     </div>
-                </section>
+                </div>
                 <Footer />
             </div >
         )
