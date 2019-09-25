@@ -6,6 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { TYPES } from 'src/components/data'
+import Input from '@material-ui/core/Input';
+import Slider from '@material-ui/core/Slider';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,25 +22,116 @@ const useStyles = makeStyles(theme => ({
     },
     tableTitle: {
         fontSize: 20
+    },
+    TableCell: {
+
     }
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export default function SimpleTable(props) {
-    const { tableTitle } = props
+    const { tableTitle, data } = props
     const classes = useStyles();
 
+    const [values, setValues] = React.useState({});
+
+    const handleTextChange = event => {
+        setValues({ ...values, [event.target.id]: event.target.value });
+    };
+    function valuetext(value) {
+        return `${value}`;
+    }
+
+    const handleSelectChange = event => {
+        setValues({ ...values, [event.target.id]: event.target.value });
+    };
+    const onChangeSlider = (event, val, location) => {
+        setValues({ ...values, [location]: val });
+    };
+
+    console.log('values', values)
+
+    const getMarks = (row) => {
+        if (!row) return [];
+        let arr = []
+        let i = row.min
+        while (i <= row.max) {
+            arr.push({ value: i })
+            i += row.ticks
+        }
+        // if we want lables in the  edges of the slider
+        // if (arr.length) { 
+        //     debugger
+        //     arr[0].label = row.min.toString()
+        //     arr[arr.length - 1].label = row.max.toString()
+        // }
+        return arr
+    }
+    const renderValueType = (row) => {
+        switch (row.type) {
+            case TYPES.NUMERIC:
+                return <Input
+                    id={row.location}
+                    label="Number"
+                    value={values[row.location] || ''}
+                    onChange={handleTextChange}
+                    type="tel"
+                    className={classes.textField}
+
+                />
+            case TYPES.RANGE:
+                return <Slider
+                    defaultValue={row.max / 2}
+                    getAriaValueText={valuetext}
+                    onChange={(e, val) => onChangeSlider(e, val, row.location)}
+                    aria-labelledby="discrete-slider-always"
+                    step={row.ticks}
+                    min={row.min}
+                    max={row.max}
+                    marks={getMarks(row)}
+                    valueLabelDisplay="on"
+                />
+            case TYPES.SELECT:
+                return <Select
+                    id={row.location}
+                    native
+                    value={values[row.location]}
+                    onChange={handleSelectChange}
+                // inputProps={{
+                //     name: 'age',
+                //     // id: 'age-native-simple',
+                // }}
+                >
+                    {row.data.map((item, i) => {
+                        return <option key={i} value={item}>{item}</option>
+                    })}
+                </Select>
+
+
+            default:
+                return row.type
+        }
+    }
+
+    const renderTableData = () => {
+        if (!data) return (
+            <TableRow>
+                <TableCell align="left" className={classes.TableCell}>
+                    no data
+                </TableCell>
+            </TableRow>
+        )
+        return data.map(row => (
+            <TableRow key={row.name}>
+                <TableCell align="left" className={classes.TableCell}>
+                    {row.name}
+                </TableCell>
+                <TableCell align="left">{row.value}</TableCell>
+                <TableCell align="left">{renderValueType(row)}</TableCell>
+            </TableRow>
+        ))
+    }
+    console.log('data', data);
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>
@@ -49,15 +144,7 @@ export default function SimpleTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map(row => (
-                        <TableRow key={row.name}>
-                            <TableCell align="left">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="left">{row.carbs}</TableCell>
-                            <TableCell align="left">{row.protein}</TableCell>
-                        </TableRow>
-                    ))}
+                    {renderTableData()}
                 </TableBody>
             </Table>
         </Paper>
