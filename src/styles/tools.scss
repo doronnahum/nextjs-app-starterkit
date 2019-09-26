@@ -28,13 +28,13 @@ button {
   }
 }
 
-@mixin clean-button {
-  border: none;
-  background: transparent;
-  :focus {
-    outline: 0;
-  }
-}
+// @mixin clean-button {
+//   border: none;
+//   background: transparent;
+//   :focus {
+//     outline: 0;
+//   }
+// }
 
 @mixin xs {
   @media (max-width: 566px) {

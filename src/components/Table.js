@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,7 @@ import { TYPES } from 'src/components/data'
 import Input from '@material-ui/core/Input';
 import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
+import { calculate } from 'src/components/data/tableUtils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,28 +29,45 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
 export default function SimpleTable(props) {
     const { tableTitle, data } = props
     const classes = useStyles();
 
     const [values, setValues] = React.useState({});
+    console.log('values', values);
 
-    const handleTextChange = event => {
-        setValues({ ...values, [event.target.id]: event.target.value });
-    };
-    function valuetext(value) {
-        return `${value}`;
+    const influencingValues = [values.d10, values.d11, values.d21, values.d22]
+
+    useEffect(() => {
+        updateReadOnlyValues()
+    }, influencingValues)
+
+    const updateReadOnlyValues = () => {
+        if (values.d10 && values.d11) { // d12
+            const res = values.d10 - values.d11
+            setValues({ ...values, d12: res });
+        }
+        if (values.d21 && values.d22) { // d12
+            const res = values.d21 - values.d22
+            setValues({ ...values, d23: res });
+        }
     }
+
+    const handleInputChange = event => {
+        setValues({ ...values, [event.target.id]: event.target.value })
+    };
 
     const handleSelectChange = event => {
         setValues({ ...values, [event.target.id]: event.target.value });
     };
+
     const onChangeSlider = (event, val, location) => {
         setValues({ ...values, [location]: val });
     };
 
-    console.log('values', values)
+    function valuetext(value) {
+        return `${value}`;
+    }
 
     const getMarks = (row) => {
         if (!row) return [];
@@ -67,6 +85,7 @@ export default function SimpleTable(props) {
         // }
         return arr
     }
+
     const renderValueType = (row) => {
         switch (row.type) {
             case TYPES.NUMERIC:
@@ -74,14 +93,14 @@ export default function SimpleTable(props) {
                     id={row.location}
                     label="Number"
                     value={values[row.location] || ''}
-                    onChange={handleTextChange}
+                    onChange={handleInputChange}
                     type="tel"
                     className={classes.textField}
 
                 />
             case TYPES.RANGE:
                 return <Slider
-                    defaultValue={row.max / 2}
+                    defaultValue={Math.floor((row.min + row.max) / 2)}
                     getAriaValueText={valuetext}
                     onChange={(e, val) => onChangeSlider(e, val, row.location)}
                     aria-labelledby="discrete-slider-always"
@@ -106,8 +125,13 @@ export default function SimpleTable(props) {
                         return <option key={i} value={item}>{item}</option>
                     })}
                 </Select>
-
-
+            case TYPES.NOT_EDITABLE:
+                return <Input
+                    id={row.location}
+                    value={values[row.location] || ''}
+                    readOnly
+                    className={classes.textField}
+                />
             default:
                 return row.type
         }
@@ -131,7 +155,6 @@ export default function SimpleTable(props) {
             </TableRow>
         ))
     }
-    console.log('data', data);
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>

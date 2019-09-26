@@ -7884,8 +7884,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
 /* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _data_tableUtils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./data/tableUtils */ "./src/components/data/tableUtils.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
 
 
 
@@ -7917,16 +7919,35 @@ function SimpleTable(props) {
   } = props;
   const classes = useStyles();
   const [values, setValues] = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState({});
+  console.log('values', values);
+  const influencingValues = [values.d10, values.d11, values.d21, values.d22];
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    updateReadOnlyValues();
+  }, influencingValues);
 
-  const handleTextChange = event => {
+  const updateReadOnlyValues = () => {
+    if (values.d10 && values.d11) {
+      // d12
+      const res = values.d10 - values.d11;
+      setValues(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, values, {
+        d12: res
+      }));
+    }
+
+    if (values.d21 && values.d22) {
+      // d12
+      const res = values.d21 - values.d22;
+      setValues(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, values, {
+        d23: res
+      }));
+    }
+  };
+
+  const handleInputChange = event => {
     setValues(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, values, {
       [event.target.id]: event.target.value
     }));
   };
-
-  function valuetext(value) {
-    return `${value}`;
-  }
 
   const handleSelectChange = event => {
     setValues(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, values, {
@@ -7940,7 +7961,9 @@ function SimpleTable(props) {
     }));
   };
 
-  console.log('values', values);
+  function valuetext(value) {
+    return `${value}`;
+  }
 
   const getMarks = row => {
     if (!row) return [];
@@ -7970,14 +7993,14 @@ function SimpleTable(props) {
           id: row.location,
           label: "Number",
           value: values[row.location] || '',
-          onChange: handleTextChange,
+          onChange: handleInputChange,
           type: "tel",
           className: classes.textField
         });
 
       case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].RANGE:
         return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_11___default.a, {
-          defaultValue: row.max / 2,
+          defaultValue: Math.floor((row.min + row.max) / 2),
           getAriaValueText: valuetext,
           onChange: (e, val) => onChangeSlider(e, val, row.location),
           "aria-labelledby": "discrete-slider-always",
@@ -8005,6 +8028,14 @@ function SimpleTable(props) {
           }, item);
         }));
 
+      case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].NOT_EDITABLE:
+        return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10___default.a, {
+          id: row.location,
+          value: values[row.location] || '',
+          readOnly: true,
+          className: classes.textField
+        });
+
       default:
         return row.type;
     }
@@ -8027,7 +8058,6 @@ function SimpleTable(props) {
     }, renderValueType(row))));
   };
 
-  console.log('data', data);
   return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8___default.a, {
     className: classes.root
   }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3___default.a, {
@@ -8071,9 +8101,10 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: className
     }, __jsx(_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
       tableTitle: 'Mechanical Properties',
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["mechanicalProperties"]
+      data: _data__WEBPACK_IMPORTED_MODULE_2__["mechanicalPropertiesData"]
     }), __jsx(_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      tableTitle: 'Water Origin'
+      tableTitle: 'Operational Properties',
+      data: _data__WEBPACK_IMPORTED_MODULE_2__["operationalPropertiesData"]
     }));
   }
 
@@ -8085,19 +8116,21 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalProperties */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TYPES", function() { return TYPES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mechanicalProperties", function() { return mechanicalProperties; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mechanicalPropertiesData", function() { return mechanicalPropertiesData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operationalPropertiesData", function() { return operationalPropertiesData; });
 const MANDATORY = true;
 const NOT_MANDATORY = false;
 const TYPES = {
   NUMERIC: 'NUMERIC',
   RANGE: 'RANGE',
-  SELECT: 'SELECT'
+  SELECT: 'SELECT',
+  NOT_EDITABLE: 'NOT_EDITABLE'
 };
 
 function createRangeData(name, value, mandatory, type, min, max, ticks, location) {
@@ -8134,7 +8167,38 @@ function createSelectData(name, value, mandatory, type, data, location) {
   };
 }
 
-const mechanicalProperties = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NUMERIC, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
+const mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
+const operationalPropertiesData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'), createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'), createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
+
+/***/ }),
+
+/***/ "./src/components/data/tableUtils.js":
+/*!*******************************************!*\
+  !*** ./src/components/data/tableUtils.js ***!
+  \*******************************************/
+/*! exports provided: calculate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculate", function() { return calculate; });
+function calculate(location, values) {
+  switch (location) {
+    case 'd12':
+      if (values.d10 && values.d11) {
+        const res = values.d10 - values.d11;
+        return res;
+      }
+
+    case 'd23':
+      if (values.d21 && values.d22) {
+        return values.d21 - values.d22;
+      }
+
+    default:
+      return '';
+  }
+}
 
 /***/ }),
 
