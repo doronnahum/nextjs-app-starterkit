@@ -148,6 +148,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
@@ -216,6 +227,79 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
 
 /***/ }),
 
@@ -8069,6 +8153,75 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/services/logger/index.js":
+/*!**************************************!*\
+  !*** ./src/services/logger/index.js ***!
+  \**************************************/
+/*! exports provided: logger */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./logger */ "./src/services/logger/logger.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "logger", function() { return _logger__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/services/logger/logger.js":
+/*!***************************************!*\
+  !*** ./src/services/logger/logger.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// import { notification } from 'antd';
+const isProd = "development" === 'production';
+const logger = {
+  error: (message, data) => {
+    if (isProd) {// TODO: is a good place to send error to some logger service
+    } else {
+      console.error(message, data); //   notification.open({
+      //     message: 'Dev Mode Error Notification',
+      //     description: message + '\n' + (data ? JSON.stringify(data) : '')
+      //   });
+    }
+
+    ;
+  },
+  info: message => {
+    if (isProd) {// TODO: is a good place to send error to some logger service
+    } else {
+      console.info(message);
+    }
+
+    ;
+  },
+  warn: (message, data) => {
+    if (isProd) {// TODO: is a good place to send error to some logger service
+    } else {
+      console.warn(message, data); //   notification.open({
+      //     message: 'Dev Mode Warning Notification',
+      //     description: message + '\n' + (data ? JSON.stringify(data) : '')
+      //   });
+    }
+
+    ;
+  },
+  debug: (message, data) => {
+    if (!isProd) {
+      console.debug('#debug -' + message, data || '');
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (logger);
+
+/***/ }),
+
 /***/ "./src/store/createStore.js":
 /*!**********************************!*\
   !*** ./src/store/createStore.js ***!
@@ -8191,10 +8344,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _global_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global/reducer */ "./src/store/global/reducer.js");
+/* harmony import */ var _tables_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tables/reducer */ "./src/store/tables/reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  global: _global_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  global: _global_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  tables: _tables_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -8210,14 +8366,193 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
- // import { logoutWatcher } from 'src/store/user/saga';
+/* harmony import */ var _tables_watcher__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tables/watcher */ "./src/store/tables/watcher.js");
+
+
 
 function* rootSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([// call(logoutWatcher, 'logout')
-  ]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(_tables_watcher__WEBPACK_IMPORTED_MODULE_1__["default"], 'tablesWatcher')]);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (rootSaga);
+
+/***/ }),
+
+/***/ "./src/store/tables/actions.js":
+/*!*************************************!*\
+  !*** ./src/store/tables/actions.js ***!
+  \*************************************/
+/*! exports provided: updateTablesValues, setValues */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTablesValues", function() { return updateTablesValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setValues", function() { return setValues; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
+
+const updateTablesValues = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].UPDATE_TABLES_VALUES,
+  payload
+});
+const setValues = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_VALUES,
+  payload
+});
+
+/***/ }),
+
+/***/ "./src/store/tables/initial.js":
+/*!*************************************!*\
+  !*** ./src/store/tables/initial.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const initialState = {
+  windowSize: {},
+  tablesData: {
+    data: {},
+    loading: false,
+    error: null
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (initialState);
+
+/***/ }),
+
+/***/ "./src/store/tables/reducer.js":
+/*!*************************************!*\
+  !*** ./src/store/tables/reducer.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return tablesReducer; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
+/* harmony import */ var _initial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./initial */ "./src/store/tables/initial.js");
+/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! immer */ "immer");
+/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(immer__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function tablesReducer(state = _initial__WEBPACK_IMPORTED_MODULE_2__["default"], action) {
+  const {
+    data,
+    loading,
+    error
+  } = action.payload || {};
+
+  switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_VALUES:
+      {
+        console.log('data in reducer', data);
+        const nextState = immer__WEBPACK_IMPORTED_MODULE_3___default()(state, draftState => {
+          draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
+          draftState.tablesData.loading = loading;
+          draftState.tablesData.error = error;
+        });
+        return nextState;
+      }
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./src/store/tables/types.js":
+/*!***********************************!*\
+  !*** ./src/store/tables/types.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
+  UPDATE_TABLES_VALUES: 'UPDATE_TABLES_VALUES',
+  SET_VALUES: 'SET_VALUES'
+});
+
+/***/ }),
+
+/***/ "./src/store/tables/watcher.js":
+/*!*************************************!*\
+  !*** ./src/store/tables/watcher.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
+/* harmony import */ var _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./workers/updateTablesValues */ "./src/store/tables/workers/updateTablesValues.js");
+
+
+
+
+function* tablesWatcher() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_types__WEBPACK_IMPORTED_MODULE_1__["default"].UPDATE_TABLES_VALUES, _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (tablesWatcher);
+
+/***/ }),
+
+/***/ "./src/store/tables/workers/updateTablesValues.js":
+/*!********************************************************!*\
+  !*** ./src/store/tables/workers/updateTablesValues.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return updateTablesValues; });
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/logger */ "./src/services/logger/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/store/tables/actions.js");
+
+
+
+function* updateTablesValues(action) {
+  const {
+    values
+  } = action.payload;
+
+  try {
+    //     yield put(setRamzorPress({ storeKey, status: consts.API_STATUS.START, error: null, loading: true, data: dataForClient }));
+    //     const res = yield httpRequest(api.request, { url: 'setCompliance', method: 'post', data: dataToSend });
+    //     if (res.error) {
+    //         const errType = res.message === 'Network Error' ? consts.API_STATUS.FAILED_NETWORK : consts.API_STATUS.FAILED;
+    //         yield put(setRamzorPress({ storeKey, status: errType, error: res, loading: false, data: dataForClient }));
+    //     } else {
+    //         yield put(setRamzorPress({
+    //             storeKey, status: consts.API_STATUS.FINISHED, error: null, loading: false, data: dataForClient
+    //         }));
+    //     }
+    const data = values;
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setValues"])({
+      error: null,
+      loading: false,
+      data
+    }));
+  } catch (err) {
+    console.log('error in onRamzorPress', err);
+  }
+}
 
 /***/ }),
 
@@ -8387,6 +8722,17 @@ module.exports = require("core-js/library/fn/object/define-property");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/get-own-property-symbols":
+/*!*********************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
 
 /***/ }),
 

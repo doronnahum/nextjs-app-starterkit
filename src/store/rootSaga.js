@@ -1,9 +1,9 @@
 import { all, call } from 'redux-saga/effects';
-// import { logoutWatcher } from 'src/store/user/saga';
+import tablesWatcher from 'src/store/tables/watcher';
 
 function* rootSaga() {
   yield all([
-    // call(logoutWatcher, 'logout')
+    call(tablesWatcher, 'tablesWatcher')
   ]);
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from 'src/components/layout/Header'
 import Footer from 'src/components/layout/Footer'
 import Swiper from 'src/components/swiper/Swiper'
-import Tables from 'src/components/Tables'
+import Tables from 'src/components/tables/Tables'
 import './homeStyle.scss'
 export default class Home extends Component {
     render() {
