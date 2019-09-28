@@ -47738,7 +47738,7 @@ function (_Component) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47748,6 +47748,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operationalPropertiesData", function() { return operationalPropertiesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterOriginData", function() { return waterOriginData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operationCostsData", function() { return operationCostsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enironmentalData", function() { return enironmentalData; });
 var MANDATORY = true;
 var NOT_MANDATORY = false;
 var TYPES = {
@@ -47791,10 +47792,12 @@ function createSelectData(name, value, mandatory, type, data, location) {
   };
 }
 
-var mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
+var mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
 var operationalPropertiesData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'), createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'), createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
-var waterOriginData = [createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['Public', 'Well', 'River', 'Reuse'], 'j8'), createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'), createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10')];
-var operationCostsData = [createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'), createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'), createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'), createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'), createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17')]; // export const waterAnalysisData = [
+var waterOriginData = [createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['', 'Public', 'Well', 'River', 'Reuse'], 'j8'), createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'), createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10')];
+var operationCostsData = [createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'), createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'), createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'), createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'), createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17')];
+var enironmentalData = [createNumericData('Discharge limitations', 'Chlorides (ppm)', MANDATORY, TYPES.NUMERIC, 'j20'), createNumericData('Discharge limitations', 'Sulfates (ppm)', MANDATORY, TYPES.NUMERIC, 'j21'), createNumericData('Discharge limitations', 'pH', MANDATORY, TYPES.NUMERIC, 'j22'), createNumericData('Discharge limitations', 'Chlorine (ppm)', MANDATORY, TYPES.NUMERIC, 'j23'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j24'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25')]; // continur with Customer's problems and requests !
+// export const waterAnalysisData = [
 //     createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
 //     createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
 //     createRangeData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
@@ -48242,7 +48245,229 @@ function SimpleTable(props) {
     }, "no data"));
     return data.map(function (row) {
       return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        key: row.name
+        key: row.location
+      }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        align: "left",
+        className: classes.TableCell
+      }, row.name), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        align: "left"
+      }, row.value), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        align: "left"
+      }, renderValueType(row)));
+    });
+  };
+
+  return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    className: classes.root
+  }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: classes.table
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: classes.tableTitle,
+    align: "left"
+  }, tableTitle), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    align: "left"
+  }, "Value"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    align: "left"
+  }, "Units"))), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__["default"], null, renderTableData())));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_13__["default"])(SimpleTable));
+
+/***/ }),
+
+/***/ "./src/components/table/TableDiffrent.js":
+/*!***********************************************!*\
+  !*** ./src/components/table/TableDiffrent.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/index.js");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/index.js");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Slider */ "./node_modules/@material-ui/core/esm/Slider/index.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+ // import { calculate } from 'src/components/data/tableUtils';
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(function (theme) {
+  return {
+    root: {// width: '100%',
+      // marginTop: theme.spacing(3),
+      // overflowX: 'auto',
+    },
+    table: {// width: 600,
+    },
+    tableTitle: {
+      fontSize: 20
+    },
+    TableCell: {}
+  };
+});
+
+function SimpleTable(props) {
+  var tableTitle = props.tableTitle,
+      data = props.data;
+  var classes = useStyles();
+  console.log("props of ".concat(tableTitle), props.tablesData);
+  var tableValues = props.tablesData;
+  var influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22];
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    updateReadOnlyValues();
+  }, influencingValues);
+
+  var updateReadOnlyValues = function updateReadOnlyValues() {
+    if (tableValues.d10 && tableValues.d11) {
+      // d12
+      var res = tableValues.d10 - tableValues.d11;
+      props.actions.updateTablesValues({
+        values: {
+          d12: res
+        }
+      });
+    }
+
+    if (tableValues.d21 && tableValues.d22) {
+      // d23
+      var _res = tableValues.d21 - tableValues.d22;
+
+      props.actions.updateTablesValues({
+        values: {
+          d23: _res
+        }
+      });
+    }
+  };
+
+  var handleInputChange = function handleInputChange(event) {
+    props.actions.updateTablesValues({
+      values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, event.target.id, event.target.value)
+    });
+  };
+
+  var handleSelectChange = function handleSelectChange(event) {
+    props.actions.updateTablesValues({
+      values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, event.target.id, event.target.value)
+    });
+  };
+
+  var onChangeSlider = function onChangeSlider(event, val, location) {
+    props.actions.updateTablesValues({
+      values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, location, val)
+    });
+  };
+
+  function valuetext(value) {
+    return "".concat(value);
+  }
+
+  var getMarks = function getMarks(row) {
+    if (!row) return [];
+    var arr = [];
+    var i = row.min;
+
+    while (i <= row.max) {
+      arr.push({
+        value: i
+      });
+      i += row.ticks;
+    } // if we want lables in the  edges of the slider
+    // if (arr.length) { 
+    //     debugger
+    //     arr[0].label = row.min.toString()
+    //     arr[arr.length - 1].label = row.max.toString()
+    // }
+
+
+    return arr;
+  };
+
+  var renderValueType = function renderValueType(row) {
+    switch (row.type) {
+      case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].NUMERIC:
+        return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          id: row.location,
+          label: "Number",
+          value: tableValues[row.location] || '',
+          onChange: handleInputChange,
+          type: "number",
+          className: classes.textField
+        });
+
+      case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].RANGE:
+        return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          defaultValue: Math.floor((row.min + row.max) / 2),
+          getAriaValueText: valuetext,
+          onChange: function onChange(e, val) {
+            return onChangeSlider(e, val, row.location);
+          },
+          "aria-labelledby": "discrete-slider-always",
+          step: row.ticks,
+          min: row.min,
+          max: row.max,
+          marks: getMarks(row),
+          valueLabelDisplay: "on"
+        });
+
+      case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].SELECT:
+        return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          id: row.location,
+          "native": true,
+          value: tableValues[row.location],
+          onChange: handleSelectChange
+        }, row.data.map(function (item, i) {
+          return __jsx("option", {
+            key: i,
+            value: item
+          }, item);
+        }));
+
+      case _data__WEBPACK_IMPORTED_MODULE_9__["TYPES"].NOT_EDITABLE:
+        return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          id: row.location,
+          value: tableValues[row.location] || '',
+          readOnly: true,
+          className: classes.textField
+        });
+
+      default:
+        return row.type;
+    }
+  };
+
+  var renderTableData = function renderTableData() {
+    if (!data) return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      align: "left",
+      className: classes.TableCell
+    }, "no data"));
+    return data.map(function (row) {
+      return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        key: row.location
       }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__["default"], {
         align: "left",
         className: classes.TableCell
@@ -48327,13 +48552,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _table_Table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../table/Table */ "./src/components/table/Table.js");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _table_TableDiffrent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../table/TableDiffrent */ "./src/components/table/TableDiffrent.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
 
 
 
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
+
 
 
 
@@ -48357,16 +48584,19 @@ function (_Component) {
         className: className
       }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Mechanical Properties',
-        data: _data__WEBPACK_IMPORTED_MODULE_7__["mechanicalPropertiesData"]
+        data: _data__WEBPACK_IMPORTED_MODULE_8__["mechanicalPropertiesData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Operational Properties',
-        data: _data__WEBPACK_IMPORTED_MODULE_7__["operationalPropertiesData"]
+        data: _data__WEBPACK_IMPORTED_MODULE_8__["operationalPropertiesData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Water Origin',
-        data: _data__WEBPACK_IMPORTED_MODULE_7__["waterOriginData"]
+        data: _data__WEBPACK_IMPORTED_MODULE_8__["waterOriginData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Operation Costs',
-        data: _data__WEBPACK_IMPORTED_MODULE_7__["operationCostsData"]
+        data: _data__WEBPACK_IMPORTED_MODULE_8__["operationCostsData"]
+      }), __jsx(_table_TableDiffrent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        tableTitle: 'Enironmental Data',
+        data: _data__WEBPACK_IMPORTED_MODULE_8__["enironmentalData"]
       }));
     }
   }]);

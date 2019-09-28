@@ -142,7 +142,7 @@ function SimpleTable(props) {
             </TableRow>
         )
         return data.map(row => (
-            <TableRow key={row.name}>
+            <TableRow key={row.location}>
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>

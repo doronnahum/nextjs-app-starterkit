@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Table from 'src/components/table/Table'
+import TableDiffrent from 'src/components/table/TableDiffrent'
 import {
     mechanicalPropertiesData,
     operationalPropertiesData,
     waterOriginData,
-    operationCostsData
+    operationCostsData,
+    enironmentalData
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -20,7 +22,9 @@ class Tables extends Component {
                     data={waterOriginData} />
                 <Table tableTitle={'Operation Costs'}
                     data={operationCostsData} />
-                {/* <Table tableTitle={'Water Analysis'}
+                <TableDiffrent tableTitle={'Enironmental Data'}
+                    data={enironmentalData} />
+                {/* <TableDiffrent tableTitle={'Water Analysis'}
                     data={waterAnalysisData} /> */}
                 {/* <Table tableTitle={'Enironmental Data '} /> */}
                 {/* <Table tableTitle={'Customer\'s problems and requests'} /> */}

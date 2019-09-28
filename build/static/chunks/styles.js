@@ -66,7 +66,7 @@
           .querySelectorAll("link[href][rel=stylesheet]")
           .forEach(function(link) {
             if (!link.href.match(prefix) || link.stale) return;
-            injectCss(link, link.href.split("?")[0] + "?unix=1569651144036");
+            injectCss(link, link.href.split("?")[0] + "?unix=1569669031349");
           });
       }
     }
