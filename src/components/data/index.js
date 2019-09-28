@@ -33,8 +33,32 @@ export const operationalPropertiesData = [
     createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
     createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
     createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
-    createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE,60,100,10, 'd24'),
-    createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE,1,7,1, 'd25'),
+    createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'),
+    createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'),
     createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'),
     createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27'),
 ]
+
+export const waterOriginData = [
+    createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['Public', 'Well', 'River', 'Reuse'], 'j8'),
+    createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'),
+    createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10'),
+]
+export const operationCostsData = [
+    createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'),
+    createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'),
+    createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'),
+    createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'),
+    createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17'),
+]
+
+
+// export const waterAnalysisData = [
+//     createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
+//     createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
+//     createRangeData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
+//     createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'),
+//     createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'),
+//     createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'),
+//     createRangeData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27'),
+// ]

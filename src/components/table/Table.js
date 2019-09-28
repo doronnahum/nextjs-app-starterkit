@@ -94,7 +94,7 @@ function SimpleTable(props) {
                     label="Number"
                     value={tableValues[row.location] || ''}
                     onChange={handleInputChange}
-                    type="tel"
+                    type="number"
                     className={classes.textField}
 
                 />
@@ -116,10 +116,6 @@ function SimpleTable(props) {
                     native
                     value={tableValues[row.location]}
                     onChange={handleSelectChange}
-                // inputProps={{
-                //     name: 'age',
-                //     // id: 'age-native-simple',
-                // }}
                 >
                     {row.data.map((item, i) => {
                         return <option key={i} value={item}>{item}</option>
