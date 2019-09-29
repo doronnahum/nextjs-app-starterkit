@@ -48460,16 +48460,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!***************************************!*\
   !*** ./src/components/table/utils.js ***!
   \***************************************/
-/*! exports provided: handleInputChange, handleSelectChange, onChangeSlider, valuetext, getMarks, renderValueType */
+/*! exports provided: renderValueType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleInputChange", function() { return handleInputChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleSelectChange", function() { return handleSelectChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSlider", function() { return onChangeSlider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "valuetext", function() { return valuetext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarks", function() { return getMarks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderValueType", function() { return renderValueType; });
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -48499,24 +48494,29 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+
 var handleInputChange = function handleInputChange(event, updateTablesValues) {
   updateTablesValues({
     values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, event.target.id, event.target.value)
   });
 };
+
 var handleSelectChange = function handleSelectChange(event, updateTablesValues) {
   updateTablesValues({
     values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, event.target.id, event.target.value)
   });
 };
+
 var onChangeSlider = function onChangeSlider(event, val, location, updateTablesValues) {
   updateTablesValues({
     values: Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, location, val)
   });
 };
+
 function valuetext(value) {
   return "".concat(value);
 }
+
 var getMarks = function getMarks(row) {
   if (!row) return [];
   var arr = [];
@@ -48537,6 +48537,7 @@ var getMarks = function getMarks(row) {
 
   return arr;
 };
+
 var renderValueType = function renderValueType(row, updateTablesValues, tableValues, classes) {
   switch (row.type) {
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NUMERIC:
@@ -48655,7 +48656,7 @@ function (_Component) {
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Operation Costs',
         data: _data__WEBPACK_IMPORTED_MODULE_8__["operationCostsData"]
-      }), __jsx(_table_TableDiffrent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         tableTitle: 'Enironmental Data',
         data: _data__WEBPACK_IMPORTED_MODULE_8__["enironmentalData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"] // tableTitle={'Customer\'s problems and requests'}

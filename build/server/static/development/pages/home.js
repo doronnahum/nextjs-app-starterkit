@@ -8488,16 +8488,11 @@ const mapDispatchToProps = dispatch => ({
 /*!***************************************!*\
   !*** ./src/components/table/utils.js ***!
   \***************************************/
-/*! exports provided: handleInputChange, handleSelectChange, onChangeSlider, valuetext, getMarks, renderValueType */
+/*! exports provided: renderValueType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleInputChange", function() { return handleInputChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleSelectChange", function() { return handleSelectChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSlider", function() { return onChangeSlider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "valuetext", function() { return valuetext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarks", function() { return getMarks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderValueType", function() { return renderValueType; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -8535,6 +8530,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 const handleInputChange = (event, updateTablesValues) => {
   updateTablesValues({
     values: {
@@ -8542,6 +8538,7 @@ const handleInputChange = (event, updateTablesValues) => {
     }
   });
 };
+
 const handleSelectChange = (event, updateTablesValues) => {
   updateTablesValues({
     values: {
@@ -8549,6 +8546,7 @@ const handleSelectChange = (event, updateTablesValues) => {
     }
   });
 };
+
 const onChangeSlider = (event, val, location, updateTablesValues) => {
   updateTablesValues({
     values: {
@@ -8556,9 +8554,11 @@ const onChangeSlider = (event, val, location, updateTablesValues) => {
     }
   });
 };
+
 function valuetext(value) {
   return `${value}`;
 }
+
 const getMarks = row => {
   if (!row) return [];
   let arr = [];
@@ -8579,6 +8579,7 @@ const getMarks = row => {
 
   return arr;
 };
+
 const renderValueType = (row, updateTablesValues, tableValues, classes) => {
   switch (row.type) {
     case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NUMERIC:
@@ -8671,7 +8672,7 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
       tableTitle: 'Operation Costs',
       data: _data__WEBPACK_IMPORTED_MODULE_3__["operationCostsData"]
-    }), __jsx(_table_TableDiffrent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
       tableTitle: 'Enironmental Data',
       data: _data__WEBPACK_IMPORTED_MODULE_3__["enironmentalData"]
     }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"] // tableTitle={'Customer\'s problems and requests'}

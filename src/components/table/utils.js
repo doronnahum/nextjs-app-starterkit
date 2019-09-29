@@ -10,23 +10,24 @@ import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
-export const handleInputChange = (event, updateTablesValues) => {
+
+const handleInputChange = (event, updateTablesValues) => {
     updateTablesValues({ values: { [event.target.id]: event.target.value } })
 };
 
-export const handleSelectChange = (event, updateTablesValues) => {
+const handleSelectChange = (event, updateTablesValues) => {
     updateTablesValues({ values: { [event.target.id]: event.target.value } })
 };
 
-export const onChangeSlider = (event, val, location, updateTablesValues) => {
+const onChangeSlider = (event, val, location, updateTablesValues) => {
     updateTablesValues({ values: { [location]: val } })
 };
 
-export function valuetext(value) {
+function valuetext(value) {
     return `${value}`;
 }
 
-export const getMarks = (row, ) => {
+const getMarks = (row, ) => {
     if (!row) return [];
     let arr = []
     let i = row.min
@@ -43,7 +44,7 @@ export const getMarks = (row, ) => {
     return arr
 }
 
-export const renderValueType = (row, updateTablesValues, tableValues,classes) => {
+export const renderValueType = (row, updateTablesValues, tableValues, classes) => {
     switch (row.type) {
         case TYPES.NUMERIC:
             return <Input

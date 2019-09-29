@@ -23,7 +23,7 @@ class Tables extends Component {
                     data={waterOriginData} />
                 <Table tableTitle={'Operation Costs'}
                     data={operationCostsData} />
-                <TableDiffrent tableTitle={'Enironmental Data'}
+                <Table tableTitle={'Enironmental Data'}
                     data={enironmentalData} />
                 <Table
                     // tableTitle={'Customer\'s problems and requests'}
@@ -31,7 +31,7 @@ class Tables extends Component {
                     tableSubTitle={'Customer\'s problems and requests'}
                     headerTitles={['Option List', 'Mark if applicable']}
                 />
-                {/* <TableDiffrent tableTitle={'Water Analysis'}
+                {/* <Table tableTitle={'Water Analysis'}
                     data={waterAnalysisData} /> */}
                 {/* <Table tableTitle={'Enironmental Data '} /> */}
                 {/* <Table tableTitle={'Customer\'s problems and requests'} /> */}
