@@ -6,7 +6,8 @@ import {
     operationalPropertiesData,
     waterOriginData,
     operationCostsData,
-    enironmentalData
+    enironmentalData,
+    customersProblemsAndRequestsData
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -24,6 +25,12 @@ class Tables extends Component {
                     data={operationCostsData} />
                 <TableDiffrent tableTitle={'Enironmental Data'}
                     data={enironmentalData} />
+                <Table
+                    // tableTitle={'Customer\'s problems and requests'}
+                    data={customersProblemsAndRequestsData}
+                    tableSubTitle={'Customer\'s problems and requests'}
+                    headerTitles={['Option List', 'Mark if applicable']}
+                />
                 {/* <TableDiffrent tableTitle={'Water Analysis'}
                     data={waterAnalysisData} /> */}
                 {/* <Table tableTitle={'Enironmental Data '} /> */}

@@ -7770,7 +7770,7 @@ class home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7781,6 +7781,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterOriginData", function() { return waterOriginData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operationCostsData", function() { return operationCostsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enironmentalData", function() { return enironmentalData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customersProblemsAndRequestsData", function() { return customersProblemsAndRequestsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterAnalysisData", function() { return waterAnalysisData; });
 const MANDATORY = true;
 const NOT_MANDATORY = false;
 const TYPES = {
@@ -7824,20 +7826,23 @@ function createSelectData(name, value, mandatory, type, data, location) {
   };
 }
 
+function createSelectDataWithoutValue(name, value, mandatory, type, data, location) {
+  return {
+    name,
+    mandatory,
+    type,
+    data,
+    location
+  };
+}
+
 const mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
 const operationalPropertiesData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'), createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'), createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
 const waterOriginData = [createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['', 'Public', 'Well', 'River', 'Reuse'], 'j8'), createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'), createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10')];
 const operationCostsData = [createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'), createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'), createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'), createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'), createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17')];
-const enironmentalData = [createNumericData('Discharge limitations', 'Chlorides (ppm)', MANDATORY, TYPES.NUMERIC, 'j20'), createNumericData('Discharge limitations', 'Sulfates (ppm)', MANDATORY, TYPES.NUMERIC, 'j21'), createNumericData('Discharge limitations', 'pH', MANDATORY, TYPES.NUMERIC, 'j22'), createNumericData('Discharge limitations', 'Chlorine (ppm)', MANDATORY, TYPES.NUMERIC, 'j23'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j24'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25')]; // continur with Customer's problems and requests !
-// export const waterAnalysisData = [
-//     createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
-//     createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
-//     createRangeData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
-//     createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'),
-//     createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'),
-//     createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'),
-//     createRangeData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27'),
-// ]
+const enironmentalData = [createNumericData('Discharge limitations', 'Chlorides (ppm)', MANDATORY, TYPES.NUMERIC, 'j20'), createNumericData('Discharge limitations', 'Sulfates (ppm)', MANDATORY, TYPES.NUMERIC, 'j21'), createNumericData('Discharge limitations', 'pH', MANDATORY, TYPES.NUMERIC, 'j22'), createNumericData('Discharge limitations', 'Chlorine (ppm)', MANDATORY, TYPES.NUMERIC, 'j23'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j24'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25')];
+const customersProblemsAndRequestsData = [createSelectDataWithoutValue('Water Conservation', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i29'), createSelectDataWithoutValue('Energy Savings', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i30'), createSelectDataWithoutValue('Bio-contamination problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i31'), createSelectDataWithoutValue('Scale Precipitation problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i32'), createSelectDataWithoutValue('Silica Related Problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i33'), createSelectDataWithoutValue('Chemical Elimination', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34')];
+const waterAnalysisData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'), createRangeData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'), createRangeData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
 
 /***/ }),
 
@@ -8095,17 +8100,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
 
 
 
@@ -8134,7 +8133,9 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["
 function SimpleTable(props) {
   const {
     tableTitle,
-    data
+    data,
+    headerTitles,
+    tableSubTitle
   } = props;
   const classes = useStyles();
   console.log(`props of ${tableTitle}`, props.tablesData);
@@ -8166,106 +8167,6 @@ function SimpleTable(props) {
     }
   };
 
-  const handleInputChange = event => {
-    props.actions.updateTablesValues({
-      values: {
-        [event.target.id]: event.target.value
-      }
-    });
-  };
-
-  const handleSelectChange = event => {
-    props.actions.updateTablesValues({
-      values: {
-        [event.target.id]: event.target.value
-      }
-    });
-  };
-
-  const onChangeSlider = (event, val, location) => {
-    props.actions.updateTablesValues({
-      values: {
-        [location]: val
-      }
-    });
-  };
-
-  function valuetext(value) {
-    return `${value}`;
-  }
-
-  const getMarks = row => {
-    if (!row) return [];
-    let arr = [];
-    let i = row.min;
-
-    while (i <= row.max) {
-      arr.push({
-        value: i
-      });
-      i += row.ticks;
-    } // if we want lables in the  edges of the slider
-    // if (arr.length) { 
-    //     debugger
-    //     arr[0].label = row.min.toString()
-    //     arr[arr.length - 1].label = row.max.toString()
-    // }
-
-
-    return arr;
-  };
-
-  const renderValueType = row => {
-    switch (row.type) {
-      case _data__WEBPACK_IMPORTED_MODULE_8__["TYPES"].NUMERIC:
-        return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
-          id: row.location,
-          label: "Number",
-          value: tableValues[row.location] || '',
-          onChange: handleInputChange,
-          type: "number",
-          className: classes.textField
-        });
-
-      case _data__WEBPACK_IMPORTED_MODULE_8__["TYPES"].RANGE:
-        return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default.a, {
-          defaultValue: Math.floor((row.min + row.max) / 2),
-          getAriaValueText: valuetext,
-          onChange: (e, val) => onChangeSlider(e, val, row.location),
-          "aria-labelledby": "discrete-slider-always",
-          step: row.ticks,
-          min: row.min,
-          max: row.max,
-          marks: getMarks(row),
-          valueLabelDisplay: "on"
-        });
-
-      case _data__WEBPACK_IMPORTED_MODULE_8__["TYPES"].SELECT:
-        return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default.a, {
-          id: row.location,
-          native: true,
-          value: tableValues[row.location],
-          onChange: handleSelectChange
-        }, row.data.map((item, i) => {
-          return __jsx("option", {
-            key: i,
-            value: item
-          }, item);
-        }));
-
-      case _data__WEBPACK_IMPORTED_MODULE_8__["TYPES"].NOT_EDITABLE:
-        return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
-          id: row.location,
-          value: tableValues[row.location] || '',
-          readOnly: true,
-          className: classes.textField
-        });
-
-      default:
-        return row.type;
-    }
-  };
-
   const renderTableData = () => {
     if (!data) return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
       align: "left",
@@ -8276,18 +8177,27 @@ function SimpleTable(props) {
     }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
       align: "left",
       className: classes.TableCell
-    }, row.name), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    }, row.name), row.value && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
       align: "left"
     }, row.value), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
       align: "left"
-    }, renderValueType(row))));
+    }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(row, props.actions.updateTablesValues, tableValues, classes))));
   };
 
   return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7___default.a, {
     className: classes.root
   }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: classes.table
-  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default.a, null, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default.a, null, tableSubTitle && __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    className: classes.tableTitle,
+    colSpan: 3,
+    align: "left"
+  }, tableSubTitle)), headerTitles ? __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, null, headerTitles.map(title => {
+    return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      key: title,
+      align: "left"
+    }, title);
+  })) : __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
     className: classes.tableTitle,
     align: "left"
   }, tableTitle), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
@@ -8295,9 +8205,15 @@ function SimpleTable(props) {
   }, "Value"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
     align: "left"
   }, "Units"))), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3___default.a, null, renderTableData())));
-}
+} // SimpleTable.defaultProps = {
+//     units: true
+// };
+// SimpleTable.propTypes = {
+//     units: PropTypes.bool
+// };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_12__["default"])(SimpleTable));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_10__["default"])(SimpleTable));
 
 /***/ }),
 
@@ -8568,6 +8484,154 @@ const mapDispatchToProps = dispatch => ({
 
 /***/ }),
 
+/***/ "./src/components/table/utils.js":
+/*!***************************************!*\
+  !*** ./src/components/table/utils.js ***!
+  \***************************************/
+/*! exports provided: handleInputChange, handleSelectChange, onChangeSlider, valuetext, getMarks, renderValueType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleInputChange", function() { return handleInputChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleSelectChange", function() { return handleSelectChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSlider", function() { return onChangeSlider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "valuetext", function() { return valuetext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarks", function() { return getMarks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderValueType", function() { return renderValueType; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Table */ "@material-ui/core/Table");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "@material-ui/core/TableCell");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+const handleInputChange = (event, updateTablesValues) => {
+  updateTablesValues({
+    values: {
+      [event.target.id]: event.target.value
+    }
+  });
+};
+const handleSelectChange = (event, updateTablesValues) => {
+  updateTablesValues({
+    values: {
+      [event.target.id]: event.target.value
+    }
+  });
+};
+const onChangeSlider = (event, val, location, updateTablesValues) => {
+  updateTablesValues({
+    values: {
+      [location]: val
+    }
+  });
+};
+function valuetext(value) {
+  return `${value}`;
+}
+const getMarks = row => {
+  if (!row) return [];
+  let arr = [];
+  let i = row.min;
+
+  while (i <= row.max) {
+    arr.push({
+      value: i
+    });
+    i += row.ticks;
+  } // if we want lables in the  edges of the slider
+  // if (arr.length) { 
+  //     debugger
+  //     arr[0].label = row.min.toString()
+  //     arr[arr.length - 1].label = row.max.toString()
+  // }
+
+
+  return arr;
+};
+const renderValueType = (row, updateTablesValues, tableValues, classes) => {
+  switch (row.type) {
+    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NUMERIC:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+        id: row.location,
+        label: "Number",
+        value: tableValues[row.location] || '',
+        onChange: e => handleInputChange(e, updateTablesValues),
+        type: "number",
+        className: classes.textField
+      });
+
+    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].RANGE:
+      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default.a, {
+        defaultValue: Math.floor((row.min + row.max) / 2),
+        getAriaValueText: valuetext,
+        onChange: (e, val) => onChangeSlider(e, val, row.location, updateTablesValues),
+        "aria-labelledby": "discrete-slider-always",
+        step: row.ticks,
+        min: row.min,
+        max: row.max,
+        marks: getMarks(row),
+        valueLabelDisplay: "on"
+      });
+
+    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].SELECT:
+      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default.a, {
+        id: row.location,
+        native: true,
+        value: tableValues[row.location],
+        onChange: e => handleSelectChange(e, updateTablesValues)
+      }, row.data.map((item, i) => {
+        return __jsx("option", {
+          key: i,
+          value: item
+        }, item);
+      }));
+
+    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NOT_EDITABLE:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+        id: row.location,
+        value: tableValues[row.location] || '',
+        readOnly: true,
+        className: classes.textField
+      });
+
+    default:
+      return row.type;
+  }
+};
+
+/***/ }),
+
 /***/ "./src/components/tables/Tables.js":
 /*!*****************************************!*\
   !*** ./src/components/tables/Tables.js ***!
@@ -8610,6 +8674,11 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), __jsx(_table_TableDiffrent__WEBPACK_IMPORTED_MODULE_2__["default"], {
       tableTitle: 'Enironmental Data',
       data: _data__WEBPACK_IMPORTED_MODULE_3__["enironmentalData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"] // tableTitle={'Customer\'s problems and requests'}
+    , {
+      data: _data__WEBPACK_IMPORTED_MODULE_3__["customersProblemsAndRequestsData"],
+      tableSubTitle: 'Customer\'s problems and requests',
+      headerTitles: ['Option List', 'Mark if applicable']
     }));
   }
 
