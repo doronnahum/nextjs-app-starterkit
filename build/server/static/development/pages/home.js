@@ -8497,35 +8497,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Table */ "@material-ui/core/Table");
-/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "@material-ui/core/TableCell");
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4__);
+
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
 
 
 
@@ -8583,7 +8562,7 @@ const getMarks = row => {
 const renderValueType = (row, updateTablesValues, tableValues, classes) => {
   switch (row.type) {
     case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NUMERIC:
-      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default.a, {
         id: row.location,
         label: "Number",
         value: tableValues[row.location] || '',
@@ -8593,7 +8572,7 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].RANGE:
-      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_10___default.a, {
+      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3___default.a, {
         defaultValue: Math.floor((row.min + row.max) / 2),
         getAriaValueText: valuetext,
         onChange: (e, val) => onChangeSlider(e, val, row.location, updateTablesValues),
@@ -8606,7 +8585,7 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].SELECT:
-      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_11___default.a, {
+      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4___default.a, {
         id: row.location,
         native: true,
         value: tableValues[row.location],
@@ -8619,7 +8598,7 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
       }));
 
     case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NOT_EDITABLE:
-      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default.a, {
         id: row.location,
         value: tableValues[row.location] || '',
         readOnly: true,
@@ -8680,6 +8659,9 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       data: _data__WEBPACK_IMPORTED_MODULE_3__["customersProblemsAndRequestsData"],
       tableSubTitle: 'Customer\'s problems and requests',
       headerTitles: ['Option List', 'Mark if applicable']
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      tableTitle: 'Water Analysis' // data={waterAnalysisData} 
+
     }));
   }
 

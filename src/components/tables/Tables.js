@@ -31,8 +31,9 @@ class Tables extends Component {
                     tableSubTitle={'Customer\'s problems and requests'}
                     headerTitles={['Option List', 'Mark if applicable']}
                 />
-                {/* <Table tableTitle={'Water Analysis'}
-                    data={waterAnalysisData} /> */}
+                <Table tableTitle={'Water Analysis'}
+                    // data={waterAnalysisData} 
+                    />
                 {/* <Table tableTitle={'Enironmental Data '} /> */}
                 {/* <Table tableTitle={'Customer\'s problems and requests'} /> */}
             </div>
