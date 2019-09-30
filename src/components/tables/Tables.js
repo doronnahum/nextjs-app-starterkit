@@ -7,6 +7,7 @@ import {
     waterOriginData,
     operationCostsData,
     enironmentalData,
+    waterAnalysisData,
     customersProblemsAndRequestsData
 } from 'src/components/data'
 
@@ -31,9 +32,11 @@ class Tables extends Component {
                     tableSubTitle={'Customer\'s problems and requests'}
                     headerTitles={['Option List', 'Mark if applicable']}
                 />
-                <Table tableTitle={'Water Analysis'}
-                    // data={waterAnalysisData} 
-                    />
+                <TableDiffrent tableTitle={'Water Analysis'}
+                    tableSubTitle={'Current Cycles of Concentration'}
+                    headerTitles={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
+                    data={waterAnalysisData} />
+
                 {/* <Table tableTitle={'Enironmental Data '} /> */}
                 {/* <Table tableTitle={'Customer\'s problems and requests'} /> */}
             </div>

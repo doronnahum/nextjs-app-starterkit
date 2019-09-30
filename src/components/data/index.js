@@ -71,12 +71,16 @@ export const customersProblemsAndRequestsData = [
     createSelectDataWithoutValue('Chemical Elimination', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34'),
 ]
 
+function createManyValuesData(name, value, mandatory, fields) {
+    return { name, value, mandatory, fields };
+}
 export const waterAnalysisData = [
-    createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
-    createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
-    createRangeData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
-    createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'),
-    createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'),
-    createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'),
-    createRangeData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27'),
+    createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd32', type: TYPES.NUMERIC }, { location: 'e32', type: TYPES.NOT_EDITABLE }, { location: 'f32', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('pH', 'Units', MANDATORY, [{ location: 'd33', type: TYPES.NUMERIC }, { location: 'e33', type: TYPES.NUMERIC }, { location: 'f33', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd34', type: TYPES.NUMERIC }, { location: 'e34', type: TYPES.NUMERIC }, { location: 'f34', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd35', type: TYPES.NUMERIC }, { location: 'e35', type: TYPES.NUMERIC }, { location: 'f35', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Chlorides', 'ppm', MANDATORY, [{ location: 'd36', type: TYPES.NUMERIC }, { location: 'e36', type: TYPES.NUMERIC }, { location: 'f36', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Iron', 'ppm', MANDATORY, [{ location: 'd37', type: TYPES.NUMERIC }, { location: 'e37', type: TYPES.NUMERIC }, { location: 'f37', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Silica', 'ppm', MANDATORY, [{ location: 'd38', type: TYPES.NUMERIC }, { location: 'e38', type: TYPES.NUMERIC }, { location: 'f38', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Sulphate', 'ppm', MANDATORY, [{ location: 'd39', type: TYPES.NUMERIC }, { location: 'e39', type: TYPES.NUMERIC }, { location: 'f39', type: TYPES.NOT_EDITABLE }]),
 ]

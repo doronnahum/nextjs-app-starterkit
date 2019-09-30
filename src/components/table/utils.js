@@ -3,7 +3,7 @@ import Input from '@material-ui/core/Input';
 import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
 
-const handleInputChange = (event, updateTablesValues) => {
+export const handleInputChange = (event, updateTablesValues) => {
     updateTablesValues({ values: { [event.target.id]: event.target.value } })
 };
 
@@ -37,7 +37,8 @@ const getMarks = (row, ) => {
 }
 
 export const renderValueType = (row, updateTablesValues, tableValues, classes) => {
-    switch (row.type) {
+    const type = row.type
+    switch (type) {
         case TYPES.NUMERIC:
             return <Input
                 id={row.location}

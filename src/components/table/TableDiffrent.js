@@ -6,10 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { TYPES } from 'src/components/data'
+import { renderValueType,handleInputChange } from './utils'
 import Input from '@material-ui/core/Input';
-import Slider from '@material-ui/core/Slider';
-import Select from '@material-ui/core/Select';
+
+import PropTypes from 'prop-types';
 // import { calculate } from 'src/components/data/tableUtils';
 import connect from './connect'
 
@@ -31,13 +31,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SimpleTable(props) {
-    const { tableTitle, data } = props
+    const { tableTitle, data, headerTitles, tableSubTitle } = props
     const classes = useStyles();
 
     console.log(`props of ${tableTitle}`, props.tablesData);
 
     const tableValues = props.tablesData
-    const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22]
+    const influencingValues = [
+        tableValues.d10,
+        tableValues.d11,
+        tableValues.d21,
+        tableValues.d22,
+        tableValues.e30,
+        tableValues.d32
+    ]
+
     useEffect(() => {
         updateReadOnlyValues()
     }, influencingValues)
@@ -51,87 +59,14 @@ function SimpleTable(props) {
             const res = tableValues.d21 - tableValues.d22
             props.actions.updateTablesValues({ values: { d23: res } })
         }
-    }
-
-    const handleInputChange = event => {
-        props.actions.updateTablesValues({ values: { [event.target.id]: event.target.value } })
-    };
-
-    const handleSelectChange = event => {
-        props.actions.updateTablesValues({ values: { [event.target.id]: event.target.value } })
-    };
-
-    const onChangeSlider = (event, val, location) => {
-        props.actions.updateTablesValues({ values: { [location]: val } })
-    };
-
-    function valuetext(value) {
-        return `${value}`;
-    }
-
-    const getMarks = (row) => {
-        if (!row) return [];
-        let arr = []
-        let i = row.min
-        while (i <= row.max) {
-            arr.push({ value: i })
-            i += row.ticks
-        }
-        // if we want lables in the  edges of the slider
-        // if (arr.length) { 
-        //     debugger
-        //     arr[0].label = row.min.toString()
-        //     arr[arr.length - 1].label = row.max.toString()
-        // }
-        return arr
-    }
-
-    const renderValueType = (row) => {
-        switch (row.type) {
-            case TYPES.NUMERIC:
-                return <Input
-                    id={row.location}
-                    label="Number"
-                    value={tableValues[row.location] || ''}
-                    onChange={handleInputChange}
-                    type="number"
-                    className={classes.textField}
-
-                />
-            case TYPES.RANGE:
-                return <Slider
-                    defaultValue={Math.floor((row.min + row.max) / 2)}
-                    getAriaValueText={valuetext}
-                    onChange={(e, val) => onChangeSlider(e, val, row.location)}
-                    aria-labelledby="discrete-slider-always"
-                    step={row.ticks}
-                    min={row.min}
-                    max={row.max}
-                    marks={getMarks(row)}
-                    valueLabelDisplay="on"
-                />
-            case TYPES.SELECT:
-                return <Select
-                    id={row.location}
-                    native
-                    value={tableValues[row.location]}
-                    onChange={handleSelectChange}
-                >
-                    {row.data.map((item, i) => {
-                        return <option key={i} value={item}>{item}</option>
-                    })}
-                </Select>
-            case TYPES.NOT_EDITABLE:
-                return <Input
-                    id={row.location}
-                    value={tableValues[row.location] || ''}
-                    readOnly
-                    className={classes.textField}
-                />
-            default:
-                return row.type
+        if (tableValues.e30 && tableValues.d32) { // e32
+            const res = tableValues.e30 * tableValues.d32
+            props.actions.updateTablesValues({ values: { e32: res } })
         }
     }
+
+
+
 
     const renderTableData = () => {
         if (!data) return (
@@ -141,26 +76,58 @@ function SimpleTable(props) {
                 </TableCell>
             </TableRow>
         )
-        return data.map(row => {
-            return <TableRow key={row.location}>
+
+
+        return data.map(row => (
+            <TableRow key={row.location}>
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
                 <TableCell align="left">{row.value}</TableCell>
-                <TableCell align="left">{renderValueType(row)}</TableCell>
+                {row.fields.map((field) => {
+                    return <TableCell align="left">
+                        {renderValueType(field, props.actions.updateTablesValues, tableValues, classes)}
+                    </TableCell>
+                })}
             </TableRow>
-        })
+        ))
     }
+
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
-                    <TableRow>
-                        <TableCell className={classes.tableTitle} align="left">{tableTitle}</TableCell>
-                        <TableCell align="left">Value</TableCell>
-                        <TableCell align="left">Units</TableCell>
+                    {tableSubTitle && <TableRow>
+                        <TableCell className={classes.tableTitle}
+                            colSpan={3}
+                            align="left">
+                            {tableSubTitle}
+                        </TableCell>
+                        <TableCell className={classes.tableTitle}
+                            colSpan={3}
+                            align="left">
+                            <Input
+                                id={'e30'}
+                                label="Number"
+                                value={tableValues['e30'] || ''}
+                                onChange={(e) => handleInputChange(e, props.actions.updateTablesValues)}
+                                type="number"
+                                className={classes.textField}
+                            />
+                        </TableCell>
+                    </TableRow>}
+                    {headerTitles
+                        ? <TableRow>
+                            {headerTitles.map((title) => {
+                                return <TableCell key={title} align="left">{title}</TableCell>
+                            })}
+                        </TableRow>
+                        : <TableRow>
+                            <TableCell className={classes.tableTitle} align="left">{tableTitle}</TableCell>
+                            <TableCell align="left">Value</TableCell>
+                            <TableCell align="left">Units</TableCell>
+                        </TableRow>}
 
-                    </TableRow>
                 </TableHead>
                 <TableBody>
                     {renderTableData()}
@@ -169,5 +136,13 @@ function SimpleTable(props) {
         </Paper>
     );
 }
+
+// SimpleTable.defaultProps = {
+//     units: true
+// };
+
+// SimpleTable.propTypes = {
+//     units: PropTypes.bool
+// };
 
 export default connect(SimpleTable)
