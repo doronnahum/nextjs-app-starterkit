@@ -79,7 +79,11 @@ function SimpleTable(props) {
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
-                {row.units && <TableCell align="left">{row.units}</TableCell>}
+                
+                {row.units &&
+                    <TableCell align="left">
+                        {row.units}
+                    </TableCell>}
 
                 {row.fields
                     ? row.fields.map((field) => {
