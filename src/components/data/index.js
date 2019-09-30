@@ -5,20 +5,21 @@ export const TYPES = {
     RANGE: 'RANGE',
     SELECT: 'SELECT',
     NOT_EDITABLE: 'NOT_EDITABLE',
-
 }
 
-function createRangeData(name, value, mandatory, type, min, max, ticks, location) {
-    return { name, value, mandatory, type, min, max, ticks, location };
+function createRangeData(name, units, mandatory, type, min, max, ticks, location) {
+    return { name, units, mandatory, type, min, max, ticks, location };
 }
-function createNumericData(name, value, mandatory, type, location) {
-    return { name, value, mandatory, type, location };
+function createNumericData(name, units, mandatory, type, location) {
+    return { name, units, mandatory, type, location };
 }
-function createSelectData(name, value, mandatory, type, data, location) {
-    return { name, value, mandatory, type, data, location };
+function createSelectData(name, units, mandatory, type, data, location) {
+    return { name, units, mandatory, type, data, location };
 }
-function createSelectDataWithoutValue(name, value, mandatory, type, data, location) {
-    return { name, mandatory, type, data, location };
+
+//create tables with more than one values
+function createManyValuesData(name, units, mandatory, fields) {
+    return { name, units, mandatory, fields };
 }
 
 export const mechanicalPropertiesData = [
@@ -63,17 +64,15 @@ export const enironmentalData = [
     createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25'),
 ]
 export const customersProblemsAndRequestsData = [
-    createSelectDataWithoutValue('Water Conservation', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i29'),
-    createSelectDataWithoutValue('Energy Savings', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i30'),
-    createSelectDataWithoutValue('Bio-contamination problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i31'),
-    createSelectDataWithoutValue('Scale Precipitation problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i32'),
-    createSelectDataWithoutValue('Silica Related Problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i33'),
-    createSelectDataWithoutValue('Chemical Elimination', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34'),
+    createSelectData('Water Conservation', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i29'),
+    createSelectData('Energy Savings', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i30'),
+    createSelectData('Bio-contamination problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i31'),
+    createSelectData('Scale Precipitation problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i32'),
+    createSelectData('Silica Related Problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i33'),
+    createSelectData('Chemical Elimination', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34'),
 ]
 
-function createManyValuesData(name, value, mandatory, fields) {
-    return { name, value, mandatory, fields };
-}
+
 export const waterAnalysisData = [
     createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd32', type: TYPES.NUMERIC }, { location: 'e32', type: TYPES.NOT_EDITABLE }, { location: 'f32', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('pH', 'Units', MANDATORY, [{ location: 'd33', type: TYPES.NUMERIC }, { location: 'e33', type: TYPES.NUMERIC }, { location: 'f33', type: TYPES.NOT_EDITABLE }]),

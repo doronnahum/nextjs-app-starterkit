@@ -6,7 +6,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { renderValueType } from './utils'
+import { renderValueType, handleInputChange } from './utils'
+import Input from '@material-ui/core/Input';
+import TableTitle from 'src/components/table/TableTitle'
+import HeaderCols from 'src/components/table/HeaderCols'
+import NoDataTableCell from 'src/components/table/NoDataTableCell'
+import WaterAnalysisTitle from 'src/components/table/WaterAnalysisTitle'
 import PropTypes from 'prop-types';
 // import { calculate } from 'src/components/data/tableUtils';
 import connect from './connect'
@@ -29,13 +34,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SimpleTable(props) {
-    const { tableTitle, data, headerTitles, tableSubTitle } = props
+    const { data, headerCols, tableTitle, tablesData, waterAnalysisTitle, actions } = props
+    const { updateTablesValues } = actions
     const classes = useStyles();
 
-    console.log(`props of ${tableTitle}`, props.tablesData);
+    console.log(`tablesData`, tablesData);
 
-    const tableValues = props.tablesData
-    const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22]
+    const tableValues = tablesData
+    const influencingValues = [
+        tableValues.d10,
+        tableValues.d11,
+        tableValues.d21,
+        tableValues.d22,
+        tableValues.e30,
+        tableValues.d32
+    ]
+
     useEffect(() => {
         updateReadOnlyValues()
     }, influencingValues)
@@ -43,11 +57,15 @@ function SimpleTable(props) {
     const updateReadOnlyValues = () => {
         if (tableValues.d10 && tableValues.d11) { // d12
             const res = tableValues.d10 - tableValues.d11
-            props.actions.updateTablesValues({ values: { d12: res } })
+            updateTablesValues({ values: { d12: res } })
         }
         if (tableValues.d21 && tableValues.d22) { // d23
             const res = tableValues.d21 - tableValues.d22
-            props.actions.updateTablesValues({ values: { d23: res } })
+            updateTablesValues({ values: { d23: res } })
+        }
+        if (tableValues.e30 && tableValues.d32) { // e32
+            const res = tableValues.e30 * tableValues.d32
+            updateTablesValues({ values: { e32: res } })
         }
     }
 
@@ -55,20 +73,22 @@ function SimpleTable(props) {
 
 
     const renderTableData = () => {
-        if (!data) return (
-            <TableRow>
-                <TableCell align="left" className={classes.TableCell}>
-                    no data
-                </TableCell>
-            </TableRow>
-        )
+        if (!data) return <NoDataTableCell className={classes.TableCell} />
         return data.map(row => (
             <TableRow key={row.location}>
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
-                {row.value && <TableCell align="left">{row.value}</TableCell>}
-                <TableCell align="left">{renderValueType(row, props.actions.updateTablesValues, tableValues,classes)}</TableCell>
+                {row.units && <TableCell align="left">{row.units}</TableCell>}
+
+                {row.fields
+                    ? row.fields.map((field) => {
+                        return <TableCell align="left">
+                            {renderValueType(field, updateTablesValues, tableValues, classes)}
+                        </TableCell>
+                    })
+                    : <TableCell align="left">{renderValueType(row, updateTablesValues, tableValues, classes)}</TableCell>
+                }
             </TableRow>
         ))
     }
@@ -77,23 +97,13 @@ function SimpleTable(props) {
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
-                    {tableSubTitle && <TableRow>
-                        <TableCell className={classes.tableTitle}
-                            colSpan={3}
-                            align="left">{tableSubTitle}</TableCell>
-                    </TableRow>}
-                    {headerTitles
-                        ? <TableRow>
-                            {headerTitles.map((title) => {
-                                return <TableCell key={title} align="left">{title}</TableCell>
-                            })}
-                        </TableRow>
-                        : <TableRow>
-                            <TableCell className={classes.tableTitle} align="left">{tableTitle}</TableCell>
-                            <TableCell align="left">Value</TableCell>
-                            <TableCell align="left">Units</TableCell>
-                        </TableRow>}
-
+                    {tableTitle && <TableTitle className={classes.tableTitle} tableTitle={tableTitle} />}
+                    {/* happens only in Water Analysis table */}
+                    {waterAnalysisTitle
+                        && <WaterAnalysisTitle value={tableValues['e30'] || ''}
+                            handleInputChange={(e) => handleInputChange(e, updateTablesValues)} />}
+                    {/* ---- */}
+                    {headerCols && <HeaderCols data={headerCols} />}
                 </TableHead>
                 <TableBody>
                     {renderTableData()}

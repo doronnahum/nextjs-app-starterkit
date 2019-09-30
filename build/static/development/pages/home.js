@@ -47760,10 +47760,10 @@ var TYPES = {
   NOT_EDITABLE: 'NOT_EDITABLE'
 };
 
-function createRangeData(name, value, mandatory, type, min, max, ticks, location) {
+function createRangeData(name, units, mandatory, type, min, max, ticks, location) {
   return {
     name: name,
-    value: value,
+    units: units,
     mandatory: mandatory,
     type: type,
     min: min,
@@ -47773,34 +47773,34 @@ function createRangeData(name, value, mandatory, type, min, max, ticks, location
   };
 }
 
-function createNumericData(name, value, mandatory, type, location) {
+function createNumericData(name, units, mandatory, type, location) {
   return {
     name: name,
-    value: value,
+    units: units,
     mandatory: mandatory,
     type: type,
     location: location
   };
 }
 
-function createSelectData(name, value, mandatory, type, data, location) {
+function createSelectData(name, units, mandatory, type, data, location) {
   return {
     name: name,
-    value: value,
+    units: units,
     mandatory: mandatory,
     type: type,
     data: data,
     location: location
   };
-}
+} //create tables with more than one values
 
-function createSelectDataWithoutValue(name, value, mandatory, type, data, location) {
+
+function createManyValuesData(name, units, mandatory, fields) {
   return {
     name: name,
+    units: units,
     mandatory: mandatory,
-    type: type,
-    data: data,
-    location: location
+    fields: fields
   };
 }
 
@@ -47809,17 +47809,7 @@ var operationalPropertiesData = [createRangeData('CWR - Cooling Water Return tem
 var waterOriginData = [createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['', 'Public', 'Well', 'River', 'Reuse'], 'j8'), createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'), createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10')];
 var operationCostsData = [createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'), createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'), createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'), createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'), createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17')];
 var enironmentalData = [createNumericData('Discharge limitations', 'Chlorides (ppm)', MANDATORY, TYPES.NUMERIC, 'j20'), createNumericData('Discharge limitations', 'Sulfates (ppm)', MANDATORY, TYPES.NUMERIC, 'j21'), createNumericData('Discharge limitations', 'pH', MANDATORY, TYPES.NUMERIC, 'j22'), createNumericData('Discharge limitations', 'Chlorine (ppm)', MANDATORY, TYPES.NUMERIC, 'j23'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j24'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25')];
-var customersProblemsAndRequestsData = [createSelectDataWithoutValue('Water Conservation', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i29'), createSelectDataWithoutValue('Energy Savings', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i30'), createSelectDataWithoutValue('Bio-contamination problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i31'), createSelectDataWithoutValue('Scale Precipitation problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i32'), createSelectDataWithoutValue('Silica Related Problems', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i33'), createSelectDataWithoutValue('Chemical Elimination', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34')];
-
-function createManyValuesData(name, value, mandatory, fields) {
-  return {
-    name: name,
-    value: value,
-    mandatory: mandatory,
-    fields: fields
-  };
-}
-
+var customersProblemsAndRequestsData = [createSelectData('Water Conservation', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i29'), createSelectData('Energy Savings', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i30'), createSelectData('Bio-contamination problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i31'), createSelectData('Scale Precipitation problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i32'), createSelectData('Silica Related Problems', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i33'), createSelectData('Chemical Elimination', null, MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'i34')];
 var waterAnalysisData = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
   location: 'd32',
   type: TYPES.NUMERIC
@@ -48140,6 +48130,64 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./src/components/table/HeaderCols.js":
+/*!********************************************!*\
+  !*** ./src/components/table/HeaderCols.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderCols; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+function HeaderCols(props) {
+  var data = props.data;
+  return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__["default"], null, data.map(function (title) {
+    return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: title,
+      align: "left"
+    }, title);
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/components/table/NoDataTableCell.js":
+/*!*************************************************!*\
+  !*** ./src/components/table/NoDataTableCell.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NoDataTableCell; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+function NoDataTableCell(props) {
+  var className = props.className;
+  return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    align: "left",
+    className: className
+  }, "no data"));
+}
+
+/***/ }),
+
 /***/ "./src/components/table/Table.js":
 /*!***************************************!*\
   !*** ./src/components/table/Table.js ***!
@@ -48159,149 +48207,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
-
- // import { calculate } from 'src/components/data/tableUtils';
-
-
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(function (theme) {
-  return {
-    root: {// width: '100%',
-      // marginTop: theme.spacing(3),
-      // overflowX: 'auto',
-    },
-    table: {// width: 600,
-    },
-    tableTitle: {
-      fontSize: 20
-    },
-    TableCell: {}
-  };
-});
-
-function SimpleTable(props) {
-  var tableTitle = props.tableTitle,
-      data = props.data,
-      headerTitles = props.headerTitles,
-      tableSubTitle = props.tableSubTitle;
-  var classes = useStyles();
-  console.log("props of ".concat(tableTitle), props.tablesData);
-  var tableValues = props.tablesData;
-  var influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22];
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    updateReadOnlyValues();
-  }, influencingValues);
-
-  var updateReadOnlyValues = function updateReadOnlyValues() {
-    if (tableValues.d10 && tableValues.d11) {
-      // d12
-      var res = tableValues.d10 - tableValues.d11;
-      props.actions.updateTablesValues({
-        values: {
-          d12: res
-        }
-      });
-    }
-
-    if (tableValues.d21 && tableValues.d22) {
-      // d23
-      var _res = tableValues.d21 - tableValues.d22;
-
-      props.actions.updateTablesValues({
-        values: {
-          d23: _res
-        }
-      });
-    }
-  };
-
-  var renderTableData = function renderTableData() {
-    if (!data) return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      align: "left",
-      className: classes.TableCell
-    }, "no data"));
-    return data.map(function (row) {
-      return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        key: row.location
-      }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        align: "left",
-        className: classes.TableCell
-      }, row.name), row.value && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        align: "left"
-      }, row.value), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        align: "left"
-      }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(row, props.actions.updateTablesValues, tableValues, classes)));
-    });
-  };
-
-  return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    className: classes.root
-  }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    className: classes.table
-  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__["default"], null, tableSubTitle && __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.tableTitle,
-    colSpan: 3,
-    align: "left"
-  }, tableSubTitle)), headerTitles ? __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, headerTitles.map(function (title) {
-    return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: title,
-      align: "left"
-    }, title);
-  })) : __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.tableTitle,
-    align: "left"
-  }, tableTitle), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    align: "left"
-  }, "Value"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    align: "left"
-  }, "Units"))), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__["default"], null, renderTableData())));
-} // SimpleTable.defaultProps = {
-//     units: true
-// };
-// SimpleTable.propTypes = {
-//     units: PropTypes.bool
-// };
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_10__["default"])(SimpleTable));
-
-/***/ }),
-
-/***/ "./src/components/table/TableDiffrent.js":
-/*!***********************************************!*\
-  !*** ./src/components/table/TableDiffrent.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/index.js");
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/index.js");
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/index.js");
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
 /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
+/* harmony import */ var _TableTitle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableTitle */ "./src/components/table/TableTitle.js");
+/* harmony import */ var _HeaderCols__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./HeaderCols */ "./src/components/table/HeaderCols.js");
+/* harmony import */ var _NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NoDataTableCell */ "./src/components/table/NoDataTableCell.js");
+/* harmony import */ var _WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./WaterAnalysisTitle */ "./src/components/table/WaterAnalysisTitle.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
 
 
 
@@ -48331,13 +48249,16 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 });
 
 function SimpleTable(props) {
-  var tableTitle = props.tableTitle,
-      data = props.data,
-      headerTitles = props.headerTitles,
-      tableSubTitle = props.tableSubTitle;
+  var data = props.data,
+      headerCols = props.headerCols,
+      tableTitle = props.tableTitle,
+      tablesData = props.tablesData,
+      waterAnalysisTitle = props.waterAnalysisTitle,
+      actions = props.actions;
+  var updateTablesValues = actions.updateTablesValues;
   var classes = useStyles();
-  console.log("props of ".concat(tableTitle), props.tablesData);
-  var tableValues = props.tablesData;
+  console.log("tablesData", tablesData);
+  var tableValues = tablesData;
   var influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     updateReadOnlyValues();
@@ -48347,7 +48268,7 @@ function SimpleTable(props) {
     if (tableValues.d10 && tableValues.d11) {
       // d12
       var res = tableValues.d10 - tableValues.d11;
-      props.actions.updateTablesValues({
+      updateTablesValues({
         values: {
           d12: res
         }
@@ -48358,7 +48279,7 @@ function SimpleTable(props) {
       // d23
       var _res = tableValues.d21 - tableValues.d22;
 
-      props.actions.updateTablesValues({
+      updateTablesValues({
         values: {
           d23: _res
         }
@@ -48369,7 +48290,7 @@ function SimpleTable(props) {
       // e32
       var _res2 = tableValues.e30 * tableValues.d32;
 
-      props.actions.updateTablesValues({
+      updateTablesValues({
         values: {
           e32: _res2
         }
@@ -48378,23 +48299,24 @@ function SimpleTable(props) {
   };
 
   var renderTableData = function renderTableData() {
-    if (!data) return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      align: "left",
+    if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__["default"], {
       className: classes.TableCell
-    }, "no data"));
+    });
     return data.map(function (row) {
       return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
         key: row.location
       }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
         align: "left",
         className: classes.TableCell
-      }, row.name), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, row.name), row.units && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
         align: "left"
-      }, row.value), row.fields.map(function (field) {
+      }, row.units), row.fields ? row.fields.map(function (field) {
         return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
           align: "left"
-        }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(field, props.actions.updateTablesValues, tableValues, classes));
-      }));
+        }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(field, updateTablesValues, tableValues, classes));
+      }) : __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        align: "left"
+      }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(row, updateTablesValues, tableValues, classes)));
     });
   };
 
@@ -48402,36 +48324,17 @@ function SimpleTable(props) {
     className: classes.root
   }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: classes.table
-  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__["default"], null, tableSubTitle && __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__["default"], null, tableTitle && __jsx(_TableTitle__WEBPACK_IMPORTED_MODULE_10__["default"], {
     className: classes.tableTitle,
-    colSpan: 3,
-    align: "left"
-  }, tableSubTitle), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.tableTitle,
-    colSpan: 3,
-    align: "left"
-  }, __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    id: 'e30',
-    label: "Number",
+    tableTitle: tableTitle
+  }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__["default"], {
     value: tableValues['e30'] || '',
-    onChange: function onChange(e) {
-      return Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, props.actions.updateTablesValues);
-    },
-    type: "number",
-    className: classes.textField
-  }))), headerTitles ? __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, headerTitles.map(function (title) {
-    return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: title,
-      align: "left"
-    }, title);
-  })) : __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.tableTitle,
-    align: "left"
-  }, tableTitle), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    align: "left"
-  }, "Value"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    align: "left"
-  }, "Units"))), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__["default"], null, renderTableData())));
+    handleInputChange: function handleInputChange(e) {
+      return Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, updateTablesValues);
+    }
+  }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    data: headerCols
+  })), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__["default"], null, renderTableData())));
 } // SimpleTable.defaultProps = {
 //     units: true
 // };
@@ -48440,7 +48343,81 @@ function SimpleTable(props) {
 // };
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_11__["default"])(SimpleTable));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_15__["default"])(SimpleTable));
+
+/***/ }),
+
+/***/ "./src/components/table/TableTitle.js":
+/*!********************************************!*\
+  !*** ./src/components/table/TableTitle.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TableTitle; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+function TableTitle(props) {
+  var className = props.className,
+      tableTitle = props.tableTitle;
+  return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: className,
+    colSpan: 3,
+    align: "left"
+  }, tableTitle));
+}
+
+/***/ }),
+
+/***/ "./src/components/table/WaterAnalysisTitle.js":
+/*!****************************************************!*\
+  !*** ./src/components/table/WaterAnalysisTitle.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return WaterAnalysisTitle; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+function WaterAnalysisTitle(props) {
+  var className = props.className,
+      handleInputChange = props.handleInputChange,
+      value = props.value;
+  return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: className,
+    colSpan: 3,
+    align: "left"
+  }, 'Current Cycles of Concentration'), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: className,
+    colSpan: 3,
+    align: "left"
+  }, __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: 'e30',
+    label: "Number",
+    value: value || '',
+    onChange: handleInputChange,
+    type: "number" // className={classes.textField}
+
+  })));
+}
 
 /***/ }),
 
@@ -48628,15 +48605,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _table_Table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../table/Table */ "./src/components/table/Table.js");
-/* harmony import */ var _table_TableDiffrent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../table/TableDiffrent */ "./src/components/table/TableDiffrent.js");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
 
 
 
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
-
 
 
 
@@ -48659,30 +48634,28 @@ function (_Component) {
       return __jsx("div", {
         className: className
       }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        tableTitle: 'Mechanical Properties',
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["mechanicalPropertiesData"]
+        headerCols: ['Mechanical Properties', 'Units', 'value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["mechanicalPropertiesData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        tableTitle: 'Operational Properties',
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["operationalPropertiesData"]
+        headerCols: ['Operational Properties', 'Units', 'value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["operationalPropertiesData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        tableTitle: 'Water Origin',
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["waterOriginData"]
+        headerCols: ['Water Origin', 'Units', 'value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["waterOriginData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        tableTitle: 'Operation Costs',
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["operationCostsData"]
+        headerCols: ['Operation Costs ', 'Units', 'value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["operationCostsData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        tableTitle: 'Enironmental Data',
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["enironmentalData"]
-      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"] // tableTitle={'Customer\'s problems and requests'}
-      , {
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["customersProblemsAndRequestsData"],
-        tableSubTitle: 'Customer\'s problems and requests',
-        headerTitles: ['Option List', 'Mark if applicable']
-      }), __jsx(_table_TableDiffrent__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        tableTitle: 'Water Analysis',
-        tableSubTitle: 'Current Cycles of Concentration',
-        headerTitles: ['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation'],
-        data: _data__WEBPACK_IMPORTED_MODULE_8__["waterAnalysisData"]
+        headerCols: ['Enironmental Data', 'Units', 'value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["enironmentalData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        tableTitle: 'Customer\'s problems and requests',
+        headerCols: ['Option List', 'Mark if applicable'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["customersProblemsAndRequestsData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        waterAnalysisTitle: true,
+        headerCols: ['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["waterAnalysisData"]
       }));
     }
   }]);

@@ -6,9 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { renderValueType,handleInputChange } from './utils'
-import Input from '@material-ui/core/Input';
-
+import { renderValueType } from './utils'
 import PropTypes from 'prop-types';
 // import { calculate } from 'src/components/data/tableUtils';
 import connect from './connect'
@@ -37,15 +35,7 @@ function SimpleTable(props) {
     console.log(`props of ${tableTitle}`, props.tablesData);
 
     const tableValues = props.tablesData
-    const influencingValues = [
-        tableValues.d10,
-        tableValues.d11,
-        tableValues.d21,
-        tableValues.d22,
-        tableValues.e30,
-        tableValues.d32
-    ]
-
+    const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22]
     useEffect(() => {
         updateReadOnlyValues()
     }, influencingValues)
@@ -58,10 +48,6 @@ function SimpleTable(props) {
         if (tableValues.d21 && tableValues.d22) { // d23
             const res = tableValues.d21 - tableValues.d22
             props.actions.updateTablesValues({ values: { d23: res } })
-        }
-        if (tableValues.e30 && tableValues.d32) { // e32
-            const res = tableValues.e30 * tableValues.d32
-            props.actions.updateTablesValues({ values: { e32: res } })
         }
     }
 
@@ -76,19 +62,13 @@ function SimpleTable(props) {
                 </TableCell>
             </TableRow>
         )
-
-
         return data.map(row => (
             <TableRow key={row.location}>
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
-                <TableCell align="left">{row.value}</TableCell>
-                {row.fields.map((field) => {
-                    return <TableCell align="left">
-                        {renderValueType(field, props.actions.updateTablesValues, tableValues, classes)}
-                    </TableCell>
-                })}
+                {row.units && <TableCell align="left">{row.units}</TableCell>}
+                <TableCell align="left">{renderValueType(row, props.actions.updateTablesValues, tableValues,classes)}</TableCell>
             </TableRow>
         ))
     }
@@ -100,21 +80,7 @@ function SimpleTable(props) {
                     {tableSubTitle && <TableRow>
                         <TableCell className={classes.tableTitle}
                             colSpan={3}
-                            align="left">
-                            {tableSubTitle}
-                        </TableCell>
-                        <TableCell className={classes.tableTitle}
-                            colSpan={3}
-                            align="left">
-                            <Input
-                                id={'e30'}
-                                label="Number"
-                                value={tableValues['e30'] || ''}
-                                onChange={(e) => handleInputChange(e, props.actions.updateTablesValues)}
-                                type="number"
-                                className={classes.textField}
-                            />
-                        </TableCell>
+                            align="left">{tableSubTitle}</TableCell>
                     </TableRow>}
                     {headerTitles
                         ? <TableRow>

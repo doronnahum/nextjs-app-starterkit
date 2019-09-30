@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Table from 'src/components/table/Table'
-import TableDiffrent from 'src/components/table/TableDiffrent'
 import {
     mechanicalPropertiesData,
     operationalPropertiesData,
@@ -16,29 +15,29 @@ class Tables extends Component {
         const { className } = this.props
         return (
             <div className={className}>
-                <Table tableTitle={'Mechanical Properties'}
+                <Table
+                    headerCols={['Mechanical Properties', 'Units', 'value']}
                     data={mechanicalPropertiesData} />
-                <Table tableTitle={'Operational Properties'}
+                <Table
+                    headerCols={['Operational Properties', 'Units', 'value']}
                     data={operationalPropertiesData} />
-                <Table tableTitle={'Water Origin'}
+                <Table
+                    headerCols={['Water Origin', 'Units', 'value']}
                     data={waterOriginData} />
-                <Table tableTitle={'Operation Costs'}
+                <Table
+                    headerCols={['Operation Costs ', 'Units', 'value']}
                     data={operationCostsData} />
-                <Table tableTitle={'Enironmental Data'}
+                <Table
+                    headerCols={['Enironmental Data', 'Units', 'value']}
                     data={enironmentalData} />
                 <Table
-                    // tableTitle={'Customer\'s problems and requests'}
+                    tableTitle={'Customer\'s problems and requests'}
+                    headerCols={['Option List', 'Mark if applicable']}
                     data={customersProblemsAndRequestsData}
-                    tableSubTitle={'Customer\'s problems and requests'}
-                    headerTitles={['Option List', 'Mark if applicable']}
                 />
-                <TableDiffrent tableTitle={'Water Analysis'}
-                    tableSubTitle={'Current Cycles of Concentration'}
-                    headerTitles={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
+                <Table waterAnalysisTitle
+                    headerCols={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
                     data={waterAnalysisData} />
-
-                {/* <Table tableTitle={'Enironmental Data '} /> */}
-                {/* <Table tableTitle={'Customer\'s problems and requests'} /> */}
             </div>
         )
     }
