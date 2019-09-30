@@ -159,6 +159,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/values.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/values.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/values */ "core-js/library/fn/object/values");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/promise.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/promise.js ***!
@@ -8222,33 +8233,36 @@ function NoDataTableCell(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Table */ "@material-ui/core/Table");
-/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
-/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableCell */ "@material-ui/core/TableCell");
-/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
-/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
-/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _TableTitle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableTitle */ "./src/components/table/TableTitle.js");
-/* harmony import */ var _HeaderCols__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./HeaderCols */ "./src/components/table/HeaderCols.js");
-/* harmony import */ var _NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NoDataTableCell */ "./src/components/table/NoDataTableCell.js");
-/* harmony import */ var _WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./WaterAnalysisTitle */ "./src/components/table/WaterAnalysisTitle.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/values */ "./node_modules/@babel/runtime-corejs2/core-js/object/values.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Table */ "@material-ui/core/Table");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableCell */ "@material-ui/core/TableCell");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _TableTitle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./TableTitle */ "./src/components/table/TableTitle.js");
+/* harmony import */ var _HeaderCols__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./HeaderCols */ "./src/components/table/HeaderCols.js");
+/* harmony import */ var _NoDataTableCell__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NoDataTableCell */ "./src/components/table/NoDataTableCell.js");
+/* harmony import */ var _WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./WaterAnalysisTitle */ "./src/components/table/WaterAnalysisTitle.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
@@ -8266,7 +8280,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
  // import { calculate } from 'src/components/data/tableUtils';
 
 
-const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(theme => ({
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(theme => ({
   root: {// width: '100%',
     // marginTop: theme.spacing(3),
     // overflowX: 'auto',
@@ -8293,9 +8307,10 @@ function SimpleTable(props) {
   } = actions;
   const classes = useStyles();
   console.log(`tablesData`, tablesData);
+  console.log('Object.values(tablesData)', _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0___default()(tablesData));
   const tableValues = tablesData;
-  const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32];
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+  const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32, tableValues.f32, tableValues.d34, tableValues.d35, tableValues.d36, tableValues.d37, tableValues.d38, tableValues.d39];
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     updateReadOnlyValues();
   }, influencingValues);
 
@@ -8329,41 +8344,111 @@ function SimpleTable(props) {
         }
       });
     }
+
+    if (tableValues.e30 && tableValues.d32) {
+      // f32
+      const res = tableValues.e30 * tableValues.d32;
+      updateTablesValues({
+        values: {
+          f32: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d34) {
+      // f34
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d34;
+      updateTablesValues({
+        values: {
+          f34: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d35) {
+      // f35
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d35;
+      updateTablesValues({
+        values: {
+          f35: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d36) {
+      // f36
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d36;
+      updateTablesValues({
+        values: {
+          f36: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d37) {
+      // f37
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d37;
+      updateTablesValues({
+        values: {
+          f37: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d38) {
+      // f38
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d38;
+      updateTablesValues({
+        values: {
+          f38: res
+        }
+      });
+    }
+
+    if (tableValues.f32 && tableValues.d32 && tableValues.d39) {
+      // f39
+      const res = tableValues.f32 / tableValues.d32 * tableValues.d39;
+      updateTablesValues({
+        values: {
+          f39: res
+        }
+      });
+    }
   };
 
   const renderTableData = () => {
-    if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_13__["default"], {
       className: classes.TableCell
     });
-    return data.map(row => __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    return data.map(row => __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7___default.a, {
       key: row.location
-    }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default.a, {
       align: "left",
       className: classes.TableCell
-    }, row.name), row.units && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    }, row.name), row.units && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default.a, {
       align: "left"
     }, row.units), row.fields ? row.fields.map(field => {
-      return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default.a, {
         align: "left"
-      }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(field, updateTablesValues, tableValues, classes));
-    }) : __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      }, Object(_utils__WEBPACK_IMPORTED_MODULE_9__["renderValueType"])(field, updateTablesValues, tableValues, classes));
+    }) : __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_5___default.a, {
       align: "left"
-    }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(row, updateTablesValues, tableValues, classes))));
+    }, Object(_utils__WEBPACK_IMPORTED_MODULE_9__["renderValueType"])(row, updateTablesValues, tableValues, classes))));
   };
 
-  return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7___default.a, {
+  return __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8___default.a, {
     className: classes.root
-  }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3___default.a, {
     className: classes.table
-  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default.a, null, tableTitle && __jsx(_TableTitle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_6___default.a, null, tableTitle && __jsx(_TableTitle__WEBPACK_IMPORTED_MODULE_11__["default"], {
     className: classes.tableTitle,
     tableTitle: tableTitle
-  }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_14__["default"], {
     value: tableValues['e30'] || '',
-    handleInputChange: e => Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, updateTablesValues)
-  }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    handleInputChange: e => Object(_utils__WEBPACK_IMPORTED_MODULE_9__["handleInputChange"])(e, updateTablesValues)
+  }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_12__["default"], {
     data: headerCols
-  })), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3___default.a, null, renderTableData())));
+  })), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_4___default.a, null, renderTableData())));
 } // SimpleTable.defaultProps = {
 //     units: true
 // };
@@ -8372,7 +8457,7 @@ function SimpleTable(props) {
 // };
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_15__["default"])(SimpleTable));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_16__["default"])(SimpleTable));
 
 /***/ }),
 
@@ -9084,6 +9169,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-descriptor"
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/values":
+/*!***************************************************!*\
+  !*** external "core-js/library/fn/object/values" ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/values");
 
 /***/ }),
 

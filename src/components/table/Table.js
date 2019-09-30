@@ -39,6 +39,7 @@ function SimpleTable(props) {
     const classes = useStyles();
 
     console.log(`tablesData`, tablesData);
+    console.log('Object.values(tablesData)', Object.values(tablesData));
 
     const tableValues = tablesData
     const influencingValues = [
@@ -47,7 +48,14 @@ function SimpleTable(props) {
         tableValues.d21,
         tableValues.d22,
         tableValues.e30,
-        tableValues.d32
+        tableValues.d32,
+        tableValues.f32,
+        tableValues.d34,
+        tableValues.d35,
+        tableValues.d36,
+        tableValues.d37,
+        tableValues.d38,
+        tableValues.d39,
     ]
 
     useEffect(() => {
@@ -67,6 +75,34 @@ function SimpleTable(props) {
             const res = tableValues.e30 * tableValues.d32
             updateTablesValues({ values: { e32: res } })
         }
+        if (tableValues.e30 && tableValues.d32) { // f32
+            const res = tableValues.e30 * tableValues.d32
+            updateTablesValues({ values: { f32: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d34) { // f34
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d34
+            updateTablesValues({ values: { f34: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d35) { // f35
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d35
+            updateTablesValues({ values: { f35: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d36) { // f36
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d36
+            updateTablesValues({ values: { f36: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d37) { // f37
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d37
+            updateTablesValues({ values: { f37: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d38) { // f38
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d38
+            updateTablesValues({ values: { f38: res } })
+        }
+        if (tableValues.f32 && tableValues.d32 && tableValues.d39) { // f39
+            const res = tableValues.f32 / tableValues.d32 * tableValues.d39
+            updateTablesValues({ values: { f39: res } })
+        }
     }
 
 
@@ -79,7 +115,7 @@ function SimpleTable(props) {
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
-                
+
                 {row.units &&
                     <TableCell align="left">
                         {row.units}
