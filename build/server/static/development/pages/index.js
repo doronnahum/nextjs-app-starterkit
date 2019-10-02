@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -8805,6 +8805,8 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     } = this.props;
     return __jsx("div", {
       className: className
+    }, __jsx("div", {
+      className: className + '__section-1'
     }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
       headerCols: ['Mechanical Properties', 'Units', 'value'],
       data: _data__WEBPACK_IMPORTED_MODULE_2__["mechanicalPropertiesData"]
@@ -8828,10 +8830,12 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       waterAnalysisTitle: true,
       headerCols: ['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation'],
       data: _data__WEBPACK_IMPORTED_MODULE_2__["waterAnalysisData"]
-    }), __jsx("h1", null, "sizing"), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    })), __jsx("h1", null, "Sizing"), __jsx("div", {
+      className: className + '__section-2-sizing'
+    }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
       headerCols: ['Thermodynamic Calculations', 'Value', 'Current', 'UET'],
       data: _data__WEBPACK_IMPORTED_MODULE_2__["thermodynamicCalculationsData"]
-    }));
+    })));
   }
 
 }
@@ -8993,7 +8997,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

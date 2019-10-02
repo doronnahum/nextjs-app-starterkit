@@ -45879,20 +45879,19 @@ try {
 
 /***/ }),
 
-/***/ "./node_modules/reselect/lib/index.js":
-/*!********************************************!*\
-  !*** ./node_modules/reselect/lib/index.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./node_modules/reselect/es/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/reselect/es/index.js ***!
+  \*******************************************/
+/*! exports provided: defaultMemoize, createSelectorCreator, createSelector, createStructuredSelector */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-exports.__esModule = true;
-exports.defaultMemoize = defaultMemoize;
-exports.createSelectorCreator = createSelectorCreator;
-exports.createStructuredSelector = createStructuredSelector;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMemoize", function() { return defaultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelectorCreator", function() { return createSelectorCreator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelector", function() { return createSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createStructuredSelector", function() { return createStructuredSelector; });
 function defaultEqualityCheck(a, b) {
   return a === b;
 }
@@ -45966,7 +45965,7 @@ function createSelectorCreator(memoize) {
     }].concat(memoizeOptions));
 
     // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
-    var selector = defaultMemoize(function () {
+    var selector = memoize(function () {
       var params = [];
       var length = dependencies.length;
 
@@ -45980,6 +45979,7 @@ function createSelectorCreator(memoize) {
     });
 
     selector.resultFunc = resultFunc;
+    selector.dependencies = dependencies;
     selector.recomputations = function () {
       return recomputations;
     };
@@ -45990,7 +45990,7 @@ function createSelectorCreator(memoize) {
   };
 }
 
-var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
+var createSelector = createSelectorCreator(defaultMemoize);
 
 function createStructuredSelector(selectors) {
   var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
@@ -48794,6 +48794,8 @@ function (_Component) {
       var className = this.props.className;
       return __jsx("div", {
         className: className
+      }, __jsx("div", {
+        className: className + '__section-1'
       }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Mechanical Properties', 'Units', 'value'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["mechanicalPropertiesData"]
@@ -48817,10 +48819,12 @@ function (_Component) {
         waterAnalysisTitle: true,
         headerCols: ['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["waterAnalysisData"]
-      }), __jsx("h1", null, "sizing"), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), __jsx("h1", null, "Sizing"), __jsx("div", {
+        className: className + '__section-2-sizing'
+      }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Thermodynamic Calculations', 'Value', 'Current', 'UET'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["thermodynamicCalculationsData"]
-      }));
+      })));
     }
   }]);
 
@@ -48976,8 +48980,7 @@ var setValues = function setValues(payload) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesState", function() { return getTablesState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesData", function() { return getTablesData; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/lib/index.js");
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 
 var getTablesState = function getTablesState(state) {
   return state.tables;
@@ -49006,7 +49009,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***********************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************************/
@@ -49029,5 +49032,5 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

@@ -16,35 +16,42 @@ class Tables extends Component {
         const { className } = this.props
         return (
             <div className={className}>
-                <Table
-                    headerCols={['Mechanical Properties', 'Units', 'value']}
-                    data={mechanicalPropertiesData} />
-                <Table
-                    headerCols={['Operational Properties', 'Units', 'value']}
-                    data={operationalPropertiesData} />
-                <Table
-                    headerCols={['Water Origin', 'Units', 'value']}
-                    data={waterOriginData} />
-                <Table
-                    headerCols={['Operation Costs ', 'Units', 'value']}
-                    data={operationCostsData} />
-                <Table
-                    headerCols={['Enironmental Data', 'Units', 'value']}
-                    data={enironmentalData} />
-                <Table
-                    tableTitle={'Customer\'s problems and requests'}
-                    headerCols={['Option List', 'Mark if applicable']}
-                    data={customersProblemsAndRequestsData}
-                />
-                <Table waterAnalysisTitle
-                    headerCols={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
-                    data={waterAnalysisData} />
-                <h1>sizing</h1>
-                <Table
-                    headerCols={['Thermodynamic Calculations', 'Value', 'Current', 'UET']}
-                    data={thermodynamicCalculationsData}
-                />
-            </div>
+
+                <div className={className + '__section-1'}>
+                    <Table
+                        headerCols={['Mechanical Properties', 'Units', 'value']}
+                        data={mechanicalPropertiesData} />
+                    <Table
+                        headerCols={['Operational Properties', 'Units', 'value']}
+                        data={operationalPropertiesData} />
+                    <Table
+                        headerCols={['Water Origin', 'Units', 'value']}
+                        data={waterOriginData} />
+                    <Table
+                        headerCols={['Operation Costs ', 'Units', 'value']}
+                        data={operationCostsData} />
+                    <Table
+                        headerCols={['Enironmental Data', 'Units', 'value']}
+                        data={enironmentalData} />
+                    <Table
+                        tableTitle={'Customer\'s problems and requests'}
+                        headerCols={['Option List', 'Mark if applicable']}
+                        data={customersProblemsAndRequestsData}
+                    />
+                    <Table waterAnalysisTitle
+                        headerCols={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
+                        data={waterAnalysisData} />
+                </div>
+                <h1>Sizing</h1>
+
+                <div className={className + '__section-2-sizing'}>
+                    <Table
+                        headerCols={['Thermodynamic Calculations', 'Value', 'Current', 'UET']}
+                        data={thermodynamicCalculationsData}
+                    />
+
+                </div>
+            </div >
         )
     }
 }

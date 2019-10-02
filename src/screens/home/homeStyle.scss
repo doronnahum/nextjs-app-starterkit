@@ -9,12 +9,21 @@
       margin-bottom: 50px;
     }
     .tables {
-      @include uptoMd {
-        @include grid(1em, center, center, 1fr, auto);
-      }
-      @include grid(2em, center, flex-start, 1fr 1fr, auto);
       padding: 2em 5em;
-      background: green;
+      &__section-1 {
+        @include uptoMd {
+          @include grid(1em, center, center, 1fr, auto);
+        }
+        @include grid(2em, center, flex-start, 1fr 1fr, auto);
+        // background: green;
+      }
+      &__section-2-sizing {
+        @include uptoMd {
+          @include grid(1em, center, center, 1fr, auto);
+        }
+        @include grid(2em, center, flex-start, 1fr 1fr, auto);
+        // background: green;
+      }
     }
   }
 }
