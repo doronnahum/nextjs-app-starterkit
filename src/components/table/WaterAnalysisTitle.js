@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Input from '@material-ui/core/Input';
 
 export default function WaterAnalysisTitle(props) {
-    const { className, handleInputChange,value } = props
+    const { className, handleInputChange, value } = props
     return (
         <TableRow>
             <TableCell className={className}
@@ -18,7 +18,7 @@ export default function WaterAnalysisTitle(props) {
                 <Input
                     id={'e30'}
                     label="Number"
-                    value={value || ''}
+                    value={value||''}
                     onChange={handleInputChange}
                     type="number"
                 // className={classes.textField}

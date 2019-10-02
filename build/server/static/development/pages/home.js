@@ -7793,7 +7793,18 @@ const TYPES = {
   NOT_EDITABLE: 'NOT_EDITABLE'
 };
 
+function getDefaultValue(type) {
+  let defaultValue = 0;
+
+  if (type === TYPES.SELECT) {
+    defaultValue = '';
+  }
+
+  return defaultValue;
+}
+
 function createRangeData(name, units, mandatory, type, min, max, ticks, location) {
+  const defaultValue = getDefaultValue(type);
   return {
     name,
     units,
@@ -7802,33 +7813,41 @@ function createRangeData(name, units, mandatory, type, min, max, ticks, location
     min,
     max,
     ticks,
-    location
+    location,
+    defaultValue
   };
 }
 
 function createNumericData(name, units, mandatory, type, location) {
+  const defaultValue = getDefaultValue(type);
   return {
     name,
     units,
     mandatory,
     type,
-    location
+    location,
+    defaultValue
   };
 }
 
 function createSelectData(name, units, mandatory, type, data, location) {
+  const defaultValue = getDefaultValue(type);
   return {
     name,
     units,
     mandatory,
     type,
     data,
-    location
+    location,
+    defaultValue
   };
 } //create tables with more than one values
 
 
 function createManyValuesData(name, units, mandatory, fields) {
+  fields.forEach(field => {
+    field.defaultValue = getDefaultValue(field.type);
+  });
   return {
     name,
     units,
@@ -7837,8 +7856,8 @@ function createManyValuesData(name, units, mandatory, fields) {
   };
 }
 
-const mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
-const operationalPropertiesData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'), createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'), createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
+const mechanicalPropertiesData = [createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 0, 10, 1, 'd8'), createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 0, 20, 1, 'd9'), createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 0, 50, 1, 'd10'), createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'), createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'), createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 0, 200, 10, 'd13'), createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'), createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'), createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16')];
+const operationalPropertiesData = [createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 0, 40, 3, 'd21'), createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 0, 40, 2, 'd22'), createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'), createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 0, 100, 10, 'd24'), createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 0, 7, 1, 'd25'), createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 0, 24, 1, 'd26'), createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27')];
 const waterOriginData = [createSelectData('Water Source', 'Public/Well/River/Reuse', MANDATORY, TYPES.SELECT, ['', 'Public', 'Well', 'River', 'Reuse'], 'j8'), createNumericData('Water Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j9'), createNumericData('Drain Cost', '$USD / m3', MANDATORY, TYPES.NUMERIC, 'j10')];
 const operationCostsData = [createNumericData('Chemical costs', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j13'), createNumericData('Elecrtricity Cost', '$USD/kWH', MANDATORY, TYPES.NUMERIC, 'j14'), createNumericData('# plant stoppages due to blockages', '#/year', MANDATORY, TYPES.NUMERIC, 'j15'), createNumericData('Thickness of scaling in heat exhanger', 'mm', MANDATORY, TYPES.NUMERIC, 'j16'), createNumericData('Cost of  cleaning of heat exchanger', '$USD/year', MANDATORY, TYPES.NUMERIC, 'j17')];
 const enironmentalData = [createNumericData('Discharge limitations', 'Chlorides (ppm)', MANDATORY, TYPES.NUMERIC, 'j20'), createNumericData('Discharge limitations', 'Sulfates (ppm)', MANDATORY, TYPES.NUMERIC, 'j21'), createNumericData('Discharge limitations', 'pH', MANDATORY, TYPES.NUMERIC, 'j22'), createNumericData('Discharge limitations', 'Chlorine (ppm)', MANDATORY, TYPES.NUMERIC, 'j23'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j24'), createSelectData('Water Source', 'Yes/No', MANDATORY, TYPES.SELECT, ['', 'Yes', 'No'], 'j25')];
@@ -8334,214 +8353,30 @@ function SimpleTable(props) {
   } = actions;
   const classes = useStyles(); // console.log(`tablesData`, tablesData);
 
-  const tableValues = tablesData;
-  const influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32, tableValues.f32, tableValues.d34, tableValues.d35, tableValues.d36, tableValues.d37, tableValues.d38, tableValues.d39, tableValues.d49, tableValues.e49, tableValues.d23, tableValues.d48, tableValues.d52, tableValues.e48, tableValues.e52, tableValues.d47, tableValues.e47];
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    updateReadOnlyValues();
-  }, influencingValues);
-
-  const updateReadOnlyValues = () => {
-    if (tableValues.d10 && tableValues.d11) {
-      // d12
-      const res = tableValues.d10 - tableValues.d11;
-      updateTablesValues({
-        values: {
-          d12: res
-        }
-      });
-    }
-
-    if (tableValues.d21 && tableValues.d22) {
-      // d23
-      const res = tableValues.d21 - tableValues.d22;
-      updateTablesValues({
-        values: {
-          d23: res
-        }
-      });
-    }
-
-    if (tableValues.e30 && tableValues.d32) {
-      // e32
-      const res = tableValues.e30 * tableValues.d32;
-      updateTablesValues({
-        values: {
-          e32: res
-        }
-      });
-    }
-
-    if (tableValues.e30 && tableValues.d32) {
-      // f32
-      const res = tableValues.e30 * tableValues.d32;
-      updateTablesValues({
-        values: {
-          f32: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d34) {
-      // f34
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d34;
-      updateTablesValues({
-        values: {
-          f34: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d35) {
-      // f35
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d35;
-      updateTablesValues({
-        values: {
-          f35: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d36) {
-      // f36
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d36;
-      updateTablesValues({
-        values: {
-          f36: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d37) {
-      // f37
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d37;
-      updateTablesValues({
-        values: {
-          f37: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d38) {
-      // f38
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d38;
-      updateTablesValues({
-        values: {
-          f38: res
-        }
-      });
-    }
-
-    if (tableValues.f32 && tableValues.d32 && tableValues.d39) {
-      // f39
-      const res = tableValues.f32 / tableValues.d32 * tableValues.d39;
-      updateTablesValues({
-        values: {
-          f39: res
-        }
-      });
-    }
-
-    if (tableValues.e30) {
-      // d47
-      const res = tableValues.e30;
-      updateTablesValues({
-        values: {
-          d47: res
-        }
-      });
-    }
-
-    if (tableValues.d49) {
-      // d48
-      const res = tableValues.d49 / 560 / 1000;
-      updateTablesValues({
-        values: {
-          d48: res
-        }
-      });
-    }
-
-    if (tableValues.e49) {
-      // e48
-      const res = tableValues.e49 / 560 / 1000;
-      updateTablesValues({
-        values: {
-          e48: res
-        }
-      });
-    }
-
-    if (tableValues.d11 && tableValues.d23) {
-      // d49 AND e49
-      const res = tableValues.d11 * tableValues.d23 * 1000;
-      updateTablesValues({
-        values: {
-          d49: res,
-          e49: res
-        }
-      });
-    }
-
-    if (tableValues.d49) {
-      // d50 
-      const res = tableValues.d49 * 0.000330693393472;
-      updateTablesValues({
-        values: {
-          d50: res
-        }
-      });
-    }
-
-    if (tableValues.e49) {
-      // e50
-      const res = tableValues.e49 * 0.000330693393472;
-      updateTablesValues({
-        values: {
-          e50: res
-        }
-      });
-    }
-
-    if (tableValues.d48 && tableValues.d52) {
-      // d51
-      const res = tableValues.d48 + tableValues.d52;
-      updateTablesValues({
-        values: {
-          d51: res
-        }
-      });
-    }
-
-    if (tableValues.e48 && tableValues.e52) {
-      // e51
-      const res = tableValues.e48 + tableValues.e52;
-      updateTablesValues({
-        values: {
-          e51: res
-        }
-      });
-    }
-
-    if (tableValues.d48 && tableValues.d47) {
-      // d52
-      const res = tableValues.d48 * (1 / tableValues.d47);
-      updateTablesValues({
-        values: {
-          d52: res
-        }
-      });
-    }
-
-    if (tableValues.e48 && tableValues.e47) {
-      // e52
-      const res = tableValues.e48 * (1 / tableValues.e47);
-      updateTablesValues({
-        values: {
-          e52: res
-        }
-      });
-    }
-  };
+  const tableValues = tablesData; // const influencingValues = [
+  //     tableValues.d10,
+  //     tableValues.d11,
+  //     tableValues.d21,
+  //     tableValues.d22,
+  //     tableValues.e30,
+  //     tableValues.d32,
+  //     tableValues.f32,
+  //     tableValues.d34,
+  //     tableValues.d35,
+  //     tableValues.d36,
+  //     tableValues.d37,
+  //     tableValues.d38,
+  //     tableValues.d39,
+  //     tableValues.d49,
+  //     tableValues.e49,
+  //     tableValues.d23,
+  //     tableValues.d48,
+  //     tableValues.d52,
+  //     tableValues.e48,
+  //     tableValues.e52,
+  //     tableValues.d47,
+  //     tableValues.e47
+  // ]
 
   const renderTableData = () => {
     if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -8574,8 +8409,8 @@ function SimpleTable(props) {
     className: classes.tableTitle,
     tableTitle: tableTitle
   }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    value: tableValues['e30'] || '',
-    handleInputChange: e => Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, updateTablesValues)
+    value: tableValues['e30'],
+    handleInputChange: e => Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, updateTablesValues, tableValues)
   }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_11__["default"], {
     data: headerCols
   })), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3___default.a, null, renderTableData())));
@@ -8719,42 +8554,163 @@ const mapDispatchToProps = dispatch => ({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleInputChange", function() { return handleInputChange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderValueType", function() { return renderValueType; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
-/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4__);
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Slider */ "@material-ui/core/Slider");
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_5__);
 
 
-const handleInputChange = (event, updateTablesValues) => {
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+
+const isOneOf = (keys, arr) => keys.some(key => arr.includes(key));
+
+const getCalculateNewValues = (key, value, tableValues) => {
+  // const keys = [key]
+  const newValues = _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, tableValues, {
+    [key]: value
+  }); // All if's here
+
+
+  if (['d10', 'd11'].includes(key)) {
+    // d12
+    newValues['d12'] = newValues.d10 - newValues.d11; // keys.push('d12');
+  }
+
+  if (['d21', 'd22'].includes(key)) {
+    // d23
+    newValues['d23'] = newValues.d21 - newValues.d22; // keys.push('d23');
+  }
+
+  if (['e30', 'd32'].includes(key)) {
+    // e32
+    newValues['e32'] = tableValues.e30 * tableValues.d32;
+  }
+
+  if (['e30', 'd32'].includes(key)) {
+    // f32
+    newValues['f32'] = tableValues.e30 * tableValues.d32;
+  }
+
+  if (['f32', 'd32', 'd34'].includes(key)) {
+    // f34
+    newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d35].includes(key)) {
+    // f35
+    newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d36].includes(key)) {
+    // f36
+    newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d37].includes(key)) {
+    // f37
+    newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d38].includes(key)) {
+    // f38
+    newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d39].includes(key)) {
+    // f39
+    newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39;
+  }
+
+  if ([tableValues.e30].includes(key)) {
+    // d47
+    newValues['d47'] = tableValues.e30;
+  }
+
+  if ([tableValues.d49].includes(key)) {
+    // d48
+    newValues['d48'] = tableValues.d49 / 560 / 1000;
+  }
+
+  if ([tableValues.e49].includes(key)) {
+    // e48
+    newValues['e48'] = tableValues.e49 / 560 / 1000;
+  }
+
+  if ([tableValues.d11, tableValues.d23].includes(key)) {
+    // d49 AND e49
+    newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000;
+  }
+
+  if ([tableValues.d49].includes(key)) {
+    // d50 
+    newValues['d50'] = tableValues.d49 * 0.000330693393472;
+  }
+
+  if ([tableValues.e49].includes(key)) {
+    // e50
+    newValues['e50'] = tableValues.e49 * 0.000330693393472;
+  }
+
+  if ([tableValues.d48, tableValues.d52].includes(key)) {
+    // d51
+    newValues['d51'] = tableValues.d48 + tableValues.d52;
+  }
+
+  if ([tableValues.e48, tableValues.e52].includes(key)) {
+    // e51
+    newValues['e51'] = tableValues.e48 + tableValues.e52;
+  }
+
+  if ([tableValues.d48, tableValues.d47].includes(key)) {
+    // d52
+    newValues['d52'] = tableValues.d48 * (1 / tableValues.d47);
+  }
+
+  if ([tableValues.e48, tableValues.e47].includes(key)) {
+    // e52
+    newValues['e52'] = tableValues.e48 * (1 / tableValues.e47);
+  } // end
+
+
+  return newValues;
+};
+
+const handleInputChange = (event, updateTablesValues, tableValues) => {
+  const field = event.target.id;
+  const newValue = Number(event.target.value);
+  const newValues = getCalculateNewValues(field, newValue, tableValues); // debugger
+
   updateTablesValues({
-    values: {
-      [event.target.id]: event.target.value
-    }
+    values: newValues
   });
 };
 
-const handleSelectChange = (event, updateTablesValues) => {
+const handleSelectChange = (event, updateTablesValues, tableValues) => {
+  const field = event.target.id;
+  const newValue = event.target.value;
+  const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
-    values: {
-      [event.target.id]: event.target.value
-    }
+    values: newValues
   });
 };
 
-const onChangeSlider = (event, val, location, updateTablesValues) => {
+const onChangeSlider = (event, val, location, updateTablesValues, tableValues) => {
+  const field = location;
+  const newValue = val;
+  const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
-    values: {
-      [location]: val
-    }
+    values: newValues
   });
 };
 
@@ -8787,21 +8743,22 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
   const type = row.type;
 
   switch (type) {
-    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NUMERIC:
-      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NUMERIC:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: row.location,
         label: "Number",
-        value: tableValues[row.location] || '',
-        onChange: e => handleInputChange(e, updateTablesValues),
+        value: tableValues[row.location],
+        onChange: e => handleInputChange(e, updateTablesValues, tableValues),
         type: "number",
         className: classes.textField
       });
 
-    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].RANGE:
-      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        defaultValue: Math.floor((row.min + row.max) / 2),
+    case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].RANGE:
+      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        defaultValue: tableValues[row.location] //Math.floor((row.min + row.max) / 2)
+        ,
         getAriaValueText: valuetext,
-        onChange: (e, val) => onChangeSlider(e, val, row.location, updateTablesValues),
+        onChange: (e, val) => onChangeSlider(e, val, row.location, updateTablesValues, tableValues),
         "aria-labelledby": "discrete-slider-always",
         step: row.ticks,
         min: row.min,
@@ -8810,12 +8767,12 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
         valueLabelDisplay: "on"
       });
 
-    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].SELECT:
-      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].SELECT:
+      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_5___default.a, {
         id: row.location,
         native: true,
         value: tableValues[row.location],
-        onChange: e => handleSelectChange(e, updateTablesValues)
+        onChange: e => handleSelectChange(e, updateTablesValues, tableValues)
       }, row.data.map((item, i) => {
         return __jsx("option", {
           key: i,
@@ -8823,10 +8780,10 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
         }, item);
       }));
 
-    case _data__WEBPACK_IMPORTED_MODULE_1__["TYPES"].NOT_EDITABLE:
-      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NOT_EDITABLE:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: row.location,
-        value: tableValues[row.location] || '',
+        value: isNaN(tableValues[row.location]) ? '' : tableValues[row.location],
         readOnly: true,
         className: classes.textFieldUNEditable
       });

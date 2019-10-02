@@ -44,117 +44,32 @@ function SimpleTable(props) {
     // console.log(`tablesData`, tablesData);
 
     const tableValues = tablesData
-    const influencingValues = [
-        tableValues.d10,
-        tableValues.d11,
-        tableValues.d21,
-        tableValues.d22,
-        tableValues.e30,
-        tableValues.d32,
-        tableValues.f32,
-        tableValues.d34,
-        tableValues.d35,
-        tableValues.d36,
-        tableValues.d37,
-        tableValues.d38,
-        tableValues.d39,
-        tableValues.d49,
-        tableValues.e49,
-        tableValues.d23,
-        tableValues.d48,
-        tableValues.d52,
-        tableValues.e48,
-        tableValues.e52,
-        tableValues.d47,
-        tableValues.e47
-    ]
+    // const influencingValues = [
+    //     tableValues.d10,
+    //     tableValues.d11,
+    //     tableValues.d21,
+    //     tableValues.d22,
+    //     tableValues.e30,
+    //     tableValues.d32,
+    //     tableValues.f32,
+    //     tableValues.d34,
+    //     tableValues.d35,
+    //     tableValues.d36,
+    //     tableValues.d37,
+    //     tableValues.d38,
+    //     tableValues.d39,
+    //     tableValues.d49,
+    //     tableValues.e49,
+    //     tableValues.d23,
+    //     tableValues.d48,
+    //     tableValues.d52,
+    //     tableValues.e48,
+    //     tableValues.e52,
+    //     tableValues.d47,
+    //     tableValues.e47
+    // ]
 
-    useEffect(() => {
-        updateReadOnlyValues()
-    }, influencingValues)
 
-    const updateReadOnlyValues = () => {
-        if (tableValues.d10 && tableValues.d11) { // d12
-            const res = tableValues.d10 - tableValues.d11
-            updateTablesValues({ values: { d12: res } })
-        }
-        if (tableValues.d21 && tableValues.d22) { // d23
-            const res = tableValues.d21 - tableValues.d22
-            updateTablesValues({ values: { d23: res } })
-        }
-        if (tableValues.e30 && tableValues.d32) { // e32
-            const res = tableValues.e30 * tableValues.d32
-            updateTablesValues({ values: { e32: res } })
-        }
-        if (tableValues.e30 && tableValues.d32) { // f32
-            const res = tableValues.e30 * tableValues.d32
-            updateTablesValues({ values: { f32: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d34) { // f34
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d34
-            updateTablesValues({ values: { f34: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d35) { // f35
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d35
-            updateTablesValues({ values: { f35: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d36) { // f36
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d36
-            updateTablesValues({ values: { f36: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d37) { // f37
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d37
-            updateTablesValues({ values: { f37: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d38) { // f38
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d38
-            updateTablesValues({ values: { f38: res } })
-        }
-        if (tableValues.f32 && tableValues.d32 && tableValues.d39) { // f39
-            const res = tableValues.f32 / tableValues.d32 * tableValues.d39
-            updateTablesValues({ values: { f39: res } })
-        }
-        if (tableValues.e30) { // d47
-            const res = tableValues.e30
-            updateTablesValues({ values: { d47: res } })
-        }
-        if (tableValues.d49) { // d48
-            const res = tableValues.d49 / 560 / 1000
-            updateTablesValues({ values: { d48: res } })
-        }
-        if (tableValues.e49) { // e48
-            const res = tableValues.e49 / 560 / 1000
-            updateTablesValues({ values: { e48: res } })
-        }
-        if (tableValues.d11 && tableValues.d23) { // d49 AND e49
-            const res = tableValues.d11 * tableValues.d23 * 1000
-            updateTablesValues({ values: { d49: res, e49: res } })
-        }
-        if (tableValues.d49) { // d50 
-            const res = tableValues.d49 * 0.000330693393472
-            updateTablesValues({ values: { d50: res } })
-        }
-        if (tableValues.e49) { // e50
-            const res = tableValues.e49 * 0.000330693393472
-            updateTablesValues({ values: { e50: res } })
-        }
-        if (tableValues.d48 && tableValues.d52) { // d51
-            const res = tableValues.d48 + tableValues.d52
-            updateTablesValues({ values: { d51: res } })
-        }
-        if (tableValues.e48 && tableValues.e52) { // e51
-            const res = tableValues.e48 + tableValues.e52
-            updateTablesValues({ values: { e51: res } })
-        }
-        if (tableValues.d48 && tableValues.d47) { // d52
-            const res = tableValues.d48 * (1 / tableValues.d47)
-            updateTablesValues({ values: { d52: res } })
-        }
-        if (tableValues.e48 && tableValues.e47) { // e52
-            const res = tableValues.e48 * (1 / tableValues.e47)
-            updateTablesValues({ values: { e52: res } })
-        }
-    }
 
 
 
@@ -191,8 +106,8 @@ function SimpleTable(props) {
                     {tableTitle && <TableTitle className={classes.tableTitle} tableTitle={tableTitle} />}
                     {/* happens only in Water Analysis table */}
                     {waterAnalysisTitle
-                        && <WaterAnalysisTitle value={tableValues['e30'] || ''}
-                            handleInputChange={(e) => handleInputChange(e, updateTablesValues)} />}
+                        && <WaterAnalysisTitle value={tableValues['e30']}
+                            handleInputChange={(e) => handleInputChange(e, updateTablesValues, tableValues)} />}
                     {/* ---- */}
                     {headerCols && <HeaderCols data={headerCols} />}
                 </TableHead>

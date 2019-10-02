@@ -7,39 +7,53 @@ export const TYPES = {
     NOT_EDITABLE: 'NOT_EDITABLE',
 }
 
+function getDefaultValue(type) {
+    let defaultValue = 0
+    if (type === TYPES.SELECT) {
+        defaultValue = ''
+    }
+    return defaultValue
+}
 function createRangeData(name, units, mandatory, type, min, max, ticks, location) {
-    return { name, units, mandatory, type, min, max, ticks, location };
+    const defaultValue = getDefaultValue(type)
+    return { name, units, mandatory, type, min, max, ticks, location, defaultValue };
 }
 function createNumericData(name, units, mandatory, type, location) {
-    return { name, units, mandatory, type, location };
+    const defaultValue = getDefaultValue(type)
+    return { name, units, mandatory, type, location, defaultValue };
 }
 function createSelectData(name, units, mandatory, type, data, location) {
-    return { name, units, mandatory, type, data, location };
+    const defaultValue = getDefaultValue(type)
+    return { name, units, mandatory, type, data, location, defaultValue };
 }
 
 //create tables with more than one values
 function createManyValuesData(name, units, mandatory, fields) {
+    fields.forEach(field => {
+        field.defaultValue = getDefaultValue(field.type)
+    })
     return { name, units, mandatory, fields };
 }
 
+
 export const mechanicalPropertiesData = [
-    createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 1, 10, 1, 'd8'),
-    createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 1, 20, 1, 'd9'),
-    createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 1, 50, 1, 'd10'),
+    createRangeData('Number of CT (interconnected)', '# (interconnected cooling towers)', NOT_MANDATORY, TYPES.RANGE, 0, 10, 1, 'd8'),
+    createRangeData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, TYPES.RANGE, 0, 20, 1, 'd9'),
+    createRangeData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, TYPES.RANGE, 0, 50, 1, 'd10'),
     createNumericData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, TYPES.NUMERIC, 'd11'),
     createNumericData('Available flowrate for UET units', 'm3/h', MANDATORY, TYPES.NOT_EDITABLE, 'd12'),
-    createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 10, 200, 10, 'd13'),
+    createRangeData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, TYPES.RANGE, 0, 200, 10, 'd13'),
     createNumericData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, TYPES.NUMERIC, 'd14'),
     createSelectData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, TYPES.SELECT, ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'], 'd15'),
     createSelectData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, TYPES.SELECT, ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'], 'd16'),
 ]
 export const operationalPropertiesData = [
-    createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 3, 'd21'),
-    createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 25, 40, 2, 'd22'),
+    createRangeData('CWR - Cooling Water Return temperature', 'oC', MANDATORY, TYPES.RANGE, 0, 40, 3, 'd21'),
+    createRangeData('CWS - Cooling Water Supply temperature', 'oC', MANDATORY, TYPES.RANGE, 0, 40, 2, 'd22'),
     createNumericData('Temperature difference', 'oC', NOT_MANDATORY, TYPES.NOT_EDITABLE, 'd23'),
-    createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 60, 100, 10, 'd24'),
-    createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 1, 7, 1, 'd25'),
-    createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 1, 24, 1, 'd26'),
+    createRangeData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, TYPES.RANGE, 0, 100, 10, 'd24'),
+    createRangeData('Days of week in operation', 'days per week', MANDATORY, TYPES.RANGE, 0, 7, 1, 'd25'),
+    createRangeData('Hours/day in operation)', 'hours per day', MANDATORY, TYPES.RANGE, 0, 24, 1, 'd26'),
     createNumericData('# weeks in operation', 'weeks per year', MANDATORY, TYPES.NUMERIC, 'd27'),
 ]
 
