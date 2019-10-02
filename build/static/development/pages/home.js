@@ -48130,6 +48130,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 
 
+var logo = '/static/images/Logo.png';
 
 var DemoCarousel =
 /*#__PURE__*/
@@ -48152,30 +48153,14 @@ function (_Component) {
         showThumbs: false,
         infiniteLoop: true
       }, __jsx("div", null, __jsx("img", {
+        src: logo,
         style: {
-          backgroundColor: 'red',
-          height: 200,
+          height: 500,
           width: 300
         }
       }), __jsx("p", {
         className: "legend"
-      }, "Legend 1")), __jsx("div", null, __jsx("img", {
-        style: {
-          backgroundColor: 'green',
-          height: 200,
-          width: 300
-        }
-      }), __jsx("p", {
-        className: "legend"
-      }, "Legend 2")), __jsx("div", null, __jsx("img", {
-        style: {
-          backgroundColor: 'blue',
-          height: 200,
-          width: 300
-        }
-      }), __jsx("p", {
-        className: "legend"
-      }, "Legend 3"))));
+      }, "Legend 1"))));
     }
   }]);
 
@@ -49021,7 +49006,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 2:
 /*!**************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js ***!
   \**************************************************************************************************************************************/
@@ -49044,5 +49029,5 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js","styles"]]]);
+},[[2,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=home.js.map

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -8162,6 +8162,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+const logo = '/static/images/Logo.png';
 class DemoCarousel extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render() {
     const {
@@ -8173,30 +8174,14 @@ class DemoCarousel extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       showThumbs: false,
       infiniteLoop: true
     }, __jsx("div", null, __jsx("img", {
+      src: logo,
       style: {
-        backgroundColor: 'red',
-        height: 200,
+        height: 500,
         width: 300
       }
     }), __jsx("p", {
       className: "legend"
-    }, "Legend 1")), __jsx("div", null, __jsx("img", {
-      style: {
-        backgroundColor: 'green',
-        height: 200,
-        width: 300
-      }
-    }), __jsx("p", {
-      className: "legend"
-    }, "Legend 2")), __jsx("div", null, __jsx("img", {
-      style: {
-        backgroundColor: 'blue',
-        height: 200,
-        width: 300
-      }
-    }), __jsx("p", {
-      className: "legend"
-    }, "Legend 3"))));
+    }, "Legend 1"))));
   }
 
 }
@@ -9008,7 +8993,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!*****************************!*\
   !*** multi ./pages/home.js ***!
   \*****************************/
