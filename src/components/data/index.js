@@ -85,9 +85,9 @@ export const waterAnalysisData = [
 ]
 export const thermodynamicCalculationsData = [
     createManyValuesData('UET treatment cycles of concentration', '#', MANDATORY, [{ location: 'd47', type: TYPES.NOT_EDITABLE }, { location: 'e47', type: TYPES.NUMERIC }]),
-    createManyValuesData('Evaporation Rate', 'm3/h', MANDATORY, [{ location: 'd48', type: TYPES.NOT_EDITABLE }, { location: 'e48', type: TYPES.NUMERIC }]),
-    createManyValuesData('Condenser capacity', 'Kcal/hour', MANDATORY, [{ location: 'd49', type: TYPES.NOT_EDITABLE }, { location: 'e49', type: TYPES.NUMERIC }]),
-    createManyValuesData('Tons of refrigeration', 'TR', MANDATORY, [{ location: 'd50', type: TYPES.NOT_EDITABLE }, { location: 'e50', type: TYPES.NUMERIC }]),
-    createManyValuesData('Make up flow rate', 'm3/h', MANDATORY, [{ location: 'd51', type: TYPES.NOT_EDITABLE }, { location: 'e51', type: TYPES.NUMERIC }]),
-    createManyValuesData('Blowdown flow rate', 'm3/h', MANDATORY, [{ location: 'd52', type: TYPES.NOT_EDITABLE }, { location: 'e52', type: TYPES.NUMERIC }]),
+    createManyValuesData('Evaporation Rate', 'm3/h', MANDATORY, [{ location: 'd48', type: TYPES.NOT_EDITABLE }, { location: 'e48', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Condenser capacity', 'Kcal/hour', MANDATORY, [{ location: 'd49', type: TYPES.NOT_EDITABLE }, { location: 'e49', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Tons of refrigeration', 'TR', MANDATORY, [{ location: 'd50', type: TYPES.NOT_EDITABLE }, { location: 'e50', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Make up flow rate', 'm3/h', MANDATORY, [{ location: 'd51', type: TYPES.NOT_EDITABLE }, { location: 'e51', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Blowdown flow rate', 'm3/h', MANDATORY, [{ location: 'd52', type: TYPES.NOT_EDITABLE }, { location: 'e52', type: TYPES.NOT_EDITABLE }]),
 ]

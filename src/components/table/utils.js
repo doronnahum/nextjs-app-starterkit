@@ -77,7 +77,7 @@ export const renderValueType = (row, updateTablesValues, tableValues, classes) =
                 id={row.location}
                 value={tableValues[row.location] || ''}
                 readOnly
-                className={classes.textField}
+                className={classes.textFieldUNEditable}
             />
         default:
             return row.type

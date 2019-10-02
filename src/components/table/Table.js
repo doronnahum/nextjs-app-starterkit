@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     },
     TableCell: {
 
+    },
+    textFieldUNEditable: {
+        background: 'lightblue'
     }
 }));
 
@@ -38,7 +41,7 @@ function SimpleTable(props) {
     const { updateTablesValues } = actions
     const classes = useStyles();
 
-    console.log(`tablesData`, tablesData);
+    // console.log(`tablesData`, tablesData);
 
     const tableValues = tablesData
     const influencingValues = [
@@ -55,6 +58,15 @@ function SimpleTable(props) {
         tableValues.d37,
         tableValues.d38,
         tableValues.d39,
+        tableValues.d49,
+        tableValues.e49,
+        tableValues.d23,
+        tableValues.d48,
+        tableValues.d52,
+        tableValues.e48,
+        tableValues.e52,
+        tableValues.d47,
+        tableValues.e47
     ]
 
     useEffect(() => {
@@ -101,6 +113,46 @@ function SimpleTable(props) {
         if (tableValues.f32 && tableValues.d32 && tableValues.d39) { // f39
             const res = tableValues.f32 / tableValues.d32 * tableValues.d39
             updateTablesValues({ values: { f39: res } })
+        }
+        if (tableValues.e30) { // d47
+            const res = tableValues.e30
+            updateTablesValues({ values: { d47: res } })
+        }
+        if (tableValues.d49) { // d48
+            const res = tableValues.d49 / 560 / 1000
+            updateTablesValues({ values: { d48: res } })
+        }
+        if (tableValues.e49) { // e48
+            const res = tableValues.e49 / 560 / 1000
+            updateTablesValues({ values: { e48: res } })
+        }
+        if (tableValues.d11 && tableValues.d23) { // d49 AND e49
+            const res = tableValues.d11 * tableValues.d23 * 1000
+            updateTablesValues({ values: { d49: res, e49: res } })
+        }
+        if (tableValues.d49) { // d50 
+            const res = tableValues.d49 * 0.000330693393472
+            updateTablesValues({ values: { d50: res } })
+        }
+        if (tableValues.e49) { // e50
+            const res = tableValues.e49 * 0.000330693393472
+            updateTablesValues({ values: { e50: res } })
+        }
+        if (tableValues.d48 && tableValues.d52) { // d51
+            const res = tableValues.d48 + tableValues.d52
+            updateTablesValues({ values: { d51: res } })
+        }
+        if (tableValues.e48 && tableValues.e52) { // e51
+            const res = tableValues.e48 + tableValues.e52
+            updateTablesValues({ values: { e51: res } })
+        }
+        if (tableValues.d48 && tableValues.d47) { // d52
+            const res = tableValues.d48 * (1 / tableValues.d47)
+            updateTablesValues({ values: { d52: res } })
+        }
+        if (tableValues.e48 && tableValues.e47) { // e52
+            const res = tableValues.e48 * (1 / tableValues.e47)
+            updateTablesValues({ values: { e52: res } })
         }
     }
 

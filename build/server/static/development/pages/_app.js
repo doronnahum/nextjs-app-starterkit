@@ -8452,7 +8452,6 @@ function tablesReducer(state = _initial__WEBPACK_IMPORTED_MODULE_2__["default"],
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_VALUES:
       {
-        console.log('data in reducer', data);
         const nextState = immer__WEBPACK_IMPORTED_MODULE_3___default()(state, draftState => {
           draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
           draftState.tablesData.loading = loading;

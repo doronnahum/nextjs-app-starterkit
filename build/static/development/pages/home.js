@@ -47895,31 +47895,31 @@ var thermodynamicCalculationsData = [createManyValuesData('UET treatment cycles 
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e48',
-  type: TYPES.NUMERIC
+  type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('Condenser capacity', 'Kcal/hour', MANDATORY, [{
   location: 'd49',
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e49',
-  type: TYPES.NUMERIC
+  type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('Tons of refrigeration', 'TR', MANDATORY, [{
   location: 'd50',
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e50',
-  type: TYPES.NUMERIC
+  type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('Make up flow rate', 'm3/h', MANDATORY, [{
   location: 'd51',
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e51',
-  type: TYPES.NUMERIC
+  type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('Blowdown flow rate', 'm3/h', MANDATORY, [{
   location: 'd52',
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e52',
-  type: TYPES.NUMERIC
+  type: TYPES.NOT_EDITABLE
 }])];
 
 /***/ }),
@@ -48282,7 +48282,10 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
     tableTitle: {
       fontSize: 20
     },
-    TableCell: {}
+    TableCell: {},
+    textFieldUNEditable: {
+      background: 'lightblue'
+    }
   };
 });
 
@@ -48294,10 +48297,10 @@ function SimpleTable(props) {
       waterAnalysisTitle = props.waterAnalysisTitle,
       actions = props.actions;
   var updateTablesValues = actions.updateTablesValues;
-  var classes = useStyles();
-  console.log("tablesData", tablesData);
+  var classes = useStyles(); // console.log(`tablesData`, tablesData);
+
   var tableValues = tablesData;
-  var influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32, tableValues.f32, tableValues.d34, tableValues.d35, tableValues.d36, tableValues.d37, tableValues.d38, tableValues.d39];
+  var influencingValues = [tableValues.d10, tableValues.d11, tableValues.d21, tableValues.d22, tableValues.e30, tableValues.d32, tableValues.f32, tableValues.d34, tableValues.d35, tableValues.d36, tableValues.d37, tableValues.d38, tableValues.d39, tableValues.d49, tableValues.e49, tableValues.d23, tableValues.d48, tableValues.d52, tableValues.e48, tableValues.e52, tableValues.d47, tableValues.e47];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     updateReadOnlyValues();
   }, influencingValues);
@@ -48408,6 +48411,116 @@ function SimpleTable(props) {
       updateTablesValues({
         values: {
           f39: _res9
+        }
+      });
+    }
+
+    if (tableValues.e30) {
+      // d47
+      var _res10 = tableValues.e30;
+      updateTablesValues({
+        values: {
+          d47: _res10
+        }
+      });
+    }
+
+    if (tableValues.d49) {
+      // d48
+      var _res11 = tableValues.d49 / 560 / 1000;
+
+      updateTablesValues({
+        values: {
+          d48: _res11
+        }
+      });
+    }
+
+    if (tableValues.e49) {
+      // e48
+      var _res12 = tableValues.e49 / 560 / 1000;
+
+      updateTablesValues({
+        values: {
+          e48: _res12
+        }
+      });
+    }
+
+    if (tableValues.d11 && tableValues.d23) {
+      // d49 AND e49
+      var _res13 = tableValues.d11 * tableValues.d23 * 1000;
+
+      updateTablesValues({
+        values: {
+          d49: _res13,
+          e49: _res13
+        }
+      });
+    }
+
+    if (tableValues.d49) {
+      // d50 
+      var _res14 = tableValues.d49 * 0.000330693393472;
+
+      updateTablesValues({
+        values: {
+          d50: _res14
+        }
+      });
+    }
+
+    if (tableValues.e49) {
+      // e50
+      var _res15 = tableValues.e49 * 0.000330693393472;
+
+      updateTablesValues({
+        values: {
+          e50: _res15
+        }
+      });
+    }
+
+    if (tableValues.d48 && tableValues.d52) {
+      // d51
+      var _res16 = tableValues.d48 + tableValues.d52;
+
+      updateTablesValues({
+        values: {
+          d51: _res16
+        }
+      });
+    }
+
+    if (tableValues.e48 && tableValues.e52) {
+      // e51
+      var _res17 = tableValues.e48 + tableValues.e52;
+
+      updateTablesValues({
+        values: {
+          e51: _res17
+        }
+      });
+    }
+
+    if (tableValues.d48 && tableValues.d47) {
+      // d52
+      var _res18 = tableValues.d48 * (1 / tableValues.d47);
+
+      updateTablesValues({
+        values: {
+          d52: _res18
+        }
+      });
+    }
+
+    if (tableValues.e48 && tableValues.e47) {
+      // e52
+      var _res19 = tableValues.e48 * (1 / tableValues.e47);
+
+      updateTablesValues({
+        values: {
+          e52: _res19
         }
       });
     }
@@ -48694,7 +48807,7 @@ var renderValueType = function renderValueType(row, updateTablesValues, tableVal
         id: row.location,
         value: tableValues[row.location] || '',
         readOnly: true,
-        className: classes.textField
+        className: classes.textFieldUNEditable
       });
 
     default:

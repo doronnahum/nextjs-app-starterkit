@@ -4124,7 +4124,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35975,7 +35975,7 @@ exports.devToolsEnhancer = (
 /*!***********************************************************************!*\
   !*** ./node_modules/redux-saga/dist/redux-saga-core-npm-proxy.esm.js ***!
   \***********************************************************************/
-/*! exports provided: default, CANCEL, SAGA_LOCATION, buffers, detach, runSaga, END, isEnd, eventChannel, channel, multicastChannel, stdChannel */
+/*! exports provided: CANCEL, SAGA_LOCATION, buffers, detach, runSaga, END, isEnd, eventChannel, channel, multicastChannel, stdChannel, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39628,7 +39628,6 @@ function tablesReducer() {
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_VALUES:
       {
-        console.log('data in reducer', data);
         var nextState = Object(immer__WEBPACK_IMPORTED_MODULE_3__["default"])(state, function (draftState) {
           draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
           draftState.tablesData.loading = loading;
