@@ -8126,7 +8126,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8140,6 +8140,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customersProblemsAndRequestsData", function() { return customersProblemsAndRequestsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterAnalysisData", function() { return waterAnalysisData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thermodynamicCalculationsData", function() { return thermodynamicCalculationsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
 const MANDATORY = true;
 const NOT_MANDATORY = false;
 const TYPES = {
@@ -8326,6 +8328,71 @@ const thermodynamicCalculationsData = [createManyValuesData('UET treatment cycle
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e52',
+  type: TYPES.NOT_EDITABLE
+}])];
+const potentialWaterSavingData = [createManyValuesData('Calculated Water Saving (m3/h)', null, MANDATORY, [{
+  location: 'c55',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Annual Hourly Operation(h/year)', null, MANDATORY, [{
+  location: 'c56',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('*Annual Water Saving  (m3/year)', null, MANDATORY, [{
+  location: 'c57',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from blowdown', null, MANDATORY, [{
+  location: 'c58',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from make up', null, MANDATORY, [{
+  location: 'c59 G',
+  type: TYPES.NOT_EDITABLE
+}])];
+const predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
+  location: 'd63',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e63',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('pH', 'Units', MANDATORY, [{
+  location: 'd64',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e64',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd65',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e65',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd66',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e66',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Chlorides', 'ppm', MANDATORY, [{
+  location: 'd67',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e67',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Iron', 'ppm', MANDATORY, [{
+  location: 'd68',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e68',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Silica', 'ppm', MANDATORY, [{
+  location: 'd69',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e69',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Sulphate', 'ppm', MANDATORY, [{
+  location: 'd70',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e70',
   type: TYPES.NOT_EDITABLE
 }])];
 
@@ -8623,7 +8690,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/data */ "./src/components/data/index.js");
 
 const defaultValues = {};
-[..._components_data__WEBPACK_IMPORTED_MODULE_0__["mechanicalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterOriginData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationCostsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["enironmentalData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterAnalysisData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["customersProblemsAndRequestsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["thermodynamicCalculationsData"]].forEach(item => {
+[..._components_data__WEBPACK_IMPORTED_MODULE_0__["mechanicalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterOriginData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationCostsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["enironmentalData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterAnalysisData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["customersProblemsAndRequestsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["thermodynamicCalculationsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["potentialWaterSavingData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["predictiveWaterAnalysis"]].forEach(item => {
   if (item.fields) {
     item.fields.forEach(field => {
       defaultValues[field.location] = field.defaultValue;

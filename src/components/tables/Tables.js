@@ -8,7 +8,9 @@ import {
     enironmentalData,
     waterAnalysisData,
     customersProblemsAndRequestsData,
-    thermodynamicCalculationsData
+    thermodynamicCalculationsData,
+    potentialWaterSavingData,
+    predictiveWaterAnalysis
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -48,6 +50,14 @@ class Tables extends Component {
                     <Table
                         headerCols={['Thermodynamic Calculations', 'Value', 'Current', 'UET']}
                         data={thermodynamicCalculationsData}
+                    />
+                    <Table
+                        headerCols={['Potential Water Saving', 'Value']}
+                        data={potentialWaterSavingData}
+                    />
+                    <Table
+                        headerCols={['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation']}
+                        data={predictiveWaterAnalysis}
                     />
 
                 </div>

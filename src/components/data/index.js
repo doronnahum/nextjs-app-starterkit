@@ -105,3 +105,20 @@ export const thermodynamicCalculationsData = [
     createManyValuesData('Make up flow rate', 'm3/h', MANDATORY, [{ location: 'd51', type: TYPES.NOT_EDITABLE }, { location: 'e51', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('Blowdown flow rate', 'm3/h', MANDATORY, [{ location: 'd52', type: TYPES.NOT_EDITABLE }, { location: 'e52', type: TYPES.NOT_EDITABLE }]),
 ]
+export const potentialWaterSavingData = [
+    createManyValuesData('Calculated Water Saving (m3/h)', null, MANDATORY, [{ location: 'c55', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Annual Hourly Operation(h/year)', null, MANDATORY, [{ location: 'c56', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('*Annual Water Saving  (m3/year)', null, MANDATORY, [{ location: 'c57', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('% of water saving from blowdown', null, MANDATORY, [{ location: 'c58', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('% of water saving from make up', null, MANDATORY, [{ location: 'c59 G', type: TYPES.NOT_EDITABLE }]),
+]
+export const predictiveWaterAnalysis = [
+    createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd63', type: TYPES.NOT_EDITABLE }, { location: 'e63', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('pH', 'Units', MANDATORY, [{ location: 'd64', type: TYPES.NOT_EDITABLE }, { location: 'e64', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd65', type: TYPES.NOT_EDITABLE }, { location: 'e65', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd66', type: TYPES.NOT_EDITABLE }, { location: 'e66', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Chlorides', 'ppm', MANDATORY, [{ location: 'd67', type: TYPES.NOT_EDITABLE }, { location: 'e67', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Iron', 'ppm', MANDATORY, [{ location: 'd68', type: TYPES.NOT_EDITABLE }, { location: 'e68', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Silica', 'ppm', MANDATORY, [{ location: 'd69', type: TYPES.NOT_EDITABLE }, { location: 'e69', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Sulphate', 'ppm', MANDATORY, [{ location: 'd70', type: TYPES.NOT_EDITABLE }, { location: 'e70', type: TYPES.NOT_EDITABLE }]),
+]

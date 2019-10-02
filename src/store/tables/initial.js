@@ -6,7 +6,9 @@ import {
   enironmentalData,
   waterAnalysisData,
   customersProblemsAndRequestsData,
-  thermodynamicCalculationsData
+  thermodynamicCalculationsData,
+  potentialWaterSavingData,
+  predictiveWaterAnalysis
 } from 'src/components/data'
 const defaultValues = {};
 
@@ -18,6 +20,8 @@ const defaultValues = {};
 ...waterAnalysisData,
 ...customersProblemsAndRequestsData,
 ...thermodynamicCalculationsData,
+...potentialWaterSavingData,
+...predictiveWaterAnalysis,
 ].forEach(item => {
   if (item.fields) {
     item.fields.forEach((field) => {

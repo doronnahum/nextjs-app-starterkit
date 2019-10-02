@@ -3,75 +3,47 @@ import Input from '@material-ui/core/Input';
 import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
 
-
-const isOneOf = (keys, arr) => keys.some(key => arr.includes(key));
-
 const getCalculateNewValues = (key, value, tableValues) => {
-    // const keys = [key]
     const newValues = Object.assign({}, tableValues, { [key]: value });
     // All if's here
-    if (['d10', 'd11'].includes(key)) { // d12
-        newValues['d12'] = newValues.d10 - newValues.d11
-        // keys.push('d12');
-    }
-    if (['d21', 'd22'].includes(key)) { // d23
-        newValues['d23'] = newValues.d21 - newValues.d22
-        // keys.push('d23');
-    }
-    if (['e30', 'd32'].includes(key)) { // e32
-        newValues['e32'] = tableValues.e30 * tableValues.d32
-    }
-    if (['e30', 'd32'].includes(key)) { // f32
-        newValues['f32'] = tableValues.e30 * tableValues.d32
-    }
-    if (['f32', 'd32', 'd34'].includes(key)) { // f34
-        newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34
-    }
-    if ([tableValues.f32, tableValues.d32, tableValues.d35].includes(key)) { // f35
-        newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35
-    }
-    if ([tableValues.f32, tableValues.d32, tableValues.d36].includes(key)) { // f36
-        newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36
-    }
-    if ([tableValues.f32, tableValues.d32, tableValues.d37].includes(key)) { // f37
-        newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37
-    }
-    if ([tableValues.f32, tableValues.d32, tableValues.d38].includes(key)) { // f38
-        newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38
-    }
-    if ([tableValues.f32, tableValues.d32, tableValues.d39].includes(key)) { // f39
-        newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39
-    }
-    if ([tableValues.e30].includes(key)) { // d47
-        newValues['d47'] = tableValues.e30
-    }
-    if ([tableValues.d49].includes(key)) { // d48
-        newValues['d48'] = tableValues.d49 / 560 / 1000
-    }
-    if ([tableValues.e49].includes(key)) { // e48
-        newValues['e48'] = tableValues.e49 / 560 / 1000
-    }
-    if ([tableValues.d11, tableValues.d23].includes(key)) { // d49 AND e49
-        newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000
-    }
-    if ([tableValues.d49].includes(key)) { // d50 
-        newValues['d50'] = tableValues.d49 * 0.000330693393472
-    }
-    if ([tableValues.e49].includes(key)) { // e50
-        newValues['e50'] = tableValues.e49 * 0.000330693393472
-    }
-    if ([tableValues.d48, tableValues.d52].includes(key)) { // d51
-        newValues['d51'] = tableValues.d48 + tableValues.d52
-    }
-    if ([tableValues.e48, tableValues.e52].includes(key)) { // e51
-        newValues['e51'] = tableValues.e48 + tableValues.e52
-    }
-    if ([tableValues.d48, tableValues.d47].includes(key)) { // d52
-        newValues['d52'] = tableValues.d48 * (1 / tableValues.d47)
-    }
-    if ([tableValues.e48, tableValues.e47].includes(key)) { // e52
-        newValues['e52'] = tableValues.e48 * (1 / tableValues.e47)
-    }
+    newValues['d12'] = newValues.d10 - newValues.d11
+    newValues['d23'] = newValues.d21 - newValues.d22
+    newValues['e32'] = tableValues.e30 * tableValues.d32
+    newValues['f32'] = tableValues.e30 * tableValues.d32
+    newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34
+    newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35
+    newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36
+    newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37
+    newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38
+    newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39
+    newValues['d47'] = tableValues.e30
+    newValues['d48'] = tableValues.d49 / 560 / 1000
+    newValues['e48'] = tableValues.e49 / 560 / 1000
+    newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000
+    newValues['d50'] = tableValues.d49 * 0.000330693393472
+    newValues['e50'] = tableValues.e49 * 0.000330693393472
+    newValues['d51'] = tableValues.d48 + tableValues.d52
+    newValues['e51'] = tableValues.e48 + tableValues.e52
+    newValues['d52'] = tableValues.d48 * (1 / tableValues.d47)
+    newValues['e52'] = tableValues.e48 * (1 / tableValues.e47)
+    newValues['c56'] = tableValues.d25 * tableValues.d26 * tableValues.d27
+    newValues['c57'] = tableValues.c55 * tableValues.c56
+    newValues['c58'] = tableValues.c55 / tableValues.d52
+    newValues['c59'] = tableValues.c55 / tableValues.d51
+    newValues['d63'] = tableValues.d32
+    newValues['d64'] = tableValues.d33
+    newValues['d65'] = tableValues.d34
+    newValues['d66'] = tableValues.d35
+    newValues['d67'] = tableValues.d36
+    newValues['d68'] = tableValues.d37
+    newValues['d69'] = tableValues.d38
+    newValues['d70'] = tableValues.d39
+    newValues['e63'] = tableValues.d63 * tableValues.e47
+    newValues['e65'] = tableValues.d65 * tableValues.e47 * 0.75
+    newValues['e66'] = tableValues.d66 * tableValues.e47 * 0.65
+    newValues['e67'] = tableValues.d67 * tableValues.e47
+    newValues['e69'] = tableValues.d69 * tableValues.e47 * 0.985
+    newValues['e70'] = tableValues.d70 * e47
     // end
     return newValues
 }

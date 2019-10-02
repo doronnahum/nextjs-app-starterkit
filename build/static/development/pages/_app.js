@@ -4124,7 +4124,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35975,7 +35975,7 @@ exports.devToolsEnhancer = (
 /*!***********************************************************************!*\
   !*** ./node_modules/redux-saga/dist/redux-saga-core-npm-proxy.esm.js ***!
   \***********************************************************************/
-/*! exports provided: default, CANCEL, SAGA_LOCATION, buffers, detach, runSaga, END, isEnd, eventChannel, channel, multicastChannel, stdChannel */
+/*! exports provided: CANCEL, SAGA_LOCATION, buffers, detach, runSaga, END, isEnd, eventChannel, channel, multicastChannel, stdChannel, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39279,7 +39279,7 @@ function (_App) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39293,6 +39293,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customersProblemsAndRequestsData", function() { return customersProblemsAndRequestsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterAnalysisData", function() { return waterAnalysisData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thermodynamicCalculationsData", function() { return thermodynamicCalculationsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
 var MANDATORY = true;
 var NOT_MANDATORY = false;
 var TYPES = {
@@ -39479,6 +39481,71 @@ var thermodynamicCalculationsData = [createManyValuesData('UET treatment cycles 
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e52',
+  type: TYPES.NOT_EDITABLE
+}])];
+var potentialWaterSavingData = [createManyValuesData('Calculated Water Saving (m3/h)', null, MANDATORY, [{
+  location: 'c55',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Annual Hourly Operation(h/year)', null, MANDATORY, [{
+  location: 'c56',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('*Annual Water Saving  (m3/year)', null, MANDATORY, [{
+  location: 'c57',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from blowdown', null, MANDATORY, [{
+  location: 'c58',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from make up', null, MANDATORY, [{
+  location: 'c59 G',
+  type: TYPES.NOT_EDITABLE
+}])];
+var predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
+  location: 'd63',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e63',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('pH', 'Units', MANDATORY, [{
+  location: 'd64',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e64',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd65',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e65',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd66',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e66',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Chlorides', 'ppm', MANDATORY, [{
+  location: 'd67',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e67',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Iron', 'ppm', MANDATORY, [{
+  location: 'd68',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e68',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Silica', 'ppm', MANDATORY, [{
+  location: 'd69',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e69',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Sulphate', 'ppm', MANDATORY, [{
+  location: 'd70',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e70',
   type: TYPES.NOT_EDITABLE
 }])];
 
@@ -39800,7 +39867,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var defaultValues = {};
-[].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["mechanicalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterOriginData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationCostsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["enironmentalData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterAnalysisData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["customersProblemsAndRequestsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["thermodynamicCalculationsData"])).forEach(function (item) {
+[].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["mechanicalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterOriginData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationCostsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["enironmentalData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterAnalysisData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["customersProblemsAndRequestsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["thermodynamicCalculationsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["potentialWaterSavingData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["predictiveWaterAnalysis"])).forEach(function (item) {
   if (item.fields) {
     item.fields.forEach(function (field) {
       defaultValues[field.location] = field.defaultValue;

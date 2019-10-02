@@ -47738,7 +47738,7 @@ function (_Component) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47752,6 +47752,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customersProblemsAndRequestsData", function() { return customersProblemsAndRequestsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waterAnalysisData", function() { return waterAnalysisData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thermodynamicCalculationsData", function() { return thermodynamicCalculationsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
 var MANDATORY = true;
 var NOT_MANDATORY = false;
 var TYPES = {
@@ -47938,6 +47940,71 @@ var thermodynamicCalculationsData = [createManyValuesData('UET treatment cycles 
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e52',
+  type: TYPES.NOT_EDITABLE
+}])];
+var potentialWaterSavingData = [createManyValuesData('Calculated Water Saving (m3/h)', null, MANDATORY, [{
+  location: 'c55',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Annual Hourly Operation(h/year)', null, MANDATORY, [{
+  location: 'c56',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('*Annual Water Saving  (m3/year)', null, MANDATORY, [{
+  location: 'c57',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from blowdown', null, MANDATORY, [{
+  location: 'c58',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('% of water saving from make up', null, MANDATORY, [{
+  location: 'c59 G',
+  type: TYPES.NOT_EDITABLE
+}])];
+var predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
+  location: 'd63',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e63',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('pH', 'Units', MANDATORY, [{
+  location: 'd64',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e64',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd65',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e65',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{
+  location: 'd66',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e66',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Chlorides', 'ppm', MANDATORY, [{
+  location: 'd67',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e67',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Iron', 'ppm', MANDATORY, [{
+  location: 'd68',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e68',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Silica', 'ppm', MANDATORY, [{
+  location: 'd69',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e69',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Sulphate', 'ppm', MANDATORY, [{
+  location: 'd70',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'e70',
   type: TYPES.NOT_EDITABLE
 }])];
 
@@ -48519,117 +48586,48 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
-var isOneOf = function isOneOf(keys, arr) {
-  return keys.some(function (key) {
-    return arr.includes(key);
-  });
-};
-
 var getCalculateNewValues = function getCalculateNewValues(key, value, tableValues) {
-  // const keys = [key]
   var newValues = _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, tableValues, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, key, value)); // All if's here
 
 
-  if (['d10', 'd11'].includes(key)) {
-    // d12
-    newValues['d12'] = newValues.d10 - newValues.d11; // keys.push('d12');
-  }
-
-  if (['d21', 'd22'].includes(key)) {
-    // d23
-    newValues['d23'] = newValues.d21 - newValues.d22; // keys.push('d23');
-  }
-
-  if (['e30', 'd32'].includes(key)) {
-    // e32
-    newValues['e32'] = tableValues.e30 * tableValues.d32;
-  }
-
-  if (['e30', 'd32'].includes(key)) {
-    // f32
-    newValues['f32'] = tableValues.e30 * tableValues.d32;
-  }
-
-  if (['f32', 'd32', 'd34'].includes(key)) {
-    // f34
-    newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34;
-  }
-
-  if ([tableValues.f32, tableValues.d32, tableValues.d35].includes(key)) {
-    // f35
-    newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35;
-  }
-
-  if ([tableValues.f32, tableValues.d32, tableValues.d36].includes(key)) {
-    // f36
-    newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36;
-  }
-
-  if ([tableValues.f32, tableValues.d32, tableValues.d37].includes(key)) {
-    // f37
-    newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37;
-  }
-
-  if ([tableValues.f32, tableValues.d32, tableValues.d38].includes(key)) {
-    // f38
-    newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38;
-  }
-
-  if ([tableValues.f32, tableValues.d32, tableValues.d39].includes(key)) {
-    // f39
-    newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39;
-  }
-
-  if ([tableValues.e30].includes(key)) {
-    // d47
-    newValues['d47'] = tableValues.e30;
-  }
-
-  if ([tableValues.d49].includes(key)) {
-    // d48
-    newValues['d48'] = tableValues.d49 / 560 / 1000;
-  }
-
-  if ([tableValues.e49].includes(key)) {
-    // e48
-    newValues['e48'] = tableValues.e49 / 560 / 1000;
-  }
-
-  if ([tableValues.d11, tableValues.d23].includes(key)) {
-    // d49 AND e49
-    newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000;
-  }
-
-  if ([tableValues.d49].includes(key)) {
-    // d50 
-    newValues['d50'] = tableValues.d49 * 0.000330693393472;
-  }
-
-  if ([tableValues.e49].includes(key)) {
-    // e50
-    newValues['e50'] = tableValues.e49 * 0.000330693393472;
-  }
-
-  if ([tableValues.d48, tableValues.d52].includes(key)) {
-    // d51
-    newValues['d51'] = tableValues.d48 + tableValues.d52;
-  }
-
-  if ([tableValues.e48, tableValues.e52].includes(key)) {
-    // e51
-    newValues['e51'] = tableValues.e48 + tableValues.e52;
-  }
-
-  if ([tableValues.d48, tableValues.d47].includes(key)) {
-    // d52
-    newValues['d52'] = tableValues.d48 * (1 / tableValues.d47);
-  }
-
-  if ([tableValues.e48, tableValues.e47].includes(key)) {
-    // e52
-    newValues['e52'] = tableValues.e48 * (1 / tableValues.e47);
-  } // end
-
+  newValues['d12'] = newValues.d10 - newValues.d11;
+  newValues['d23'] = newValues.d21 - newValues.d22;
+  newValues['e32'] = tableValues.e30 * tableValues.d32;
+  newValues['f32'] = tableValues.e30 * tableValues.d32;
+  newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34;
+  newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35;
+  newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36;
+  newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37;
+  newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38;
+  newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39;
+  newValues['d47'] = tableValues.e30;
+  newValues['d48'] = tableValues.d49 / 560 / 1000;
+  newValues['e48'] = tableValues.e49 / 560 / 1000;
+  newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000;
+  newValues['d50'] = tableValues.d49 * 0.000330693393472;
+  newValues['e50'] = tableValues.e49 * 0.000330693393472;
+  newValues['d51'] = tableValues.d48 + tableValues.d52;
+  newValues['e51'] = tableValues.e48 + tableValues.e52;
+  newValues['d52'] = tableValues.d48 * (1 / tableValues.d47);
+  newValues['e52'] = tableValues.e48 * (1 / tableValues.e47);
+  newValues['c56'] = tableValues.d25 * tableValues.d26 * tableValues.d27;
+  newValues['c57'] = tableValues.c55 * tableValues.c56;
+  newValues['c58'] = tableValues.c55 / tableValues.d52;
+  newValues['c59'] = tableValues.c55 / tableValues.d51;
+  newValues['d63'] = tableValues.d32;
+  newValues['d64'] = tableValues.d33;
+  newValues['d65'] = tableValues.d34;
+  newValues['d66'] = tableValues.d35;
+  newValues['d67'] = tableValues.d36;
+  newValues['d68'] = tableValues.d37;
+  newValues['d69'] = tableValues.d38;
+  newValues['d70'] = tableValues.d39;
+  newValues['e63'] = tableValues.d63 * tableValues.e47;
+  newValues['e65'] = tableValues.d65 * tableValues.e47 * 0.75;
+  newValues['e66'] = tableValues.d66 * tableValues.e47 * 0.65;
+  newValues['e67'] = tableValues.d67 * tableValues.e47;
+  newValues['e69'] = tableValues.d69 * tableValues.e47 * 0.985;
+  newValues['e70'] = tableValues.d70 * e47; // end
 
   return newValues;
 };
@@ -48824,6 +48822,12 @@ function (_Component) {
       }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Thermodynamic Calculations', 'Value', 'Current', 'UET'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["thermodynamicCalculationsData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        headerCols: ['Potential Water Saving', 'Value'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["potentialWaterSavingData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        headerCols: ['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["predictiveWaterAnalysis"]
       })));
     }
   }]);
@@ -49009,7 +49013,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /*!***********************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************************/
@@ -49032,5 +49036,5 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js","styles"]]]);
+},[[2,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

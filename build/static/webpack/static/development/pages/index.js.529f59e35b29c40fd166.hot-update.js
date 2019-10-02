@@ -1,0 +1,278 @@
+webpackHotUpdate("static\\development\\pages\\index.js",{
+
+/***/ "./src/components/table/utils.js":
+/*!***************************************!*\
+  !*** ./src/components/table/utils.js ***!
+  \***************************************/
+/*! exports provided: handleInputChange, renderValueType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleInputChange", function() { return handleInputChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderValueType", function() { return renderValueType; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
+/* harmony import */ var _material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Slider */ "./node_modules/@material-ui/core/esm/Slider/index.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+
+
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+var isOneOf = function isOneOf(keys, arr) {
+  return keys.some(function (key) {
+    return arr.includes(key);
+  });
+};
+
+var getCalculateNewValues = function getCalculateNewValues(key, value, tableValues) {
+  // const keys = [key]
+  var newValues = _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, tableValues, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, key, value)); // All if's here
+
+
+  if (['d10', 'd11'].includes(key)) {
+    // d12
+    newValues['d12'] = newValues.d10 - newValues.d11; // keys.push('d12');
+  }
+
+  if (['d21', 'd22'].includes(key)) {
+    // d23
+    newValues['d23'] = newValues.d21 - newValues.d22; // keys.push('d23');
+  }
+
+  if (['e30', 'd32'].includes(key)) {
+    // e32
+    newValues['e32'] = tableValues.e30 * tableValues.d32;
+  }
+
+  if (['e30', 'd32'].includes(key)) {
+    // f32
+    newValues['f32'] = tableValues.e30 * tableValues.d32;
+  }
+
+  if (['f32', 'd32', 'd34'].includes(key)) {
+    // f34
+    newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d35].includes(key)) {
+    // f35
+    newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d36].includes(key)) {
+    // f36
+    newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d37].includes(key)) {
+    // f37
+    newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d38].includes(key)) {
+    // f38
+    newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38;
+  }
+
+  if ([tableValues.f32, tableValues.d32, tableValues.d39].includes(key)) {
+    // f39
+    newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39;
+  }
+
+  if ([tableValues.e30].includes(key)) {
+    // d47
+    newValues['d47'] = tableValues.e30;
+  }
+
+  if ([tableValues.d49].includes(key)) {
+    // d48
+    newValues['d48'] = tableValues.d49 / 560 / 1000;
+  }
+
+  if ([tableValues.e49].includes(key)) {
+    // e48
+    newValues['e48'] = tableValues.e49 / 560 / 1000;
+  }
+
+  if ([tableValues.d11, tableValues.d23].includes(key)) {
+    // d49 AND e49
+    newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000;
+  }
+
+  if ([tableValues.d49].includes(key)) {
+    // d50 
+    newValues['d50'] = tableValues.d49 * 0.000330693393472;
+  }
+
+  if ([tableValues.e49].includes(key)) {
+    // e50
+    newValues['e50'] = tableValues.e49 * 0.000330693393472;
+  }
+
+  if ([tableValues.d48, tableValues.d52].includes(key)) {
+    // d51
+    newValues['d51'] = tableValues.d48 + tableValues.d52;
+  }
+
+  if ([tableValues.e48, tableValues.e52].includes(key)) {
+    // e51
+    newValues['e51'] = tableValues.e48 + tableValues.e52;
+  }
+
+  if ([tableValues.d48, tableValues.d47].includes(key)) {
+    // d52
+    newValues['d52'] = tableValues.d48 * (1 / tableValues.d47);
+  }
+
+  if ([tableValues.e48, tableValues.e47].includes(key)) {
+    // e52
+    newValues['e52'] = tableValues.e48 * (1 / tableValues.e47);
+  }
+
+  if ([tableValues.d52, tableValues.e52].includes(key)) {
+    // c55
+    newValues['c55'] = tableValues.d52 - tableValues.e52;
+  }
+
+  if ([tableValues.d25, tableValues.d26, tableValues.d27].includes(key)) {
+    // c56
+    newValues['c56'] = tableValues.d25 * tableValues.d26 * tableValues.d27;
+  }
+
+  if ([tableValues.c55, tableValues.c56].includes(key)) {
+    // c57
+    newValues['c57'] = tableValues.c55 * tableValues.c56;
+  } // end
+
+
+  return newValues;
+};
+
+var handleInputChange = function handleInputChange(event, updateTablesValues, tableValues) {
+  var field = event.target.id;
+  var newValue = Number(event.target.value);
+  var newValues = getCalculateNewValues(field, newValue, tableValues); // debugger
+
+  updateTablesValues({
+    values: newValues
+  });
+};
+
+var handleSelectChange = function handleSelectChange(event, updateTablesValues, tableValues) {
+  var field = event.target.id;
+  var newValue = event.target.value;
+  var newValues = getCalculateNewValues(field, newValue, tableValues);
+  updateTablesValues({
+    values: newValues
+  });
+};
+
+var onChangeSlider = function onChangeSlider(event, val, location, updateTablesValues, tableValues) {
+  var field = location;
+  var newValue = val;
+  var newValues = getCalculateNewValues(field, newValue, tableValues);
+  updateTablesValues({
+    values: newValues
+  });
+};
+
+function valuetext(value) {
+  return "".concat(value);
+}
+
+var getMarks = function getMarks(row) {
+  if (!row) return [];
+  var arr = [];
+  var i = row.min;
+
+  while (i <= row.max) {
+    arr.push({
+      value: i
+    });
+    i += row.ticks;
+  } // if we want lables in the  edges of the slider
+  // if (arr.length) { 
+  //     debugger
+  //     arr[0].label = row.min.toString()
+  //     arr[arr.length - 1].label = row.max.toString()
+  // }
+
+
+  return arr;
+};
+
+var renderValueType = function renderValueType(row, updateTablesValues, tableValues, classes) {
+  var type = row.type;
+
+  switch (type) {
+    case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].NUMERIC:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        id: row.location,
+        label: "Number",
+        value: tableValues[row.location],
+        onChange: function onChange(e) {
+          return handleInputChange(e, updateTablesValues, tableValues);
+        },
+        type: "number",
+        className: classes.textField
+      });
+
+    case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].RANGE:
+      return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        defaultValue: tableValues[row.location] //Math.floor((row.min + row.max) / 2)
+        ,
+        getAriaValueText: valuetext,
+        onChange: function onChange(e, val) {
+          return onChangeSlider(e, val, row.location, updateTablesValues, tableValues);
+        },
+        "aria-labelledby": "discrete-slider-always",
+        step: row.ticks,
+        min: row.min,
+        max: row.max,
+        marks: getMarks(row),
+        valueLabelDisplay: "on"
+      });
+
+    case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].SELECT:
+      return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        id: row.location,
+        "native": true,
+        value: tableValues[row.location],
+        onChange: function onChange(e) {
+          return handleSelectChange(e, updateTablesValues, tableValues);
+        }
+      }, row.data.map(function (item, i) {
+        return __jsx("option", {
+          key: i,
+          value: item
+        }, item);
+      }));
+
+    case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].NOT_EDITABLE:
+      return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        id: row.location,
+        value: isNaN(tableValues[row.location]) ? '' : tableValues[row.location],
+        readOnly: true,
+        className: classes.textFieldUNEditable
+      });
+
+    default:
+      return row.type;
+  }
+};
+
+/***/ })
+
+})
+//# sourceMappingURL=index.js.529f59e35b29c40fd166.hot-update.js.map
