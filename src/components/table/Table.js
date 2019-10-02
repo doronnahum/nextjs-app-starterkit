@@ -39,7 +39,6 @@ function SimpleTable(props) {
     const classes = useStyles();
 
     console.log(`tablesData`, tablesData);
-    console.log('Object.values(tablesData)', Object.values(tablesData));
 
     const tableValues = tablesData
     const influencingValues = [
@@ -110,8 +109,8 @@ function SimpleTable(props) {
 
     const renderTableData = () => {
         if (!data) return <NoDataTableCell className={classes.TableCell} />
-        return data.map(row => (
-            <TableRow key={row.location}>
+        return data.map((row, i) => {
+            return <TableRow key={i}>
                 <TableCell align="left" className={classes.TableCell}>
                     {row.name}
                 </TableCell>
@@ -123,14 +122,14 @@ function SimpleTable(props) {
 
                 {row.fields
                     ? row.fields.map((field) => {
-                        return <TableCell align="left">
+                        return <TableCell key={field.location} align="left">
                             {renderValueType(field, updateTablesValues, tableValues, classes)}
                         </TableCell>
                     })
                     : <TableCell align="left">{renderValueType(row, updateTablesValues, tableValues, classes)}</TableCell>
                 }
             </TableRow>
-        ))
+        })
     }
 
     return (
