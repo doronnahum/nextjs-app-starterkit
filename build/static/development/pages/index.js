@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\home.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\index.js"],{
 
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js":
 /*!***********************************************************************!*\
@@ -35403,21 +35403,21 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js!./":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js!./":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js ***!
+  \*******************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/home", function() {
-      var mod = __webpack_require__(/*! ./pages/home.js */ "./pages/home.js")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/", function() {
+      var mod = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
       if(true) {
-        module.hot.accept(/*! ./pages/home.js */ "./pages/home.js", function() {
-          if(!next.router.components["/home"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/home.js */ "./pages/home.js")
-          next.router.update("/home", updatedPage)
+        module.hot.accept(/*! ./pages/index.js */ "./pages/index.js", function() {
+          if(!next.router.components["/"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
+          next.router.update("/", updatedPage)
         })
       }
       return mod
@@ -47682,10 +47682,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./pages/home.js":
-/*!***********************!*\
-  !*** ./pages/home.js ***!
-  \***********************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -49007,13 +49007,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 2:
-/*!**************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js ***!
-  \**************************************************************************************************************************************/
+/*!***********************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fhome&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Chome.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js!./");
 
 
 /***/ }),
@@ -49030,4 +49030,4 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 /***/ })
 
 },[[2,"static/runtime/webpack.js","styles"]]]);
-//# sourceMappingURL=home.js.map
+//# sourceMappingURL=index.js.map

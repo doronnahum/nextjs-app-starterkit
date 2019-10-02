@@ -7741,10 +7741,10 @@ function withTranslation(ns) {
 
 /***/ }),
 
-/***/ "./pages/home.js":
-/*!***********************!*\
-  !*** ./pages/home.js ***!
-  \***********************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8994,13 +8994,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 3:
-/*!*****************************!*\
-  !*** multi ./pages/home.js ***!
-  \*****************************/
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\elad\Desktop\committed\UET\pages\home.js */"./pages/home.js");
+module.exports = __webpack_require__(/*! C:\Users\elad\Desktop\committed\UET\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -9721,4 +9721,4 @@ module.exports = require("util");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=home.js.map
+//# sourceMappingURL=index.js.map
