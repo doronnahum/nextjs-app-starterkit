@@ -134,10 +134,10 @@ export const renderValueType = (row, updateTablesValues, tableValues, classes) =
                 getAriaValueText={valuetext}
                 onChange={(e, val) => onChangeSlider(e, val, row.location, updateTablesValues, tableValues)}
                 aria-labelledby="discrete-slider-always"
-                step={row.ticks}
-                min={row.min}
-                max={row.max}
-                marks={getMarks(row)}
+                step={row.data ? row.data.ticks : row.ticks}
+                min={row.data ? row.data.min : row.min}
+                max={row.data ? row.data.max : row.max}
+                marks={getMarks(row.data || row)}
                 valueLabelDisplay="on"
             />
         case TYPES.SELECT:

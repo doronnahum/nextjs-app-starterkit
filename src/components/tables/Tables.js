@@ -28,7 +28,7 @@ class Tables extends Component {
 
                 <div className={className + '__section-1'}>
                     <Table
-                        headerCols={['Mechanical Properties', 'Units', 'value']}
+                        headerCols={['Mechanical Properties1', 'Units', 'value']}
                         data={mechanicalPropertiesData} />
                     <Table
                         headerCols={['Operational Properties', 'Units', 'value']}

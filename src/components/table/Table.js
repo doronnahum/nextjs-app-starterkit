@@ -76,6 +76,9 @@ function SimpleTable(props) {
 
     const renderTableData = () => {
         if (!data) return <NoDataTableCell className={classes.TableCell} />
+        if (headerCols && headerCols[0] === 'Mechanical Properties1') {
+            // debugger
+        }
         return data.map((row, i) => {
             return <TableRow key={i}>
                 <TableCell align="left" className={classes.TableCell}>
