@@ -48987,25 +48987,25 @@ var getCalculateNewValues = function getCalculateNewValues(key, value, tableValu
   return newValues;
 };
 
-var handleInputChange = function handleInputChange(event, updateTablesValues, tableValues) {
-  var field = event.target.id;
-  var newValue = Number(event.target.value);
+var handleInputChange = function handleInputChange(e, updateTablesValues, tableValues) {
+  var field = e.target.id;
+  var newValue = Number(e.target.value);
   var newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
     values: newValues
   });
 };
 
-var handleSelectChange = function handleSelectChange(event, updateTablesValues, tableValues) {
-  var field = event.target.id;
-  var newValue = event.target.value;
+var handleSelectChange = function handleSelectChange(e, updateTablesValues, tableValues) {
+  var field = e.target.id;
+  var newValue = e.target.value;
   var newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
     values: newValues
   });
 };
 
-var onChangeSlider = function onChangeSlider(event, val, location, updateTablesValues, tableValues) {
+var onChangeSlider = function onChangeSlider(e, val, location, updateTablesValues, tableValues) {
   var field = location;
   var newValue = val;
   var newValues = getCalculateNewValues(field, newValue, tableValues);

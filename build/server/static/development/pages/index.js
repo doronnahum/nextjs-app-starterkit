@@ -9046,25 +9046,25 @@ const getCalculateNewValues = (key, value, tableValues) => {
   return newValues;
 };
 
-const handleInputChange = (event, updateTablesValues, tableValues) => {
-  const field = event.target.id;
-  const newValue = Number(event.target.value);
+const handleInputChange = (e, updateTablesValues, tableValues) => {
+  const field = e.target.id;
+  const newValue = Number(e.target.value);
   const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
     values: newValues
   });
 };
 
-const handleSelectChange = (event, updateTablesValues, tableValues) => {
-  const field = event.target.id;
-  const newValue = event.target.value;
+const handleSelectChange = (e, updateTablesValues, tableValues) => {
+  const field = e.target.id;
+  const newValue = e.target.value;
   const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
     values: newValues
   });
 };
 
-const onChangeSlider = (event, val, location, updateTablesValues, tableValues) => {
+const onChangeSlider = (e, val, location, updateTablesValues, tableValues) => {
   const field = location;
   const newValue = val;
   const newValues = getCalculateNewValues(field, newValue, tableValues);
