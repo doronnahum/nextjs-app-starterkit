@@ -7766,6 +7766,38 @@ class home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 /***/ }),
 
+/***/ "./src/components/Logo.js":
+/*!********************************!*\
+  !*** ./src/components/Logo.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Logo; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+const logo = '/static/images/uet-logo.png';
+function Logo(props) {
+  const {
+    logoContainerStyle
+  } = props;
+  return __jsx("div", {
+    style: logoContainerStyle
+  }, __jsx("img", {
+    src: logo,
+    alt: "logo",
+    style: {
+      width: 200
+    }
+  }));
+}
+
+/***/ }),
+
 /***/ "./src/components/data/index.js":
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
@@ -8370,12 +8402,7 @@ function ButtonAppBar({
   }, t('footer')), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default.a, {
     variant: "h6",
     className: classes.title
-  }, title), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    edge: "start",
-    className: classes.menuButton,
-    color: "inherit",
-    "aria-label": "menu"
-  }, __jsx(_material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_7___default.a, null)))));
+  }, title))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_services_i18n__WEBPACK_IMPORTED_MODULE_8__["withTranslation"])('common')(ButtonAppBar));
@@ -8486,7 +8513,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const logo = '/static/images/Logo.png';
+const tower = '/static/images/tower.jpg';
+const machine = '/static/images/machine.jpg';
 class DemoCarousel extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render() {
     const {
@@ -8498,14 +8526,20 @@ class DemoCarousel extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       showThumbs: false,
       infiniteLoop: true
     }, __jsx("div", null, __jsx("img", {
-      src: logo,
+      src: tower,
       style: {
-        height: 500,
-        width: 300
+        height: 500
       }
     }), __jsx("p", {
       className: "legend"
-    }, "Legend 1"))));
+    }, "building")), __jsx("div", null, __jsx("img", {
+      src: machine,
+      style: {
+        height: 500
+      }
+    }), __jsx("p", {
+      className: "legend"
+    }, "machine"))));
   }
 
 }
@@ -8605,15 +8639,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "@material-ui/core/Paper");
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils */ "./src/components/table/utils.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _TableTitle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./TableTitle */ "./src/components/table/TableTitle.js");
-/* harmony import */ var _HeaderCols__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./HeaderCols */ "./src/components/table/HeaderCols.js");
-/* harmony import */ var _NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NoDataTableCell */ "./src/components/table/NoDataTableCell.js");
-/* harmony import */ var _WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./WaterAnalysisTitle */ "./src/components/table/WaterAnalysisTitle.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
+/* harmony import */ var _TableTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TableTitle */ "./src/components/table/TableTitle.js");
+/* harmony import */ var _HeaderCols__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./HeaderCols */ "./src/components/table/HeaderCols.js");
+/* harmony import */ var _NoDataTableCell__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./NoDataTableCell */ "./src/components/table/NoDataTableCell.js");
+/* harmony import */ var _WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./WaterAnalysisTitle */ "./src/components/table/WaterAnalysisTitle.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./connect */ "./src/components/table/connect.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -8628,8 +8660,6 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-
- // import { calculate } from 'src/components/data/tableUtils';
 
 
 const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(theme => ({
@@ -8660,41 +8690,13 @@ function SimpleTable(props) {
   const {
     updateTablesValues
   } = actions;
-  const classes = useStyles(); // console.log(`tablesData`, tablesData);
-
-  const tableValues = tablesData; // const influencingValues = [
-  //     tableValues.d10,
-  //     tableValues.d11,
-  //     tableValues.d21,
-  //     tableValues.d22,
-  //     tableValues.e30,
-  //     tableValues.d32,
-  //     tableValues.f32,
-  //     tableValues.d34,
-  //     tableValues.d35,
-  //     tableValues.d36,
-  //     tableValues.d37,
-  //     tableValues.d38,
-  //     tableValues.d39,
-  //     tableValues.d49,
-  //     tableValues.e49,
-  //     tableValues.d23,
-  //     tableValues.d48,
-  //     tableValues.d52,
-  //     tableValues.e48,
-  //     tableValues.e52,
-  //     tableValues.d47,
-  //     tableValues.e47
-  // ]
+  const classes = useStyles();
+  const tableValues = tablesData;
 
   const renderTableData = () => {
-    if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    if (!data) return __jsx(_NoDataTableCell__WEBPACK_IMPORTED_MODULE_11__["default"], {
       className: classes.TableCell
     });
-
-    if (headerCols && headerCols[0] === 'Mechanical Properties1') {// debugger
-    }
-
     return data.map((row, i) => {
       return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_6___default.a, {
         key: i
@@ -8716,24 +8718,30 @@ function SimpleTable(props) {
     className: classes.root
   }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: classes.table
-  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default.a, null, tableTitle && __jsx(_TableTitle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_5___default.a, null, tableTitle && __jsx(_TableTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: classes.tableTitle,
     tableTitle: tableTitle
-  }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), waterAnalysisTitle && __jsx(_WaterAnalysisTitle__WEBPACK_IMPORTED_MODULE_12__["default"], {
     value: tableValues['e30'],
     handleInputChange: e => Object(_utils__WEBPACK_IMPORTED_MODULE_8__["handleInputChange"])(e, updateTablesValues, tableValues)
-  }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), headerCols && __jsx(_HeaderCols__WEBPACK_IMPORTED_MODULE_10__["default"], {
     data: headerCols
   })), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_3___default.a, null, renderTableData())));
-} // SimpleTable.defaultProps = {
-//     units: true
-// };
-// SimpleTable.propTypes = {
-//     units: PropTypes.bool
-// };
+}
 
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_15__["default"])(SimpleTable));
+SimpleTable.defaultProps = {
+  data: [],
+  headerCols: [],
+  tablesData: []
+};
+SimpleTable.propTypes = {
+  data: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
+  headerCols: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
+  tablesData: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
+  tableTitle: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string,
+  waterAnalysisTitle: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_14__["default"])(SimpleTable));
 
 /***/ }),
 
@@ -9172,9 +9180,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layout_Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/layout/Footer */ "./src/components/layout/Footer.js");
 /* harmony import */ var _components_swiper_Swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/swiper/Swiper */ "./src/components/swiper/Swiper.js");
 /* harmony import */ var _components_tables_Tables__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/tables/Tables */ "./src/components/tables/Tables.js");
-/* harmony import */ var _homeStyle_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./homeStyle.scss */ "./src/screens/home/homeStyle.scss");
-/* harmony import */ var _homeStyle_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_homeStyle_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_Logo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Logo */ "./src/components/Logo.js");
+/* harmony import */ var _homeStyle_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./homeStyle.scss */ "./src/screens/home/homeStyle.scss");
+/* harmony import */ var _homeStyle_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_homeStyle_scss__WEBPACK_IMPORTED_MODULE_6__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -9187,7 +9197,14 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: "home-screen"
     }, __jsx("div", {
       className: "home-screen__body"
-    }, __jsx(_components_swiper_Swiper__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, __jsx(_components_Logo__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      logoContainerStyle: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        zIndex: 1
+      }
+    }), __jsx(_components_swiper_Swiper__WEBPACK_IMPORTED_MODULE_3__["default"], {
       className: "swiper-container"
     }), __jsx(_components_tables_Tables__WEBPACK_IMPORTED_MODULE_4__["default"], {
       className: "tables"

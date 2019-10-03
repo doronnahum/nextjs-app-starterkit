@@ -3,6 +3,7 @@ import Header from 'src/components/layout/Header'
 import Footer from 'src/components/layout/Footer'
 import Swiper from 'src/components/swiper/Swiper'
 import Tables from 'src/components/tables/Tables'
+import Logo from 'src/components/Logo'
 import './homeStyle.scss'
 export default class Home extends Component {
     render() {
@@ -10,6 +11,7 @@ export default class Home extends Component {
             <div className='home-screen'>
                 {/* <Header /> */}
                 <div className='home-screen__body'>
+                    <Logo logoContainerStyle={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }} />
                     <Swiper className='swiper-container' />
                     <Tables className='tables' />
                     <div style={{

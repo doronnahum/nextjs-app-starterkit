@@ -22,7 +22,8 @@ button {
   height: 100%;
   background: red; }
   .home-screen__body {
-    background: orange; }
+    background: orange;
+    position: relative; }
     .home-screen__body .swiper-container {
       margin-bottom: 50px; }
     .home-screen__body .tables {

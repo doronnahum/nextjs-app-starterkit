@@ -5,6 +5,7 @@
   background: red;
   &__body {
     background: orange;
+    position: relative;
     .swiper-container {
       margin-bottom: 50px;
     }
