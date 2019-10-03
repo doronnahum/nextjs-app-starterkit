@@ -4,79 +4,77 @@ import Slider from '@material-ui/core/Slider';
 import Select from '@material-ui/core/Select';
 
 const getCalculateNewValues = (key, value, tableValues) => {
-    const newValues = Object.assign({}, tableValues, { [key]: value });
+    const newValues = { ...tableValues, [key]: value }
     newValues['d12'] = newValues.d10 - newValues.d11
     newValues['d23'] = newValues.d21 - newValues.d22
-    newValues['e32'] = tableValues.e30 * tableValues.d32
-    newValues['f32'] = tableValues.e30 * tableValues.d32
-    newValues['f34'] = tableValues.f32 / tableValues.d32 * tableValues.d34
-    newValues['f35'] = tableValues.f32 / tableValues.d32 * tableValues.d35
-    newValues['f36'] = tableValues.f32 / tableValues.d32 * tableValues.d36
-    newValues['f37'] = tableValues.f32 / tableValues.d32 * tableValues.d37
-    newValues['f38'] = tableValues.f32 / tableValues.d32 * tableValues.d38
-    newValues['f39'] = tableValues.f32 / tableValues.d32 * tableValues.d39
-    newValues['d47'] = tableValues.e30
-    newValues['d48'] = tableValues.d49 / 560 / 1000
-    newValues['e48'] = tableValues.e49 / 560 / 1000
-    newValues['e49'] = tableValues.d11 * tableValues.d23 * 1000
-    newValues['d50'] = tableValues.d49 * 0.000330693393472
-    newValues['e50'] = tableValues.e49 * 0.000330693393472
-    newValues['d51'] = tableValues.d48 + tableValues.d52
-    newValues['e51'] = tableValues.e48 + tableValues.e52
-    newValues['d52'] = tableValues.d48 * (1 / tableValues.d47)
-    newValues['e52'] = tableValues.e48 * (1 / tableValues.e47)
-    newValues['c56'] = tableValues.d25 * tableValues.d26 * tableValues.d27
-    newValues['c57'] = tableValues.c55 * tableValues.c56
-    newValues['c58'] = tableValues.c55 / tableValues.d52
-    newValues['c59'] = tableValues.c55 / tableValues.d51
-    newValues['d63'] = tableValues.d32
-    newValues['d64'] = tableValues.d33
-    newValues['d65'] = tableValues.d34
-    newValues['d66'] = tableValues.d35
-    newValues['d67'] = tableValues.d36
-    newValues['d68'] = tableValues.d37
-    newValues['d69'] = tableValues.d38
-    newValues['d70'] = tableValues.d39
-    newValues['e63'] = tableValues.d63 * tableValues.e47
-    newValues['e65'] = tableValues.d65 * tableValues.e47 * 0.75
-    newValues['e66'] = tableValues.d66 * tableValues.e47 * 0.65
-    newValues['e67'] = tableValues.d67 * tableValues.e47
-    newValues['e69'] = tableValues.d69 * tableValues.e47 * 0.985
-    newValues['e70'] = tableValues.d70 * tableValues.e47
-    // Model Configuration
-    newValues['i62'] = tableValues.i58 / 4
-    newValues['i63'] = tableValues.i58 / 8
-    newValues['i64'] = tableValues.i58 / 16
-    newValues['j62'] = Math.ceil(tableValues.i62)
-    newValues['j63'] = Math.ceil(tableValues.i63)
-    newValues['j64'] = Math.ceil(tableValues.i64)
-    // UET circulation flow rate
-    newValues['i68'] = tableValues.j64 * 100
-    newValues['i69'] = tableValues.j64 * 150
-    // UETWorkingParameters
-    newValues['j79'] = tableValues.j64 * 1.2
-    newValues['j80'] = tableValues.j64 * (2.35 * 1.2) * (1 + 0.2)
-    // Theoretical Energy Savings 
-    newValues['d79'] = tableValues.j14
-    newValues['d80'] = tableValues.j16
-    newValues['d81'] = `${tableValues.d80 * 0.2285 / 2.54}%`
-    newValues['d82'] = ((tableValues.d50 * (tableValues.d79 * 0.284) * (tableValues.d81 + 1) * tableValues.c56) - ((tableValues.d79 * 0.284) * tableValues.c56 * tableValues.d50)) * 0.75
-    // ROI Calculation
-    newValues['d85'] = (tableValues.j9 + tableValues.j10) * tableValues.c56 * tableValues.c55
-    newValues['d86'] = tableValues.d82
-    newValues['d87'] = tableValues.j13
-    newValues['d88'] = (tableValues.d49 / 33.33) * (1 + tableValues.d81) / 20
-    newValues['d89'] = tableValues.j17
-    newValues['d91'] = tableValues.d85 + tableValues.d86 + tableValues.d87 + tableValues.d88 + tableValues.d89
+    newValues['e32'] = newValues.e30 * newValues.d32
+    newValues['f32'] = newValues.e30 * newValues.d32
+    newValues['f34'] = newValues.f32 / newValues.d32 * newValues.d34
+    newValues['f35'] = newValues.f32 / newValues.d32 * newValues.d35
+    newValues['f36'] = newValues.f32 / newValues.d32 * newValues.d36
+    newValues['f37'] = newValues.f32 / newValues.d32 * newValues.d37
+    newValues['f38'] = newValues.f32 / newValues.d32 * newValues.d38
+    newValues['f39'] = newValues.f32 / newValues.d32 * newValues.d39
+    newValues['d47'] = newValues.e30
+    newValues['d48'] = newValues.d49 / 560 / 1000
+    newValues['e48'] = newValues.e49 / 560 / 1000
+    newValues['e49'] = newValues.d11 * newValues.d23 * 1000
+    newValues['d50'] = newValues.d49 * 0.000330693393472
+    newValues['e50'] = newValues.e49 * 0.000330693393472
+    newValues['d51'] = newValues.d48 + newValues.d52
+    newValues['e51'] = newValues.e48 + newValues.e52
+    newValues['d52'] = newValues.d48 * (1 / newValues.d47)
+    newValues['e52'] = newValues.e48 * (1 / newValues.e47)
+    newValues['c56'] = newValues.d25 * newValues.d26 * newValues.d27
+    newValues['c57'] = newValues.c55 * newValues.c56
+    newValues['c58'] = newValues.c55 / newValues.d52
+    newValues['c59'] = newValues.c55 / newValues.d51
+    newValues['d63'] = newValues.d32
+    newValues['d64'] = newValues.d33
+    newValues['d65'] = newValues.d34
+    newValues['d66'] = newValues.d35
+    newValues['d67'] = newValues.d36
+    newValues['d68'] = newValues.d37
+    newValues['d69'] = newValues.d38
+    newValues['d70'] = newValues.d39
+    newValues['e63'] = newValues.d63 * newValues.e47
+    newValues['e65'] = newValues.d65 * newValues.e47 * 0.75
+    newValues['e66'] = newValues.d66 * newValues.e47 * 0.65
+    newValues['e67'] = newValues.d67 * newValues.e47
+    newValues['e69'] = newValues.d69 * newValues.e47 * 0.985
+    newValues['e70'] = newValues.d70 * newValues.e47
+    // Mo4del Configuration
+    newValues['i62'] = newValues.i58 / 4
+    newValues['i63'] = newValues.i58 / 8
+    newValues['i64'] = newValues.i58 / 16
+    newValues['j62'] = Math.ceil(newValues.i62)
+    newValues['j63'] = Math.ceil(newValues.i63)
+    newValues['j64'] = Math.ceil(newValues.i64)
+    // UE4T circulation flow rate
+    newValues['i68'] = newValues.j64 * 100
+    newValues['i69'] = newValues.j64 * 150
+    // UE4TWorkingParameters
+    newValues['j79'] = newValues.j64 * 1.2
+    newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2)
+    // Th4eoretical Energy Savings 
+    newValues['d79'] = newValues.j14
+    newValues['d80'] = newValues.j16
+    newValues['d81'] = `${newValues.d80 * 0.2285 / 2.54}%`
+    newValues['d82'] = ((newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56) - ((newValues.d79 * 0.284) * newValues.c56 * newValues.d50)) * 0.75
+    // RO4I Calculation
+    newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55
+    newValues['d86'] = newValues.d82
+    newValues['d87'] = newValues.j13
+    newValues['d88'] = (newValues.d49 / 33.33) * (1 + newValues.d81) / 20
+    newValues['d89'] = newValues.j17
+    newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89
 
     return newValues
 }
-
 export const handleInputChange = (event, updateTablesValues, tableValues) => {
     const field = event.target.id;
     const newValue = Number(event.target.value);
     const newValues = getCalculateNewValues(field, newValue, tableValues)
-    // debugger
     updateTablesValues({ values: newValues })
 };
 

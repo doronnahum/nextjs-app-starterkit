@@ -40128,6 +40128,7 @@ var defaultValues = {};
   item.fields.forEach(function (field) {
     defaultValues[field.location] = field.defaultValue;
   });
+  defaultValues['e30'] = 0;
 });
 var initialState = {
   windowSize: {},

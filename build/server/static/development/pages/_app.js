@@ -8951,6 +8951,7 @@ const defaultValues = {};
   item.fields.forEach(field => {
     defaultValues[field.location] = field.defaultValue;
   });
+  defaultValues['e30'] = 0;
 });
 const initialState = {
   windowSize: {},
