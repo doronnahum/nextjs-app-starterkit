@@ -5,7 +5,6 @@ import Select from '@material-ui/core/Select';
 
 const getCalculateNewValues = (key, value, tableValues) => {
     const newValues = Object.assign({}, tableValues, { [key]: value });
-    // All if's here
     newValues['d12'] = newValues.d10 - newValues.d11
     newValues['d23'] = newValues.d21 - newValues.d22
     newValues['e32'] = tableValues.e30 * tableValues.d32
@@ -43,8 +42,33 @@ const getCalculateNewValues = (key, value, tableValues) => {
     newValues['e66'] = tableValues.d66 * tableValues.e47 * 0.65
     newValues['e67'] = tableValues.d67 * tableValues.e47
     newValues['e69'] = tableValues.d69 * tableValues.e47 * 0.985
-    newValues['e70'] = tableValues.d70 * e47
-    // end
+    newValues['e70'] = tableValues.d70 * tableValues.e47
+    // Model Configuration
+    newValues['i62'] = tableValues.i58 / 4
+    newValues['i63'] = tableValues.i58 / 8
+    newValues['i64'] = tableValues.i58 / 16
+    newValues['j62'] = Math.ceil(tableValues.i62)
+    newValues['j63'] = Math.ceil(tableValues.i63)
+    newValues['j64'] = Math.ceil(tableValues.i64)
+    // UET circulation flow rate
+    newValues['i68'] = tableValues.j64 * 100
+    newValues['i69'] = tableValues.j64 * 150
+    // UETWorkingParameters
+    newValues['j79'] = tableValues.j64 * 1.2
+    newValues['j80'] = tableValues.j64 * (2.35 * 1.2) * (1 + 0.2)
+    // Theoretical Energy Savings 
+    newValues['d79'] = tableValues.j14
+    newValues['d80'] = tableValues.j16
+    newValues['d81'] = `${tableValues.d80 * 0.2285 / 2.54}%`
+    newValues['d82'] = ((tableValues.d50 * (tableValues.d79 * 0.284) * (tableValues.d81 + 1) * tableValues.c56) - ((tableValues.d79 * 0.284) * tableValues.c56 * tableValues.d50)) * 0.75
+    // ROI Calculation
+    newValues['d85'] = (tableValues.j9 + tableValues.j10) * tableValues.c56 * tableValues.c55
+    newValues['d86'] = tableValues.d82
+    newValues['d87'] = tableValues.j13
+    newValues['d88'] = (tableValues.d49 / 33.33) * (1 + tableValues.d81) / 20
+    newValues['d89'] = tableValues.j17
+    newValues['d91'] = tableValues.d85 + tableValues.d86 + tableValues.d87 + tableValues.d88 + tableValues.d89
+
     return newValues
 }
 

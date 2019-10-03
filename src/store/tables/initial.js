@@ -8,7 +8,14 @@ import {
   customersProblemsAndRequestsData,
   thermodynamicCalculationsData,
   potentialWaterSavingData,
-  predictiveWaterAnalysis
+  predictiveWaterAnalysis,
+  sizingFactorsData,
+  sizingOfReactorsData,
+  modelConfigurationData,
+  UETCirculationFlowrateData,
+  theoreticalEnergySavingsData,
+  ROICalculationData,
+  UETWorkingParameters
 } from 'src/components/data'
 const defaultValues = {};
 
@@ -22,6 +29,13 @@ const defaultValues = {};
 ...thermodynamicCalculationsData,
 ...potentialWaterSavingData,
 ...predictiveWaterAnalysis,
+...sizingFactorsData,
+...sizingOfReactorsData,
+...modelConfigurationData,
+...UETCirculationFlowrateData,
+...theoreticalEnergySavingsData,
+...ROICalculationData,
+...UETWorkingParameters
 ].forEach(item => {
   if (item.fields) {
     item.fields.forEach((field) => {

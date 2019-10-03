@@ -110,7 +110,7 @@ export const potentialWaterSavingData = [
     createManyValuesData('Annual Hourly Operation(h/year)', null, MANDATORY, [{ location: 'c56', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('*Annual Water Saving  (m3/year)', null, MANDATORY, [{ location: 'c57', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('% of water saving from blowdown', null, MANDATORY, [{ location: 'c58', type: TYPES.NOT_EDITABLE }]),
-    createManyValuesData('% of water saving from make up', null, MANDATORY, [{ location: 'c59 G', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('% of water saving from make up', null, MANDATORY, [{ location: 'c59', type: TYPES.NOT_EDITABLE }]),
 ]
 export const predictiveWaterAnalysis = [
     createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd63', type: TYPES.NOT_EDITABLE }, { location: 'e63', type: TYPES.NOT_EDITABLE }]),
@@ -134,7 +134,7 @@ export const sizingFactorsData = [
     createManyValuesData('Skin Temp.', '>60', MANDATORY, [{ location: 'j55', type: TYPES.NOT_EDITABLE }, { location: 'l55', type: TYPES.NOT_EDITABLE }]),
 ]
 
-export const SizingOfReactorsData = [
+export const sizingOfReactorsData = [
     createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{ location: 'i58', type: TYPES.NOT_EDITABLE }]),
 ]
 

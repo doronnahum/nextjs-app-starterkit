@@ -39279,7 +39279,7 @@ function (_App) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, SizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData, theoreticalEnergySavingsData, ROICalculationData, UETWorkingParameters */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, sizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData, theoreticalEnergySavingsData, ROICalculationData, UETWorkingParameters */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39296,7 +39296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizingFactorsData", function() { return sizingFactorsData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SizingOfReactorsData", function() { return SizingOfReactorsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizingOfReactorsData", function() { return sizingOfReactorsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modelConfigurationData", function() { return modelConfigurationData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UETCirculationFlowrateData", function() { return UETCirculationFlowrateData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "theoreticalEnergySavingsData", function() { return theoreticalEnergySavingsData; });
@@ -39503,7 +39503,7 @@ var potentialWaterSavingData = [createManyValuesData('Calculated Water Saving (m
   location: 'c58',
   type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('% of water saving from make up', null, MANDATORY, [{
-  location: 'c59 G',
+  location: 'c59',
   type: TYPES.NOT_EDITABLE
 }])];
 var predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
@@ -39610,7 +39610,7 @@ var sizingFactorsData = [createManyValuesData('Silica Factor', '>15', MANDATORY,
   location: 'l55',
   type: TYPES.NOT_EDITABLE
 }])];
-var SizingOfReactorsData = [createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{
+var sizingOfReactorsData = [createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{
   location: 'i58',
   type: TYPES.NOT_EDITABLE
 }])];
@@ -39999,7 +39999,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var defaultValues = {};
-[].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["mechanicalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterOriginData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationCostsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["enironmentalData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterAnalysisData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["customersProblemsAndRequestsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["thermodynamicCalculationsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["potentialWaterSavingData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["predictiveWaterAnalysis"])).forEach(function (item) {
+[].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["mechanicalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationalPropertiesData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterOriginData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["operationCostsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["enironmentalData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["waterAnalysisData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["customersProblemsAndRequestsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["thermodynamicCalculationsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["potentialWaterSavingData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["predictiveWaterAnalysis"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["sizingFactorsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["sizingOfReactorsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["modelConfigurationData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["UETCirculationFlowrateData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["theoreticalEnergySavingsData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["ROICalculationData"]), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_data__WEBPACK_IMPORTED_MODULE_1__["UETWorkingParameters"])).forEach(function (item) {
   if (item.fields) {
     item.fields.forEach(function (field) {
       defaultValues[field.location] = field.defaultValue;

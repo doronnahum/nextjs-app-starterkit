@@ -12,7 +12,7 @@ import {
     potentialWaterSavingData,
     predictiveWaterAnalysis,
     sizingFactorsData,
-    SizingOfReactorsData,
+    sizingOfReactorsData,
     modelConfigurationData,
     UETCirculationFlowrateData,
     theoreticalEnergySavingsData,
@@ -67,7 +67,7 @@ class Tables extends Component {
                         data={potentialWaterSavingData}
                     />
                     <Table
-                        data={SizingOfReactorsData}
+                        data={sizingOfReactorsData}
                     />
                     <Table
                         headerCols={['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation']}

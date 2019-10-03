@@ -47738,7 +47738,7 @@ function (_Component) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, SizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData, theoreticalEnergySavingsData, ROICalculationData, UETWorkingParameters */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, sizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData, theoreticalEnergySavingsData, ROICalculationData, UETWorkingParameters */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47755,7 +47755,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizingFactorsData", function() { return sizingFactorsData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SizingOfReactorsData", function() { return SizingOfReactorsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizingOfReactorsData", function() { return sizingOfReactorsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modelConfigurationData", function() { return modelConfigurationData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UETCirculationFlowrateData", function() { return UETCirculationFlowrateData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "theoreticalEnergySavingsData", function() { return theoreticalEnergySavingsData; });
@@ -47962,7 +47962,7 @@ var potentialWaterSavingData = [createManyValuesData('Calculated Water Saving (m
   location: 'c58',
   type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('% of water saving from make up', null, MANDATORY, [{
-  location: 'c59 G',
+  location: 'c59',
   type: TYPES.NOT_EDITABLE
 }])];
 var predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MANDATORY, [{
@@ -48069,7 +48069,7 @@ var sizingFactorsData = [createManyValuesData('Silica Factor', '>15', MANDATORY,
   location: 'l55',
   type: TYPES.NOT_EDITABLE
 }])];
-var SizingOfReactorsData = [createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{
+var sizingOfReactorsData = [createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{
   location: 'i58',
   type: TYPES.NOT_EDITABLE
 }])];
@@ -48719,8 +48719,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 var getCalculateNewValues = function getCalculateNewValues(key, value, tableValues) {
-  var newValues = _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, tableValues, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, key, value)); // All if's here
-
+  var newValues = _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, tableValues, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, key, value));
 
   newValues['d12'] = newValues.d10 - newValues.d11;
   newValues['d23'] = newValues.d21 - newValues.d22;
@@ -48759,8 +48758,32 @@ var getCalculateNewValues = function getCalculateNewValues(key, value, tableValu
   newValues['e66'] = tableValues.d66 * tableValues.e47 * 0.65;
   newValues['e67'] = tableValues.d67 * tableValues.e47;
   newValues['e69'] = tableValues.d69 * tableValues.e47 * 0.985;
-  newValues['e70'] = tableValues.d70 * e47; // end
+  newValues['e70'] = tableValues.d70 * tableValues.e47; // Model Configuration
 
+  newValues['i62'] = tableValues.i58 / 4;
+  newValues['i63'] = tableValues.i58 / 8;
+  newValues['i64'] = tableValues.i58 / 16;
+  newValues['j62'] = Math.ceil(tableValues.i62);
+  newValues['j63'] = Math.ceil(tableValues.i63);
+  newValues['j64'] = Math.ceil(tableValues.i64); // UET circulation flow rate
+
+  newValues['i68'] = tableValues.j64 * 100;
+  newValues['i69'] = tableValues.j64 * 150; // UETWorkingParameters
+
+  newValues['j79'] = tableValues.j64 * 1.2;
+  newValues['j80'] = tableValues.j64 * (2.35 * 1.2) * (1 + 0.2); // Theoretical Energy Savings 
+
+  newValues['d79'] = tableValues.j14;
+  newValues['d80'] = tableValues.j16;
+  newValues['d81'] = "".concat(tableValues.d80 * 0.2285 / 2.54, "%");
+  newValues['d82'] = (tableValues.d50 * (tableValues.d79 * 0.284) * (tableValues.d81 + 1) * tableValues.c56 - tableValues.d79 * 0.284 * tableValues.c56 * tableValues.d50) * 0.75; // ROI Calculation
+
+  newValues['d85'] = (tableValues.j9 + tableValues.j10) * tableValues.c56 * tableValues.c55;
+  newValues['d86'] = tableValues.d82;
+  newValues['d87'] = tableValues.j13;
+  newValues['d88'] = tableValues.d49 / 33.33 * (1 + tableValues.d81) / 20;
+  newValues['d89'] = tableValues.j17;
+  newValues['d91'] = tableValues.d85 + tableValues.d86 + tableValues.d87 + tableValues.d88 + tableValues.d89;
   return newValues;
 };
 
@@ -48961,7 +48984,7 @@ function (_Component) {
         headerCols: ['Potential Water Saving', 'Value'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["potentialWaterSavingData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        data: _data__WEBPACK_IMPORTED_MODULE_7__["SizingOfReactorsData"]
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["sizingOfReactorsData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["predictiveWaterAnalysis"]
