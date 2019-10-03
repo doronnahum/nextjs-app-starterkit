@@ -99,11 +99,10 @@ export const renderValueType = (row, updateTablesValues, tableValues, classes) =
             return <Input
                 id={row.location}
                 label="Number"
-                value={tableValues[row.location]}
+                value={tableValues[row.location] === 0 ? '' : tableValues[row.location]}
                 onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
                 type="number"
                 className={classes.textField}
-                defaultValue=''
             />
         case TYPES.RANGE:
             return <Slider
@@ -131,7 +130,7 @@ export const renderValueType = (row, updateTablesValues, tableValues, classes) =
         case TYPES.NOT_EDITABLE:
             return <Input
                 id={row.location}
-                value={isNaN(tableValues[row.location]) ? '' : tableValues[row.location]}
+                value={isNaN(tableValues[row.location]) || tableValues[row.location] === 0 ? '' : tableValues[row.location]}
                 readOnly
                 className={classes.textFieldUNEditable}
             />

@@ -8866,11 +8866,10 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: row.location,
         label: "Number",
-        value: tableValues[row.location],
+        value: tableValues[row.location] === 0 ? '' : tableValues[row.location],
         onChange: e => handleInputChange(e, updateTablesValues, tableValues),
         type: "number",
-        className: classes.textField,
-        defaultValue: ""
+        className: classes.textField
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].RANGE:
@@ -8903,7 +8902,7 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NOT_EDITABLE:
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: row.location,
-        value: isNaN(tableValues[row.location]) ? '' : tableValues[row.location],
+        value: isNaN(tableValues[row.location]) || tableValues[row.location] === 0 ? '' : tableValues[row.location],
         readOnly: true,
         className: classes.textFieldUNEditable
       });

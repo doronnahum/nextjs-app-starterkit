@@ -48825,13 +48825,12 @@ var renderValueType = function renderValueType(row, updateTablesValues, tableVal
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: row.location,
         label: "Number",
-        value: tableValues[row.location],
+        value: tableValues[row.location] === 0 ? '' : tableValues[row.location],
         onChange: function onChange(e) {
           return handleInputChange(e, updateTablesValues, tableValues);
         },
         type: "number",
-        className: classes.textField,
-        defaultValue: ""
+        className: classes.textField
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].RANGE:
@@ -48868,7 +48867,7 @@ var renderValueType = function renderValueType(row, updateTablesValues, tableVal
     case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].NOT_EDITABLE:
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: row.location,
-        value: isNaN(tableValues[row.location]) ? '' : tableValues[row.location],
+        value: isNaN(tableValues[row.location]) || tableValues[row.location] === 0 ? '' : tableValues[row.location],
         readOnly: true,
         className: classes.textFieldUNEditable
       });
