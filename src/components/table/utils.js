@@ -103,7 +103,7 @@ export const renderValueType = (row, updateTablesValues, tableValues, classes) =
                 onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
                 type="number"
                 className={classes.textField}
-
+                defaultValue=''
             />
         case TYPES.RANGE:
             return <Slider

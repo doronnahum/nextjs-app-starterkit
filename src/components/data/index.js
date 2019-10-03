@@ -122,3 +122,28 @@ export const predictiveWaterAnalysis = [
     createManyValuesData('Silica', 'ppm', MANDATORY, [{ location: 'd69', type: TYPES.NOT_EDITABLE }, { location: 'e69', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('Sulphate', 'ppm', MANDATORY, [{ location: 'd70', type: TYPES.NOT_EDITABLE }, { location: 'e70', type: TYPES.NOT_EDITABLE }]),
 ]
+export const sizingFactorsData = [
+    createManyValuesData('Silica Factor', '>15', MANDATORY, [{ location: 'j47', type: TYPES.NOT_EDITABLE }, { location: 'l47', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Hardness Factor', '>250', MANDATORY, [{ location: 'j48', type: TYPES.NOT_EDITABLE }, { location: 'l48', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Ammonia Factor', '>300', MANDATORY, [{ location: 'j49', type: TYPES.NOT_EDITABLE }, { location: 'l49', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Freon Factor', 'Ammonia', MANDATORY, [{ location: 'j50', type: TYPES.NOT_EDITABLE }, { location: 'l50', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('pPipe Length Factor', 'Freon', MANDATORY, [{ location: 'j51', type: TYPES.NOT_EDITABLE }, { location: 'l51', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Pipe Length Factor', '>100', MANDATORY, [{ location: 'j52', type: TYPES.NOT_EDITABLE }, { location: 'l52', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Evaporator - condenser Factor', 'Evaporator - condenser', MANDATORY, [{ location: 'j53', type: TYPES.NOT_EDITABLE }, { location: 'l53', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('High Silica and low chlorides', 'Cl<50 & Si>50', MANDATORY, [{ location: 'j54', type: TYPES.NOT_EDITABLE }, { location: 'l54', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Skin Temp.', '>60', MANDATORY, [{ location: 'j55', type: TYPES.NOT_EDITABLE }, { location: 'l55', type: TYPES.NOT_EDITABLE }]),
+]
+
+export const SizingOfReactorsData = [
+    createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{ location: 'i58', type: TYPES.NOT_EDITABLE }]),
+]
+
+export const modelConfigurationData = [
+    createManyValuesData('1X4', null, MANDATORY, [{ location: 'i62', type: TYPES.NOT_EDITABLE }, { location: 'j62', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('2X4', null, MANDATORY, [{ location: 'i63', type: TYPES.NOT_EDITABLE }, { location: 'j63', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('4X4', null, MANDATORY, [{ location: 'i64', type: TYPES.NOT_EDITABLE }, { location: 'j64', type: TYPES.NOT_EDITABLE }]),
+]
+export const UETCirculationFlowrateData = [
+    createManyValuesData('minimum flow rate', null, MANDATORY, [{ location: 'i68', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('maximum flow rate', null, MANDATORY, [{ location: 'i69', type: TYPES.NOT_EDITABLE }]),
+]

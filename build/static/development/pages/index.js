@@ -47738,7 +47738,7 @@ function (_Component) {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, SizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47754,6 +47754,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thermodynamicCalculationsData", function() { return thermodynamicCalculationsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "potentialWaterSavingData", function() { return potentialWaterSavingData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "predictiveWaterAnalysis", function() { return predictiveWaterAnalysis; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizingFactorsData", function() { return sizingFactorsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SizingOfReactorsData", function() { return SizingOfReactorsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modelConfigurationData", function() { return modelConfigurationData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UETCirculationFlowrateData", function() { return UETCirculationFlowrateData; });
 var MANDATORY = true;
 var NOT_MANDATORY = false;
 var TYPES = {
@@ -48005,6 +48009,91 @@ var predictiveWaterAnalysis = [createManyValuesData('Conductivity', 'µS/cm', MA
   type: TYPES.NOT_EDITABLE
 }, {
   location: 'e70',
+  type: TYPES.NOT_EDITABLE
+}])];
+var sizingFactorsData = [createManyValuesData('Silica Factor', '>15', MANDATORY, [{
+  location: 'j47',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l47',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Hardness Factor', '>250', MANDATORY, [{
+  location: 'j48',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l48',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Ammonia Factor', '>300', MANDATORY, [{
+  location: 'j49',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l49',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Freon Factor', 'Ammonia', MANDATORY, [{
+  location: 'j50',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l50',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('pPipe Length Factor', 'Freon', MANDATORY, [{
+  location: 'j51',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l51',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Pipe Length Factor', '>100', MANDATORY, [{
+  location: 'j52',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l52',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Evaporator - condenser Factor', 'Evaporator - condenser', MANDATORY, [{
+  location: 'j53',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l53',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('High Silica and low chlorides', 'Cl<50 & Si>50', MANDATORY, [{
+  location: 'j54',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l54',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Skin Temp.', '>60', MANDATORY, [{
+  location: 'j55',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'l55',
+  type: TYPES.NOT_EDITABLE
+}])];
+var SizingOfReactorsData = [createManyValuesData('Sizing (# of Reactors)', null, MANDATORY, [{
+  location: 'i58',
+  type: TYPES.NOT_EDITABLE
+}])];
+var modelConfigurationData = [createManyValuesData('1X4', null, MANDATORY, [{
+  location: 'i62',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'j62',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('2X4', null, MANDATORY, [{
+  location: 'i63',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'j63',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('4X4', null, MANDATORY, [{
+  location: 'i64',
+  type: TYPES.NOT_EDITABLE
+}, {
+  location: 'j64',
+  type: TYPES.NOT_EDITABLE
+}])];
+var UETCirculationFlowrateData = [createManyValuesData('minimum flow rate', null, MANDATORY, [{
+  location: 'i68',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('maximum flow rate', null, MANDATORY, [{
+  location: 'i69',
   type: TYPES.NOT_EDITABLE
 }])];
 
@@ -48698,7 +48787,8 @@ var renderValueType = function renderValueType(row, updateTablesValues, tableVal
           return handleInputChange(e, updateTablesValues, tableValues);
         },
         type: "number",
-        className: classes.textField
+        className: classes.textField,
+        defaultValue: ""
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_3__["TYPES"].RANGE:
@@ -48823,11 +48913,22 @@ function (_Component) {
         headerCols: ['Thermodynamic Calculations', 'Value', 'Current', 'UET'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["thermodynamicCalculationsData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        headerCols: ['Sizing Factors', 'Benchmark', 'Factor', 'Actual'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["sizingFactorsData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Potential Water Saving', 'Value'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["potentialWaterSavingData"]
       }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["SizingOfReactorsData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
         headerCols: ['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation'],
         data: _data__WEBPACK_IMPORTED_MODULE_7__["predictiveWaterAnalysis"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        headerCols: ['Model Configuration', '# of Units', 'rounded up'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["modelConfigurationData"]
+      }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        headerCols: ['UET circulation flow rate', 'm3/h'],
+        data: _data__WEBPACK_IMPORTED_MODULE_7__["UETCirculationFlowrateData"]
       })));
     }
   }]);
@@ -49013,7 +49114,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***********************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5Celad%5CDesktop%5Ccommitted%5CUET%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************************/
@@ -49036,5 +49137,5 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

@@ -10,7 +10,11 @@ import {
     customersProblemsAndRequestsData,
     thermodynamicCalculationsData,
     potentialWaterSavingData,
-    predictiveWaterAnalysis
+    predictiveWaterAnalysis,
+    sizingFactorsData,
+    SizingOfReactorsData,
+    modelConfigurationData,
+    UETCirculationFlowrateData
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -52,12 +56,27 @@ class Tables extends Component {
                         data={thermodynamicCalculationsData}
                     />
                     <Table
+                        headerCols={['Sizing Factors', 'Benchmark', 'Factor', 'Actual']}
+                        data={sizingFactorsData}
+                    />
+                    <Table
                         headerCols={['Potential Water Saving', 'Value']}
                         data={potentialWaterSavingData}
                     />
                     <Table
+                        data={SizingOfReactorsData}
+                    />
+                    <Table
                         headerCols={['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation']}
                         data={predictiveWaterAnalysis}
+                    />
+                    <Table
+                        headerCols={['Model Configuration', '# of Units', 'rounded up']}
+                        data={modelConfigurationData}
+                    />
+                    <Table
+                        headerCols={['UET circulation flow rate', 'm3/h']}
+                        data={UETCirculationFlowrateData}
                     />
 
                 </div>
