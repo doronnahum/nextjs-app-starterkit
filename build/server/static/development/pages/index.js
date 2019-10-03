@@ -8703,14 +8703,12 @@ function SimpleTable(props) {
         className: classes.TableCell
       }, row.name), row.units && __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
         align: "left"
-      }, row.units), row.fields ? row.fields.map(field => {
+      }, row.units), row.fields && row.fields.map(field => {
         return __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
           key: field.location,
           align: "left"
         }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(field, updateTablesValues, tableValues, classes));
-      }) : __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        align: "left"
-      }, Object(_utils__WEBPACK_IMPORTED_MODULE_8__["renderValueType"])(row, updateTablesValues, tableValues, classes)));
+      }));
     });
   };
 
@@ -9000,25 +8998,25 @@ const getMarks = row => {
     });
     i += row.ticks;
   } // if we want lables in the  edges of the slider
-  // if (arr.length) { 
-  //     debugger
-  //     arr[0].label = row.min.toString()
-  //     arr[arr.length - 1].label = row.max.toString()
-  // }
 
+
+  if (arr.length) {
+    arr[0].label = row.min.toString();
+    arr[arr.length - 1].label = row.max.toString();
+  }
 
   return arr;
 };
 
-const renderValueType = (row, updateTablesValues, tableValues, classes) => {
-  const type = row.type;
+const renderValueType = (field, updateTablesValues, tableValues, classes) => {
+  const type = field.type;
 
   switch (type) {
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NUMERIC:
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        id: row.location,
+        id: field.location,
         label: "Number",
-        value: tableValues[row.location] === 0 ? '' : tableValues[row.location],
+        value: tableValues[field.location] === 0 ? '' : tableValues[field.location],
         onChange: e => handleInputChange(e, updateTablesValues, tableValues),
         type: "number",
         className: classes.textField
@@ -9026,25 +9024,25 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
 
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].RANGE:
       return __jsx(_material_ui_core_Slider__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        defaultValue: tableValues[row.location] //Math.floor((row.min + row.max) / 2)
+        defaultValue: tableValues[field.location] //Math.floor((field.min + field.max) / 2)
         ,
         getAriaValueText: valuetext,
-        onChange: (e, val) => onChangeSlider(e, val, row.location, updateTablesValues, tableValues),
+        onChange: (e, val) => onChangeSlider(e, val, field.location, updateTablesValues, tableValues),
         "aria-labelledby": "discrete-slider-always",
-        step: row.data ? row.data.ticks : row.ticks,
-        min: row.data ? row.data.min : row.min,
-        max: row.data ? row.data.max : row.max,
-        marks: getMarks(row.data || row),
+        step: field.data.ticks,
+        min: field.data.min,
+        max: field.data.max,
+        marks: getMarks(field.data),
         valueLabelDisplay: "on"
       });
 
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].SELECT:
       return __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_5___default.a, {
-        id: row.location,
+        id: field.location,
         native: true,
-        value: tableValues[row.location],
+        value: tableValues[field.location],
         onChange: e => handleSelectChange(e, updateTablesValues, tableValues)
-      }, row.data.map((item, i) => {
+      }, field.data.map((item, i) => {
         return __jsx("option", {
           key: i,
           value: item
@@ -9053,14 +9051,14 @@ const renderValueType = (row, updateTablesValues, tableValues, classes) => {
 
     case _data__WEBPACK_IMPORTED_MODULE_2__["TYPES"].NOT_EDITABLE:
       return __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        id: row.location,
-        value: isNaN(tableValues[row.location]) || tableValues[row.location] === 0 ? '' : tableValues[row.location],
+        id: field.location,
+        value: isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? '' : tableValues[field.location],
         readOnly: true,
         className: classes.textFieldUNEditable
       });
 
     default:
-      return row.type;
+      return field.type;
   }
 };
 

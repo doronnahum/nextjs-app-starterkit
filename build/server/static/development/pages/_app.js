@@ -8948,13 +8948,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const defaultValues = {};
 [..._components_data__WEBPACK_IMPORTED_MODULE_0__["mechanicalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationalPropertiesData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterOriginData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["operationCostsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["enironmentalData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["waterAnalysisData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["customersProblemsAndRequestsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["thermodynamicCalculationsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["potentialWaterSavingData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["predictiveWaterAnalysis"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["sizingFactorsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["sizingOfReactorsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["modelConfigurationData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["UETCirculationFlowrateData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["theoreticalEnergySavingsData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["ROICalculationData"], ..._components_data__WEBPACK_IMPORTED_MODULE_0__["UETWorkingParameters"]].forEach(item => {
-  if (item.fields) {
-    item.fields.forEach(field => {
-      defaultValues[field.location] = field.defaultValue;
-    });
-  }
-
-  defaultValues[item.location] = item.defaultValue;
+  item.fields.forEach(field => {
+    defaultValues[field.location] = field.defaultValue;
+  });
 });
 const initialState = {
   windowSize: {},

@@ -37,12 +37,9 @@ const defaultValues = {};
 ...ROICalculationData,
 ...UETWorkingParameters
 ].forEach(item => {
-  if (item.fields) {
-    item.fields.forEach((field) => {
-      defaultValues[field.location] = field.defaultValue
-    })
-  }
-  defaultValues[item.location] = item.defaultValue
+  item.fields.forEach((field) => {
+    defaultValues[field.location] = field.defaultValue
+  })
 })
 const initialState = {
   windowSize: {},

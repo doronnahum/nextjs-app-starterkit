@@ -90,14 +90,11 @@ function SimpleTable(props) {
                         {row.units}
                     </TableCell>}
 
-                {row.fields
-                    ? row.fields.map((field) => {
-                        return <TableCell key={field.location} align="left">
-                            {renderValueType(field, updateTablesValues, tableValues, classes)}
-                        </TableCell>
-                    })
-                    : <TableCell align="left">{renderValueType(row, updateTablesValues, tableValues, classes)}</TableCell>
-                }
+                {row.fields && row.fields.map((field) => {
+                    return <TableCell key={field.location} align="left">
+                        {renderValueType(field, updateTablesValues, tableValues, classes)}
+                    </TableCell>
+                })}
             </TableRow>
         })
     }
