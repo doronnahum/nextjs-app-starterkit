@@ -24,6 +24,13 @@
         @include grid(2em, center, flex-start, 1fr 1fr, auto);
         // background: green;
       }
+      &__section-3-savings-calculation {
+        @include uptoMd {
+          @include grid(1em, center, center, 1fr, auto);
+        }
+        @include grid(2em, center, flex-start, 1fr 1fr, auto);
+        // background: green;
+      }
     }
   }
 }

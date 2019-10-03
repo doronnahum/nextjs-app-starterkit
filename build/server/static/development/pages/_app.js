@@ -8126,7 +8126,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 /*!**************************************!*\
   !*** ./src/components/data/index.js ***!
   \**************************************/
-/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, SizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData */
+/*! exports provided: TYPES, mechanicalPropertiesData, operationalPropertiesData, waterOriginData, operationCostsData, enironmentalData, customersProblemsAndRequestsData, waterAnalysisData, thermodynamicCalculationsData, potentialWaterSavingData, predictiveWaterAnalysis, sizingFactorsData, SizingOfReactorsData, modelConfigurationData, UETCirculationFlowrateData, theoreticalEnergySavingsData, ROICalculationData, UETWorkingParameters */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8146,6 +8146,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SizingOfReactorsData", function() { return SizingOfReactorsData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modelConfigurationData", function() { return modelConfigurationData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UETCirculationFlowrateData", function() { return UETCirculationFlowrateData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "theoreticalEnergySavingsData", function() { return theoreticalEnergySavingsData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROICalculationData", function() { return ROICalculationData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UETWorkingParameters", function() { return UETWorkingParameters; });
 const MANDATORY = true;
 const NOT_MANDATORY = false;
 const TYPES = {
@@ -8482,6 +8485,46 @@ const UETCirculationFlowrateData = [createManyValuesData('minimum flow rate', nu
   type: TYPES.NOT_EDITABLE
 }]), createManyValuesData('maximum flow rate', null, MANDATORY, [{
   location: 'i69',
+  type: TYPES.NOT_EDITABLE
+}])]; // Savings Calculation
+
+const theoreticalEnergySavingsData = [createManyValuesData('Electricity Cost', '$USD/kWH', MANDATORY, [{
+  location: 'd79',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Scale Deposit Thickness', 'mm', MANDATORY, [{
+  location: 'd80',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Efficiency Loss', '%', MANDATORY, [{
+  location: 'd81',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Total Theoretical Energy Savings', '$USD/Year', MANDATORY, [{
+  location: 'd82',
+  type: TYPES.NOT_EDITABLE
+}])];
+const ROICalculationData = [createManyValuesData('Potential Water Savings', '$USD/Year', MANDATORY, [{
+  location: 'd85',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Potential Energy Savings', '$USD/Year', MANDATORY, [{
+  location: 'd86',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Chemical Savings', '$USD/Year', MANDATORY, [{
+  location: 'd87',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Equipment Life efficiency savings', '$USD/Year', MANDATORY, [{
+  location: 'd88',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Costs for cleaning heat exhanger', '$USD/Year', MANDATORY, [{
+  location: 'd89',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Total Potential Savings ', '$USD/Year', MANDATORY, [{
+  location: 'd91',
+  type: TYPES.NOT_EDITABLE
+}])];
+const UETWorkingParameters = [createManyValuesData('Approx. Electricity Consumption', 'kWH', MANDATORY, [{
+  location: 'j79',
+  type: TYPES.NOT_EDITABLE
+}]), createManyValuesData('Approx. Footprint area (inc. service)', 'm2', MANDATORY, [{
+  location: 'j80',
   type: TYPES.NOT_EDITABLE
 }])];
 

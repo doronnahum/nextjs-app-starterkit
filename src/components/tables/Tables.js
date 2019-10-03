@@ -14,7 +14,10 @@ import {
     sizingFactorsData,
     SizingOfReactorsData,
     modelConfigurationData,
-    UETCirculationFlowrateData
+    UETCirculationFlowrateData,
+    theoreticalEnergySavingsData,
+    ROICalculationData,
+    UETWorkingParameters
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -78,6 +81,29 @@ class Tables extends Component {
                         headerCols={['UET circulation flow rate', 'm3/h']}
                         data={UETCirculationFlowrateData}
                     />
+                </div>
+                <h1>Savings Calculation</h1>
+                <h3>note: this Savings calculation is a theoretical tool and might change from different places </h3>
+                <div className={className + '__section-3-savings-calculation'}>
+                    <div>
+                        <Table
+                            headerCols={['Theoretical Energy Savings', 'Units', 'Value']}
+                            data={theoreticalEnergySavingsData}
+                        />
+                        <Table
+                            headerCols={['ROI Calculation', '', '$USD/Year']}
+                            data={ROICalculationData}
+                        />
+                    </div>
+                    <div>
+                        <h2>Working Parameters</h2>
+                        <Table
+                            headerCols={['UET working parameters (estimated*)', 'Units', 'Value']}
+                            data={UETWorkingParameters}
+                        />
+
+                    </div>
+
 
                 </div>
             </div >

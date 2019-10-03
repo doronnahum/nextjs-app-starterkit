@@ -147,3 +147,24 @@ export const UETCirculationFlowrateData = [
     createManyValuesData('minimum flow rate', null, MANDATORY, [{ location: 'i68', type: TYPES.NOT_EDITABLE }]),
     createManyValuesData('maximum flow rate', null, MANDATORY, [{ location: 'i69', type: TYPES.NOT_EDITABLE }]),
 ]
+
+// Savings Calculation
+
+export const theoreticalEnergySavingsData = [
+    createManyValuesData('Electricity Cost', '$USD/kWH', MANDATORY, [{ location: 'd79', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Scale Deposit Thickness', 'mm', MANDATORY, [{ location: 'd80', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Efficiency Loss', '%', MANDATORY, [{ location: 'd81', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Total Theoretical Energy Savings', '$USD/Year', MANDATORY, [{ location: 'd82', type: TYPES.NOT_EDITABLE }]),
+]
+export const ROICalculationData = [
+    createManyValuesData('Potential Water Savings', '$USD/Year', MANDATORY, [{ location: 'd85', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Potential Energy Savings', '$USD/Year', MANDATORY, [{ location: 'd86', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Chemical Savings', '$USD/Year', MANDATORY, [{ location: 'd87', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Equipment Life efficiency savings', '$USD/Year', MANDATORY, [{ location: 'd88', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Costs for cleaning heat exhanger', '$USD/Year', MANDATORY, [{ location: 'd89', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Total Potential Savings ', '$USD/Year', MANDATORY, [{ location: 'd91', type: TYPES.NOT_EDITABLE }]),
+]
+export const UETWorkingParameters = [
+    createManyValuesData('Approx. Electricity Consumption', 'kWH', MANDATORY, [{ location: 'j79', type: TYPES.NOT_EDITABLE }]),
+    createManyValuesData('Approx. Footprint area (inc. service)', 'm2', MANDATORY, [{ location: 'j80', type: TYPES.NOT_EDITABLE }]),
+]
