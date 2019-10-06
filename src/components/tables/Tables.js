@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table from 'src/components/table/Table'
+import connect from './connect'
 import {
     mechanicalPropertiesData,
     operationalPropertiesData,
@@ -21,6 +22,11 @@ import {
 } from 'src/components/data'
 
 class Tables extends Component {
+
+    calculateSavings = () => {
+        this.props.actions.calculateSavings()
+    }
+
     render() {
         const { className } = this.props
         return (
@@ -82,6 +88,10 @@ class Tables extends Component {
                         data={UETCirculationFlowrateData}
                     />
                 </div>
+                <button onClick={this.calculateSavings}
+                    style={{ padding: '10px 15px', backgroundColor: 'lightgreen', borderRadius: '50%', marginTop: 20 }}>
+                    <h1>calculate</h1>
+                </button>
                 <h1>Savings Calculation</h1>
                 <h3>note: this Savings calculation is a theoretical tool and might change from different places </h3>
                 <div className={className + '__section-3-savings-calculation'}>
@@ -110,4 +120,4 @@ class Tables extends Component {
         )
     }
 }
-export default Tables
+export default connect(Tables)

@@ -1,10 +1,10 @@
 import { takeEvery } from 'redux-saga/effects';
 import types from './types';
 
-import updateTablesValues from './workers/updateTablesValues';
+import calculateSavings from './workers/calculateSavings';
 
 function* tablesWatcher() {
-  yield takeEvery(types.UPDATE_TABLES_VALUES, updateTablesValues);
+  yield takeEvery(types.CALCULATE_SAVINGS, calculateSavings);
 
 }
 export default tablesWatcher;

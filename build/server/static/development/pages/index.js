@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -8815,13 +8815,12 @@ function SimpleTable(props) {
 
 SimpleTable.defaultProps = {
   data: [],
-  headerCols: [],
-  tablesData: []
+  headerCols: []
 };
 SimpleTable.propTypes = {
   data: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
   headerCols: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
-  tablesData: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.array,
+  tablesData: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.object,
   tableTitle: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string,
   waterAnalysisTitle: prop_types__WEBPACK_IMPORTED_MODULE_13___default.a.string
 };
@@ -9027,22 +9026,22 @@ const getCalculateNewValues = (key, value, tableValues) => {
   newValues['j64'] = Math.ceil(newValues.i64); // UE4T circulation flow rate
 
   newValues['i68'] = newValues.j64 * 100;
-  newValues['i69'] = newValues.j64 * 150; // UE4TWorkingParameters
+  newValues['i69'] = newValues.j64 * 150; // // UE4TWorkingParameters ////// after submit
+  // newValues['j79'] = newValues.j64 * 1.2
+  // newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2)
+  // // Th4eoretical Energy Savings 
+  // newValues['d79'] = newValues.j14
+  // newValues['d80'] = newValues.j16
+  // newValues['d81'] = newValues.d80 * 0.2285 / 2.54
+  // newValues['d82'] = ((newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56) - ((newValues.d79 * 0.284) * newValues.c56 * newValues.d50)) * 0.75
+  // // RO4I Calculation
+  // newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55
+  // newValues['d86'] = newValues.d82
+  // newValues['d87'] = newValues.j13
+  // newValues['d88'] = (newValues.d49 / 33.33) * (1 + newValues.d81) / 20
+  // newValues['d89'] = newValues.j17
+  // newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89
 
-  newValues['j79'] = newValues.j64 * 1.2;
-  newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2); // Th4eoretical Energy Savings 
-
-  newValues['d79'] = newValues.j14;
-  newValues['d80'] = newValues.j16;
-  newValues['d81'] = `${newValues.d80 * 0.2285 / 2.54}%`;
-  newValues['d82'] = (newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56 - newValues.d79 * 0.284 * newValues.c56 * newValues.d50) * 0.75; // RO4I Calculation
-
-  newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55;
-  newValues['d86'] = newValues.d82;
-  newValues['d87'] = newValues.j13;
-  newValues['d88'] = newValues.d49 / 33.33 * (1 + newValues.d81) / 20;
-  newValues['d89'] = newValues.j17;
-  newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89;
   return newValues;
 };
 
@@ -9051,7 +9050,7 @@ const handleInputChange = (e, updateTablesValues, tableValues) => {
   const newValue = Number(e.target.value);
   const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
-    values: newValues
+    data: newValues
   });
 };
 
@@ -9060,7 +9059,7 @@ const handleSelectChange = (e, updateTablesValues, tableValues) => {
   const newValue = e.target.value;
   const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
-    values: newValues
+    data: newValues
   });
 };
 
@@ -9069,7 +9068,7 @@ const onChangeSlider = (e, val, location, updateTablesValues, tableValues) => {
   const newValue = val;
   const newValues = getCalculateNewValues(field, newValue, tableValues);
   updateTablesValues({
-    values: newValues
+    data: newValues
   });
 };
 
@@ -9163,16 +9162,28 @@ const renderValueType = (field, updateTablesValues, tableValues, classes) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _table_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../table/Table */ "./src/components/table/Table.js");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _table_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../table/Table */ "./src/components/table/Table.js");
+/* harmony import */ var _connect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connect */ "./src/components/tables/connect.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data */ "./src/components/data/index.js");
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
 
-class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+
+class Tables extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "calculateSavings", () => {
+      this.props.actions.calculateSavings();
+    });
+  }
+
   render() {
     const {
       className
@@ -9181,68 +9192,110 @@ class Tables extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: className
     }, __jsx("div", {
       className: className + '__section-1'
-    }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Mechanical Properties1', 'Units', 'value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["mechanicalPropertiesData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["mechanicalPropertiesData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Operational Properties', 'Units', 'value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["operationalPropertiesData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["operationalPropertiesData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Water Origin', 'Units', 'value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["waterOriginData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["waterOriginData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Operation Costs ', 'Units', 'value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["operationCostsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["operationCostsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Enironmental Data', 'Units', 'value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["enironmentalData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["enironmentalData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       tableTitle: 'Customer\'s problems and requests',
       headerCols: ['Option List', 'Mark if applicable'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["customersProblemsAndRequestsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["customersProblemsAndRequestsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       waterAnalysisTitle: true,
       headerCols: ['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["waterAnalysisData"]
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["waterAnalysisData"]
     })), __jsx("h1", null, "Sizing"), __jsx("div", {
       className: className + '__section-2-sizing'
-    }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Thermodynamic Calculations', 'Value', 'Current', 'UET'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["thermodynamicCalculationsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["thermodynamicCalculationsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Sizing Factors', 'Benchmark', 'Factor', 'Actual'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["sizingFactorsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["sizingFactorsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Potential Water Saving', 'Value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["potentialWaterSavingData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["sizingOfReactorsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["potentialWaterSavingData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["sizingOfReactorsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["predictiveWaterAnalysis"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["predictiveWaterAnalysis"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Model Configuration', '# of Units', 'rounded up'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["modelConfigurationData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["modelConfigurationData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['UET circulation flow rate', 'm3/h'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["UETCirculationFlowrateData"]
-    })), __jsx("h1", null, "Savings Calculation"), __jsx("h3", null, "note: this Savings calculation is a theoretical tool and might change from different places "), __jsx("div", {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["UETCirculationFlowrateData"]
+    })), __jsx("button", {
+      onClick: this.calculateSavings,
+      style: {
+        padding: '10px 15px',
+        backgroundColor: 'lightgreen',
+        borderRadius: '50%',
+        marginTop: 20
+      }
+    }, __jsx("h1", null, "calculate")), __jsx("h1", null, "Savings Calculation"), __jsx("h3", null, "note: this Savings calculation is a theoretical tool and might change from different places "), __jsx("div", {
       className: className + '__section-3-savings-calculation'
-    }, __jsx("div", null, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, __jsx("div", null, __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['Theoretical Energy Savings', 'Units', 'Value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["theoreticalEnergySavingsData"]
-    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["theoreticalEnergySavingsData"]
+    }), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['ROI Calculation', '', '$USD/Year'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["ROICalculationData"]
-    })), __jsx("div", null, __jsx("h2", null, "Working Parameters"), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["ROICalculationData"]
+    })), __jsx("div", null, __jsx("h2", null, "Working Parameters"), __jsx(_table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
       headerCols: ['UET working parameters (estimated*)', 'Units', 'Value'],
-      data: _data__WEBPACK_IMPORTED_MODULE_2__["UETWorkingParameters"]
+      data: _data__WEBPACK_IMPORTED_MODULE_4__["UETWorkingParameters"]
     }))));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Tables);
+/* harmony default export */ __webpack_exports__["default"] = (Object(_connect__WEBPACK_IMPORTED_MODULE_3__["default"])(Tables));
+
+/***/ }),
+
+/***/ "./src/components/tables/connect.js":
+/*!******************************************!*\
+  !*** ./src/components/tables/connect.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _store_tables_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/tables/actions */ "./src/store/tables/actions.js");
+/* harmony import */ var _store_tables_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/tables/selectors */ "./src/store/tables/selectors.js");
+
+
+
+
+
+const mapStateToProps = state => ({
+  tablesData: Object(_store_tables_selectors__WEBPACK_IMPORTED_MODULE_3__["getTablesData"])(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: Object(redux__WEBPACK_IMPORTED_MODULE_1__["bindActionCreators"])({
+    calculateSavings: _store_tables_actions__WEBPACK_IMPORTED_MODULE_2__["calculateSavings"]
+  }, dispatch)
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (comp => Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(comp));
 
 /***/ }),
 
@@ -9351,21 +9404,26 @@ module.exports = {
 /*!*************************************!*\
   !*** ./src/store/tables/actions.js ***!
   \*************************************/
-/*! exports provided: updateTablesValues, setValues */
+/*! exports provided: updateTablesValues, calculateSavings, setCalculatedData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTablesValues", function() { return updateTablesValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setValues", function() { return setValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateSavings", function() { return calculateSavings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCalculatedData", function() { return setCalculatedData; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
 
 const updateTablesValues = payload => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].UPDATE_TABLES_VALUES,
   payload
 });
-const setValues = payload => ({
-  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_VALUES,
+const calculateSavings = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].CALCULATE_SAVINGS,
+  payload
+});
+const setCalculatedData = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_CALCULATED_DATA,
   payload
 });
 
@@ -9403,12 +9461,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
   UPDATE_TABLES_VALUES: 'UPDATE_TABLES_VALUES',
-  SET_VALUES: 'SET_VALUES'
+  CALCULATE_SAVINGS: 'CALCULATE_SAVINGS',
+  SET_CALCULATED_DATA: 'SET_CALCULATED_DATA'
 });
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

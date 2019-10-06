@@ -37500,6 +37500,142 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/reselect/es/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/reselect/es/index.js ***!
+  \*******************************************/
+/*! exports provided: defaultMemoize, createSelectorCreator, createSelector, createStructuredSelector */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMemoize", function() { return defaultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelectorCreator", function() { return createSelectorCreator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelector", function() { return createSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createStructuredSelector", function() { return createStructuredSelector; });
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = memoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.dependencies = dependencies;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
+
+/***/ }),
+
 /***/ "./node_modules/symbol-observable/es/index.js":
 /*!****************************************************!*\
   !*** ./node_modules/symbol-observable/es/index.js ***!
@@ -40086,13 +40222,14 @@ function rootSaga() {
 /*!*************************************!*\
   !*** ./src/store/tables/actions.js ***!
   \*************************************/
-/*! exports provided: updateTablesValues, setValues */
+/*! exports provided: updateTablesValues, calculateSavings, setCalculatedData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTablesValues", function() { return updateTablesValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setValues", function() { return setValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateSavings", function() { return calculateSavings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCalculatedData", function() { return setCalculatedData; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
 
 var updateTablesValues = function updateTablesValues(payload) {
@@ -40101,9 +40238,15 @@ var updateTablesValues = function updateTablesValues(payload) {
     payload: payload
   };
 };
-var setValues = function setValues(payload) {
+var calculateSavings = function calculateSavings(payload) {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_VALUES,
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].CALCULATE_SAVINGS,
+    payload: payload
+  };
+};
+var setCalculatedData = function setCalculatedData(payload) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_CALCULATED_DATA,
     payload: payload
   };
 };
@@ -40128,7 +40271,7 @@ var defaultValues = {};
   item.fields.forEach(function (field) {
     defaultValues[field.location] = field.defaultValue;
   });
-  defaultValues['e30'] = 0;
+  defaultValues['e30'] = 0; // because its is not in the tables data, it is sepereted
 });
 var initialState = {
   windowSize: {},
@@ -40170,7 +40313,7 @@ function tablesReducer() {
       error = _ref.error;
 
   switch (action.type) {
-    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_VALUES:
+    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].UPDATE_TABLES_VALUES:
       {
         var nextState = Object(immer__WEBPACK_IMPORTED_MODULE_3__["default"])(state, function (draftState) {
           draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
@@ -40180,10 +40323,46 @@ function tablesReducer() {
         return nextState;
       }
 
+    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_CALCULATED_DATA:
+      {
+        debugger;
+
+        var _nextState = Object(immer__WEBPACK_IMPORTED_MODULE_3__["default"])(state, function (draftState) {
+          draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
+          draftState.tablesData.loading = loading;
+          draftState.tablesData.error = error;
+        });
+
+        return _nextState;
+      }
+
     default:
       return state;
   }
 }
+
+/***/ }),
+
+/***/ "./src/store/tables/selectors.js":
+/*!***************************************!*\
+  !*** ./src/store/tables/selectors.js ***!
+  \***************************************/
+/*! exports provided: getTablesState, getTablesData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesState", function() { return getTablesState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesData", function() { return getTablesData; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+
+var getTablesState = function getTablesState(state) {
+  return state.tables;
+}; // export const getWindowSize = createSelector(getGlobalState, globalState => globalState.windowSize);
+
+var getTablesData = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getTablesState, function (tablesState) {
+  return tablesState.tablesData.data;
+});
 
 /***/ }),
 
@@ -40199,7 +40378,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
   UPDATE_TABLES_VALUES: 'UPDATE_TABLES_VALUES',
-  SET_VALUES: 'SET_VALUES'
+  CALCULATE_SAVINGS: 'CALCULATE_SAVINGS',
+  SET_CALCULATED_DATA: 'SET_CALCULATED_DATA'
 });
 
 /***/ }),
@@ -40217,7 +40397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
-/* harmony import */ var _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workers/updateTablesValues */ "./src/store/tables/workers/updateTablesValues.js");
+/* harmony import */ var _workers_calculateSavings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./workers/calculateSavings */ "./src/store/tables/workers/calculateSavings.js");
 
 
 var _marked =
@@ -40234,7 +40414,7 @@ function tablesWatcher() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeEvery"])(_types__WEBPACK_IMPORTED_MODULE_2__["default"].UPDATE_TABLES_VALUES, _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_3__["default"]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeEvery"])(_types__WEBPACK_IMPORTED_MODULE_2__["default"].CALCULATE_SAVINGS, _workers_calculateSavings__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
         case 2:
         case "end":
@@ -40248,39 +40428,45 @@ function tablesWatcher() {
 
 /***/ }),
 
-/***/ "./src/store/tables/workers/updateTablesValues.js":
-/*!********************************************************!*\
-  !*** ./src/store/tables/workers/updateTablesValues.js ***!
-  \********************************************************/
+/***/ "./src/store/tables/workers/calculateSavings.js":
+/*!******************************************************!*\
+  !*** ./src/store/tables/workers/calculateSavings.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return updateTablesValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return calculateSavings; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
 /* harmony import */ var _services_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/logger */ "./src/services/logger/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./src/store/tables/actions.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../selectors */ "./src/store/tables/selectors.js");
 
 
 var _marked =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(updateTablesValues);
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(calculateSavings);
 
 
 
 
-function updateTablesValues(action) {
-  var values, data;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function updateTablesValues$(_context) {
+
+function calculateSavings(action) {
+  var newValues;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function calculateSavings$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          values = action.payload.values;
-          _context.prev = 1;
-          //     yield put(setRamzorPress({ storeKey, status: consts.API_STATUS.START, error: null, loading: true, data: dataForClient }));
+          _context.prev = 0;
+          _context.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["select"])(_selectors__WEBPACK_IMPORTED_MODULE_4__["getTablesData"]);
+
+        case 3:
+          newValues = _context.sent;
+          //     yield put(setRamzorPress({ storeKey, status: consts.API_STATUS.START, error: null, loading: true, data: data }));
           //     const res = yield httpRequest(api.request, { url: 'setCompliance', method: 'post', data: dataToSend });
           //     if (res.error) {
           //         const errType = res.message === 'Network Error' ? consts.API_STATUS.FAILED_NETWORK : consts.API_STATUS.FAILED;
@@ -40290,29 +40476,44 @@ function updateTablesValues(action) {
           //             storeKey, status: consts.API_STATUS.FINISHED, error: null, loading: false, data: dataForClient
           //         }));
           //     }
-          data = values;
-          _context.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["setValues"])({
+          ////// after submit
+          // // UE4TWorkingParameters 
+          newValues['j79'] = newValues.j64 * 1.2;
+          newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2); // Th4eoretical Energy Savings 
+
+          newValues['d79'] = newValues.j14;
+          newValues['d80'] = newValues.j16;
+          newValues['d81'] = newValues.d80 * 0.2285 / 2.54;
+          newValues['d82'] = (newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56 - newValues.d79 * 0.284 * newValues.c56 * newValues.d50) * 0.75; // RO4I Calculation
+
+          newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55;
+          newValues['d86'] = newValues.d82;
+          newValues['d87'] = newValues.j13;
+          newValues['d88'] = newValues.d49 / 33.33 * (1 + newValues.d81) / 20;
+          newValues['d89'] = newValues.j17;
+          newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89;
+          _context.next = 18;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["setCalculatedData"])({
             error: null,
             loading: false,
-            data: data
+            data: newValues
           }));
 
-        case 5:
-          _context.next = 10;
+        case 18:
+          _context.next = 23;
           break;
 
-        case 7:
-          _context.prev = 7;
-          _context.t0 = _context["catch"](1);
+        case 20:
+          _context.prev = 20;
+          _context.t0 = _context["catch"](0);
           console.log('error in onRamzorPress', _context.t0);
 
-        case 10:
+        case 23:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, null, [[1, 7]]);
+  }, _marked, null, [[0, 20]]);
 }
 
 /***/ }),

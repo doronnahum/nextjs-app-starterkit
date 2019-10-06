@@ -8915,21 +8915,26 @@ function* rootSaga() {
 /*!*************************************!*\
   !*** ./src/store/tables/actions.js ***!
   \*************************************/
-/*! exports provided: updateTablesValues, setValues */
+/*! exports provided: updateTablesValues, calculateSavings, setCalculatedData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTablesValues", function() { return updateTablesValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setValues", function() { return setValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateSavings", function() { return calculateSavings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCalculatedData", function() { return setCalculatedData; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
 
 const updateTablesValues = payload => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].UPDATE_TABLES_VALUES,
   payload
 });
-const setValues = payload => ({
-  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_VALUES,
+const calculateSavings = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].CALCULATE_SAVINGS,
+  payload
+});
+const setCalculatedData = payload => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_CALCULATED_DATA,
   payload
 });
 
@@ -8951,7 +8956,7 @@ const defaultValues = {};
   item.fields.forEach(field => {
     defaultValues[field.location] = field.defaultValue;
   });
-  defaultValues['e30'] = 0;
+  defaultValues['e30'] = 0; // because its is not in the tables data, it is sepereted
 });
 const initialState = {
   windowSize: {},
@@ -8992,8 +8997,19 @@ function tablesReducer(state = _initial__WEBPACK_IMPORTED_MODULE_2__["default"],
   } = action.payload || {};
 
   switch (action.type) {
-    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_VALUES:
+    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].UPDATE_TABLES_VALUES:
       {
+        const nextState = immer__WEBPACK_IMPORTED_MODULE_3___default()(state, draftState => {
+          draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
+          draftState.tablesData.loading = loading;
+          draftState.tablesData.error = error;
+        });
+        return nextState;
+      }
+
+    case _types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_CALCULATED_DATA:
+      {
+        debugger;
         const nextState = immer__WEBPACK_IMPORTED_MODULE_3___default()(state, draftState => {
           draftState.tablesData.data = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, draftState.tablesData.data, data);
           draftState.tablesData.loading = loading;
@@ -9009,6 +9025,26 @@ function tablesReducer(state = _initial__WEBPACK_IMPORTED_MODULE_2__["default"],
 
 /***/ }),
 
+/***/ "./src/store/tables/selectors.js":
+/*!***************************************!*\
+  !*** ./src/store/tables/selectors.js ***!
+  \***************************************/
+/*! exports provided: getTablesState, getTablesData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesState", function() { return getTablesState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTablesData", function() { return getTablesData; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "reselect");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
+
+const getTablesState = state => state.tables; // export const getWindowSize = createSelector(getGlobalState, globalState => globalState.windowSize);
+
+const getTablesData = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getTablesState, tablesState => tablesState.tablesData.data);
+
+/***/ }),
+
 /***/ "./src/store/tables/types.js":
 /*!***********************************!*\
   !*** ./src/store/tables/types.js ***!
@@ -9021,7 +9057,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
   UPDATE_TABLES_VALUES: 'UPDATE_TABLES_VALUES',
-  SET_VALUES: 'SET_VALUES'
+  CALCULATE_SAVINGS: 'CALCULATE_SAVINGS',
+  SET_CALCULATED_DATA: 'SET_CALCULATED_DATA'
 });
 
 /***/ }),
@@ -9038,43 +9075,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./src/store/tables/types.js");
-/* harmony import */ var _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./workers/updateTablesValues */ "./src/store/tables/workers/updateTablesValues.js");
+/* harmony import */ var _workers_calculateSavings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workers/calculateSavings */ "./src/store/tables/workers/calculateSavings.js");
 
 
 
 
 function* tablesWatcher() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_types__WEBPACK_IMPORTED_MODULE_1__["default"].UPDATE_TABLES_VALUES, _workers_updateTablesValues__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_types__WEBPACK_IMPORTED_MODULE_1__["default"].CALCULATE_SAVINGS, _workers_calculateSavings__WEBPACK_IMPORTED_MODULE_3__["default"]);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (tablesWatcher);
 
 /***/ }),
 
-/***/ "./src/store/tables/workers/updateTablesValues.js":
-/*!********************************************************!*\
-  !*** ./src/store/tables/workers/updateTablesValues.js ***!
-  \********************************************************/
+/***/ "./src/store/tables/workers/calculateSavings.js":
+/*!******************************************************!*\
+  !*** ./src/store/tables/workers/calculateSavings.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return updateTablesValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return calculateSavings; });
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/logger */ "./src/services/logger/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/store/tables/actions.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../selectors */ "./src/store/tables/selectors.js");
 
 
 
-function* updateTablesValues(action) {
-  const {
-    values
-  } = action.payload;
 
+function* calculateSavings(action) {
+  // const { data } = action.payload
   try {
-    //     yield put(setRamzorPress({ storeKey, status: consts.API_STATUS.START, error: null, loading: true, data: dataForClient }));
+    const newValues = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["select"])(_selectors__WEBPACK_IMPORTED_MODULE_3__["getTablesData"]); //     yield put(setRamzorPress({ storeKey, status: consts.API_STATUS.START, error: null, loading: true, data: data }));
     //     const res = yield httpRequest(api.request, { url: 'setCompliance', method: 'post', data: dataToSend });
     //     if (res.error) {
     //         const errType = res.message === 'Network Error' ? consts.API_STATUS.FAILED_NETWORK : consts.API_STATUS.FAILED;
@@ -9084,11 +9120,27 @@ function* updateTablesValues(action) {
     //             storeKey, status: consts.API_STATUS.FINISHED, error: null, loading: false, data: dataForClient
     //         }));
     //     }
-    const data = values;
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setValues"])({
+    ////// after submit
+    // // UE4TWorkingParameters 
+
+    newValues['j79'] = newValues.j64 * 1.2;
+    newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2); // Th4eoretical Energy Savings 
+
+    newValues['d79'] = newValues.j14;
+    newValues['d80'] = newValues.j16;
+    newValues['d81'] = newValues.d80 * 0.2285 / 2.54;
+    newValues['d82'] = (newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56 - newValues.d79 * 0.284 * newValues.c56 * newValues.d50) * 0.75; // RO4I Calculation
+
+    newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55;
+    newValues['d86'] = newValues.d82;
+    newValues['d87'] = newValues.j13;
+    newValues['d88'] = newValues.d49 / 33.33 * (1 + newValues.d81) / 20;
+    newValues['d89'] = newValues.j17;
+    newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89;
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setCalculatedData"])({
       error: null,
       loading: false,
-      data
+      data: newValues
     }));
   } catch (err) {
     console.log('error in onRamzorPress', err);
@@ -9791,6 +9843,17 @@ module.exports = require("regenerator-runtime");
 /***/ (function(module, exports) {
 
 module.exports = require("regenerator-runtime/runtime");
+
+/***/ }),
+
+/***/ "reselect":
+/*!***************************!*\
+  !*** external "reselect" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("reselect");
 
 /***/ }),
 

@@ -84,13 +84,12 @@ function SimpleTable(props) {
 SimpleTable.defaultProps = {
     data: [],
     headerCols: [],
-    tablesData: [],
 };
 
 SimpleTable.propTypes = {
     data: PropTypes.array,
     headerCols: PropTypes.array,
-    tablesData: PropTypes.array,
+    tablesData: PropTypes.object,
     tableTitle: PropTypes.string,
     waterAnalysisTitle: PropTypes.string,
 };

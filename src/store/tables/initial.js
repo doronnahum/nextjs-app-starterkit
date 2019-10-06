@@ -40,7 +40,7 @@ const defaultValues = {};
   item.fields.forEach((field) => {
     defaultValues[field.location] = field.defaultValue
   })
-  defaultValues['e30'] = 0
+  defaultValues['e30'] = 0 // because its is not in the tables data, it is sepereted
 })
 const initialState = {
   windowSize: {},
