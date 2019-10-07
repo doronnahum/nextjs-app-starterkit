@@ -40,10 +40,10 @@ const defaultValues = {};
   item.fields.forEach((field) => {
     defaultValues[field.location] = field.defaultValue
   })
-  defaultValues['e30'] = 0 // because its is not in the tables data, it is sepereted
+  defaultValues['e30'] = 0 // Because its is not in the tables data, it is sepereted
 });
 
-// sizing Factors 
+// sizing Factors  //  The user shouldnt see this, there for it is only in the redux and not in the tables
 defaultValues['j47'] = 50;
 defaultValues['j48'] = 10;
 defaultValues['j49'] = 20;
