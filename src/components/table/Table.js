@@ -54,13 +54,18 @@ function SimpleTable(props) {
 
                 {row.fields && row.fields.map((field) => {
                     return <TableCell key={field.location} align="left">
-                        {renderValueType(field, updateTablesValues, tableValues, classes)}
+                        {renderValueType(field, updateTablesValues, tableValues, classes, onBlur, onFocus)}
                     </TableCell>
                 })}
             </TableRow>
         })
     }
-
+    const onFocus = () => {
+        console.log('!!onFocus');
+    }
+    const onBlur = () => {
+        console.log('!!onBlur');
+    }
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>
@@ -91,7 +96,7 @@ SimpleTable.propTypes = {
     headerCols: PropTypes.array,
     tablesData: PropTypes.object,
     tableTitle: PropTypes.string,
-    waterAnalysisTitle: PropTypes.string,
+    waterAnalysisTitle: PropTypes.bool,
 };
 
 export default connect(SimpleTable)

@@ -11,7 +11,7 @@ export default class DemoCarousel extends Component {
                 <Carousel showThumbs={false} infiniteLoop>
                     <div>
                         <img src={tower}
-                            style={{ height: 500 }} />
+                            style={{ height: 500, width: 'fit-content' }} />
                         <p className="legend">building</p>
                     </div>
                     <div>

@@ -16,6 +16,7 @@ const getCalculateNewValues = (key, value, tableValues) => {
     newValues['f38'] = newValues.f32 / newValues.d32 * newValues.d38
     newValues['f39'] = newValues.f32 / newValues.d32 * newValues.d39
     newValues['d47'] = newValues.e30
+    newValues['d49'] = newValues.d11 * newValues.d23 * 1000
     newValues['d48'] = newValues.d49 / 560 / 1000
     newValues['e48'] = newValues.e49 / 560 / 1000
     newValues['e49'] = newValues.d11 * newValues.d23 * 1000
@@ -43,6 +44,21 @@ const getCalculateNewValues = (key, value, tableValues) => {
     newValues['e67'] = newValues.d67 * newValues.e47
     newValues['e69'] = newValues.d69 * newValues.e47 * 0.985
     newValues['e70'] = newValues.d70 * newValues.e47
+    // Sizing Factors
+    newValues['l47'] = newValues.d38 > 15 ? newValues.j47 : 0
+    newValues['l48'] = newValues.d34 > 250 ? newValues.j48 : 0
+    newValues['l49'] = newValues.d34 > 300 ? newValues.j49 : 0
+    newValues['l50'] = newValues.d15 === 'Ammonia' ? newValues.j50 + newValues.l47 + newValues.l48 + newValues.l49 + newValues.l51 + newValues.l52 + newValues.l53 : 0
+    newValues['l51'] = newValues.d16 === 'Freon' ? newValues.j51 : 0
+    newValues['l52'] = newValues.d14 > 100 ? newValues.j52 : 0
+    newValues['l53'] = newValues.D16 === 'evaporator - condenser*' ? newValues.j53 : 0
+    newValues['l54'] = newValues.d67 < 50 && newValues.e69 > 50 ? newValues.j54 : 0
+    newValues['l55'] = newValues.d24 > 60 ? newValues.j55 : 0
+    // sizingOfReactorsData
+    const arrL47_To_L53 = [newValues.l47, newValues.l48, newValues.l49, newValues.l50, newValues.l51, newValues.l52, newValues.l53]
+    console.log('arrL47_To_L53', arrL47_To_L53);
+
+    newValues['l58'] = newValues.d23 < 7 ? (((0.0032 * (newValues.e49 / 3000)) * 4) * (1 + Math.max(arrL47_To_L53)) * (1 + newValues.l54) * (1 + newValues.l55)) : (0.8 * ((0.0032 * (newValues.e49 / 3000)) * 4)) * (1 + Math.max(arrL47_To_L53)) * (1 + newValues.l54) * (1 + newValues.l55)
     // Mo4del Configuration
     newValues['i62'] = newValues.i58 / 4
     newValues['i63'] = newValues.i58 / 8
@@ -53,6 +69,7 @@ const getCalculateNewValues = (key, value, tableValues) => {
     // UE4T circulation flow rate
     newValues['i68'] = newValues.j64 * 100
     newValues['i69'] = newValues.j64 * 150
+
     // // UE4TWorkingParameters ////// after submit
     // newValues['j79'] = newValues.j64 * 1.2
     // newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2)
@@ -113,14 +130,17 @@ const getMarks = (row, ) => {
     return arr
 }
 
-export const renderValueType = (field, updateTablesValues, tableValues, classes) => {
+export const renderValueType = (field, updateTablesValues, tableValues, classes, onBlur, onFocus) => {
     const type = field.type
     switch (type) {
         case TYPES.NUMERIC:
             return <Input
                 id={field.location}
+                placeholder={tableValues[field.location] === 0 ? '' : (tableValues[field.location]).toString()}
                 label="Number"
-                value={tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                // value={tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
                 type="number"
                 className={classes.textField}
@@ -134,7 +154,7 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes)
                 step={field.data.ticks}
                 min={field.data.min}
                 max={field.data.max}
-                marks={getMarks(field.data)}
+                marks={getMarks(field.data)} //slowdown everything
                 valueLabelDisplay="on"
             />
         case TYPES.SELECT:
@@ -151,7 +171,8 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes)
         case TYPES.NOT_EDITABLE:
             return <Input
                 id={field.location}
-                value={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                // placeholder={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                value={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? 0 : tableValues[field.location].toFixed(2)}
                 readOnly
                 className={classes.textFieldUNEditable}
             />

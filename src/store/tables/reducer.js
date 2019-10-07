@@ -14,7 +14,6 @@ export default function tablesReducer(state = initialState, action) {
       return nextState;
     }
     case types.SET_CALCULATED_DATA: {
-      debugger
       const nextState = produce(state, draftState => {
         draftState.tablesData.data = { ...draftState.tablesData.data, ...data };
         draftState.tablesData.loading = loading;

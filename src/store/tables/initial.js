@@ -41,7 +41,19 @@ const defaultValues = {};
     defaultValues[field.location] = field.defaultValue
   })
   defaultValues['e30'] = 0 // because its is not in the tables data, it is sepereted
-})
+});
+
+// sizing Factors 
+defaultValues['j47'] = 50;
+defaultValues['j48'] = 10;
+defaultValues['j49'] = 20;
+defaultValues['j50'] = 100;
+defaultValues['j51'] = 50;
+defaultValues['j52'] = 10;
+defaultValues['j53'] = 50;
+defaultValues['j54'] = 25;
+defaultValues['j55'] = 1;
+
 const initialState = {
   windowSize: {},
   tablesData: {

@@ -65,7 +65,7 @@ class Tables extends Component {
                         data={thermodynamicCalculationsData}
                     />
                     <Table
-                        headerCols={['Sizing Factors', 'Benchmark', 'Factor', 'Actual']}
+                        headerCols={['Sizing Factors', 'Benchmark', 'Actual']}
                         data={sizingFactorsData}
                     />
                     <Table

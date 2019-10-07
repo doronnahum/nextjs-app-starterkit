@@ -18,7 +18,9 @@ function getDefaultValue(type) {
 //create tables with more than one values
 function createRowData(name, units, mandatory, fields) {
     fields.forEach(field => {
-        field.defaultValue = getDefaultValue(field.type)
+        if (!field.defaultValue) {
+            field.defaultValue = getDefaultValue(field.type)
+        }
     })
     return { name, units, mandatory, fields };
 }
@@ -26,10 +28,10 @@ function createRowData(name, units, mandatory, fields) {
 export const mechanicalPropertiesData = [
     createRowData('Number of CT (interconnected)', '# (interconnected cooling towers)', MANDATORY, [{ location: 'd8', type: TYPES.RANGE, data: { min: 0, max: 10, ticks: 1 } }]),
     createRowData('Number of Circulation Pumps', '#  (operational + standby) ', NOT_MANDATORY, [{ location: 'd9', type: TYPES.RANGE, data: { min: 0, max: 10, ticks: 1 } }]),
-    createRowData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, [{ location: 'd10', type: TYPES.RANGE, data: { min: 0, max: 50, ticks: 1 } }]),
+    createRowData('Total pumps flow rate capacity', 'm3/h', NOT_MANDATORY, [{ location: 'd10', type: TYPES.RANGE, data: { min: 0, max: 10000, ticks: 200 } }]),
     createRowData('Actual cooling circulation flow rate', 'm3/h', NOT_MANDATORY, [{ location: 'd11', type: TYPES.NUMERIC }]),
     createRowData('Available flowrate for UET units', 'm3/h', MANDATORY, [{ location: 'd12', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, [{ location: 'd13', type: TYPES.RANGE, data: { min: 0, max: 10, ticks: 1 } }]),
+    createRowData('Total Basin volume (with equation line)', 'm3', NOT_MANDATORY, [{ location: 'd13', type: TYPES.RANGE, data: { min: 0, max: 500, ticks: 1 } }]),
     createRowData('Pipe length from CT to H.Ex. (approx.)', 'meters', MANDATORY, [{ location: 'd14', type: TYPES.NUMERIC }]),
     createRowData('type of fluid to be chilled', 'Water/Ammonia/Freon/Ethylene-glycol', MANDATORY, [{ location: 'd15', type: TYPES.SELECT, data: ['', 'Water', 'Ammonia', 'Freon', 'Ethylene-glycol'] }]),
     createRowData('Cooling Tower type', 'external heat exchanger/evaporator - condenser*/direct contact', MANDATORY, [{ location: 'd16', type: TYPES.SELECT, data: ['', 'external heat exchanger', 'evaporator - condenser*', 'direct contact'] }]),
@@ -41,7 +43,7 @@ export const operationalPropertiesData = [
     createRowData('Skin Temp. (highest in the system) ', 'oC', MANDATORY, [{ location: 'd24', type: TYPES.RANGE, data: { min: 0, max: 100, ticks: 10 } }]),
     createRowData('Days of week in operation', 'days per week', MANDATORY, [{ location: 'd25', type: TYPES.RANGE, data: { min: 0, max: 7, ticks: 1 } }]),
     createRowData('Hours/day in operation)', 'hours per day', MANDATORY, [{ location: 'd26', type: TYPES.RANGE, data: { min: 0, max: 24, ticks: 1 } }]),
-    createRowData('# weeks in operation', 'weeks per year', MANDATORY, [{ location: 'd27', type: TYPES.NOT_EDITABLE }]),
+    createRowData('# weeks in operation', 'weeks per year', MANDATORY, [{ location: 'd27', type: TYPES.NUMERIC }]),
 ]
 
 export const waterOriginData = [
@@ -76,7 +78,7 @@ export const customersProblemsAndRequestsData = [
 
 export const waterAnalysisData = [
     createRowData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd32', type: TYPES.NUMERIC }, { location: 'e32', type: TYPES.NOT_EDITABLE }, { location: 'f32', type: TYPES.NOT_EDITABLE }]),
-    createRowData('pH', 'Units', MANDATORY, [{ location: 'd33', type: TYPES.NUMERIC }, { location: 'e33', type: TYPES.NUMERIC }, { location: 'f33', type: TYPES.NOT_EDITABLE }]),
+    createRowData('pH', 'Units', MANDATORY, [{ location: 'd33', type: TYPES.NUMERIC }, { location: 'e33', type: TYPES.NUMERIC }, { location: 'f33', type: TYPES.NOT_EDITABLE, defaultValue: 9 }]),
     createRowData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd34', type: TYPES.NUMERIC }, { location: 'e34', type: TYPES.NUMERIC }, { location: 'f34', type: TYPES.NOT_EDITABLE }]),
     createRowData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd35', type: TYPES.NUMERIC }, { location: 'e35', type: TYPES.NUMERIC }, { location: 'f35', type: TYPES.NOT_EDITABLE }]),
     createRowData('Chlorides', 'ppm', MANDATORY, [{ location: 'd36', type: TYPES.NUMERIC }, { location: 'e36', type: TYPES.NUMERIC }, { location: 'f36', type: TYPES.NOT_EDITABLE }]),
@@ -101,24 +103,24 @@ export const potentialWaterSavingData = [
 ]
 export const predictiveWaterAnalysis = [
     createRowData('Conductivity', 'µS/cm', MANDATORY, [{ location: 'd63', type: TYPES.NOT_EDITABLE }, { location: 'e63', type: TYPES.NOT_EDITABLE }]),
-    createRowData('pH', 'Units', MANDATORY, [{ location: 'd64', type: TYPES.NOT_EDITABLE }, { location: 'e64', type: TYPES.NOT_EDITABLE }]),
+    createRowData('pH', 'Units', MANDATORY, [{ location: 'd64', type: TYPES.NOT_EDITABLE }, { location: 'e64', type: TYPES.NOT_EDITABLE, defaultValue: 9 }]),
     createRowData('Total Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd65', type: TYPES.NOT_EDITABLE }, { location: 'e65', type: TYPES.NOT_EDITABLE }]),
     createRowData('Carbonate Hardness', 'ppm as CaCO3', MANDATORY, [{ location: 'd66', type: TYPES.NOT_EDITABLE }, { location: 'e66', type: TYPES.NOT_EDITABLE }]),
     createRowData('Chlorides', 'ppm', MANDATORY, [{ location: 'd67', type: TYPES.NOT_EDITABLE }, { location: 'e67', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Iron', 'ppm', MANDATORY, [{ location: 'd68', type: TYPES.NOT_EDITABLE }, { location: 'e68', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Iron', 'ppm', MANDATORY, [{ location: 'd68', type: TYPES.NOT_EDITABLE }, { location: 'e68', type: TYPES.NOT_EDITABLE, defaultValue: 9 }]),
     createRowData('Silica', 'ppm', MANDATORY, [{ location: 'd69', type: TYPES.NOT_EDITABLE }, { location: 'e69', type: TYPES.NOT_EDITABLE }]),
     createRowData('Sulphate', 'ppm', MANDATORY, [{ location: 'd70', type: TYPES.NOT_EDITABLE }, { location: 'e70', type: TYPES.NOT_EDITABLE }]),
 ]
 export const sizingFactorsData = [
-    createRowData('Silica Factor', '>15', MANDATORY, [{ location: 'j47', type: TYPES.NOT_EDITABLE }, { location: 'l47', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Hardness Factor', '>250', MANDATORY, [{ location: 'j48', type: TYPES.NOT_EDITABLE }, { location: 'l48', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Ammonia Factor', '>300', MANDATORY, [{ location: 'j49', type: TYPES.NOT_EDITABLE }, { location: 'l49', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Freon Factor', 'Ammonia', MANDATORY, [{ location: 'j50', type: TYPES.NOT_EDITABLE }, { location: 'l50', type: TYPES.NOT_EDITABLE }]),
-    createRowData('pPipe Length Factor', 'Freon', MANDATORY, [{ location: 'j51', type: TYPES.NOT_EDITABLE }, { location: 'l51', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Pipe Length Factor', '>100', MANDATORY, [{ location: 'j52', type: TYPES.NOT_EDITABLE }, { location: 'l52', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Evaporator - condenser Factor', 'Evaporator - condenser', MANDATORY, [{ location: 'j53', type: TYPES.NOT_EDITABLE }, { location: 'l53', type: TYPES.NOT_EDITABLE }]),
-    createRowData('High Silica and low chlorides', 'Cl<50 & Si>50', MANDATORY, [{ location: 'j54', type: TYPES.NOT_EDITABLE }, { location: 'l54', type: TYPES.NOT_EDITABLE }]),
-    createRowData('Skin Temp.', '>60', MANDATORY, [{ location: 'j55', type: TYPES.NOT_EDITABLE }, { location: 'l55', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Silica Factor', '>15', MANDATORY, [{ location: 'l47', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Hardness Factor', '>250', MANDATORY, [{ location: 'l48', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Ammonia Factor', '>300', MANDATORY, [{ location: 'l49', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Freon Factor', 'Ammonia', MANDATORY, [{ location: 'l50', type: TYPES.NOT_EDITABLE }]),
+    createRowData('pPipe Length Factor', 'Freon', MANDATORY, [{ location: 'l51', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Pipe Length Factor', '>100', MANDATORY, [{ location: 'l52', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Evaporator - condenser Factor', 'Evaporator - condenser', MANDATORY, [{ location: 'l53', type: TYPES.NOT_EDITABLE }]),
+    createRowData('High Silica and low chlorides', 'Cl<50 & Si>50', MANDATORY, [{ location: 'l54', type: TYPES.NOT_EDITABLE }]),
+    createRowData('Skin Temp.', '>60', MANDATORY, [{ location: 'l55', type: TYPES.NOT_EDITABLE }]),
 ]
 
 export const sizingOfReactorsData = [
