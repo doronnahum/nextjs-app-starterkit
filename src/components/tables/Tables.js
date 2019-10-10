@@ -11,14 +11,14 @@ import {
     customersProblemsAndRequestsData,
     thermodynamicCalculationsData,
     potentialWaterSavingData,
-    predictiveWaterAnalysis,
+    predictiveWaterAnalysisData,
     sizingFactorsData,
     sizingOfReactorsData,
     modelConfigurationData,
     UETCirculationFlowrateData,
     theoreticalEnergySavingsData,
     ROICalculationData,
-    UETWorkingParameters
+    UETWorkingParametersData
 } from 'src/components/data'
 
 class Tables extends Component {
@@ -34,7 +34,7 @@ class Tables extends Component {
 
                 <div className={className + '__section-1'}>
                     <Table
-                        headerCols={['Mechanical Properties1', 'Units', 'value']}
+                        headerCols={['Mechanical Properties', 'Units', 'value']}
                         data={mechanicalPropertiesData} />
                     <Table
                         headerCols={['Operational Properties', 'Units', 'value']}
@@ -43,7 +43,7 @@ class Tables extends Component {
                         headerCols={['Water Origin', 'Units', 'value']}
                         data={waterOriginData} />
                     <Table
-                        headerCols={['Operation Costs ', 'Units', 'value']}
+                        headerCols={['Operation Costs', 'Units', 'value']}
                         data={operationCostsData} />
                     <Table
                         headerCols={['Enironmental Data', 'Units', 'value']}
@@ -77,7 +77,7 @@ class Tables extends Component {
                     />
                     <Table
                         headerCols={['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation']}
-                        data={predictiveWaterAnalysis}
+                        data={predictiveWaterAnalysisData}
                     />
                     <Table
                         headerCols={['Model Configuration', '# of Units', 'rounded up']}
@@ -109,7 +109,7 @@ class Tables extends Component {
                         <h2>Working Parameters</h2>
                         <Table
                             headerCols={['UET working parameters (estimated*)', 'Units', 'Value']}
-                            data={UETWorkingParameters}
+                            data={UETWorkingParametersData}
                         />
 
                     </div>

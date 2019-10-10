@@ -131,7 +131,7 @@ const getMarks = (row, ) => {
 }
 
 export const renderValueType = (field, updateTablesValues, tableValues, classes, onBlur, onFocus) => {
-    const type = field.type
+    const { type, isMandatory } = field
     switch (type) {
         case TYPES.NUMERIC:
             return <Input

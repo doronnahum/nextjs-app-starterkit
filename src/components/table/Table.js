@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     TableCell: {
 
     },
+    TableInput: {
+        display: 'flex'
+    },
     textFieldUNEditable: {
         background: 'lightblue'
     }
@@ -53,8 +56,9 @@ function SimpleTable(props) {
                     </TableCell>}
 
                 {row.fields && row.fields.map((field) => {
-                    return <TableCell key={field.location} align="left">
+                    return <TableCell key={field.location} align="left" className={classes.TableInput}>
                         {renderValueType(field, updateTablesValues, tableValues, classes, onBlur, onFocus)}
+                        {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
                     </TableCell>
                 })}
             </TableRow>
@@ -67,7 +71,7 @@ function SimpleTable(props) {
         console.log('!!onBlur');
     }
     return (
-        <Paper className={classes.root}>
+        <Paper className={`${classes.root} table`}>
             <Table className={classes.table}>
                 <TableHead>
                     {tableTitle && <TableTitle className={classes.tableTitle} tableTitle={tableTitle} />}

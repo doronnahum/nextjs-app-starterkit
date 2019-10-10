@@ -8,14 +8,14 @@ import {
   customersProblemsAndRequestsData,
   thermodynamicCalculationsData,
   potentialWaterSavingData,
-  predictiveWaterAnalysis,
+  predictiveWaterAnalysisData,
   sizingFactorsData,
   sizingOfReactorsData,
   modelConfigurationData,
   UETCirculationFlowrateData,
   theoreticalEnergySavingsData,
   ROICalculationData,
-  UETWorkingParameters
+  UETWorkingParametersData
 } from 'src/components/data'
 const defaultValues = {};
 
@@ -28,14 +28,14 @@ const defaultValues = {};
 ...customersProblemsAndRequestsData,
 ...thermodynamicCalculationsData,
 ...potentialWaterSavingData,
-...predictiveWaterAnalysis,
+...predictiveWaterAnalysisData,
 ...sizingFactorsData,
 ...sizingOfReactorsData,
 ...modelConfigurationData,
 ...UETCirculationFlowrateData,
 ...theoreticalEnergySavingsData,
 ...ROICalculationData,
-...UETWorkingParameters
+...UETWorkingParametersData
 ].forEach(item => {
   item.fields.forEach((field) => {
     defaultValues[field.location] = field.defaultValue
