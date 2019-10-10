@@ -7,20 +7,30 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withTranslation } from 'src/services/i18n'
-const logo = 'static/images/Logo.png'
+const logo = '/static/images/uet-logo.png'
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        position: 'fixed',
+        top: 0,
+        zIndex: 2,
+        width: '100%'
     },
     header: {
-        height: '65px'
+        height: '65px',
+        backgroundColor: '#09152B'
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
-        flexGrow: 1,
-    },
+
+    titleContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+        marginRight: 100
+    }
 }));
 
 function ButtonAppBar({ title, t }) {
@@ -29,17 +39,18 @@ function ButtonAppBar({ title, t }) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.header} >
-                    <Button color="inherit"><img src={logo} alt='logo' /></Button>
+                    <Button color="inherit">
+                        <img src={logo} alt='logo' style={{ height: 40 }} />
+                    </Button>
 
-                    <Typography variant="h6" className={classes.title}>
-                        UET
+                    <div className={classes.titleContainer}>
+                        <Typography variant="h6" className={classes.title}>
+                            START SIMULATOR HERE
                     </Typography>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+                    </div>
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     );
 }
 

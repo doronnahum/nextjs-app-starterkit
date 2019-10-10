@@ -10,9 +10,9 @@ import { updateStepper } from './utils'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '90%',
+        width: '100%',
         position: 'fixed',
-        top: '0',
+        top: 65,
         zIndex: 2
     },
     stepper: {
@@ -29,8 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 function getSteps() {
     return ['Mechanical Properties', 'Operational Properties', 'Water Origin', 'Operation Costs',
-        'Enironmental Data', 'Customer\'s problems and requests', 'Water Analysis', 'Thermodynamic Calculations',
-        'Sizing Factors', 'Potential Water Saving', 'Predictive Water Analysis', 'Model Configuration', 'UET circulation flow rate'];
+        'Enironmental Data', 'Customer\'s problems and requests', 'Water Analysis', 'Thermodynamic Calculations'];
 }
 
 function getStepContent(step) {

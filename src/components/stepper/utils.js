@@ -19,7 +19,7 @@ import {
 } from 'src/components/data/index.js'
 
 
-export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, skipped, setSkipped,setActiveStep) => {
+export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, skipped, setSkipped, setActiveStep) => {
     const filled = fields.every(field => tablesData[field])
     let _skipped = [...skipped]
     if (filled) {
@@ -38,7 +38,7 @@ export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, sk
     }
 }
 
-export const updateStepper = (tablesData, skipped, setSkipped,setActiveStep) => {
+export const updateStepper = (tablesData, skipped, setSkipped, setActiveStep) => {
     const mechanicalPropertiesMandatory = {
         index: 0,
         fields: mechanicalPropertiesData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
@@ -71,42 +71,6 @@ export const updateStepper = (tablesData, skipped, setSkipped,setActiveStep) => 
         index: 7,
         fields: thermodynamicCalculationsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
     }
-    const potentialWaterSaving = {
-        index: 8,
-        fields: potentialWaterSavingData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const predictiveWaterAnalysis = {
-        index: 9,
-        fields: predictiveWaterAnalysisData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const sizingFactors = {
-        index: 10,
-        fields: sizingFactorsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const sizingOfReactors = {
-        index: 11,
-        fields: sizingOfReactorsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const modelConfiguration = {
-        index: 12,
-        fields: modelConfigurationData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const UETCirculationFlowrate = {
-        index: 13,
-        fields: UETCirculationFlowrateData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const theoreticalEnergySavings = {
-        index: 14,
-        fields: theoreticalEnergySavingsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const ROICalculation = {
-        index: 15,
-        fields: ROICalculationData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const UETWorkingParameters = {
-        index: 16,
-        fields: UETWorkingParametersData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
     const arr = [
         mechanicalPropertiesMandatory,
         operationalPropertiesMandatory,
@@ -116,19 +80,9 @@ export const updateStepper = (tablesData, skipped, setSkipped,setActiveStep) => 
         customersProblemsAndRequests,
         waterAnalysis,
         thermodynamicCalculations,
-        potentialWaterSaving,
-        predictiveWaterAnalysis,
-        sizingFactors,
-        sizingOfReactors,
-        modelConfiguration,
-        UETCirculationFlowrate,
-        theoreticalEnergySavings,
-        ROICalculation,
-        UETWorkingParameters,
-
     ]
     arr.forEach((data) => {
-        areTableMandatoryFieldsFilled(data.fields, data.index, tablesData, skipped, setSkipped,setActiveStep)
+        areTableMandatoryFieldsFilled(data.fields, data.index, tablesData, skipped, setSkipped, setActiveStep)
     })
 
 }
