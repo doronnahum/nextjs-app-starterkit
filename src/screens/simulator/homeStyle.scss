@@ -1,15 +1,18 @@
 @import "src/styles/tools.scss";
+@import "src/styles/fonts.scss";
 
 .home-screen {
   height: 100%;
-  background: red;
+  // background: red;
   &__body {
-    background: orange;
+    height: 100%;
+    // background: orange;
     position: relative;
     .swiper-container {
       margin-bottom: 50px;
     }
     &__tables-and-picture {
+      height: 100%;
       @include grid(1em, center, flex-start, 1.3fr 1fr, auto);
       margin-top: 150px;
       &__pic {
@@ -22,12 +25,19 @@
         .table {
           // background: red;
           &__title {
-            font-family: Helvetica-Bold;
-            font-weight: bold;
-            font-size: 18px;
-            color: #193a77;
-            letter-spacing: 0;
-            line-height: 24px;
+            @include table-title();
+            padding-left: 1em;
+          }
+          .value-and-mandatory {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+          }
+          .row-text {
+            @include row-text();
+          }
+          .table-units {
+            @include table-units();
           }
         }
         @include uptoMd {

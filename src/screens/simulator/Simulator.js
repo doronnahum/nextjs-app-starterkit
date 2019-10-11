@@ -20,14 +20,14 @@ export default class Simulator extends Component {
                     {/* <Swiper className='swiper-container' /> */}
                     <Stepper />
                     <div className={'home-screen__body__tables-and-picture'}>
-                        <Scrollbars style={{ width: '100%', height: '100vh' }}>
+                        <Scrollbars style={{ width: '100%', height: '100%' }}>
                             <Tables className='tables' />
                         </Scrollbars>
                         <div className={'home-screen__body__tables-and-picture__pic'} >
                             <img src={machine} style={{ width: 400 }} />
                         </div>
                     </div>
-                    <div style={{
+                    {/* <div style={{
                         height: 100,
                         backgroundColor: 'lightblue',
                         alignItems: 'center',
@@ -35,9 +35,9 @@ export default class Simulator extends Component {
                         display: 'flex'
                     }}>
                         start save today
-                    </div>
+                    </div> */}
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div >
         )
     }

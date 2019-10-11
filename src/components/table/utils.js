@@ -70,22 +70,6 @@ const getCalculateNewValues = (key, value, tableValues) => {
     newValues['i68'] = newValues.j64 * 100
     newValues['i69'] = newValues.j64 * 150
 
-    // // UE4TWorkingParameters ////// after submit
-    // newValues['j79'] = newValues.j64 * 1.2
-    // newValues['j80'] = newValues.j64 * (2.35 * 1.2) * (1 + 0.2)
-    // // Th4eoretical Energy Savings 
-    // newValues['d79'] = newValues.j14
-    // newValues['d80'] = newValues.j16
-    // newValues['d81'] = newValues.d80 * 0.2285 / 2.54
-    // newValues['d82'] = ((newValues.d50 * (newValues.d79 * 0.284) * (newValues.d81 + 1) * newValues.c56) - ((newValues.d79 * 0.284) * newValues.c56 * newValues.d50)) * 0.75
-    // // RO4I Calculation
-    // newValues['d85'] = (newValues.j9 + newValues.j10) * newValues.c56 * newValues.c55
-    // newValues['d86'] = newValues.d82
-    // newValues['d87'] = newValues.j13
-    // newValues['d88'] = (newValues.d49 / 33.33) * (1 + newValues.d81) / 20
-    // newValues['d89'] = newValues.j17
-    // newValues['d91'] = newValues.d85 + newValues.d86 + newValues.d87 + newValues.d88 + newValues.d89
-
     return newValues
 }
 export const handleInputChange = (e, updateTablesValues, tableValues) => {
@@ -134,48 +118,60 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes,
     const { type, isMandatory } = field
     switch (type) {
         case TYPES.NUMERIC:
-            return <Input
-                id={field.location}
-                placeholder={tableValues[field.location] === 0 ? '' : (tableValues[field.location]).toString()}
-                label="Number"
-                // value={tableValues[field.location] === 0 ? '' : tableValues[field.location]}
-                onBlur={onBlur}
-                onFocus={onFocus}
-                onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
-                type="number"
-                className={classes.textField}
-            />
+            return <div className='value-and-mandatory'>
+                <Input
+                    id={field.location}
+                    placeholder={tableValues[field.location] === 0 ? '' : (tableValues[field.location]).toString()}
+                    label="Number"
+                    // value={tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                    onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
+                    type="number"
+                    className={classes.textField}
+                />
+                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+            </div>
         case TYPES.RANGE:
-            return <Slider
-                defaultValue={tableValues[field.location]}//Math.floor((field.min + field.max) / 2)
-                getAriaValueText={valuetext}
-                onChange={(e, val) => onChangeSlider(e, val, field.location, updateTablesValues, tableValues)}
-                aria-labelledby="discrete-slider-always"
-                step={field.data.ticks}
-                min={field.data.min}
-                max={field.data.max}
-                marks={getMarks(field.data)} //slowdown everything
-                valueLabelDisplay="on"
-            />
+            return <div className='value-and-mandatory'>
+                <Slider
+                    defaultValue={tableValues[field.location]}//Math.floor((field.min + field.max) / 2)
+                    getAriaValueText={valuetext}
+                    onChange={(e, val) => onChangeSlider(e, val, field.location, updateTablesValues, tableValues)}
+                    aria-labelledby="discrete-slider-always"
+                    step={field.data.ticks}
+                    min={field.data.min}
+                    max={field.data.max}
+                    marks={getMarks(field.data)} //slowdown everything
+                    valueLabelDisplay="on"
+                />
+                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+            </div>
         case TYPES.SELECT:
-            return <Select
-                id={field.location}
-                native
-                value={tableValues[field.location]}
-                onChange={(e) => handleSelectChange(e, updateTablesValues, tableValues)}
-            >
-                {field.data.map((item, i) => {
-                    return <option key={i} value={item}>{item}</option>
-                })}
-            </Select>
+            return <div className='value-and-mandatory'>
+                <Select
+                    id={field.location}
+                    native
+                    value={tableValues[field.location]}
+                    onChange={(e) => handleSelectChange(e, updateTablesValues, tableValues)}
+                >
+                    {field.data.map((item, i) => {
+                        return <option key={i} value={item}>{item}</option>
+                    })}
+                </Select>
+                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+            </div>
         case TYPES.NOT_EDITABLE:
-            return <Input
-                id={field.location}
-                // placeholder={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? '' : tableValues[field.location]}
-                value={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? 0 : tableValues[field.location].toFixed(2)}
-                readOnly
-                className={classes.textFieldUNEditable}
-            />
+            return <div className='value-and-mandatory'>
+                <Input
+                    id={field.location}
+                    // placeholder={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? '' : tableValues[field.location]}
+                    value={isNaN(tableValues[field.location]) || tableValues[field.location] === 0 ? 0 : tableValues[field.location].toFixed(2)}
+                    readOnly
+                    className={classes.textFieldUNEditable}
+                />
+                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+            </div>
         default:
             return field.type
     }

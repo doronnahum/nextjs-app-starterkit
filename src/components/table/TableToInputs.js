@@ -27,11 +27,11 @@ const useStyles = makeStyles(theme => ({
         fontSize: 20
     },
     TableRow: {
-// backgroundColor:'red',
+        // backgroundColor:'red',
 
     },
     TableCell: {
-padding:'2em 2em !important'
+        padding: '2em 2em !important'
     },
     TableInput: {
         // display: 'flex'
@@ -50,7 +50,7 @@ function SimpleTable(props) {
         if (!data) return <NoDataTableCell className={classes.TableCell} />
         return data.map((row, i) => {
             return <TableRow key={i} className={classes.TableRow}>
-                <TableCell align="left" className={classes.TableCell}>
+                <TableCell align="left" className={`${classes.TableCell} row-text`}>
                     {row.name}
                 </TableCell>
 
@@ -60,15 +60,18 @@ function SimpleTable(props) {
                     </TableCell>} */}
 
                 {row.fields && row.fields.map((field) => {
-                    return <TableCell key={field.location} align="left" className={classes.TableCell}>
-                            {row.units && <div >{row.units}</div>} 
-                            <div style={{display:'flex'}} >
+                    return <TableCell key={field.location} align="right" className={classes.TableCell}>
+                        {row.units && <div className='table-units' style={{ textAlign: 'right' }}>
+                            {tablesData[field.location]} {row.units}
+                        </div>}
+
                         {renderValueType(field, updateTablesValues, tableValues, classes, onBlur, onFocus)}
-                        {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
-                            </div>
+                        {/* {field.isMandatory && <div style={{ color: 'red' }}>***</div>} */}
+
                     </TableCell>
-                })}
-            </TableRow>
+                })
+                }
+            </TableRow >
         })
     }
     const onFocus = () => {
@@ -79,11 +82,11 @@ function SimpleTable(props) {
     }
     return (
         <div className='table'>
-         <div  className='table__title' style={{marginBottom:'1em'}}>Mechanical Properties</div>
-        <Paper className={`${classes.root}`}>
+            <div className='table__title' style={{ marginBottom: '1em' }}>Mechanical Properties</div>
+            <Paper className={`${classes.root}`}>
 
-            <Table className={classes.table}>
-                {/* <TableHead> */}
+                <Table className={classes.table}>
+                    {/* <TableHead> */}
                     {/* {tableTitle && <TableTitle className={classes.tableTitle} tableTitle={tableTitle} />} */}
                     {/* happens only in Water Analysis table */}
                     {/* {waterAnalysisTitle
@@ -91,14 +94,14 @@ function SimpleTable(props) {
                         handleInputChange={(e) => handleInputChange(e, updateTablesValues, tableValues)} />} */}
                     {/* ---- */}
                     {/* {headerCols && <HeaderCols data={headerCols} />} */}
-                {/* </TableHead> */}
-                
-                <TableBody>
-                    {renderTableData()}
-                </TableBody>
-            </Table>
-        </Paper>
-                        </div>
+                    {/* </TableHead> */}
+
+                    <TableBody>
+                        {renderTableData()}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </div>
     );
 }
 
