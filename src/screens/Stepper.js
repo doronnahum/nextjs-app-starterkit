@@ -13,7 +13,7 @@ export default class Stepper extends Component {
                     <div style={{}}>
                         <Tables className='tables' />
                     </div>
-                    <div style={{ backgroundColor: 'red', }}>
+                    <div style={{}}>
                         <img src={machine} style={{ height: 300 }} />
                         {/* <Tables className='tables' /> */}
                     </div>

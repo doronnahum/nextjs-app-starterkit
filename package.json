@@ -22,6 +22,7 @@
     "produce": "^0.4.1",
     "prop-types": "latest",
     "react": "latest",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "latest",
     "react-dynamic-swiper": "^2.0.2",
     "react-redux": "^7.1.0",

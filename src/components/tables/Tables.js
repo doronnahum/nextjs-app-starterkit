@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table from 'src/components/table/Table'
+import TableToInputs from 'src/components/table/TableToInputs'
 import connect from './connect'
 import {
     mechanicalPropertiesData,
@@ -33,8 +34,8 @@ class Tables extends Component {
             <div className={className}>
 
                 <div className={className + '__section-1'}>
-                    <Table
-                        headerCols={['Mechanical Properties', 'Units', 'value']}
+                    <TableToInputs
+                        headerCols={['Mechanical Properties', 'value']}
                         data={mechanicalPropertiesData} />
                     <Table
                         headerCols={['Operational Properties', 'Units', 'value']}
