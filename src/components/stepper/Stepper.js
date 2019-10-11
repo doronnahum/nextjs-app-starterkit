@@ -3,12 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
 import connect from './connect'
 import { updateStepper } from './utils'
+import './stepper.scss'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
+
     root: {
         width: '100%',
         position: 'fixed',
@@ -16,7 +18,24 @@ const useStyles = makeStyles(theme => ({
         zIndex: 2
     },
     stepper: {
-        backgroundColor: 'lightblue'
+        backgroundColor: '#2554AD'
+    },
+    iconRoot: {
+        backgroundColor: 'white',
+        borderRadius: '50%',
+    },
+    iconCompleted: {
+        backgroundColor: 'white',
+        color: '#69DB4D !important'
+    },
+    label: {
+        color: 'white !important',
+        opacity: 0.44,
+        fontFamily: 'Helvetica',
+        fontSize: 14,
+    },
+    labelActive: {
+        opacity: 1,
     },
     button: {
         marginRight: theme.spacing(1),
@@ -32,18 +51,18 @@ function getSteps() {
         'Enironmental Data', 'Customer\'s problems and requests', 'Water Analysis', 'Thermodynamic Calculations'];
 }
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return 'Select campaign settings...';
-        case 1:
-            return 'What is an ad group anyways?';
-        case 2:
-            return 'This is the bit I really care about!';
-        default:
-            return 'Unknown step';
-    }
-}
+// function getStepContent(step) {
+//     switch (step) {
+//         case 0:
+//             return 'Select campaign settings...';
+//         case 1:
+//             return 'What is an ad group anyways?';
+//         case 2:
+//             return 'This is the bit I really care about!';
+//         default:
+//             return 'Unknown step';
+//     }
+// }
 
 function HorizontalLinearStepper(props) {
     const classes = useStyles();
@@ -112,14 +131,28 @@ function HorizontalLinearStepper(props) {
                     const stepProps = {};
                     const labelProps = {};
                     if (isStepOptional(index, label)) {
-                        labelProps.optional = <Typography variant="caption">Optional</Typography>;
+                        // labelProps.optional = <Typography variant="caption">Optional</Typography>;
                     }
                     if (isStepSkipped(index)) {
                         stepProps.completed = false;
                     }
                     return (
-                        <Step key={label} {...stepProps}>
-                            <StepLabel {...labelProps}>{label}</StepLabel>
+                        <Step key={label}  {...stepProps} classes={{ completed: classes.completed }}>
+                            <StepLabel
+                                classes={{
+                                    root: classes.rootlabel,
+                                    label: classes.label,
+                                    active: classes.labelActive,
+                                }}
+                                StepIconProps={{
+                                    classes: {
+                                        root: classes.iconRoot,
+                                        completed: classes.iconCompleted,
+                                    }
+                                }}
+                                {...labelProps}>
+                                {label}
+                            </StepLabel>
                         </Step>
                     );
                 })}
@@ -128,7 +161,7 @@ function HorizontalLinearStepper(props) {
                 {/* here long text */}
 
             </div>
-        </div>
+        </div >
     );
 }
 
