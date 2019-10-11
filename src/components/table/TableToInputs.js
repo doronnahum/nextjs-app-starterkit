@@ -13,6 +13,7 @@ import NoDataTableCell from 'src/components/table/NoDataTableCell'
 import WaterAnalysisTitle from 'src/components/table/WaterAnalysisTitle'
 import PropTypes from 'prop-types';
 import connect from './connect'
+import { TYPES } from 'src/components/data'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -61,7 +62,7 @@ function SimpleTable(props) {
 
                 {row.fields && row.fields.map((field) => {
                     return <TableCell key={field.location} align="right" className={classes.TableCell}>
-                        {row.units && <div className='table-units' style={{ textAlign: 'right' }}>
+                        {row.units && field.type !==TYPES.SELECT && <div className='table-units' style={{ textAlign: 'right' }}>
                             {tablesData[field.location]} {row.units}
                         </div>}
 

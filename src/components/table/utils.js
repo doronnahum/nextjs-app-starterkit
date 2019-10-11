@@ -156,7 +156,7 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes,
                     onChange={(e) => handleSelectChange(e, updateTablesValues, tableValues)}
                 >
                     {field.data.map((item, i) => {
-                        return <option key={i} value={item}>{item}</option>
+                        return <option key={i} value={item}>{item || 'Select one option'}</option>
                     })}
                 </Select>
                 {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
