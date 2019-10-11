@@ -30,7 +30,7 @@ function createRowData(name, units, fields) {
 export const mechanicalPropertiesData = [
     createRowData('Number of CT (interconnected)', '# (interconnected cooling towers)', [{ location: 'd8', type: TYPES.RANGE, data: { min: 0, max: 10, ticks: 1 }, isMandatory: NOT_MANDATORY }]),
     createRowData('Number of Circulation Pumps', '#  (operational + standby) ', [{ location: 'd9', type: TYPES.RANGE, data: { min: 0, max: 10, ticks: 1 }, isMandatory: NOT_MANDATORY }]),
-    createRowData('Total pumps flow rate capacity', 'm3/h', [{ location: 'd10', type: TYPES.RANGE, data: { min: 0, max: 10000, ticks: 200 }, isMandatory: NOT_MANDATORY }]),
+    createRowData('Total pumps flow rate capacity', 'm3/h', [{ location: 'd10', type: TYPES.RANGE, data: { min: 0, max: 10000, ticks: 200 }, isMandatory: MANDATORY }]),
     createRowData('Actual cooling circulation flow rate', 'm3/h', [{ location: 'd11', type: TYPES.NUMERIC, isMandatory: NOT_MANDATORY }]),
     createRowData('Available flowrate for UET units', 'm3/h', [{ location: 'd12', type: TYPES.NOT_EDITABLE, isMandatory: NOT_MANDATORY }]),
     createRowData('Total Basin volume (with equation line)', 'm3', [{ location: 'd13', type: TYPES.RANGE, data: { min: 0, max: 500, ticks: 1 }, isMandatory: NOT_MANDATORY }]),
