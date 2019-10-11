@@ -63,13 +63,15 @@ export const updateStepper = (tablesData, skipped, setSkipped, setActiveStep) =>
         index: 5,
         fields: customersProblemsAndRequestsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
     }
+
     const waterAnalysis = {
         index: 6,
         fields: waterAnalysisData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
     }
+
     const thermodynamicCalculations = {
         index: 7,
-        fields: thermodynamicCalculationsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
+        fields: ['e47'],
     }
     const arr = [
         mechanicalPropertiesMandatory,

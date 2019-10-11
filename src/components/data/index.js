@@ -65,8 +65,8 @@ export const enironmentalData = [
     createRowData('Discharge limitations', 'Sulfates (ppm)', [{ location: 'j21', type: TYPES.NUMERIC, isMandatory: MANDATORY }]),
     createRowData('Discharge limitations', 'pH', [{ location: 'j22', type: TYPES.NUMERIC, isMandatory: MANDATORY }]),
     createRowData('Discharge limitations', 'Chlorine (ppm)', [{ location: 'j23', type: TYPES.NUMERIC, isMandatory: MANDATORY }]),
-    createRowData('Water Source', 'Yes/No', [{ location: 'j24', type: TYPES.SELECT, data: ['', 'Yes', 'No'], isMandatory: MANDATORY }]),
-    createRowData('Water Source', 'Yes/No', [{ location: 'j25', type: TYPES.SELECT, data: ['', 'Yes', 'No'], isMandatory: MANDATORY }]),
+    createRowData('Problems with chemical storage', 'Yes/No', [{ location: 'j24', type: TYPES.SELECT, data: ['', 'Yes', 'No'], isMandatory: MANDATORY }]),
+    createRowData('Presence of heavy metals in the drain', 'Yes/No', [{ location: 'j25', type: TYPES.SELECT, data: ['', 'Yes', 'No'], isMandatory: MANDATORY }]),
 ]
 export const customersProblemsAndRequestsData = [
     createRowData('Water Conservation', null, [{ location: 'i29', type: TYPES.SELECT, data: ['', 'Yes', 'No'], isMandatory: MANDATORY }]),
