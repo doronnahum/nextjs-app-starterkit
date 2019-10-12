@@ -48,37 +48,38 @@ class Tables extends Component {
                         tableTitleBig={'Customer\'s problems and requests'}
                         data={customersProblemsAndRequestsData}
                     />
-                    <Table waterAnalysisTitle
-                        headerCols={['Water Analysis', 'Units', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
+                    <TableToInputs waterAnalysisTitle
+                        headerCols={['Water Analysis', 'Make up', 'Actual Circulation', 'Calculated Circulation']}
                         data={waterAnalysisData} />
                 </div>
                 <h1>Sizing</h1>
 
                 <div className={className + '__section-2-sizing'}>
-                    <Table
-                        headerCols={['Thermodynamic Calculations', 'Value', 'Current', 'UET']}
+                    <TableToInputs tableTitleBig='Thermodynamic Calculations'
+                        headerCols={['Thermodynamic Calculations', 'Current', 'UET']}
                         data={thermodynamicCalculationsData}
                     />
-                    <Table
+                    <TableToInputs tableTitleBig='Sizing Factors'
                         headerCols={['Sizing Factors', 'Benchmark', 'Actual']}
                         data={sizingFactorsData}
+                        marks
                     />
-                    <Table
+                    <TableToInputs tableTitleBig='Potential Water Saving'
                         headerCols={['Potential Water Saving', 'Value']}
                         data={potentialWaterSavingData}
                     />
-                    <Table
+                    <TableToInputs
                         data={sizingOfReactorsData}
                     />
-                    <Table
-                        headerCols={['Predictive Water Analysis', 'Units', 'Make up', 'UET Circulation']}
+                    <TableToInputs tableTitleBig='Predictive Water Analysis'
+                        headerCols={['Predictive Water Analysis', 'Make up', 'UET Circulation']}
                         data={predictiveWaterAnalysisData}
                     />
-                    <Table
+                    <TableToInputs tableTitleBig='Model Configuration'
                         headerCols={['Model Configuration', '# of Units', 'rounded up']}
                         data={modelConfigurationData}
                     />
-                    <Table
+                    <TableToInputs tableTitleBig='UET circulation flow rate'
                         headerCols={['UET circulation flow rate', 'm3/h']}
                         data={UETCirculationFlowrateData}
                     />
@@ -91,19 +92,18 @@ class Tables extends Component {
                 <h3>note: this Savings calculation is a theoretical tool and might change from different places </h3>
                 <div className={className + '__section-3-savings-calculation'}>
                     <div>
-                        <Table
-                            headerCols={['Theoretical Energy Savings', 'Units', 'Value']}
+                        <TableToInputs tableTitleBig='Theoretical Energy Savings'
                             data={theoreticalEnergySavingsData}
                         />
-                        <Table
-                            headerCols={['ROI Calculation', '', '$USD/Year']}
+                        <TableToInputs tableTitleBig='ROI Calculation'
+                            // headerCols={['ROI Calculation', '', '$USD/Year']}
                             data={ROICalculationData}
                         />
                     </div>
                     <div>
-                        <h2>Working Parameters</h2>
-                        <Table
-                            headerCols={['UET working parameters (estimated*)', 'Units', 'Value']}
+                        {/* <h2>Working Parameters</h2> */}
+                        <TableToInputs tableTitleBig='UET working parameters (estimated*)'
+                            // headerCols={['UET working parameters (estimated*)', 'Units', 'Value']}
                             data={UETWorkingParametersData}
                         />
 

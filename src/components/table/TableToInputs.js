@@ -27,7 +27,9 @@ const useStyles = makeStyles(theme => ({
     tableTitle: {
         fontSize: 20
     },
-
+    TableRow:{
+position:'relative'
+    },
     TableCell: {
         padding: '2em 2em !important'
     },
@@ -43,25 +45,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SimpleTable(props) {
-    const { data, headerCols, tableTitle, tablesData, waterAnalysisTitle, actions, tableTitleBig } = props
+    const { data, headerCols, tableTitle, tablesData, waterAnalysisTitle, actions, tableTitleBig,marks } = props
     const { updateTablesValues } = actions
     const classes = useStyles();
     const tableValues = tablesData
     const renderTableData = () => {
         if (!data) return <NoDataTableCell className={classes.TableCell} />
         return data.map((row, i) => {
-            return <TableRow key={i}>
+            return <TableRow key={i} className={classes.TableRow}>
                 <TableCell align="left" className={`${classes.TableCell} row-text`}>
                     {row.name}
                 </TableCell>
 
-                {/* {row.units &&
+                {row.units && marks &&
                     <TableCell align="left">
                         {row.units}
-                    </TableCell>} */}
+                    </TableCell>}
 
                 {row.fields && row.fields.map((field) => {
-                    return <TableCell key={field.location} align="right" className={classes.TableCell}>
+                    return <TableCell key={field.location} align="right" className={`${classes.TableCell} tableCell-value`}>
                         {renderValueType(field, updateTablesValues, tableValues, classes, row.units)}
                     </TableCell>
                 })
@@ -79,11 +81,11 @@ function SimpleTable(props) {
                     {/* <TableHead> */}
                     {/* {tableTitle && <TableTitle className={classes.tableTitle} tableTitle={tableTitle} />} */}
                     {/* happens only in Water Analysis table */}
-                    {/* {waterAnalysisTitle
+                    {waterAnalysisTitle
                         && <WaterAnalysisTitle value={tableValues['e30']}
-                        handleInputChange={(e) => handleInputChange(e, updateTablesValues, tableValues)} />} */}
+                        handleInputChange={(e) => handleInputChange(e, updateTablesValues, tableValues)} />}
                     {/* ---- */}
-                    {/* {headerCols && <HeaderCols data={headerCols} />} */}
+                    {headerCols && <HeaderCols data={headerCols} />}
                     {/* </TableHead> */}
 
                     <TableBody>

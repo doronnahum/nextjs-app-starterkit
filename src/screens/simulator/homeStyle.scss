@@ -21,42 +21,48 @@
     }
     .tables {
       padding: 2em 5em;
-      &__section-1 {
-        .table {
-          // background: red;
-          &__title {
-            @include table-title();
-            padding-left: 1em;
-          }
+      // &__section-1 {
+      .table {
+        margin-top: 3em;
+        // background: red;
+        &__title {
+          @include table-title();
+          padding-left: 1em;
+        }
+        .tableCell-value {
+          position: relative;
           .value-and-mandatory {
-            position: relative;
+            // position: relative;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             .mandatory {
               color: red;
               position: absolute;
-              right: -60px;
+              right: 20px;
+              top: 0;
             }
           }
-          .table-units {
-            @include table-units();
-          }
+        }
+        .table-units {
+          @include table-units();
+        }
 
-          .table-units-in-input {
-            @include table-units-in-input();
-            position: absolute;
-          }
-          .row-text {
-            @include row-text();
-          }
+        .table-units-in-input {
+          @include table-units-in-input();
+          position: absolute;
+          top: 32px;
         }
-        @include uptoMd {
-          // @include grid(1em, center, center, 1fr, auto);
+        .row-text {
+          @include row-text();
         }
-        @include grid(1em, center, center, 1fr, auto);
-        // background: green;
       }
+      @include uptoMd {
+        // @include grid(1em, center, center, 1fr, auto);
+      }
+      @include grid(1em, center, center, 1fr, auto);
+      // background: green;
+      // }
       &__section-2-sizing {
         @include uptoMd {
           // @include grid(1em, center, center, 1fr, auto);
@@ -66,9 +72,9 @@
       }
       &__section-3-savings-calculation {
         @include uptoMd {
-          @include grid(1em, center, center, 1fr, auto);
         }
-        @include grid(2em, center, flex-start, 1fr 1fr, auto);
+        @include grid(1em, center, center, 1fr, auto);
+        // @include grid(2em, center, flex-start, 1fr 1fr, auto);
         // background: green;
       }
     }
