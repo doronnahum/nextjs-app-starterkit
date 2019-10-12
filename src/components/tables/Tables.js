@@ -34,24 +34,18 @@ class Tables extends Component {
             <div className={className}>
 
                 <div className={className + '__section-1'}>
-                    <TableToInputs
-                        headerCols={['Mechanical Properties', 'value']}
+                    <TableToInputs tableTitleBig='Mechanical Properties'
                         data={mechanicalPropertiesData} />
-                    <Table
-                        headerCols={['Operational Properties', 'Units', 'value']}
+                    <TableToInputs tableTitleBig='Operational Properties'
                         data={operationalPropertiesData} />
-                    <Table
-                        headerCols={['Water Origin', 'Units', 'value']}
+                    <TableToInputs tableTitleBig='Water Origin'
                         data={waterOriginData} />
-                    <Table
-                        headerCols={['Operation Costs', 'Units', 'value']}
+                    <TableToInputs tableTitleBig='Operation Costs'
                         data={operationCostsData} />
-                    <Table
-                        headerCols={['Enironmental Data', 'Units', 'value']}
+                    <TableToInputs tableTitleBig='Enironmental Data'
                         data={enironmentalData} />
-                    <Table
-                        tableTitle={'Customer\'s problems and requests'}
-                        headerCols={['Option List', 'Mark if applicable']}
+                    <TableToInputs
+                        tableTitleBig={'Customer\'s problems and requests'}
                         data={customersProblemsAndRequestsData}
                     />
                     <Table waterAnalysisTitle

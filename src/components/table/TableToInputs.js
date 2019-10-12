@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     tableTitle: {
         fontSize: 20
     },
-  
+
     TableCell: {
         padding: '2em 2em !important'
     },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         // display: 'flex'
     },
     select: {
-        width: '100%'
+        width: '14em'
     },
     textFieldUNEditable: {
         background: 'lightblue'
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SimpleTable(props) {
-    const { data, headerCols, tableTitle, tablesData, waterAnalysisTitle, actions } = props
+    const { data, headerCols, tableTitle, tablesData, waterAnalysisTitle, actions, tableTitleBig } = props
     const { updateTablesValues } = actions
     const classes = useStyles();
     const tableValues = tablesData
@@ -72,7 +72,7 @@ function SimpleTable(props) {
 
     return (
         <div className='table'>
-            <div className='table__title' style={{ marginBottom: '1em' }}>Mechanical Properties</div>
+            <div className='table__title' style={{ marginBottom: '1em' }}>{tableTitleBig}</div>
             <Paper className={`${classes.root}`}>
 
                 <Table className={classes.table}>
