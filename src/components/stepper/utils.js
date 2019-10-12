@@ -17,8 +17,6 @@ import {
     // ROICalculationData,
     // UETWorkingParametersData,
 } from 'src/components/data/index.js'
-import { array } from 'prop-types'
-
 
 export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, skipped, setSkipped, setActiveStep) => {
     debugger
