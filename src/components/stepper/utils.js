@@ -7,19 +7,21 @@ import {
     customersProblemsAndRequestsData,
     waterAnalysisData,
     thermodynamicCalculationsData,
-    potentialWaterSavingData,
-    predictiveWaterAnalysisData,
-    sizingFactorsData,
-    sizingOfReactorsData,
-    modelConfigurationData,
-    UETCirculationFlowrateData,
-    theoreticalEnergySavingsData,
-    ROICalculationData,
-    UETWorkingParametersData,
+    // potentialWaterSavingData,
+    // predictiveWaterAnalysisData,
+    // sizingFactorsData,
+    // sizingOfReactorsData,
+    // modelConfigurationData,
+    // UETCirculationFlowrateData,
+    // theoreticalEnergySavingsData,
+    // ROICalculationData,
+    // UETWorkingParametersData,
 } from 'src/components/data/index.js'
+import { array } from 'prop-types'
 
 
 export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, skipped, setSkipped, setActiveStep) => {
+    debugger
     const filled = fields.every(field => tablesData[field])
     let _skipped = [...skipped]
     if (filled) {
@@ -38,53 +40,41 @@ export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, sk
     }
 }
 
+const tablesMandatoryFields = {}
+
+// find the mandatory fields and push them to the object 'tablesMandatoryFields'
+//**
+//  * 
+//  * @param {array} data 
+//  * @param {string} name 
+//  */
+const setMandatorydata = (data, name) => {
+    data.forEach(row => row.fields.forEach(field => {
+        if (field.isMandatory) {
+            if (tablesMandatoryFields[name]) {
+                tablesMandatoryFields[name].push(field.location)
+            } else {
+                tablesMandatoryFields[name] = []
+                tablesMandatoryFields[name].push(field.location)
+
+            }
+        }
+    }))
+}
+
+// list of tables to find the mandatory fields in each tables
+setMandatorydata(mechanicalPropertiesData, 'mechanicalProperties')
+setMandatorydata(operationalPropertiesData, 'operationalProperties')
+setMandatorydata(waterOriginData, 'waterOrigin')
+setMandatorydata(operationCostsData, 'operationCosts')
+setMandatorydata(enironmentalData, 'enironmental')
+setMandatorydata(customersProblemsAndRequestsData, 'customersProblemsAndRequests')
+setMandatorydata(waterAnalysisData, 'waterAnalysis')
+setMandatorydata(thermodynamicCalculationsData, 'thermodynamicCalculations')
+
+
 export const updateStepper = (tablesData, skipped, setSkipped, setActiveStep) => {
-    const mechanicalPropertiesMandatory = {
-        index: 0,
-        fields: mechanicalPropertiesData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const operationalPropertiesMandatory = {
-        index: 1,
-        fields: operationalPropertiesData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const waterOrigin = {
-        index: 2,
-        fields: waterOriginData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const operationCosts = {
-        index: 3,
-        fields: operationCostsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const enironmental = {
-        index: 4,
-        fields: enironmentalData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-    const customersProblemsAndRequests = {
-        index: 5,
-        fields: customersProblemsAndRequestsData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-
-    const waterAnalysis = {
-        index: 6,
-        fields: waterAnalysisData.filter(row => row.fields.some(field => field.isMandatory)).map(row => row.fields.map(field => field.location)).map(row => row[0]),
-    }
-
-    const thermodynamicCalculations = {
-        index: 7,
-        fields: ['e47'],
-    }
-    const arr = [
-        mechanicalPropertiesMandatory,
-        operationalPropertiesMandatory,
-        waterOrigin,
-        operationCosts,
-        enironmental,
-        customersProblemsAndRequests,
-        waterAnalysis,
-        thermodynamicCalculations,
-    ]
-    arr.forEach((data) => {
-        areTableMandatoryFieldsFilled(data.fields, data.index, tablesData, skipped, setSkipped, setActiveStep)
+    Object.values(tablesMandatoryFields).forEach((fields, dataIndex) => {
+        areTableMandatoryFieldsFilled(fields, dataIndex, tablesData, skipped, setSkipped, setActiveStep)
     })
-
 }
