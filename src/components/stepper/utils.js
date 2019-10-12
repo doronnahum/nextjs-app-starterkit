@@ -19,7 +19,6 @@ import {
 } from 'src/components/data/index.js'
 
 export const areTableMandatoryFieldsFilled = (fields, tableIndex, tablesData, skipped, setSkipped, setActiveStep) => {
-    debugger
     const filled = fields.every(field => tablesData[field])
     let _skipped = [...skipped]
     if (filled) {

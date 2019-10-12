@@ -27,15 +27,15 @@ const useStyles = makeStyles(theme => ({
     tableTitle: {
         fontSize: 20
     },
-    TableRow: {
-        // backgroundColor:'red',
-
-    },
+  
     TableCell: {
         padding: '2em 2em !important'
     },
     TableInput: {
         // display: 'flex'
+    },
+    select: {
+        width: '100%'
     },
     textFieldUNEditable: {
         background: 'lightblue'
@@ -50,7 +50,7 @@ function SimpleTable(props) {
     const renderTableData = () => {
         if (!data) return <NoDataTableCell className={classes.TableCell} />
         return data.map((row, i) => {
-            return <TableRow key={i} className={classes.TableRow}>
+            return <TableRow key={i}>
                 <TableCell align="left" className={`${classes.TableCell} row-text`}>
                     {row.name}
                 </TableCell>
@@ -62,25 +62,14 @@ function SimpleTable(props) {
 
                 {row.fields && row.fields.map((field) => {
                     return <TableCell key={field.location} align="right" className={classes.TableCell}>
-                        {row.units && field.type !==TYPES.SELECT && <div className='table-units' style={{ textAlign: 'right' }}>
-                            {tablesData[field.location]} {row.units}
-                        </div>}
-
-                        {renderValueType(field, updateTablesValues, tableValues, classes, onBlur, onFocus)}
-                        {/* {field.isMandatory && <div style={{ color: 'red' }}>***</div>} */}
-
+                        {renderValueType(field, updateTablesValues, tableValues, classes, row.units)}
                     </TableCell>
                 })
                 }
             </TableRow >
         })
     }
-    const onFocus = () => {
-        console.log('!!onFocus');
-    }
-    const onBlur = () => {
-        console.log('!!onBlur');
-    }
+
     return (
         <div className='table'>
             <div className='table__title' style={{ marginBottom: '1em' }}>Mechanical Properties</div>

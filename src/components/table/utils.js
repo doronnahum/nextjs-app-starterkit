@@ -114,7 +114,7 @@ const getMarks = (row, ) => {
     return arr
 }
 
-export const renderValueType = (field, updateTablesValues, tableValues, classes, onBlur, onFocus) => {
+export const renderValueType = (field, updateTablesValues, tableValues, classes, units) => {
     const { type, isMandatory } = field
     switch (type) {
         case TYPES.NUMERIC:
@@ -124,33 +124,40 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes,
                     placeholder={tableValues[field.location] === 0 ? '' : (tableValues[field.location]).toString()}
                     label="Number"
                     // value={tableValues[field.location] === 0 ? '' : tableValues[field.location]}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
                     onChange={(e) => handleInputChange(e, updateTablesValues, tableValues)}
                     type="number"
-                    className={classes.textField}
+                    // className={classes.textField}
                 />
-                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+                {field.isMandatory && <div className='mandatory'>***</div>}
+                {units && <div className='table-units-in-input'>
+                    {units}
+                </div>}
             </div>
         case TYPES.RANGE:
-            return <div className='value-and-mandatory'>
-                <Slider
-                    defaultValue={tableValues[field.location]}//Math.floor((field.min + field.max) / 2)
-                    getAriaValueText={valuetext}
-                    onChange={(e, val) => onChangeSlider(e, val, field.location, updateTablesValues, tableValues)}
-                    aria-labelledby="discrete-slider-always"
-                    step={field.data.ticks}
-                    min={field.data.min}
-                    max={field.data.max}
-                    marks={getMarks(field.data)} //slowdown everything
-                    valueLabelDisplay="on"
-                />
-                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+            return <div style={{}}>
+                {units && <div className='table-units' style={{ textAlign: 'right' }}>
+                    {tableValues[field.location]} {units}
+                </div>}
+                <div className='value-and-mandatory'>
+                    <Slider
+                        defaultValue={tableValues[field.location]}
+                        getAriaValueText={valuetext}
+                        onChange={(e, val) => onChangeSlider(e, val, field.location, updateTablesValues, tableValues)}
+                        aria-labelledby="discrete-slider-always"
+                        step={field.data.ticks}
+                        min={field.data.min}
+                        max={field.data.max}
+                        marks={getMarks(field.data)} //slowdown everything
+                        valueLabelDisplay="on"
+                    />
+                    {field.isMandatory && <div className='mandatory'>***</div>}
+                </div>
             </div>
         case TYPES.SELECT:
             return <div className='value-and-mandatory'>
                 <Select
                     id={field.location}
+                    className={classes.select}
                     native
                     value={tableValues[field.location]}
                     onChange={(e) => handleSelectChange(e, updateTablesValues, tableValues)}
@@ -159,7 +166,7 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes,
                         return <option key={i} value={item}>{item || 'Select one option'}</option>
                     })}
                 </Select>
-                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+                {field.isMandatory && <div className='mandatory'>***</div>}
             </div>
         case TYPES.NOT_EDITABLE:
             return <div className='value-and-mandatory'>
@@ -170,7 +177,9 @@ export const renderValueType = (field, updateTablesValues, tableValues, classes,
                     readOnly
                     className={classes.textFieldUNEditable}
                 />
-                {field.isMandatory && <div style={{ color: 'red' }}>***</div>}
+                {units && <div className='table-units-in-input'>
+                    {units}
+                </div>}
             </div>
         default:
             return field.type

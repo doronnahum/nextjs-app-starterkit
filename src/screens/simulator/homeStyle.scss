@@ -29,15 +29,26 @@
             padding-left: 1em;
           }
           .value-and-mandatory {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-          }
-          .row-text {
-            @include row-text();
+            .mandatory {
+              color: red;
+              position: absolute;
+              right: -60px;
+            }
           }
           .table-units {
             @include table-units();
+          }
+
+          .table-units-in-input {
+            @include table-units-in-input();
+            position: absolute;
+          }
+          .row-text {
+            @include row-text();
           }
         }
         @include uptoMd {
