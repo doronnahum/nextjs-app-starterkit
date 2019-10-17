@@ -1,5 +1,5 @@
 ---
-to: ssrc/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.js
+to: src/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.reducer.js
 ---
 <% const nameLower = h.changeCase.lower(name) -%>
 /* eslint-disable operator-assignment */
@@ -13,7 +13,7 @@ const initialState = {
 
 export default function <%=nameLower %>Reducer(state = initialState, action) {
   switch (action.type) {
-    <% if(locals.example) { -%>
+<% if(locals.example) { -%>
     case actionsType.INCREMENT: {
       const nextState = produce(state, (draftState) => {
         draftState.count = draftState.count + 1;
@@ -26,7 +26,7 @@ export default function <%=nameLower %>Reducer(state = initialState, action) {
       });
       return nextState;
     }
-    <%}-%>
+<%}-%>
     default:
       return state;
   }

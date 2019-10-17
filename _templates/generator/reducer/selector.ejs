@@ -1,11 +1,12 @@
 ---
 to: src/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.selectors.js
 ---
-<% const nameLower = h.changeCase.lower(name) -%>
 import { createSelector } from 'reselect';
 
+export const getState = (state) => state.<%= h.changeCase.lower(name) %>;
+
 <% if(locals.example) { -%>
-export const getCount = createSelector(getState, (<% nameLower -%>State) => (
-  <% nameLower -%>State.count
+export const getCount = createSelector(getState, (<%= h.changeCase.lower(name) %>State) => (
+  <%= h.changeCase.lower(name) %>State.count
 ));
 <%}-%>

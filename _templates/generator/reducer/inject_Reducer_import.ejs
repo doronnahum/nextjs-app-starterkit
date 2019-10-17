@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/redux/index.js
+after: "// Import saga and reducers"
+skip_if: import <%= h.changeCase.lower(name) %>
+---
+import <%= h.changeCase.lower(name) %> from './<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.reducer';

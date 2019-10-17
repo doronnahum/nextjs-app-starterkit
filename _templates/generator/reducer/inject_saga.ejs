@@ -1,0 +1,7 @@
+---
+inject: true
+to: '<% if(locals.saga) { %>src/redux/index.js%><% } %>'
+after: "  yield all"
+skip_if: <%= h.changeCase.lower(name) %>SagaWatcher
+---
+    call(<%= h.changeCase.lower(name) %>Saga, '<%= h.changeCase.lower(name) %>SagaWatcher'),
