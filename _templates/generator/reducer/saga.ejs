@@ -1,0 +1,41 @@
+---
+to: '<% if(saga) { %>src/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.selectors.js%><% } %>'
+---
+<% const nameLower = h.changeCase.lower(name) -%>
+
+<% if(locals.example) { -%>
+import {
+  takeEvery, put, delay, select,
+} from 'redux-saga/effects';
+import { actionsType } from './<%= nameLower %>.actions';
+import { getCount } from './<%= nameLower %>.selectors';
+import { startLoading, stopLoading, LoaderTypes } from '../loaders';
+
+function* onCountChange() {
+  try {
+    const current = yield select(getCount);
+    yield put(startLoading({ loaderType: LoaderTypes.ON_COUNT_CHANGE }));
+    yield delay(500);
+    if (current === 5) {
+      throw new Error('throw error on 5');
+    }
+    yield put(stopLoading({ loaderType: LoaderTypes.ON_COUNT_CHANGE }));
+  } catch (error) {
+    yield put(stopLoading({ loaderType: LoaderTypes.ON_COUNT_CHANGE, error }));
+  }
+}
+
+export default function* <%= nameLower %>Watcher() {
+  yield takeEvery(actionsType.INCREMENT, onCountChange);
+  yield takeEvery(actionsType.DECREMENT, onCountChange);
+}
+<%}-%>
+<% if(!locals.example) { -%>
+//import { takeEvery } from 'redux-saga/effects';
+//import { } from './<%= nameLower %>.actions';
+//import { startLoading, stopLoading, LoaderTypes } from '../loaders';
+
+export default function* <%= nameLower %>Watcher() {
+  //yield takeEvery(actionsType.DECREMENT, onCountChange);
+}
+<%}-%>

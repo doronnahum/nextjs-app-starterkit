@@ -37,4 +37,5 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Extended);
 BlogScreen.propTypes = {
+  t: PropTypes.func.isRequired,
 };

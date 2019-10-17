@@ -10,14 +10,13 @@ import WithAuth from 'src/components/WithAuth';
 import Head from 'next/head';
 import Local from 'src/components/Local';
 
-function <%=pageUpper %>Page(props) {
+function <%=pageUpper %>Page() {
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <React.Fragment>
       <Head>
         <title><%=pageUpper %></title>
       </Head>
-      <Screen {...props} />
+      <Screen />
       <Local />
     </React.Fragment>
   );

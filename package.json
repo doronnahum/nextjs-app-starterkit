@@ -2,6 +2,16 @@
   "name": "nextjs",
   "version": "4.0.0",
   "private": true,
+  "scripts": {
+    "clean-cache": "rimraf -rf ./node_modules/.cache",
+    "dev": "npm run lint && npm run clean-cache && nodemon server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "eslint --fix --ext .js pages src",
+    "create-comp": "hygen generator component",
+    "create-page": "hygen generator page",
+    "create-reducer": "hygen generator reducer"
+  },
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.2.1",
@@ -38,15 +48,6 @@
     "reselect": "^4.0.0",
     "uninstall": "0.0.0",
     "webpack": "^4.40.2"
-  },
-  "scripts": {
-    "clean-cache": "rimraf -rf ./node_modules/.cache",
-    "dev": "npm run lint && npm run clean-cache && nodemon server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js",
-    "lint": "eslint --fix --ext .js pages src",
-    "create-comp": "hygen generator component",
-    "create-page": "hygen generator page"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",

@@ -4,7 +4,7 @@ to: src/screens/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.
 <% const Screen = h.changeCase.title(name) -%>
 <% const compClassName = h.changeCase.lower(name) -%>
 import React from 'react';
-<% if(!locals.withStyle) { -%>//<%}-%>import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 <% if(locals.withStyle) { -%>
 import { makeStyles, createStyles } from '@material-ui/core';
 <%}-%>
@@ -61,4 +61,5 @@ export default Extended;
 <%}-%>
 <%}-%>
 <%=Screen %>Screen.propTypes = {
+    t: PropTypes.func.isRequired,
 };

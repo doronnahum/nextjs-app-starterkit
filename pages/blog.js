@@ -6,14 +6,14 @@ import WithAuth from 'src/components/WithAuth';
 import Head from 'next/head';
 import Local from 'src/components/Local';
 
-function BlogPage(props) {
+function BlogPage() {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <React.Fragment>
       <Head>
         <title>Blog</title>
       </Head>
-      <Screen {...props} />
+      <Screen />
       <Local />
     </React.Fragment>
   );

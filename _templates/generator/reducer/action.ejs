@@ -1,0 +1,24 @@
+---
+to: src/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.actions.js
+---
+<% const nameLower = h.changeCase.lower(name) -%>
+const NAME_SPACE = '<%=nameLower %>';
+
+export const actionsType = {
+<% if(locals.example) { -%>
+INCREMENT: `${NAME_SPACE}/INCREMENT`,
+DECREMENT: `${NAME_SPACE}/DECREMENT`,
+<%}-%>
+};
+
+<% if(locals.example) { -%>
+export const increment = (payload) => ({
+type: actionsType.INCREMENT,
+payload,
+});
+
+export const decrement = (payload) => ({
+type: actionsType.DECREMENT,
+payload,
+});
+<%}-%>
