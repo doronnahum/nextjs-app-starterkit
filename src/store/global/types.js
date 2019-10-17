@@ -1,4 +1,0 @@
-export default {
-  EXAMPLE: 'EXAMPLE',
-  CHANGE_WINDOW_SIZE: 'CHANGE_WINDOW_SIZE',
-};
