@@ -8,6 +8,7 @@ import Screen from 'src/screens/<%=pageLower %>';
 import { withTranslation } from 'src/i18n';
 import WithAuth from 'src/components/WithAuth';
 import Head from 'next/head';
+import Local from 'src/components/Local';
 
 function <%=pageUpper %>Page(props) {
   return (
@@ -17,12 +18,14 @@ function <%=pageUpper %>Page(props) {
         <title><%=pageUpper %></title>
       </Head>
       <Screen {...props} />
+      <Local />
     </React.Fragment>
   );
 }
 
-<%=pageUpper %>Page.getInitialProps = async () => ({
+const ExtendedWithAuth = WithAuth({ isPrivate: <%=isPrivate %> })(<%=pageUpper %>Page);
+ExtendedWithAuth.getInitialProps = async () => ({
   namespacesRequired: ['<%=pageLower %>', 'common'],
 });
-const Extended = WithAuth({ isPrivate: <%=isPrivate %> })(withTranslation('<%=pageLower %>')(<%=pageUpper %>Page));
-export default Extended;
+
+export default withTranslation(['blog', 'common'])(ExtendedWithAuth);

@@ -1,23 +1,27 @@
-/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 import Screen from 'src/screens/blog';
 import { withTranslation } from 'src/i18n';
 import WithAuth from 'src/components/WithAuth';
 import Head from 'next/head';
+import Local from 'src/components/Local';
 
 function BlogPage(props) {
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <React.Fragment>
       <Head>
         <title>Blog</title>
       </Head>
       <Screen {...props} />
+      <Local />
     </React.Fragment>
   );
 }
 
-BlogPage.getInitialProps = async () => ({
+const ExtendedWithAuth = WithAuth({ isPrivate: true })(BlogPage);
+ExtendedWithAuth.getInitialProps = async () => ({
   namespacesRequired: ['blog', 'common'],
 });
-const Extended = WithAuth({ isPrivate: true })(withTranslation('blog')(BlogPage));
-export default Extended;
+
+export default withTranslation(['blog', 'common'])(ExtendedWithAuth);

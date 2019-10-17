@@ -61,9 +61,4 @@ export default Extended;
 <%}-%>
 <%}-%>
 <%=Screen %>Screen.propTypes = {
-<% if(locals.withStyle) { -%>
-  // eslint-disable-next-line
-  classes: PropTypes.object,
-<%}
--%>
 };

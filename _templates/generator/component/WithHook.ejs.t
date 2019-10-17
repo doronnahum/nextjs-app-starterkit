@@ -62,9 +62,4 @@ export default <%=comp %>;
 <%}-%>
 <%}-%>
 <%=comp %>.propTypes = {
-<% if(locals.withStyle) { -%>
-  // eslint-disable-next-line
-  classes: PropTypes.object,
-<%}
--%>
 };

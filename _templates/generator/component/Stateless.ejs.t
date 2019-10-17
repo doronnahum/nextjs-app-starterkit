@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 <%}-%>
 
-<% if(locals.scss) { -%>
+<% if(locals.withStyle) { -%>
 const useStyles = makeStyles(() => createStyles({
   root: {
     backgroundColor: 'red',
@@ -24,8 +24,8 @@ const useStyles = makeStyles(() => createStyles({
 }));
 
 <%}-%>
-function <%=comp %>(props) {
-<% if(locals.scss) { -%>
+function <%=comp %>() {
+<% if(locals.withStyle) { -%>
   const classes = useStyles();
 <%}-%>
   return (
@@ -57,9 +57,4 @@ export default <%=comp %>;
 <%}-%>
 <%}-%>
 <%=comp %>.propTypes = {
-<% if(locals.withStyle) { -%>
-  // eslint-disable-next-line
-  classes: PropTypes.object,
-<%}
--%>
 };

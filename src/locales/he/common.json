@@ -1,3 +1,4 @@
 {
-  "h1": "3A simple example"
+  "h1": "3A simple example",
+  "defaultErrorMessage": "אופס! משהו השתבש"
 }
