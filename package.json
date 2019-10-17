@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "clean-cache": "rimraf -rf ./node_modules/.cache",
-    "dev": "npm run lint && npm run clean-cache && nodemon server.js",
+    "dev": "npm run lint && npm run clean-cache && node index.js",
+    "local": "npm run lint && npm run clean-cache && cross-env CONFIG_ENV=local node index.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "cross-env NODE_ENV=production node index.js",
     "lint": "eslint --fix --ext .js pages src",
     "create-comp": "hygen generator component",
     "create-page": "hygen generator page",
@@ -16,7 +17,9 @@
     "analyze": "cross-env BUNDLE_ANALYZE=both npm run build",
     "build:static_export": "rimraf -rf ./out && npm run build && next export",
     "build:server-static": "npm run build:static_export && http-server ./out",
-    "server-static": "http-server ./out"
+    "server-static": "http-server ./out",
+    "now-login": "now login",
+    "now-deploy": "now --prod"
   },
   "dependencies": {
     "@material-ui/core": "latest",
@@ -26,6 +29,8 @@
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "clsx": "latest",
+    "cross-env": "^6.0.3",
+    "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
     "immer": "^3.2.0",
     "immutability-helper": "^3.0.1",
@@ -35,9 +40,9 @@
     "next": "latest",
     "next-compose-plugins": "^2.2.0",
     "next-i18next": "^1.2.1",
+    "next-offline": "^4.0.6",
     "next-redux-saga": "^4.0.2",
     "next-redux-wrapper": "^3.0.0-alpha.3",
-    "next-runtime-dotenv": "^1.2.0",
     "node-sass": "^4.12.0",
     "npm": "^6.11.1",
     "produce": "^0.4.1",
@@ -68,6 +73,7 @@
     "hygen": "^4.0.11",
     "hygen-add": "^1.0.5",
     "nodemon": "^1.19.4",
+    "now": "^16.3.1",
     "rimraf": "^3.0.0"
   }
 }

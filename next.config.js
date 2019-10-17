@@ -1,12 +1,20 @@
+/* eslint-disable no-console */
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
+const withOffline = require('next-offline');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
-const nextRuntimeDotenv = require('next-runtime-dotenv');
 
-const withConfig = nextRuntimeDotenv({ public: ['API_URL', 'API_KEY'] });
+const env = process.env.CONFIG_ENV || process.env.NODE_ENV || 'development';
+const envConfig = require('./env')(env);
+
+console.debug('CONFIG_ENV=', process.env.CONFIG_ENV);
+console.debug('NODE_ENV=', process.env.NODE_ENV);
+console.debug('envConfig=', envConfig);
 
 const nextConfig = {
+  env: envConfig,
+  serverRuntimeConfig: envConfig,
   analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
   analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
   bundleAnalyzerConfig: {
@@ -19,14 +27,30 @@ const nextConfig = {
       reportFilename: '../bundles/client.html',
     },
   },
-  publicRuntimeConfig: {
-    PROXY_MODE: process.env.PROXY_MODE,
-    API_URL: process.env.API_URL,
-    API_KEY: process.env.API_KEY,
-    STATIC_PATH: process.env.STATIC_PATH,
+  // offline
+  target: 'serverless',
+  workboxOpts: {
+    swDest: 'static/service-worker.js',
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'networkFirst',
+        options: {
+          cacheName: 'https-calls',
+          networkTimeoutSeconds: 15,
+          expiration: {
+            maxEntries: 150,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+    ],
   },
 };
 
-module.exports = withConfig(
-  withPlugins([[withCSS], [withSass], [withBundleAnalyzer]], nextConfig),
-);
+module.exports = withPlugins([
+  [withCSS], [withSass], [withBundleAnalyzer], [withOffline],
+], nextConfig);

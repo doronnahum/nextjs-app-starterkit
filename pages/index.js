@@ -1,18 +1,21 @@
+/* eslint-disable no-console */
 import React from 'react';
-import Posts from 'src/screens/posts';
 import { withTranslation } from 'src/i18n';
 import WithAuth from 'src/components/WithAuth';
 
-function Home(props) {
+function Home() {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Posts {...props} />
+    <div>
+      Welcome
+      <p>url: {process.env.url}</p>
+    </div>
   );
 }
 
-Home.getInitialProps = async () => ({
-  namespacesRequired: ['Home'],
+const ExtendedWithAuth = WithAuth({ isPrivate: true })(Home);
+ExtendedWithAuth.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
 });
-const Extended = WithAuth((withTranslation('home')(Home)), { private: true });
 
-export default Extended;
+export default withTranslation(['common'])(ExtendedWithAuth);
