@@ -1,7 +1,7 @@
 ---
 inject: true
-to: src/redux/index.js
-after: "export const rootReducer = combineReducers"
+to: src/redux/rootReducer.js
+after: "= combineReducers"
 skip_if:   <%= h.changeCase.lower(name) %>,
 ---
   <%= h.changeCase.lower(name) %>,
