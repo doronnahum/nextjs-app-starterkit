@@ -26,14 +26,15 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          {/* Progressive Web App: Match the width of app’s content with width of viewport for mobile devices */}
+          {/* Progressive Web App:
+            Match the width of app’s content with width of viewport for mobile devices */}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           {/* Progressive Web App: Have address bar match brand colors */}
           <meta name="theme-color" content="#fff" />
 
           {/* Progressive Web App: Provide manifest file for metadata */}
-          <link rel="manifest" href="./static/manifest.json" />
+          <link rel="manifest" href="./manifest.json" />
 
           {/* SEO: App description for search-engine optimization */}
           <meta name="Description" content={description} />
@@ -55,60 +56,60 @@ class MyDocument extends Document {
           <link
             rel="apple-touch-icon"
             sizes="57x57"
-            href="./static/graphics/icon-57.png"
+            href="./graphics/icon-57.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="72x72"
-            href="./static/graphics/icon-72.png"
+            href="./graphics/icon-72.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="114x114"
-            href="./static/graphics/icon-114.png"
+            href="./graphics/icon-114.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="144x144"
-            href="./static/graphics/icon-144.png"
+            href="./graphics/icon-144.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="512x512"
-            href="./static/graphics/icon-512.png"
+            href="./graphics/icon-512.png"
           />
           <link
-            href="./static/graphics/splash-2048.png"
+            href="./graphics/splash-2048.png"
             media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-1668.png"
+            href="./graphics/splash-1668.png"
             media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-1536.png"
+            href="./graphics/splash-1536.png"
             media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-1125.png"
+            href="./graphics/splash-1125.png"
             media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-1242.png"
+            href="./graphics/splash-1242.png"
             media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-750.png"
+            href="./graphics/splash-750.png"
             media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
           <link
-            href="./static/graphics/splash-640.png"
+            href="./graphics/splash-640.png"
             media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
