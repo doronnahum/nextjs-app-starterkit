@@ -2,6 +2,6 @@
 inject: true
 to: src/redux/rootReducer.js
 after: "redux"
-skip_if: import <%= h.changeCase.lower(name) %>
+skip_if: import <%= h.changeCase.lcFirst(name) %>
 ---
-import <%= h.changeCase.lower(name) %> from './<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.reducer';
+import <%= h.changeCase.lcFirst(name) %> from './<%= h.changeCase.lcFirst(name) %>/<%= h.changeCase.lcFirst(name) %>.reducer';

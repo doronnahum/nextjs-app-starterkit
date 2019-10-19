@@ -1,4 +1,4 @@
 ---
-to: src/screens/<%= h.changeCase.lower(name) %>/index.js
+to: src/screens/<%= h.changeCase.lcFirst(name) %>/index.js
 ---
-export { default } from './<%= h.changeCase.lower(name) %>';
+export { default } from './<%= h.changeCase.lcFirst(name) %>';

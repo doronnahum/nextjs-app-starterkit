@@ -1,24 +1,24 @@
 ---
-to: '<% if(type === "Component") { %>src/components/<%= h.changeCase.title(name) %>/<%= h.changeCase.title(name) %>.js%><% } %>'
+to: '<% if(type === "Component") { %>src/components/<%= h.changeCase.pascal(name) %>/<%= h.changeCase.pascal(name) %>.js%><% } %>'
 ---
-<% const comp = h.changeCase.title(name) -%>
-<% const compClassName = h.changeCase.lower(name) -%>
+<% const comp = h.changeCase.pascal(name) -%>
+<% const compClassName = h.changeCase.lcFirst(name) -%>
 import React from 'react';
 <% if(locals.withStyle) { -%>//<%}-%>import PropTypes from 'prop-types';
 <% if(locals.withStyle) { -%>
 import { withStyles, createStyles } from '@material-ui/core';
 <%}-%>
 <% if(locals.scss) { -%>
-import './<%= h.changeCase.lower(name) %>.scss';
+import './<%= h.changeCase.lcFirst(name) %>.scss';
 <%}-%>
 <% if(locals.redux) { -%>
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 <%}-%>
 
-class <%=comp %> extends React.Component {
-  constructor() {
-    super();
+class <%=comp %> extends React.Component() {
+  constructor(props) {
+    super(props);
     this.state = {
       myName: '<%=comp %>',
     };

@@ -6,7 +6,7 @@ import theme from '../src/theme';
 
 import {
   title, description, url, thumbnail,
-} from '../seo';
+} from '../siteInfo';
 
 
 class MyDocument extends Document {

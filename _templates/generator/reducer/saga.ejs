@@ -1,7 +1,7 @@
 ---
-to: '<% if(saga) { %>src/redux/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.saga.js%><% } %>'
+to: '<% if(saga) { %>src/redux/<%= h.changeCase.lcFirst(name) %>/<%= h.changeCase.lcFirst(name) %>.saga.js%><% } %>'
 ---
-<% const nameLower = h.changeCase.lower(name) -%>
+<% const nameLower = h.changeCase.lcFirst(name) -%>
 
 <% if(locals.example) { -%>
 import {

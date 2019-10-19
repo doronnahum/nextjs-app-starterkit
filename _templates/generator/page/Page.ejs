@@ -1,8 +1,8 @@
 ---
-to: pages/<%= h.changeCase.lower(name) %>.js
+to: pages/<%= h.changeCase.lcFirst(name) %>.js
 ---
-<% const pageLower = h.changeCase.lower(name) -%>
-<% const pageUpper = h.changeCase.title(name) -%>
+<% const pageLower = h.changeCase.lcFirst(name) -%>
+<% const pageUpper = h.changeCase.pascal(name) -%>
 import React from 'react';
 import Screen from 'src/screens/<%=pageLower %>';
 import { withTranslation } from 'src/i18n';

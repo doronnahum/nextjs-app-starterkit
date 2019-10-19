@@ -1,7 +1,7 @@
 ---
-to: '<% if(scss) { %>src/screens/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.scss%><% } %>'
+to: '<% if(scss) { %>src/screens/<%= h.changeCase.lcFirst(name) %>/<%= h.changeCase.lcFirst(name) %>.scss%><% } %>'
 ---
-.<%= h.changeCase.lower(name) %>_screen {
+.<%= h.changeCase.lcFirst(name) %>_screen {
   padding: 15px;
   border: 1px solid red;
 }

@@ -1,18 +1,19 @@
 
 const common = {
+  userTokenKey: 'userTokenKey',
 };
 
 const dev = {
   ...common,
-  url: 'https://xsctrl-dev-server-19.herokuapp.com',
+  serverUrl: 'https://xsctrl-dev-server-19.herokuapp.com',
 };
 const prod = {
   ...common,
-  url: 'https://xsctrl-server-19.herokuapp.com',
+  serverUrl: 'https://xsctrl-server-19.herokuapp.com',
 };
 const local = {
   ...common,
-  url: 'http://localhost:3030',
+  serverUrl: 'http://localhost:3030',
 };
 
 const configByEnv = {

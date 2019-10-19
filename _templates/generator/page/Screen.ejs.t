@@ -1,15 +1,15 @@
 ---
-to: src/screens/<%= h.changeCase.lower(name) %>/<%= h.changeCase.lower(name) %>.js
+to: src/screens/<%= h.changeCase.lcFirst(name) %>/<%= h.changeCase.lcFirst(name) %>.js
 ---
-<% const Screen = h.changeCase.title(name) -%>
-<% const compClassName = h.changeCase.lower(name) -%>
+<% const Screen = h.changeCase.pascal(name) -%>
+<% const compClassName = h.changeCase.lcFirst(name) -%>
 import React from 'react';
 import PropTypes from 'prop-types';
 <% if(locals.withStyle) { -%>
 import { makeStyles, createStyles } from '@material-ui/core';
 <%}-%>
 <% if(locals.scss) { -%>
-import './<%= h.changeCase.lower(name) %>.scss';
+import './<%= h.changeCase.lcFirst(name) %>.scss';
 <%}-%>
 <% if(locals.redux) { -%>
 import { connect } from 'react-redux';
@@ -37,7 +37,7 @@ function <%=Screen %>Screen({ t }) {
   );
 }
 
-const Extended = withTranslation('<%= h.changeCase.lower(name) %>')(<%=Screen %>Screen);
+const Extended = withTranslation('<%= h.changeCase.lcFirst(name) %>')(<%=Screen %>Screen);
 
 <% if(locals.redux) { -%>
 function mapStateToProps(store) {

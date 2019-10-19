@@ -1,4 +1,4 @@
 ---
-to: src/components/<%= h.changeCase.title(name) %>/index.js
+to: src/components/<%= h.changeCase.pascal(name) %>/index.js
 ---
-export { default } from './<%= h.changeCase.title(name) %>';
+export { default } from './<%= h.changeCase.pascal(name) %>';
