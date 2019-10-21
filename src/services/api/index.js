@@ -38,7 +38,6 @@ export const END_POINTS = {
 };
 
 
-
 export default class ApiService {
   // Auth
   static createUser(email, password) {
