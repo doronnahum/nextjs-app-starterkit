@@ -9,6 +9,9 @@ export const actionsType = {
   ON_CHECK_TOKEN_START: `${NAME_SPACE}/ON_CHECK_TOKEN_START`,
   ON_CHECK_TOKEN_END: `${NAME_SPACE}/ON_CHECK_TOKEN_END`,
   ON_CHECK_TOKEN_FAILED: `${NAME_SPACE}/ON_CHECK_TOKEN_FAILED`,
+  LOGIN: `${NAME_SPACE}/LOGIN`,
+  REGISTER: `${NAME_SPACE}/REGISTER`,
+  SEND_VERIFY_ACCOUNT: `${NAME_SPACE}/SEND_VERIFY_ACCOUNT`,
 };
 
 export const onCheckTokenStart = () => ({
@@ -19,6 +22,46 @@ export const onCheckTokenEnd = () => ({
 });
 export const onCheckTokenFailed = () => ({
   type: actionsType.ON_CHECK_TOKEN_FAILED,
+});
+
+/**
+ * @function login
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.mobile
+ * @param {string} payload.password
+ * @param {string} payload.nextRoute next route
+ *
+ */
+export const login = (payload) => ({
+  type: actionsType.LOGIN,
+  payload,
+});
+
+/**
+ * @function register
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.mobile
+ * @param {string} payload.password
+ * @param {string} payload.nextRoute next route
+ *
+ */
+export const register = (payload) => ({
+  type: actionsType.REGISTER,
+  payload,
+});
+
+/**
+ * @function sendVerifyAccount
+ * @param {object} payload
+ * @param {string} payload.email
+ * @param {string} payload.mobile
+ *
+ */
+export const sendVerifyAccount = (payload) => ({
+  type: actionsType.SEND_VERIFY_ACCOUNT,
+  payload,
 });
 
 

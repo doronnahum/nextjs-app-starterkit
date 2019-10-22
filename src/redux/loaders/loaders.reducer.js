@@ -20,7 +20,7 @@ export default function loadersReducer(state = initialState, action) {
     }
     case actionsType.STOP_LOADING: {
       const nextState = produce(state, (draftState) => {
-        draftState[loaderType] = { status: null, error };
+        draftState[loaderType] = { status: null, error: (error ? (error.message || error) : null) };
       });
       return nextState;
     }

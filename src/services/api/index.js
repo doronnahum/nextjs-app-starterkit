@@ -1,6 +1,8 @@
 
 import axios from 'axios';
 
+export { default as httpRequest } from './httpRequest';
+
 const SERVER_URL = process.env.serverUrl;
 
 const METHODS = {
@@ -12,27 +14,27 @@ const METHODS = {
 
 export const END_POINTS = {
   createUser: {
-    url: 'users/',
+    url: 'users',
     getErrMessage: (error) => error.response.data.message,
   },
   login: {
-    url: 'authentication/',
+    url: 'authentication',
     getErrMessage: (error) => error.response.data.message,
   },
-  resendVerifyEmail: {
-    url: 'authManagement/',
+  resendVerifyAccount: {
+    url: 'authManagement',
     getErrMessage: (error) => error.response.data.message,
   },
   passwordChange: {
-    url: 'authManagement/',
+    url: 'authManagement',
     getErrMessage: (error) => error.response.data.message,
   },
   forgotPassword: {
-    url: 'authManagement/',
+    url: 'authManagement',
     getErrMessage: (error) => error.response.data.message,
   },
   changedPasswordWithToken: {
-    url: 'authManagement/',
+    url: 'authManagement',
     getErrMessage: (error) => error.response.data.message,
   },
 };
@@ -40,12 +42,12 @@ export const END_POINTS = {
 
 export default class ApiService {
   // Auth
-  static createUser(email, password) {
+  static createUser(email, mobile, password, firstName, lastName) {
     return axios.request({
       baseURL: SERVER_URL,
       url: END_POINTS.createUser.url,
       method: METHODS.POST,
-      body: { email, password, strategy: 'local' },
+      data: { email, mobile, password, firstName, lastName },
     });
   }
 
@@ -64,23 +66,23 @@ export default class ApiService {
     return null;
   }
 
-  static login(email, password) {
+  static login(email, mobile, password) {
     return axios.request({
       baseURL: SERVER_URL,
       url: END_POINTS.login.url,
       method: METHODS.POST,
-      body: { email, password, strategy: 'local' },
+      data: { email, mobile, password, strategy: 'local' },
     });
   }
 
-  static resendVerifyEmail(email) {
+  static resendVerifyAccount(email, mobile) {
     return axios.request({
       baseURL: SERVER_URL,
-      url: END_POINTS.resendVerifyEmail.url,
+      url: END_POINTS.resendVerifyAccount.url,
       method: METHODS.POST,
-      body: {
+      data: {
         action: 'resendVerifySignup',
-        value: { email },
+        value: { email, mobile },
       },
     });
   }
@@ -90,7 +92,7 @@ export default class ApiService {
       baseURL: SERVER_URL,
       url: END_POINTS.passwordChange.url,
       method: METHODS.POST,
-      body: {
+      data: {
         action: 'passwordChange',
         value: {
           user: {
@@ -108,7 +110,7 @@ export default class ApiService {
       baseURL: SERVER_URL,
       url: END_POINTS.forgotPassword.url,
       method: METHODS.POST,
-      body: {
+      data: {
         action: 'sendResetPwd',
         value: {
           email,
@@ -122,7 +124,7 @@ export default class ApiService {
       baseURL: SERVER_URL,
       url: END_POINTS.changedPasswordWithToken.url,
       method: METHODS.POST,
-      body: {
+      data: {
         action: 'resetPwdLong',
         value: {
           password,

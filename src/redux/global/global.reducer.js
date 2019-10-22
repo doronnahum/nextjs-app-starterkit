@@ -5,6 +5,7 @@ import { actionsType } from './global.actions';
 
 const initialState = {
   count: 0,
+  notifications: [],
 };
 
 export default function globalReducer(state = initialState, action) {
@@ -18,6 +19,33 @@ export default function globalReducer(state = initialState, action) {
     case actionsType.DECREMENT: {
       const nextState = produce(state, (draftState) => {
         draftState.count = draftState.count - 1;
+      });
+      return nextState;
+    }
+    case actionsType.SEND_NOTIFICATION: {
+      const nextState = produce(state, (draftState) => {
+        draftState.notifications.push({
+          key: action.key,
+          ...action.notification,
+        });
+      });
+      return nextState;
+    }
+    case actionsType.CLOSE_NOTIFICATION: {
+      const nextState = produce(state, (draftState) => {
+        draftState.notifications = draftState.notifications.map((notification) => (
+          (action.dismissAll || notification.key === action.key)
+            ? { ...notification, dismissed: true }
+            : { ...notification }
+        ));
+      });
+      return nextState;
+    }
+    case actionsType.REMOVE_NOTIFICATION: {
+      const nextState = produce(state, (draftState) => {
+        draftState.notifications = draftState.notifications.filter(
+          (notification) => notification.key !== action.key,
+        );
       });
       return nextState;
     }

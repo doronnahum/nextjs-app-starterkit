@@ -1,0 +1,10 @@
+{
+  "screenName": "signin",
+  "signinScreenTitle": "Sign In",
+  "signinEmailAddress": "Email Address",
+  "signinPassword": "Password",
+  "signinRememberMe": "Remember Me",
+  "signinButton": "Sign In",
+  "signinForgotPassword": "Forgot password?",
+  "signinDontHaveAnAccountSignUp": "Don't have an account? Sign Up"
+}

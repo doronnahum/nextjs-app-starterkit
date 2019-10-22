@@ -4,46 +4,49 @@ import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from 'next/link';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Link from 'next/link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from 'src/redux/auth/auth.actions';
+import { sendVerifyAccount } from 'src/redux/auth/auth.actions';
 import Loader, { LoaderTypes } from 'src/components/Loader';
 import Error, { ErrorTypes } from 'src/components/Error';
 import Copyright from 'src/components/Copyright';
 import { withTranslation } from 'src/i18n';
 import { useRouter } from 'next/router';
 import useStyles from './styles';
+import { mainUserField } from '../../../siteConfig';
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
+  [mainUserField]: mainUserField === 'email' ? yup.string().email().required() : yup.string().required(),
 });
 
-function SignIn({ actions, t }) {
+function verifyAccount({ actions, t }) {
   const classes = useStyles();
   const router = useRouter();
-
   const { register, handleSubmit, errors } = useForm({
     validationSchema,
   });
+
+
+
+  const emailIsMainField = mainUserField === 'email';
 
   const onSubmit = (values, e) => {
     e.preventDefault();
     const actionPayload = {
       ...values,
-      nextRoute: router.query.next || '/',
+      notificationMessage: emailIsMainField ? t('signupVerifyEmailNotificationMessage') : t('signupVerifyMobileNotificationMessage'),
     };
-    actions.login(actionPayload);
+    actions.sendVerifyAccount(actionPayload);
   };
+
+  const valueFromParams = (emailIsMainField ? router.query.email : router.query.mobile) || '';
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,7 +55,11 @@ function SignIn({ actions, t }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {t('signinScreenTitle')}
+          {emailIsMainField ? t('signupVerifyEmailAccountTitle') : t('signupVerifyMobileAccountTitle')}
+        </Typography>
+        <br />
+        <Typography component="p">
+          {emailIsMainField ? t('signupVerifyEmailText') : t('signupVerifyMobileText')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -60,34 +67,17 @@ function SignIn({ actions, t }) {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label={t('signinEmailAddress')}
-            name="email"
-            autoComplete="email"
+            id={emailIsMainField ? 'email' : 'mobile'}
+            label={emailIsMainField ? t('signupEmailAddress') : t('signupMobile')}
+            name={emailIsMainField ? 'email' : 'mobile'}
+            defaultValue={valueFromParams}
+            autoComplete={emailIsMainField ? 'email' : 'mobile'}
             autoFocus
             inputRef={register}
-            error={errors.email}
-            helperText={errors.email && errors.email.message}
+            error={errors[mainUserField]}
+            helperText={errors[mainUserField] && errors[mainUserField].message}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label={t('signinPassword')}
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            inputRef={register}
-            error={errors.password}
-            helperText={errors.password && errors.password.message}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label={t('signinRememberMe')}
-          />
-          <Error errorType={ErrorTypes.LOGIN} />
+          <Error errorType={ErrorTypes.VERIFY_ACCOUNT} />
           <Button
             type="submit"
             fullWidth
@@ -95,17 +85,12 @@ function SignIn({ actions, t }) {
             color="primary"
             className={classes.submit}
           >
-            {t('signinButton')}
+            {emailIsMainField ? t('signupVerifyEmailButton') : t('signupVerifyMobileButton')}
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="/forgot-password">
-                <a><Typography component="span" variant="body2">{t('signinForgotPassword')}</Typography></a>
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="/signup">
-                <a><Typography component="span" variant="body2">{t('signinDontHaveAnAccountSignUp')}</Typography></a>
+              <Link href="/signin">
+                <a><Typography component="span" variant="body2">{t('signupSigninButton')}</Typography></a>
               </Link>
             </Grid>
           </Grid>
@@ -114,7 +99,7 @@ function SignIn({ actions, t }) {
       <Box mt={8}>
         <Copyright />
       </Box>
-      <Loader fullScreen loaderType={LoaderTypes.LOGIN} />
+      <Loader fullScreen loaderType={LoaderTypes.VERIFY_ACCOUNT} />
     </Container>
   );
 }
@@ -122,17 +107,16 @@ function SignIn({ actions, t }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ login }, dispatch),
+    actions: bindActionCreators({ sendVerifyAccount }, dispatch),
   };
 }
-
-const Extend = withTranslation('signin')(SignIn);
-
-SignIn.propTypes = {
+verifyAccount.propTypes = {
   t: PropTypes.func.isRequired,
   actions: PropTypes.objectOf({
     login: PropTypes.func.isRequired,
   }).isRequired,
 };
+
+const Extend = withTranslation('signup')(verifyAccount);
 
 export default connect(null, mapDispatchToProps)(Extend);

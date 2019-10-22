@@ -1,0 +1,22 @@
+{
+  "screenName": "signup",
+  "signupScreenTitle": "Sign Up",
+  "signupFirstName": "First Name",
+  "signupLastName": "Last Name",
+  "signupEmailAddress": "Email Address",
+  "signupPassword": "Password",
+  "signupRememberMe": "Remember Me",
+  "signupButton": "Sign Up",
+  "signupForgotPassword": "Forgot password?",
+  "signupConfirm": "I want to receive inspiration, marketing promotions and updates via email.",
+  "signupVerifyEmailAccountTitle": "Verify Email",
+  "signupVerifyMobileAccountTitle": "Verify Mobile",
+  "signupVerifyEmailButton": "ReSend Verification email",
+  "signupVerifyEmailText": "Please log in to your email account and find the email we have just sent you.",
+  "signupVerifyMobileText": "Please check your sms inbox and find the message we have just sent you.",
+  "signupVerifyMobileButton": "ReSend Verification message",
+  "signupHaveAnAccount": "Already have an account? Sign in",
+  "signupSigninButton": "Sign in",
+  "signupVerifyEmailNotificationMessage": "Email message send successful",
+  "signupVerifyMobileNotificationMessage": "Sms message send successful"
+}

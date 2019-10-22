@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 <%}-%>
 
-<% if(locals.scss) { -%>
+<% if(locals.withStyle) { -%>
 const useStyles = makeStyles(() => createStyles({
   root: {
     backgroundColor: 'red',
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => createStyles({
 <%}-%>
 function <%=comp %>() {
   const [count, setCount] = useState(0);
-<% if(locals.scss) { -%>
+<% if(locals.withStyle) { -%>
   const classes = useStyles();
 <%}-%>
   return (

@@ -15,6 +15,7 @@ import { create } from 'jss';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { appWithTranslation, i18n } from 'src/i18n';
 import createTheme from 'src/themes';
+import { SnackbarProvider } from 'notistack';
 
 const jss = create({ plugins: [...jssPreset().plugins] });
 const jssWithRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -49,7 +50,9 @@ class MyApp extends App {
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Provider store={store}>
-              <Component {...pageProps} />
+              <SnackbarProvider autoHideDuration={3500}>
+                <Component {...pageProps} />
+              </SnackbarProvider>
             </Provider>
           </ThemeProvider>
         </StylesProvider>

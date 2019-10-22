@@ -1,0 +1,20 @@
+{
+  "screenName": "signup",
+  "signupScreenTitle": "הרשמה",
+  "signupFirstName": "שם פרטי",
+  "signupLastName": "שם משפחה",
+  "signupEmailAddress": "דואר אלקטרוני",
+  "signupPassword": "סיסמא",
+  "signupButton": "הרשמה",
+  "signupConfirm": "אני מעוניין לקבל עדכונים לאימייל שלי",
+  "signupVerifyEmailAccountTitle": "אימות אימייל",
+  "signupVerifyMobileAccountTitle": "אימות טלפון",
+  "signupVerifyEmailButton": "שלח אימייל מחדש",
+  "signupVerifyMobileButton": "שלח הודעת טקסט מחדש",
+  "signupHaveAnAccount": "יש לך כבר חשבון ? כניסה",
+  "signupVerifyEmailText": "אנא בדוק בתיבת האימייל שלך את האימייל שכרגע שלחנו לך",
+  "signupVerifyMobileText": "אנא בדוק את הלינק ששלחנו לך כרגע בהודעת טקסט",
+  "signupSigninButton": "כניסה",
+  "signupVerifyEmailNotificationMessage": "אימייל נשלח בהצלחה",
+  "signupVerifyMobileNotificationMessage": "הודעת טקסט נשלחה בהצלחה"
+}

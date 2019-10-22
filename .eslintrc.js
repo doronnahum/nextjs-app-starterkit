@@ -27,6 +27,11 @@ module.exports = {
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-fragments": 0,
     "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": ["Link"],
+      "specialLink": ["hrefLeft", "hrefRight"],
+      "aspects": ["invalidHref", "preferButton"]
+    }]
   },
   "settings": { "import/resolver": { "node": { "paths": ["src"] } } },
 };

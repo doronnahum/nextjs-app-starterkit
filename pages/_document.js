@@ -7,7 +7,7 @@ import createTheme from 'src/themes';
 
 import {
   title, description, url, thumbnail,
-} from '../siteInfo';
+} from '../siteConfig';
 
 const theme = createTheme();
 
