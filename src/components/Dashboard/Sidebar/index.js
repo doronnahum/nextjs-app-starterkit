@@ -92,14 +92,13 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function() {
+  useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
       window.removeEventListener("resize", handleWindowWidthChange);
     };
   });
-
   return (
     <Drawer
       variant={isPermanent ? "permanent" : "temporary"}
@@ -114,6 +113,7 @@ function Sidebar({ location }) {
         }),
       }}
       open={isSidebarOpened}
+    //anchor={irRtl ? 'right' : 'left'}
     >
       <div className={classes.toolbar} />
       <div className={classes.mobileBackButton}>

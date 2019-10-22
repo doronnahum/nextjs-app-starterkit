@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-
+import { i18n } from 'src/i18n';
+import Local from 'src/components/Local';
 // styles
 import useStyles from './styles';
 
@@ -18,7 +19,7 @@ function Layout() {
   const layoutState = useLayoutState();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} dir={i18n.dir()}>
       <>
         <Header />
         <Sidebar />
@@ -28,8 +29,9 @@ function Layout() {
           })}
         >
           <div className={classes.fakeToolbar} />
-            fakeToolbar
+          fakeToolbar
         </div>
+        <Local />
       </>
     </div>
   );

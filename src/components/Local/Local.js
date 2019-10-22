@@ -16,6 +16,7 @@ const useStyles = makeStyles(() => createStyles({
     top: 0,
     right: 0,
     opacity: 0.5,
+    zIndex: 10000,
   },
   button: {
     fontSize: 10,

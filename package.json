@@ -38,6 +38,8 @@
     "immer": "^3.2.0",
     "immutability-helper": "^3.0.1",
     "install": "^0.13.0",
+    "jss": "^10.0.0",
+    "jss-rtl": "^0.3.0",
     "lodash": "^4.17.15",
     "material-ui-popup-state": "^1.4.1",
     "next": "latest",

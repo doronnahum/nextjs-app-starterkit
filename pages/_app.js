@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import 'src/styles/tools.scss';
+import 'src/styles/theme.scss';
 import React from 'react';
 import App from 'next/app';
 import { ThemeProvider } from '@material-ui/styles';
@@ -8,10 +10,14 @@ import withReduxSaga from 'next-redux-saga';
 import { Provider } from 'react-redux';
 import createStore from 'src/redux/createStore';
 import Router from 'next/router';
-import { appWithTranslation } from 'src/i18n';
-import theme from '../src/theme';
-import 'src/styles/tools.scss';
-import 'src/styles/theme.scss';
+import rtl from 'jss-rtl';
+import { create } from 'jss';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+import { appWithTranslation, i18n } from 'src/i18n';
+import createTheme from 'src/themes';
+
+const jss = create({ plugins: [...jssPreset().plugins] });
+const jssWithRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 class MyApp extends App {
   componentDidMount() {
@@ -32,16 +38,21 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
-
+    const isRtl = i18n.dir() === 'rtl';
+    if (process.browser) {
+      document.getElementsByTagName('body')[0].dir = i18n.dir();
+    }
     return (
       <React.Fragment>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        </ThemeProvider>
+        <StylesProvider jss={isRtl ? jssWithRtl : jss}>
+          <ThemeProvider theme={createTheme(i18n.dir())}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Provider store={store}>
+              <Component {...pageProps} />
+            </Provider>
+          </ThemeProvider>
+        </StylesProvider>
       </React.Fragment>
     );
   }

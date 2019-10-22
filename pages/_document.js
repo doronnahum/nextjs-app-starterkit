@@ -2,11 +2,14 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
-import theme from '../src/theme';
+
+import createTheme from 'src/themes';
 
 import {
   title, description, url, thumbnail,
 } from '../siteInfo';
+
+const theme = createTheme();
 
 
 class MyDocument extends Document {

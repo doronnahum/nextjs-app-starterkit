@@ -16,7 +16,7 @@ export default (initialState = {}) => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && process.browser) {
     // eslint-disable-next-line global-require
     const { logger } = require('redux-logger');
     middlewares.push(logger);
