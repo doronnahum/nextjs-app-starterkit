@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
@@ -10,8 +11,6 @@ import {
 } from '@material-ui/core';
 import { useTheme, makeStyles } from '@material-ui/styles';
 import classnames from 'classnames';
-
-// ########################################################################
 
 function getColor(color, theme, brigtness = 'main') {
   if (color && theme.palette[color] && theme.palette[color][brigtness]) {
@@ -56,13 +55,13 @@ function getFontSize(size, variant = '', theme) {
 
   const defaultSize = variant && theme.typography[variant]
     ? theme.typography[variant].fontSize
-    : `${theme.typography.fontSize }px`;
+    : `${theme.typography.fontSize}px`;
 
   return `calc(${defaultSize} * ${multiplier})`;
 }
 
 function createStyled(styles, options) {
-  const Styled = function (props) {
+  const Styled = function styled(props) {
     const { children, ...other } = props;
     return children(other);
   };
@@ -162,4 +161,3 @@ function Button({ children, color, ...props }) {
 }
 
 export { Badge, Typography, Button };
-

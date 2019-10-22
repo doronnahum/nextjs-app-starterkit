@@ -1,4 +1,4 @@
-  
+
 import React from "react";
 import { Button } from "@material-ui/core";
 import {
@@ -20,12 +20,11 @@ import { useTheme } from "@material-ui/styles";
 import classnames from "classnames";
 import tinycolor from "tinycolor2";
 
-// styles
+// styles
 import useStyles from "./styles";
 
-// components
+// components
 import { Typography } from "../../../Wrappers";
-
 
 const typesIcons = {
   "e-commerce": <ShoppingCartIcon />,
@@ -43,7 +42,6 @@ const typesIcons = {
   disc: <DiscIcon />,
 };
 
-// ####################################################################
 function getIconByType(type = "offer") {
   return typesIcons[type];
 }
