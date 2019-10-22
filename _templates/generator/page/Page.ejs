@@ -4,27 +4,20 @@ to: pages/<%= h.changeCase.lcFirst(name) %>.js
 <% const pageLower = h.changeCase.lcFirst(name) -%>
 <% const pageUpper = h.changeCase.pascal(name) -%>
 import React from 'react';
-import Screen from 'src/screens/<%=pageLower %>';
-import { withTranslation } from 'src/i18n';
-import WithAuth from 'src/components/WithAuth';
+import Screen from 'src/screens/signin';
+import Page from 'src/components/Page';
 import Head from 'next/head';
-import Local from 'src/components/Local';
 
-function <%=pageUpper %>Page() {
-  return (
-    <React.Fragment>
-      <Head>
-        <title><%=pageUpper %></title>
-      </Head>
-      <Screen />
-      <Local />
-    </React.Fragment>
-  );
-}
-
-const ExtendedWithAuth = WithAuth({ isPrivate: <%=isPrivate %> })(<%=pageUpper %>Page);
-ExtendedWithAuth.getInitialProps = async () => ({
-  namespacesRequired: ['<%=pageLower %>', 'common'],
-});
-
-export default withTranslation(['blog', 'common'])(ExtendedWithAuth);
+export default Page({
+  isPrivate: <%=isPrivate %>,
+  i18n: ['<%=pageLower %>', 'common'],
+  showLocalButton: true,
+  displayName: '<%=pageUpper %>Page',
+})(() => (
+  <React.Fragment>
+    <Head>
+      <title><%=pageUpper %></title>
+    </Head>
+    <Screen />
+  </React.Fragment>
+));

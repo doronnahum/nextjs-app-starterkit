@@ -1,0 +1,11 @@
+{
+  "screenName": "verifyAccount",
+  "verifyEmailAccountTitle": "Verify Email",
+  "verifyMobileAccountTitle": "Verify Mobile",
+  "verifyEmailButton": "ReSend Verification email",
+  "verifyEmailText": "Please log in to your email account and find the email we have just sent you.",
+  "verifyMobileText": "Please check your sms inbox and find the message we have just sent you.",
+  "verifyMobileButton": "ReSend Verification message",
+  "verifyEmailNotificationMessage": "Email message send successful",
+  "verifyMobileNotificationMessage": "sms message send successful"
+}

@@ -41,7 +41,7 @@ function verifyAccount({ actions, t }) {
     e.preventDefault();
     const actionPayload = {
       ...values,
-      notificationMessage: emailIsMainField ? t('signupVerifyEmailNotificationMessage') : t('signupVerifyMobileNotificationMessage'),
+      notificationMessage: emailIsMainField ? t('verifyEmailNotificationMessage') : t('verifyMobileNotificationMessage'),
     };
     actions.sendVerifyAccount(actionPayload);
   };
@@ -55,11 +55,11 @@ function verifyAccount({ actions, t }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {emailIsMainField ? t('signupVerifyEmailAccountTitle') : t('signupVerifyMobileAccountTitle')}
+          {emailIsMainField ? t('verifyEmailAccountTitle') : t('verifyMobileAccountTitle')}
         </Typography>
         <br />
         <Typography component="p">
-          {emailIsMainField ? t('signupVerifyEmailText') : t('signupVerifyMobileText')}
+          {emailIsMainField ? t('verifyEmailText') : t('verifyMobileText')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -85,7 +85,7 @@ function verifyAccount({ actions, t }) {
             color="primary"
             className={classes.submit}
           >
-            {emailIsMainField ? t('signupVerifyEmailButton') : t('signupVerifyMobileButton')}
+            {emailIsMainField ? t('verifyEmailButton') : t('verifyMobileButton')}
           </Button>
           <Grid container>
             <Grid item>
@@ -117,6 +117,6 @@ verifyAccount.propTypes = {
   }).isRequired,
 };
 
-const Extend = withTranslation('signup')(verifyAccount);
+const Extend = withTranslation('verifyAccount')(verifyAccount);
 
 export default connect(null, mapDispatchToProps)(Extend);

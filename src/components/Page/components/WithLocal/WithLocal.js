@@ -57,6 +57,13 @@ function Local() {
   );
 }
 
-export default (Local);
-Local.propTypes = {
+export default (WrappedComponent) => {
+  const WithLocal = (props) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <React.Fragment>
+      <WrappedComponent {...props} />
+      <Local />
+    </React.Fragment>
+  );
+  return WithLocal;
 };

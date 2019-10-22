@@ -15,6 +15,7 @@ import './<%= h.changeCase.lcFirst(name) %>.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 <%}-%>
+import { withTranslation } from 'src/i18n';
 
 class <%=comp %> extends React.Component() {
   constructor(props) {
@@ -37,6 +38,8 @@ class <%=comp %> extends React.Component() {
   }
 }
 
+const Extended = withTranslation('common')(<%=comp %>);
+
 <% if(locals.withStyle) { -%>
 const styles = () => createStyles({
   root: {
@@ -55,14 +58,14 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({ }, dispatch)
   };
 }
-export default <% if(locals.withStyle) { -%>withStyles(styles, <%}-%>connect(mapStateToProps, mapDispatchToProps)(<%=comp %>)<% if(locals.withStyle) { -%>)<%}-%>;
+export default <% if(locals.withStyle) { -%>withStyles(styles, <%}-%>connect(mapStateToProps, mapDispatchToProps)(Extended)<% if(locals.withStyle) { -%>)<%}-%>;
 <%}-%>
 <% if(!locals.redux) { -%>
 <% if(locals.withStyle) { -%>
-export default withStyles(styles)(<%=comp %>);
+export default withStyles(styles)(Extended);
 <%}-%>
 <% if(!locals.withStyle) { -%>
-export default <%=comp %>;
+export defaultExtended;
 <%}-%>
 <%}-%>
 <%=comp %>.propTypes = {

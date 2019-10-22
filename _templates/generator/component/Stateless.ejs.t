@@ -15,6 +15,7 @@ import './<%= h.changeCase.lcFirst(name) %>.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 <%}-%>
+import { useTranslation } from 'src/i18n'
 
 <% if(locals.withStyle) { -%>
 const useStyles = makeStyles(() => createStyles({
@@ -22,6 +23,7 @@ const useStyles = makeStyles(() => createStyles({
     backgroundColor: 'red',
   },
 }));
+const { t } = useTranslation('common');
 
 <%}-%>
 function <%=comp %>() {
@@ -31,6 +33,7 @@ function <%=comp %>() {
   return (
     <div <% if(locals.withStyle) { -%>className={`${classes.root} <%=compClassName %>_component`}<%}-%><% if(!locals.withStyle) { -%>className="<%=compClassName %>_component"<%}-%>>
       <h2>I am a <%=comp %> Hook Component</h2>
+      <p>{t.('add_your_component_translates_to_common.json')}</p>
     </div>
   );
 }
