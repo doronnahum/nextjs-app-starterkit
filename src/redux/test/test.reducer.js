@@ -4,7 +4,7 @@ import produce from 'immer';
 import { actionsType } from './test.actions';
 
 const initialState = {
-  count: 0,
+    count: 0,
 };
 
 export default function testReducer(state = initialState, action) {
