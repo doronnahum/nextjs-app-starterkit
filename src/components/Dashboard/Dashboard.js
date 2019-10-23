@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import { i18n } from 'src/i18n';
-import Local from 'src/components/Local';
 // styles
 import useStyles from './styles';
 
@@ -31,7 +30,6 @@ function Layout() {
           <div className={classes.fakeToolbar} />
           fakeToolbar
         </div>
-        <Local />
       </>
     </div>
   );

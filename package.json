@@ -17,7 +17,7 @@
     "prestart": "npm run build",
     "analyze": "cross-env BUNDLE_ANALYZE=both npm run build",
     "build:static_export": "rimraf -rf ./out && npm run build && next export",
-    "build:server-static": "npm run build:static_export && http-server ./out",
+    "build:serve-static": "npm run build:static_export && http-server ./out",
     "server-static": "http-server ./out",
     "now-login": "now login",
     "now-deploy": "now --prod"
