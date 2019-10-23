@@ -27,12 +27,11 @@ class <%=comp %> extends React.Component() {
 
   render() {
     const { myName } = this.state;
-<% if(locals.scss) { -%>
-    const { classes } = this.props;
-<%}-%>
+    const { <% if(locals.scss) { -%> classes, <%}-%> t } = this.props;
     return (
       <div <% if(locals.withStyle) { -%>className={`${classes.root} <%=compClassName %>_component`}<%}-%><% if(!locals.withStyle) { -%>className="<%=compClassName %>_component"<%}-%>>
         <h2>{`I am a ${myName} Component`}</h2>
+        <p>{t('add_your_component_translates_to_common.json')}</p>
       </div>
     );
   }
@@ -65,7 +64,7 @@ export default <% if(locals.withStyle) { -%>withStyles(styles, <%}-%>connect(map
 export default withStyles(styles)(Extended);
 <%}-%>
 <% if(!locals.withStyle) { -%>
-export defaultExtended;
+export default Extended;
 <%}-%>
 <%}-%>
 <%=comp %>.propTypes = {

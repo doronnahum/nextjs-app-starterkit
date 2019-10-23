@@ -4,7 +4,7 @@ to: pages/<%= h.changeCase.lcFirst(name) %>.js
 <% const pageLower = h.changeCase.lcFirst(name) -%>
 <% const pageUpper = h.changeCase.pascal(name) -%>
 import React from 'react';
-import Screen from 'src/screens/signin';
+import Screen from 'src/screens/<%=pageLower %>';
 import Page from 'src/components/Page';
 import Head from 'next/head';
 

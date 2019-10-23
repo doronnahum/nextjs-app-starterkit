@@ -17,13 +17,12 @@ import { bindActionCreators } from 'redux';
 <%}-%>
 import { withTranslation } from 'src/i18n';
 
-<% if(locals.scss) { -%>
+<% if(locals.withStyle) { -%>
 const useStyles = makeStyles(() => createStyles({
   root: {
     backgroundColor: 'red',
   },
 }));
-
 <%}-%>
 function <%=Screen %>Screen({ t }) {
 <% if(locals.scss) { -%>
@@ -53,13 +52,8 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Extended);
 <%}-%>
 <% if(!locals.redux) { -%>
-<% if(locals.withStyle) { -%>
-export default (Extended);
-<%}-%>
-<% if(!locals.withStyle) { -%>
 export default Extended;
 <%}-%>
-<%}-%>
 <%=Screen %>Screen.propTypes = {
-    t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };

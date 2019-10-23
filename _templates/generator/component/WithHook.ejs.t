@@ -34,7 +34,7 @@ function <%=comp %>() {
   return (
     <div <% if(locals.withStyle) { -%>className={`${classes.root} <%=compClassName %>_component`}<%}-%><% if(!locals.withStyle) { -%>className="<%=compClassName %>_component"<%}-%>>
       <h2>I am a <%=comp %> Hook Component</h2>
-      <p>{t.('add_your_component_translates_to_common.json')}</p>
+      <p>{t('add_your_component_translates_to_common.json')}</p>
       <p>You clicked {count} times</p>
       <button type="button" onClick={() => setCount(count + 1)}>
         Click me
