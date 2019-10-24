@@ -5,9 +5,12 @@ import { makeStyles, createStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { withTranslation } from 'src/i18n';
 import { getErrorByType } from 'src/redux/loaders';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 
-const useStyles = makeStyles(() => createStyles({
+
+const useStyles = makeStyles((theme) => createStyles({
   fullScreen: {
     position: 'fixed',
     left: 0,
@@ -23,7 +26,12 @@ const useStyles = makeStyles(() => createStyles({
     pointerEvents: 'none',
   },
   simple: {
-    padding: 5,
+    height: '55px',
+    display: 'flex',
+    padding: '0px 10px',
+    alignItems: 'center',
+    borderRadius: 4,
+    backgroundColor: 'rgb(232, 240, 254) !important',
   },
 }));
 
@@ -41,14 +49,14 @@ function Error({
   errorType, error, fullScreen, errorText, t,
 }) {
   const classes = useStyles();
-  const showLoader = (errorType && error);
+  const showErr = (errorType && error);
   const className = fullScreen ? classes.fullScreen : classes.simple;
   const defaultErrorMessage = t('defaultErrorMessage');
-  if (showLoader) {
+  if (showErr) {
     return (
-      <div className={`${className} error_component`}>
-        {getErrorMessage(error, errorText, defaultErrorMessage)}
-      </div>
+      <Box color="text.primary" className={`${className} error_component`}>
+        <Typography color="error">{getErrorMessage(error, errorText, defaultErrorMessage)}</Typography>
+      </Box>
     );
   }
   return null;
