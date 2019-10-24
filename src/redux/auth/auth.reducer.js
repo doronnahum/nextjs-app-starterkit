@@ -39,6 +39,15 @@ export default function authReducer(state = initialState, action) {
       });
       return nextState;
     }
+    case actionsType.ON_LOGIN_END:
+    case actionsType.ON_REGISTER_END: {
+      const nextState = produce(state, (draftState) => {
+        draftState.loading = false;
+        draftState.valid = true;
+        draftState.token = action.token;
+      });
+      return nextState;
+    }
     default:
       return state;
   }

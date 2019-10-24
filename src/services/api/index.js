@@ -37,6 +37,10 @@ export const END_POINTS = {
     url: 'authManagement',
     getErrMessage: (error) => error.response.data.message,
   },
+  reAuthenticate: {
+    url: 'me',
+    getErrMessage: (error) => error.response.data.message,
+  },
 };
 
 
@@ -53,19 +57,15 @@ export default class ApiService {
     });
   }
 
-  static me(token) {
-    if (token) {
-      return axios.request({
-        baseURL: SERVER_URL,
-        url: END_POINTS.login.url,
-        method: METHODS.POST,
-        headers: {
-          Authorization: token,
-        },
-      });
-    }
-    // TODO: axios incatnce
-    return null;
+  static reAuthenticate(token) {
+    return axios.request({
+      baseURL: SERVER_URL,
+      url: END_POINTS.reAuthenticate.url,
+      method: METHODS.GET,
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 
   static login(email, mobile, password) {

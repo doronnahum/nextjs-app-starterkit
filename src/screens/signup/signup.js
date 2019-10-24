@@ -148,7 +148,7 @@ function mapDispatchToProps(dispatch) {
 }
 SignUp.propTypes = {
   t: PropTypes.func.isRequired,
-  actions: PropTypes.objectOf({
+  actions: PropTypes.shape({
     register: PropTypes.func.isRequired,
   }).isRequired,
 };

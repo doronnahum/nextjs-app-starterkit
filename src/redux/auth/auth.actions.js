@@ -1,6 +1,7 @@
 import ApiService from 'src/services/api';
 import logger from 'src/services/logger';
 import { setUser } from 'src/redux/user/user.actions';
+import { removeToken } from 'src/services/userToken';
 
 const NAME_SPACE = 'auth';
 
@@ -12,6 +13,8 @@ export const actionsType = {
   LOGIN: `${NAME_SPACE}/LOGIN`,
   REGISTER: `${NAME_SPACE}/REGISTER`,
   SEND_VERIFY_ACCOUNT: `${NAME_SPACE}/SEND_VERIFY_ACCOUNT`,
+  ON_LOGIN_END: `${NAME_SPACE}/ON_LOGIN_END`,
+  ON_REGISTER_END: `${NAME_SPACE}/ON_REGISTER_END`,
 };
 
 export const onCheckTokenStart = () => ({
@@ -24,6 +27,14 @@ export const onCheckTokenFailed = () => ({
   type: actionsType.ON_CHECK_TOKEN_FAILED,
 });
 
+export const onLoginEnd = (token) => ({
+  type: actionsType.ON_LOGIN_END,
+  token,
+});
+export const onRegisterEnd = (token) => ({
+  type: actionsType.ON_REGISTER_END,
+  token,
+});
 /**
  * @function login
  * @param {object} payload
@@ -72,19 +83,19 @@ export const sendVerifyAccount = (payload) => ({
  * @param {*} token
  * @param {*} onRemoveToken
  */
-export function getMe(dispatch, token, onRemoveToken) {
-  logger.debug('getMe start');
-  ApiService.me(token).then((response) => {
+export function reAuthenticate(dispatch, token) {
+  logger.debug('reAuthenticate start');
+  ApiService.reAuthenticate(token).then((response) => {
     logger.debug('Token is valid');
     dispatch(setUser(response));
     dispatch(onCheckTokenEnd());
   })
     .catch(() => {
       logger.debug('Token is not valid');
-      onRemoveToken();
+      removeToken();
       dispatch(onCheckTokenFailed());
     })
     .finally(() => {
-      logger.debug('getMe end');
+      logger.debug('reAuthenticate end');
     });
 }

@@ -130,7 +130,7 @@ const Extend = withTranslation('signin')(SignIn);
 
 SignIn.propTypes = {
   t: PropTypes.func.isRequired,
-  actions: PropTypes.objectOf({
+  actions: PropTypes.shape({
     login: PropTypes.func.isRequired,
   }).isRequired,
 };

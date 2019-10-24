@@ -111,7 +111,7 @@ function mapDispatchToProps(dispatch) {
 }
 verifyAccount.propTypes = {
   t: PropTypes.func.isRequired,
-  actions: PropTypes.objectOf({
+  actions: PropTypes.shape({
     login: PropTypes.func.isRequired,
   }).isRequired,
 };

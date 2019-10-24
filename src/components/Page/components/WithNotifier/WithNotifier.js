@@ -81,7 +81,7 @@ const Extend = withSnackbar(connect(
 
 Notifier.propTypes = {
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
-  actions: PropTypes.objectOf({
+  actions: PropTypes.shape({
     removeNotification: PropTypes.func.isRequired,
   }).isRequired,
   closeSnackbar: PropTypes.func.isRequired,

@@ -2,8 +2,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { getToken as getTokenFromStorage, removeToken } from 'src/services/userToken';
-import { getMe } from 'src/redux/auth/auth.actions';
+import { getToken as getTokenFromStorage } from 'src/services/userToken';
+import { reAuthenticate } from 'src/redux/auth/auth.actions';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
@@ -33,7 +33,7 @@ export default (initialState = {}) => {
     if (!token && !loading && !valid) {
       const tokenFromStorage = getTokenFromStorage();
       if (tokenFromStorage) {
-        getMe(store.dispatch, tokenFromStorage, removeToken);
+        reAuthenticate(store.dispatch, tokenFromStorage);
       }
     }
   }

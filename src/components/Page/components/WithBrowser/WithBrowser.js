@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setNetworkOnline, setWindowSize } from 'src/redux/global/global.actions';
@@ -77,12 +77,16 @@ const mapStateToProps = (store) => ({
   networkOnline: store.global.networkOnline,
 });
 
+ReactBrowser.defaultProps = {
+  networkOnline: null,
+};
+
 ReactBrowser.propTypes = {
-  actions: PropTypes.objectOf({
+  actions: PropTypes.shape({
     setNetworkOnline: PropTypes.func.isRequired,
     setWindowSize: PropTypes.func.isRequired,
   }).isRequired,
-  networkOnline: PropTypes.bool.isRequired,
+  networkOnline: PropTypes.bool,
 };
 
 const Extend = connect(
