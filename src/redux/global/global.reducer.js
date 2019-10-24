@@ -8,7 +8,7 @@ const initialState = {
   notifications: [],
   windowWidth: null,
   windowHeight: null,
-  networkOnline: false,
+  networkOnline: null,
 };
 
 export default function globalReducer(state = initialState, action) {

@@ -5,6 +5,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setNetworkOnline, setWindowSize } from 'src/redux/global/global.actions';
 import throttle from 'lodash/throttle';
+import Typography from '@material-ui/core/Typography';
+
+
+const offLineStyle = {
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  left: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  opacity: 0.5,
+  zIndex: 10000,
+};
 
 class ReactBrowser extends PureComponent {
   handleWindowSize = throttle(() => {
@@ -41,6 +55,14 @@ class ReactBrowser extends PureComponent {
   };
 
   render() {
+    const { networkOnline } = this.props;
+    if (!networkOnline && networkOnline !== null) {
+      return (
+        <div style={offLineStyle}>
+          <Typography color="textSecondary"> No Network</Typography>
+        </div>
+      );
+    }
     return null;
   }
 }
@@ -51,15 +73,20 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const mapStateToProps = (store) => ({
+  networkOnline: store.global.networkOnline,
+});
+
 ReactBrowser.propTypes = {
   actions: PropTypes.objectOf({
     setNetworkOnline: PropTypes.func.isRequired,
     setWindowSize: PropTypes.func.isRequired,
   }).isRequired,
+  networkOnline: PropTypes.bool.isRequired,
 };
 
 const Extend = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(ReactBrowser);
 
