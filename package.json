@@ -9,7 +9,8 @@
     "local-no-lint": "npm run clean-cache && cross-env CONFIG_ENV=local node index.js",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node index.js",
-    "lint": "eslint --fix --ext .js pages src",
+    "lint": "eslint --ext .js pages src",
+    "format": "eslint --fix --ext .js pages src",
     "create-comp": "hygen generator component",
     "create-page": "hygen generator page",
     "create-reducer": "hygen generator reducer",
@@ -50,7 +51,6 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-fns": "^1.4.0",
     "react-hook-form": "^3.24.1",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
@@ -65,6 +65,7 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "babel-plugin-module-resolver": "^3.2.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",

@@ -4,7 +4,10 @@ import logger from '../logger';
 const getErrorMessage = (error, errorText, defaultErrorMessage) => {
   if (errorText) return errorText;
   if (error && typeof error === 'string') return error;
-  if (error && error.response && error.response.data && error.response.data.message) return error.response.data.message;
+  if (error
+    && error.response
+    && error.response.data
+    && error.response.data.message) return error.response.data.message;
   if (error && error.data && error.data.message) return error.data.message;
   if (error && error.message) return error.message;
   if (defaultErrorMessage) return defaultErrorMessage;

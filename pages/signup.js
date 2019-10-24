@@ -16,4 +16,3 @@ export default Page({
     <Screen />
   </React.Fragment>
 ));
-

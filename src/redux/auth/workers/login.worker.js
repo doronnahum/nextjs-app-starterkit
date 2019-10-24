@@ -6,7 +6,9 @@ import Router from 'next/router';
 import { startLoading, stopLoading, LoaderTypes } from '../../loaders';
 
 function* signIn(action) {
-  const { email, mobile, password, nextRoute } = action.payload;
+  const {
+    email, mobile, password, nextRoute,
+  } = action.payload;
   try {
     yield put(startLoading({ loaderType: LoaderTypes.LOGIN }));
     const response = yield httpRequest(ApiService.login, email, mobile, password);

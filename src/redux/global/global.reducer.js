@@ -6,6 +6,9 @@ import { actionsType } from './global.actions';
 const initialState = {
   count: 0,
   notifications: [],
+  windowWidth: null,
+  windowHeight: null,
+  networkOnline: false,
 };
 
 export default function globalReducer(state = initialState, action) {
@@ -46,6 +49,19 @@ export default function globalReducer(state = initialState, action) {
         draftState.notifications = draftState.notifications.filter(
           (notification) => notification.key !== action.key,
         );
+      });
+      return nextState;
+    }
+    case actionsType.SET_WINDOW_SIZE: {
+      const nextState = produce(state, (draftState) => {
+        draftState.windowWidth = action.width;
+        draftState.windowHeight = action.height;
+      });
+      return nextState;
+    }
+    case actionsType.SET_NETWORK_ONLINE: {
+      const nextState = produce(state, (draftState) => {
+        draftState.networkOnline = action.payload;
       });
       return nextState;
     }

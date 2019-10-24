@@ -23,4 +23,3 @@ export default Page({
     </LayoutProvider>
   </React.Fragment>
 ));
-

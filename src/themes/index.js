@@ -25,5 +25,5 @@ const overrides = {
   },
 };
 
-const createTheme = (direction = 'ltr') => createMuiTheme({ ...defaultTheme, ...overrides, direction })
+const createTheme = (direction = 'ltr') => createMuiTheme({ ...defaultTheme, ...overrides, direction });
 export default createTheme;

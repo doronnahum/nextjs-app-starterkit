@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import {
   Collapse,
   Divider,
@@ -7,23 +9,23 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from "@material-ui/core";
-import { Inbox as InboxIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { Inbox as InboxIcon } from '@material-ui/icons';
 
 
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // styles
-import useStyles from "./styles";
+import useStyles from './styles';
 
 // components
-import Dot from "../Dot";
+import Dot from '../Dot';
 
 const Link = () => (
   <div>
     LINK
   </div>
-)
+);
 export default function SidebarLink({
   link,
   icon,
@@ -34,15 +36,21 @@ export default function SidebarLink({
   nested,
   type,
 }) {
-  var classes = useStyles();
+  const classes = useStyles();
 
   // local
-  var [isOpen, setIsOpen] = useState(false);
-  var isLinkActive =
-    link &&
-    false
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleCollapse(e) {
+    if (isSidebarOpened) {
+      e.preventDefault();
+      setIsOpen(!isOpen);
+    }
+  }
 
-  if (type === "title")
+  const isLinkActive = link
+    && false;
+
+  if (type === 'title') {
     return (
       <Typography
         className={classnames(classes.linkText, classes.sectionTitle, {
@@ -52,10 +60,11 @@ export default function SidebarLink({
         {label}
       </Typography>
     );
+  }
 
-  if (type === "divider") return <Divider className={classes.divider} />;
+  if (type === 'divider') return <Divider className={classes.divider} />;
 
-  if (!children)
+  if (!children) {
     return (
       <ListItem
         button
@@ -75,7 +84,7 @@ export default function SidebarLink({
             [classes.linkIconActive]: isLinkActive,
           })}
         >
-          {nested ? <Dot color={isLinkActive && "primary"} /> : icon}
+          {nested ? <Dot color={isLinkActive && 'primary'} /> : icon}
         </ListItemIcon>
         <ListItemText
           classes={{
@@ -88,6 +97,7 @@ export default function SidebarLink({
         />
       </ListItem>
     );
+  }
 
   return (
     <>
@@ -104,7 +114,7 @@ export default function SidebarLink({
             [classes.linkIconActive]: isLinkActive,
           })}
         >
-          {icon ? icon : <InboxIcon />}
+          {icon || <InboxIcon />}
         </ListItemIcon>
         <ListItemText
           classes={{
@@ -124,7 +134,7 @@ export default function SidebarLink({
           className={classes.nestedList}
         >
           <List component="div" disablePadding>
-            {children.map(childrenLink => (
+            {children.map((childrenLink) => (
               <SidebarLink
                 key={childrenLink && childrenLink.link}
                 location={location}
@@ -139,13 +149,4 @@ export default function SidebarLink({
       )}
     </>
   );
-
-  // ###########################################################
-
-  function toggleCollapse(e) {
-    if (isSidebarOpened) {
-      e.preventDefault();
-      setIsOpen(!isOpen);
-    }
-  }
 }

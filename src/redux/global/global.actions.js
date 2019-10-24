@@ -6,6 +6,8 @@ export const actionsType = {
   SEND_NOTIFICATION: `${NAME_SPACE}/SEND_NOTIFICATION`,
   CLOSE_NOTIFICATION: `${NAME_SPACE}/CLOSE_NOTIFICATION`,
   REMOVE_NOTIFICATION: `${NAME_SPACE}/REMOVE_NOTIFICATION`,
+  SET_NETWORK_ONLINE: `${NAME_SPACE}/SET_NETWORK_ONLINE`,
+  SET_WINDOW_SIZE: `${NAME_SPACE}/SET_WINDOW_SIZE`,
 };
 
 // eslint-disable-next-line import/prefer-default-export
@@ -47,3 +49,13 @@ export const removeNotification = (key) => ({
 });
 
 // Notifications End
+
+export const setWindowSize = (width, height) => ({
+  type: actionsType.SET_WINDOW_SIZE,
+  width,
+  height,
+});
+export const setNetworkOnline = (payload) => ({
+  type: actionsType.SET_NETWORK_ONLINE,
+  payload,
+});

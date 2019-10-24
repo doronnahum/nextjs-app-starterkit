@@ -47,7 +47,9 @@ export default class ApiService {
       baseURL: SERVER_URL,
       url: END_POINTS.createUser.url,
       method: METHODS.POST,
-      data: { email, mobile, password, firstName, lastName },
+      data: {
+        email, mobile, password, firstName, lastName,
+      },
     });
   }
 
@@ -71,7 +73,9 @@ export default class ApiService {
       baseURL: SERVER_URL,
       url: END_POINTS.login.url,
       method: METHODS.POST,
-      data: { email, mobile, password, strategy: 'local' },
+      data: {
+        email, mobile, password, strategy: 'local',
+      },
     });
   }
 

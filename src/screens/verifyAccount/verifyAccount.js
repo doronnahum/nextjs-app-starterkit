@@ -34,7 +34,6 @@ function verifyAccount({ actions, t }) {
   });
 
 
-
   const emailIsMainField = mainUserField === 'email';
 
   const onSubmit = (values, e) => {

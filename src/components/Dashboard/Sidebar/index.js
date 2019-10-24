@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Drawer, IconButton, List } from "@material-ui/core";
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+import { Drawer, IconButton, List } from '@material-ui/core';
 import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,
@@ -10,98 +12,119 @@ import {
   LibraryBooks as LibraryIcon,
   HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
-} from "@material-ui/icons";
-import { useTheme } from "@material-ui/styles";
-import classNames from "classnames";
+} from '@material-ui/icons';
+import { useTheme } from '@material-ui/styles';
+import classNames from 'classnames';
 
 // styles
-import useStyles from "./styles";
+import useStyles from './styles';
 
 // components
-import SidebarLink from "./SidebarLink";
-import Dot from "./Dot";
+import SidebarLink from './SidebarLink';
+import Dot from './Dot';
 
 // context
 import {
   useLayoutState,
   useLayoutDispatch,
   toggleSidebar,
-} from "../LayoutContext";
+} from '../LayoutContext';
 
 const structure = [
-  { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+  {
+    id: 0, label: 'Dashboard', link: '/app/dashboard', icon: <HomeIcon />,
+  },
   {
     id: 1,
-    label: "Typography",
-    link: "/app/typography",
+    label: 'Typography',
+    link: '/app/typography',
     icon: <TypographyIcon />,
   },
-  { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
+  {
+    id: 2, label: 'Tables', link: '/app/tables', icon: <TableIcon />,
+  },
   {
     id: 3,
-    label: "Notifications",
-    link: "/app/notifications",
+    label: 'Notifications',
+    link: '/app/notifications',
     icon: <NotificationsIcon />,
   },
   {
     id: 4,
-    label: "UI Elements",
-    link: "/app/ui",
+    label: 'UI Elements',
+    link: '/app/ui',
     icon: <UIElementsIcon />,
     children: [
-      { label: "Icons", link: "/app/ui/icons" },
-      { label: "Charts", link: "/app/ui/charts" },
-      { label: "Maps", link: "/app/ui/maps" },
+      { label: 'Icons', link: '/app/ui/icons' },
+      { label: 'Charts', link: '/app/ui/charts' },
+      { label: 'Maps', link: '/app/ui/maps' },
     ],
   },
-  { id: 5, type: "divider" },
-  { id: 6, type: "title", label: "HELP" },
-  { id: 7, label: "Library", link: "", icon: <LibraryIcon /> },
-  { id: 8, label: "Support", link: "", icon: <SupportIcon /> },
-  { id: 9, label: "FAQ", link: "", icon: <FAQIcon /> },
-  { id: 10, type: "divider" },
-  { id: 11, type: "title", label: "PROJECTS" },
+  { id: 5, type: 'divider' },
+  { id: 6, type: 'title', label: 'HELP' },
+  {
+    id: 7, label: 'Library', link: '', icon: <LibraryIcon />,
+  },
+  {
+    id: 8, label: 'Support', link: '', icon: <SupportIcon />,
+  },
+  {
+    id: 9, label: 'FAQ', link: '', icon: <FAQIcon />,
+  },
+  { id: 10, type: 'divider' },
+  { id: 11, type: 'title', label: 'PROJECTS' },
   {
     id: 12,
-    label: "My recent",
-    link: "",
+    label: 'My recent',
+    link: '',
     icon: <Dot size="large" color="warning" />,
   },
   {
     id: 13,
-    label: "Starred",
-    link: "",
+    label: 'Starred',
+    link: '',
     icon: <Dot size="large" color="primary" />,
   },
   {
     id: 14,
-    label: "Background",
-    link: "",
+    label: 'Background',
+    link: '',
     icon: <Dot size="large" color="secondary" />,
   },
 ];
 
 function Sidebar({ location }) {
-  var classes = useStyles();
-  var theme = useTheme();
+  const classes = useStyles();
+  const theme = useTheme();
+  // local
+  const [isPermanent, setPermanent] = useState(true);
+
+  function handleWindowWidthChange() {
+    const windowWidth = window.innerWidth;
+    const breakpointWidth = theme.breakpoints.values.md;
+    const isSmallScreen = windowWidth < breakpointWidth;
+
+    if (isSmallScreen && isPermanent) {
+      setPermanent(false);
+    } else if (!isSmallScreen && !isPermanent) {
+      setPermanent(true);
+    }
+  }
 
   // global
-  var { isSidebarOpened } = useLayoutState();
-  var layoutDispatch = useLayoutDispatch();
+  const { isSidebarOpened } = useLayoutState();
+  const layoutDispatch = useLayoutDispatch();
 
-  // local
-  var [isPermanent, setPermanent] = useState(true);
-
-  useEffect(function () {
-    window.addEventListener("resize", handleWindowWidthChange);
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
-      window.removeEventListener("resize", handleWindowWidthChange);
+      window.removeEventListener('resize', handleWindowWidthChange);
     };
   });
   return (
     <Drawer
-      variant={isPermanent ? "permanent" : "temporary"}
+      variant={isPermanent ? 'permanent' : 'temporary'}
       className={classNames(classes.drawer, {
         [classes.drawerOpen]: isSidebarOpened,
         [classes.drawerClose]: !isSidebarOpened,
@@ -113,7 +136,7 @@ function Sidebar({ location }) {
         }),
       }}
       open={isSidebarOpened}
-    //anchor={irRtl ? 'right' : 'left'}
+    // anchor={irRtl ? 'right' : 'left'}
     >
       <div className={classes.toolbar} />
       <div className={classes.mobileBackButton}>
@@ -126,7 +149,7 @@ function Sidebar({ location }) {
         </IconButton>
       </div>
       <List className={classes.sidebarList}>
-        {structure.map(link => (
+        {structure.map((link) => (
           <SidebarLink
             key={link.id}
             location={location}
@@ -137,19 +160,6 @@ function Sidebar({ location }) {
       </List>
     </Drawer>
   );
-
-  // ##################################################################
-  function handleWindowWidthChange() {
-    var windowWidth = window.innerWidth;
-    var breakpointWidth = theme.breakpoints.values.md;
-    var isSmallScreen = windowWidth < breakpointWidth;
-
-    if (isSmallScreen && isPermanent) {
-      setPermanent(false);
-    } else if (!isSmallScreen && !isPermanent) {
-      setPermanent(true);
-    }
-  }
 }
 
 export default Sidebar;
