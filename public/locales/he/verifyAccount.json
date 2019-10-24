@@ -7,5 +7,6 @@
   "verifyEmailText": "אנא בדוק בתיבת האימייל שלך את האימייל שכרגע שלחנו לך",
   "verifyMobileText": "אנא בדוק את הלינק ששלחנו לך כרגע בהודעת טקסט",
   "verifyEmailNotificationMessage": "אימייל נשלח בהצלחה",
-  "verifyMobileNotificationMessage": "הודעת טקסט נשלחה בהצלחה"
+  "verifyMobileNotificationMessage": "הודעת טקסט נשלחה בהצלחה",
+  "verifySigninButton": "כניסה"
 }

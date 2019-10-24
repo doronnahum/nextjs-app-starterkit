@@ -68,7 +68,7 @@ function verifyAccount({ actions, t }) {
             required
             fullWidth
             id={emailIsMainField ? 'email' : 'mobile'}
-            label={emailIsMainField ? t('signupEmailAddress') : t('signupMobile')}
+            label={emailIsMainField ? t('verifyEmailAccountTitle') : t('verifyMobileAccountTitle')}
             name={emailIsMainField ? 'email' : 'mobile'}
             defaultValue={valueFromParams}
             autoComplete={emailIsMainField ? 'email' : 'mobile'}
@@ -90,7 +90,7 @@ function verifyAccount({ actions, t }) {
           <Grid container>
             <Grid item>
               <Link href="/signin">
-                <a><Typography component="span" variant="body2">{t('signupSigninButton')}</Typography></a>
+                <a><Typography component="span" variant="body2">{t('verifySigninButton')}</Typography></a>
               </Link>
             </Grid>
           </Grid>

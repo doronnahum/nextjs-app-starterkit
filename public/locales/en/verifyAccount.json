@@ -7,5 +7,6 @@
   "verifyMobileText": "Please check your sms inbox and find the message we have just sent you.",
   "verifyMobileButton": "ReSend Verification message",
   "verifyEmailNotificationMessage": "Email message send successful",
-  "verifyMobileNotificationMessage": "sms message send successful"
+  "verifyMobileNotificationMessage": "sms message send successful",
+  "verifySigninButton": "Sign In"
 }
