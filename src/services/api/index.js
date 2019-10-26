@@ -5,6 +5,8 @@ export { default as httpRequest } from './httpRequest';
 
 const SERVER_URL = process.env.serverUrl;
 
+let axiosInstance;
+
 const METHODS = {
   GET: 'get',
   POST: 'post',
@@ -13,6 +15,11 @@ const METHODS = {
 };
 
 export const END_POINTS = {
+  // Example
+  fakeData: {
+    url: 'https://jsonplaceholder.typicode.com/todos',
+  },
+  // Auth
   createUser: {
     url: 'users',
     getErrMessage: (error) => error.response.data.message,
@@ -45,6 +52,21 @@ export const END_POINTS = {
 
 
 export default class ApiService {
+  static getAxios() {
+    axiosInstance = axiosInstance || axios.create({
+      baseURL: SERVER_URL,
+    });
+    return axiosInstance;
+  }
+
+  // Example
+  static fetchFakeData() {
+    return axios.request({
+      url: END_POINTS.fakeData.url,
+      method: METHODS.GET,
+    });
+  }
+
   // Auth
   static createUser(email, mobile, password, firstName, lastName) {
     return axios.request({

@@ -15,6 +15,12 @@ export default function userReducer(state = initialState, action) {
       });
       return nextState;
     }
+    case actionsType.REMOVE_USER: {
+      const nextState = produce(state, (draftState) => {
+        draftState.user = initialState.user;
+      });
+      return nextState;
+    }
 
     default:
       return state;

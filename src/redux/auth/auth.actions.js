@@ -10,6 +10,9 @@ export const actionsType = {
   ON_CHECK_TOKEN_START: `${NAME_SPACE}/ON_CHECK_TOKEN_START`,
   ON_CHECK_TOKEN_END: `${NAME_SPACE}/ON_CHECK_TOKEN_END`,
   ON_CHECK_TOKEN_FAILED: `${NAME_SPACE}/ON_CHECK_TOKEN_FAILED`,
+  ON_CHECK_TOKEN_FAILED_NETWORK_ERROR: `${NAME_SPACE}/ON_CHECK_TOKEN_FAILED_NETWORK_ERROR`,
+  LOGOUT: `${NAME_SPACE}/LOGOUT`,
+  ON_LOGOUT_END: `${NAME_SPACE}/ON_LOGOUT_END`,
   LOGIN: `${NAME_SPACE}/LOGIN`,
   REGISTER: `${NAME_SPACE}/REGISTER`,
   SEND_VERIFY_ACCOUNT: `${NAME_SPACE}/SEND_VERIFY_ACCOUNT`,
@@ -25,6 +28,9 @@ export const onCheckTokenEnd = () => ({
 });
 export const onCheckTokenFailed = () => ({
   type: actionsType.ON_CHECK_TOKEN_FAILED,
+});
+export const onCheckTokenFailedNetworkError = () => ({
+  type: actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR,
 });
 
 export const onLoginEnd = (token) => ({
@@ -64,6 +70,17 @@ export const register = (payload) => ({
 });
 
 /**
+ * @function logout
+ *
+ */
+export const logout = () => ({
+  type: actionsType.LOGOUT,
+});
+export const onLogoutEnd = () => ({
+  type: actionsType.ON_LOGOUT_END,
+});
+
+/**
  * @function sendVerifyAccount
  * @param {object} payload
  * @param {string} payload.email
@@ -77,7 +94,7 @@ export const sendVerifyAccount = (payload) => ({
 
 
 /**
- * @function getMe
+ * @function reAuthenticate
  * This is action create to let as make the action async
  * @param {*} dispatch
  * @param {*} token
@@ -87,13 +104,18 @@ export function reAuthenticate(dispatch, token) {
   logger.debug('reAuthenticate start');
   ApiService.reAuthenticate(token).then((response) => {
     logger.debug('Token is valid');
-    dispatch(setUser(response));
+    dispatch(setUser(response.data));
     dispatch(onCheckTokenEnd());
   })
-    .catch(() => {
-      logger.debug('Token is not valid');
-      removeToken();
-      dispatch(onCheckTokenFailed());
+    .catch((error) => {
+      if (error.message === 'Network Error') {
+        dispatch(onCheckTokenFailedNetworkError());
+        logger.debug('reAuthenticate failed, Network Error');
+      } else {
+        logger.debug('Token is not valid');
+        removeToken();
+        dispatch(onCheckTokenFailed());
+      }
     })
     .finally(() => {
       logger.debug('reAuthenticate end');

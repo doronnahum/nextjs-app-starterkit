@@ -7,6 +7,7 @@ import WithLocal from './components/WithLocal';
 import WithBrowser from './components/WithBrowser';
 
 const Page = (config) => (WrappedComponent) => {
+  if (!config) throw new Error('Config is required');
   // eslint-disable-next-line no-unused-vars
   const {
     isPrivate, i18n, getInitialProps, showLocalButton, displayName,
@@ -21,7 +22,7 @@ const Page = (config) => (WrappedComponent) => {
     });
   }
 
-  const Extended1 = WithAuth({ isPrivate })(WrappedComponent);
+  const Extended1 = WithAuth({ isPrivate }, WrappedComponent);
   const Extended2 = WithNotifier(Extended1);
   const Extended3 = showLocalButton ? WithLocal(Extended2) : Extended2;
   const Extended4 = WithBrowser(Extended3);

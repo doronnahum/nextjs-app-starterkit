@@ -5,8 +5,9 @@ import { actionsType } from './auth.actions';
 
 const initialState = {
   token: null,
-  loading: false,
-  valid: false,
+  loading: null, // Keep it null for initial, and not false to detect if check token end
+  valid: null,
+  lastAction: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -14,6 +15,7 @@ export default function authReducer(state = initialState, action) {
     case actionsType.SET_TOKEN: {
       const nextState = produce(state, (draftState) => {
         draftState.token = action.payload;
+        draftState.lastAction = action.type;
       });
       return nextState;
     }
@@ -21,6 +23,7 @@ export default function authReducer(state = initialState, action) {
       const nextState = produce(state, (draftState) => {
         draftState.loading = true;
         draftState.valid = false;
+        draftState.lastAction = action.type;
       });
       return nextState;
     }
@@ -28,6 +31,7 @@ export default function authReducer(state = initialState, action) {
       const nextState = produce(state, (draftState) => {
         draftState.loading = false;
         draftState.valid = true;
+        draftState.lastAction = action.type;
       });
       return nextState;
     }
@@ -36,6 +40,7 @@ export default function authReducer(state = initialState, action) {
         draftState.loading = false;
         draftState.valid = false;
         draftState.token = null;
+        draftState.lastAction = action.type;
       });
       return nextState;
     }
@@ -45,6 +50,22 @@ export default function authReducer(state = initialState, action) {
         draftState.loading = false;
         draftState.valid = true;
         draftState.token = action.token;
+        draftState.lastAction = action.type;
+      });
+      return nextState;
+    }
+    case actionsType.ON_LOGOUT_END: {
+      const nextState = produce(state, (draftState) => {
+        draftState.loading = initialState.loading;
+        draftState.valid = initialState.valid;
+        draftState.token = initialState.token;
+        draftState.lastAction = action.type;
+      });
+      return nextState;
+    }
+    case actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR: {
+      const nextState = produce(state, (draftState) => {
+        draftState.lastAction = action.type;
       });
       return nextState;
     }

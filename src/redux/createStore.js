@@ -18,7 +18,11 @@ export default (initialState = {}) => {
 
   if (process.env.NODE_ENV !== 'production' && process.browser) {
     // eslint-disable-next-line global-require
-    const { logger } = require('redux-logger');
+    const { createLogger } = require('redux-logger');
+    const logger = createLogger({
+      collapsed: true,
+    });
+
     middlewares.push(logger);
   }
 

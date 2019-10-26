@@ -1,4 +1,6 @@
 export const LoaderTypes = {
+  // Example
+  FETCH_FAKE_DATA: 'FETCH_FAKE_DATA',
   // Global
   ON_COUNT_CHANGE: 'ON_COUNT_CHANGE',
   // ATUH

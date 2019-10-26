@@ -16,6 +16,7 @@ import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { appWithTranslation, i18n } from 'src/i18n';
 import createTheme from 'src/themes';
 import { SnackbarProvider } from 'notistack';
+import initApp from 'src/initApp';
 
 const jss = create({ plugins: [...jssPreset().plugins] });
 const jssWithRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -39,6 +40,10 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
+    if (!this.initApp) {
+      this.initApp = true;
+      initApp(this.props);
+    }
     const isRtl = i18n.dir() === 'rtl';
     if (process.browser) {
       document.getElementsByTagName('body')[0].dir = i18n.dir();

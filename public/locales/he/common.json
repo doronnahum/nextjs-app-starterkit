@@ -1,4 +1,5 @@
 {
   "h1": "3A simple example",
-  "defaultErrorMessage": "אופס! משהו השתבש"
+  "defaultErrorMessage": "אופס! משהו השתבש",
+  "example": "תורגמתי בעזרת 18nNext"
 }

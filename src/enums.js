@@ -6,4 +6,7 @@ module.exports = {
     FINISHED: 'FINISHED',
   },
   PLACED_ITEM: 'PLACED_ITEM',
+  ROUTES: {
+    SIGNIN_ROUTE: '/signin',
+  },
 };

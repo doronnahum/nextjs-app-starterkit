@@ -6,6 +6,7 @@ import './home.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withTranslation } from 'src/i18n';
+import Link from 'next/link';
 
 const useStyles = makeStyles(() => createStyles({
   root: {
@@ -19,6 +20,8 @@ function homeScreen({ t }) {
     <div className={`${classes.root} home_screen`}>
       <h2>I am a home screen</h2>
       <h2>name from i18n {t('screenName')}</h2>
+      <Link href="/example/public"><a>Example Public screen</a></Link>
+      <Link href="/example/private"><a>Example Private screen</a></Link>
     </div>
   );
 }

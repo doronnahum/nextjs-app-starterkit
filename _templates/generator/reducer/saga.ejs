@@ -6,7 +6,7 @@ to: '<% if(saga) { %>src/redux/<%= h.changeCase.lcFirst(name) %>/<%= h.changeCas
 <% if(locals.example) { -%>
 import { takeEvery } from 'redux-saga/effects';
 import { actionsType } from './<%= nameLower %>.actions';
-import onCountChange from './workers/onCountChange';
+import onCountChange from './workers/onCountChange.worker';
 
 export default function* <%= nameLower %>Watcher() {
   yield takeEvery(actionsType.INCREMENT, onCountChange);

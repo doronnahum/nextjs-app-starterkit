@@ -104,7 +104,7 @@ function SignUp({ actions, t }) {
             label={t('signupPassword')}
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             inputRef={register}
             error={errors.password}
             helperText={errors.password && errors.password.message}

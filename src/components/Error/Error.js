@@ -82,7 +82,7 @@ Error.defaultProps = {
 
 Error.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  error: PropTypes.object,
+  error: PropTypes.any,
   errorText: PropTypes.string,
   errorType: PropTypes.string.isRequired,
   fullScreen: PropTypes.bool,
