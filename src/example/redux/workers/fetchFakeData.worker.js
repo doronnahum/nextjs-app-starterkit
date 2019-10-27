@@ -3,7 +3,7 @@ import {
   put,
 } from 'redux-saga/effects';
 import ApiService, { httpRequest } from 'src/services/api';
-import { startLoading, stopLoading, LoaderTypes } from '../../loaders';
+import { startLoading, stopLoading, LoaderTypes } from 'src/redux/loaders';
 import { setFakeData } from '../example.actions';
 
 function* fetchFakeData() {

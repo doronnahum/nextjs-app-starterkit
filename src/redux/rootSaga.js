@@ -1,6 +1,6 @@
 import { all, call } from 'redux-saga/effects';
 import { crudReduxSaga } from 'net-provider';
-import example from './example/example.saga';
+import example from 'src/example/redux/example.saga';
 
 
 import global from './global/global.saga';

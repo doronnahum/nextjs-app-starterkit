@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { crudReduxReducer } from 'net-provider';
-import example from './example/example.reducer';
+import example from 'src/example/redux/example.reducer';
 import user from './user/user.reducer';
 import auth from './auth/auth.reducer';
 

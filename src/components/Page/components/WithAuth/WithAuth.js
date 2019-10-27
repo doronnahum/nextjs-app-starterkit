@@ -52,7 +52,12 @@ export default (config, WrappedComponent) => {
       if (auth_lastAction === actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR) {
         const tokenFromStorage = getTokenFromStorage();
         if (tokenFromStorage) {
-          return <DisplayOffLine dispatch={resProps.dispatch} tokenFromStorage={tokenFromStorage}/>;
+          return (
+            <DisplayOffLine
+              dispatch={resProps.dispatch}
+              tokenFromStorage={tokenFromStorage}
+            />
+          );
         }
       }
 
@@ -61,7 +66,7 @@ export default (config, WrappedComponent) => {
       if (
         auth_isLoading === false // The Token test is over
         || auth_lastAction === actionsType.ON_LOGOUT_END // User is just logout
-        || !getTokenFromStorage() // token is not in storage
+        || (process.browser && !getTokenFromStorage()) // token is not in storage
       ) {
         setOnRedirect(true);
       }

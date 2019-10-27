@@ -1,6 +1,6 @@
 import {
   setApiInstance, setDispatch, setDefaultIdKey, setErrorHandler,
-} from  'net-provider';
+} from 'net-provider';
 import ApiService from 'src/services/api';
 
 export default (props) => {

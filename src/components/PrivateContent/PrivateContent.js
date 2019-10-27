@@ -42,7 +42,7 @@ function PrivateContent({
       <div className={`${classes.root} privateContent_component alert-info`}>
         <p>{t('You_are_not_able_to_see_this_content')}</p>
       </div>
-    )
+    );
   }
   return (
     <div className={`${classes.root} privateContent_component alert-info`}>

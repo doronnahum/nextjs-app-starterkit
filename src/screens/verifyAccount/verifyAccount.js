@@ -113,6 +113,7 @@ verifyAccount.propTypes = {
   t: PropTypes.func.isRequired,
   actions: PropTypes.shape({
     login: PropTypes.func.isRequired,
+    sendVerifyAccount: PropTypes.func.isRequired,
   }).isRequired,
 };
 
