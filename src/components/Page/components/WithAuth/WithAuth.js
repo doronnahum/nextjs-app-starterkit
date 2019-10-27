@@ -86,7 +86,7 @@ export default (config, WrappedComponent) => {
   WithAuth.propTypes = {
     auth_isLoading: PropTypes.bool,
     auth_tokenValidateState: PropTypes.bool,
-    auth_lastAction: PropTypes.bool,
+    auth_lastAction: PropTypes.string,
     global_isOnline: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   };
