@@ -4,10 +4,10 @@ import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from 'next/link';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -83,10 +83,11 @@ function SignIn({ actions, t }) {
             error={errors.password}
             helperText={errors.password && errors.password.message}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label={t('signinRememberMe')}
           />
+          */}
           <Error errorType={ErrorTypes.LOGIN} />
           <Button
             type="submit"

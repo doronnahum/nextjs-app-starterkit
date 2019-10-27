@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => createStyles({
   },
 }));
 
-function PrivateScreen({
+function ExampleScreen({
   networkOnline,
   windowHeight,
   windowWidth,
@@ -57,10 +57,7 @@ function PrivateScreen({
   const { t } = useTranslation('common');
   const classes = useStyles();
   return (
-    <Paper className={`${classes.root} PrivateScreen_screen`}>
-      <div className={classes.header}>
-        <h2>Hi, i am example of private screen</h2>
-      </div>
+    <Paper className={`${classes.root} ExampleScreen_screen`}>
       {/*
       // --------------------------------------------------------------------
       // Example of using i18n
@@ -184,14 +181,14 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-PrivateScreen.defaultProps = {
+ExampleScreen.defaultProps = {
   networkOnline: null,
   windowHeight: 0,
   windowWidth: 0,
   fakeData: null,
 };
 
-PrivateScreen.propTypes = {
+ExampleScreen.propTypes = {
   networkOnline: PropTypes.bool,
   windowHeight: PropTypes.number,
   windowWidth: PropTypes.number,
@@ -202,4 +199,4 @@ PrivateScreen.propTypes = {
   }).isRequired,
   fakeData: PropTypes.arrayOf(PropTypes.object),
 };
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ExampleScreen);
