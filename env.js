@@ -13,7 +13,7 @@ const prod = {
 };
 const local = {
   ...common,
-  serverUrl: 'http://localhost:3030',
+  serverUrl: 'https://barak19-dev.herokuapp.com/',
 };
 
 const configByEnv = {

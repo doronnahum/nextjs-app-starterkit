@@ -6,9 +6,10 @@ const DynamicComponentWithNoSSR = dynamic(
   { ssr: false },
 );
 
-function Dashboard() {
+function Dashboard(props) {
   return (
-    <DynamicComponentWithNoSSR />
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <DynamicComponentWithNoSSR {...props} />
   );
 }
 

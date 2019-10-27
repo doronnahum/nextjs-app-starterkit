@@ -11,7 +11,7 @@ import Sidebar from './Sidebar';
 // context
 import { useLayoutState } from './LayoutContext';
 
-function Layout() {
+function Layout(props) {
   const classes = useStyles();
 
   // global
@@ -28,7 +28,7 @@ function Layout() {
           })}
         >
           <div className={classes.fakeToolbar} />
-          fakeToolbar
+          {props.renderMain(props)}
         </div>
       </>
     </div>
@@ -36,3 +36,7 @@ function Layout() {
 }
 
 export default Layout;
+
+Layout.defaultProps = {
+  renderMain: 
+}
