@@ -61,7 +61,7 @@ export default class ApiService {
 
   // Example
   static fetchFakeData() {
-    return axios.request({
+    return this.getAxios().request({
       url: END_POINTS.fakeData.url,
       method: METHODS.GET,
     });

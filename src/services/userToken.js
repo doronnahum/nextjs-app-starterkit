@@ -1,20 +1,24 @@
+
+import store from 'store';
+import ApiService from './api';
+
 const TOKEN_KEY = process.env.userTokenKey;
 
-const store = require('store');
-
-
-function getToken() {
-  return store.get(TOKEN_KEY);
+export function getToken() {
+  const token = store.get(TOKEN_KEY);
+  if (token) {
+    const axiosInstance = ApiService.getAxios();
+    axiosInstance.defaults.headers.common.Authorization = token;
+  }
+  return token;
 }
-function setToken(token) {
+export function setToken(token) {
+  const axiosInstance = ApiService.getAxios();
+  axiosInstance.defaults.headers.common.Authorization = token;
   return store.set(TOKEN_KEY, token);
 }
-function removeToken() {
+export function removeToken() {
+  const axiosInstance = ApiService.getAxios();
+  delete axiosInstance.defaults.headers.common.Authorization;
   return store.remove(TOKEN_KEY);
 }
-
-module.exports = {
-  getToken,
-  setToken,
-  removeToken,
-};
