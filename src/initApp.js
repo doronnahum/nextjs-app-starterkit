@@ -1,9 +1,30 @@
+/* eslint-disable no-restricted-syntax */
 import {
   setApiInstance, setDispatch, setDefaultIdKey, setErrorHandler,
 } from 'net-provider';
 import ApiService from 'src/services/api';
 import { setDispatch as setNotificationDispatch } from 'src/services/notification/notification';
 import logger from 'src/services/logger';
+import { setRouteConfig } from 'redux-admin';
+import Router from 'next/router';
+
+const serialize = function serialize(obj) {
+  let str = [];
+  for (let p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  }
+  return str.join('&');
+};
+
+const getSerializePathnameAndParams = function (paramsToSet) {
+  const pathname = Router.pathname || '/';
+  const query = { ...Router.query, ...paramsToSet };
+  const serializeQuery = serialize(query);
+  if (serializeQuery.length) return `${pathname}?${serializeQuery}`;
+  return pathname;
+};
 
 export default (props) => {
   setDefaultIdKey('_id');
@@ -11,4 +32,23 @@ export default (props) => {
   setDispatch(props.store.dispatch);
   setApiInstance(ApiService.getAxios());
   setNotificationDispatch(props.store.dispatch);
+  setRouteConfig({
+    onReplaceParams: (paramsToSet) => {
+      const href = getSerializePathnameAndParams(paramsToSet);
+      const as = href;
+      Router.replace(href, as, { shallow: true });
+    },
+    onSetParams: (paramsToSet) => {
+      const href = getSerializePathnameAndParams(paramsToSet);
+      const as = href;
+      Router.push(href, as, { shallow: true });
+    },
+    onBack: () => Router.back(),
+    goHome: () => Router.replace({
+      pathname: '/dashboard',
+    }, {
+      pathname: '/dashboard',
+    }, { shallow: true }),
+    onGetParams: () => Router.query || {},
+  });
 };

@@ -2,8 +2,8 @@ import React from 'react';
 import classnames from 'classnames';
 import { i18n } from 'src/i18n';
 // styles
+import PropTypes from 'prop-types';
 import useStyles from './styles';
-
 // components
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -11,7 +11,7 @@ import Sidebar from './Sidebar';
 // context
 import { useLayoutState } from './LayoutContext';
 
-function Layout(props) {
+function Layout({ renderMain, renderSidebarBody, ...resProps }) {
   const classes = useStyles();
 
   // global
@@ -21,22 +21,28 @@ function Layout(props) {
     <div className={classes.root} dir={i18n.dir()}>
       <>
         <Header />
-        <Sidebar />
+        <Sidebar
+          renderBody={
+            (({ isSidebarOpened }) => renderSidebarBody({ ...resProps, isSidebarOpened }))
+          }
+        />
         <div
           className={classnames(classes.content, {
             [classes.contentShift]: layoutState.isSidebarOpened,
           })}
         >
           <div className={classes.fakeToolbar} />
-          {props.renderMain(props)}
+          {renderMain(resProps)}
         </div>
       </>
     </div>
   );
 }
 
-export default Layout;
 
-Layout.defaultProps = {
-  renderMain: 
-}
+Layout.propTypes = {
+  renderMain: PropTypes.func.isRequired,
+  renderSidebarBody: PropTypes.func.isRequired,
+};
+
+export default Layout;

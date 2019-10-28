@@ -36,6 +36,7 @@
     "cross-env": "^6.0.3",
     "express": "^4.17.1",
     "feathers-mongoose-casl-dashboard": "^1.2.2",
+    "formik": "^2.0.2",
     "immer": "^3.2.0",
     "install": "^0.13.0",
     "jss": "^10.0.0",
