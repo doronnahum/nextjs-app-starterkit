@@ -9,7 +9,9 @@ import Page from 'src/components/Page';
 import Head from 'next/head';
 
 export default Page({
-  isPrivate: <%=isPrivate %>,
+  loginRequired: <%=isPrivate %>,
+  logoutRequired: false,
+  adminRequired: false,
   i18n: ['<%=pageLower %>', 'common'],
   showLocalButton: true,
   displayName: '<%=pageUpper %>Page',

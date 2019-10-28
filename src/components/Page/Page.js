@@ -3,34 +3,23 @@
 import React from 'react';
 import WithAuth from './components/WithAuth';
 import WithNotifier from './components/WithNotifier';
-import WithLocal from './components/WithLocal';
 import WithBrowser from './components/WithBrowser';
 
 const Page = (config) => (WrappedComponent) => {
   if (!config) throw new Error('Config is required');
   // eslint-disable-next-line no-unused-vars
   const {
-    isPrivate, i18n, getInitialProps, showLocalButton, displayName,
+    loginRequired, logoutRequired, adminRequired, i18n, showLocalButton, displayName,
   } = config;
   const _displayName = displayName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
-  let _getInitialProps;
-  if (getInitialProps || WrappedComponent.getInitialProps) {
-    _getInitialProps = getInitialProps || WrappedComponent.getInitialProps;
-  } else {
-    _getInitialProps = async () => ({
-      namespacesRequired: i18n,
-    });
-  }
 
-  const Extended1 = WithAuth({ isPrivate }, WrappedComponent);
+  const Extended1 = WithAuth(WrappedComponent, { loginRequired, logoutRequired, adminRequired });
   const Extended2 = WithNotifier(Extended1);
-  const Extended3 = showLocalButton ? WithLocal(Extended2) : Extended2;
-  const Extended4 = WithBrowser(Extended3);
+  const Extended3 = WithBrowser(Extended2, { showLocalButton, i18n });
 
-  Extended4.getInitialProps = _getInitialProps;
-  Extended4.displayName = _displayName;
+  Extended3.displayName = _displayName;
 
-  return Extended4;
+  return Extended3;
 };
 
 

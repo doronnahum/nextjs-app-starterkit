@@ -1,102 +1,140 @@
-/* eslint-disable camelcase */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
-
+/* eslint-disable camelcase */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/static-property-placement */
+import React from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { connect } from 'react-redux';
 import {
   isLoading,
   getTokenValidateState,
   getLastAction,
 } from 'src/redux/auth/auth.selectors';
-import { reAuthenticate, actionsType } from 'src/redux/auth/auth.actions';
+import { reAuthenticate, actionsType, setLoading } from 'src/redux/auth/auth.actions';
 import { isOnline } from 'src/redux/global/global.selectors';
 import { getToken as getTokenFromStorage } from 'src/services/userToken';
-import {
-  DisplayLoader,
-  onRedirect,
-  DisplayRedirect,
-  DisplayOffLine,
-} from './WithAuth.utils';
+import { ROUTES } from 'src/enums';
+import logger from 'src/services/logger';
 
 
-export default (config, WrappedComponent) => {
-  const { isPrivate } = config;
+export default function withAuth(
+  BaseComponent,
+  { loginRequired, logoutRequired, adminRequired } = {},
+) {
+  class App extends React.PureComponent {
+    static propTypes = {
+      auth_isLoading: PropTypes.bool,
+      auth_isTokenValid: PropTypes.bool,
+      auth_lastAction: PropTypes.string,
+      global_isOnline: PropTypes.bool,
+      dispatch: PropTypes.func.isRequired,
+    };
 
-  const WithAuth = ({
-    auth_isLoading,
-    auth_tokenValidateState,
-    auth_lastAction,
-    global_isOnline,
-    ...resProps
-  }) => {
-    const [onRedirectStart, setOnRedirect] = useState(false);
-    // Make the redirect request only one time after we setOnRedirect
-    React.useEffect(() => {
-      if (onRedirectStart) { onRedirect(); }
-    }, [onRedirectStart]);
+    static defaultProps = {
+      auth_isLoading: null,
+      auth_isTokenValid: null,
+      auth_lastAction: null,
+      global_isOnline: null,
+    };
 
-    React.useEffect(() => {
-      if (auth_lastAction === actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR) {
-        const tokenFromStorage = getTokenFromStorage();
-        if (tokenFromStorage) {
-          reAuthenticate(resProps.dispatch, tokenFromStorage);
-        }
-      }
-    }, [global_isOnline]);
+    static async getInitialProps(ctx) {
+      // const isFromServer = !!ctx.req;
+      const props = {};
 
-    // Display Redirect
-    if (onRedirectStart) return <DisplayRedirect />;
-
-    if (isPrivate && !auth_tokenValidateState) {
-      if (auth_lastAction === actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR) {
-        const tokenFromStorage = getTokenFromStorage();
-        if (tokenFromStorage) {
-          return (
-            <DisplayOffLine
-              dispatch={resProps.dispatch}
-              tokenFromStorage={tokenFromStorage}
-            />
-          );
-        }
+      if (BaseComponent.getInitialProps) {
+        Object.assign(props, (await BaseComponent.getInitialProps(ctx)) || {});
       }
 
-      // When to redirect the user to sign-in page
-      // -----------------------------------------
-      if (
-        auth_isLoading === false // The Token test is over
-        || auth_lastAction === actionsType.ON_LOGOUT_END // User is just logout
-        || (process.browser && !getTokenFromStorage()) // token is not in storage
-      ) {
-        setOnRedirect(true);
-      }
-      return <DisplayLoader />;
+      return props;
     }
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    return <WrappedComponent {...resProps} />;
-  };
 
-  WithAuth.defaultProps = {
-    auth_isLoading: null,
-    auth_tokenValidateState: null,
-    auth_lastAction: null,
-    global_isOnline: null,
-  };
+    constructor(props) {
+      super(props);
+      this.state = {
+        displayRedirect: false,
+        checkAbilityEnd: (!loginRequired && !logoutRequired && !adminRequired)
+          || (loginRequired && this.props.auth_isTokenValid)
+          || (logoutRequired && this.props.auth_isTokenValid === false),
+      };
+    }
 
-  WithAuth.propTypes = {
-    auth_isLoading: PropTypes.bool,
-    auth_tokenValidateState: PropTypes.bool,
-    auth_lastAction: PropTypes.string,
-    global_isOnline: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
-  };
+
+    componentDidMount() {
+      const { auth_isLoading, dispatch } = this.props;
+      const isTokenCheckNotStart = auth_isLoading === null;
+      const isTokenCheckEnds = auth_isLoading === false;
+      const tokenFromStorage = getTokenFromStorage();
+      if (isTokenCheckNotStart) {
+        if (tokenFromStorage) {
+          reAuthenticate(dispatch, tokenFromStorage);
+        } else {
+          dispatch(setLoading(false));
+          this.checkAbility();
+        }
+      } else if (isTokenCheckEnds || !tokenFromStorage) {
+        this.checkAbility();
+      }
+    }
+
+    componentDidUpdate() {
+      const { auth_isLoading, auth_lastAction } = this.props;
+      const isTokenCheckEnds = this.lastAuth_isLoading === null && auth_isLoading !== null;
+      const isLogoutEnd = this.auth_lastAction !== actionsType.ON_LOGOUT_END
+        && auth_lastAction === actionsType.ON_LOGOUT_END;
+      if (isTokenCheckEnds) {
+        this.checkAbility();
+      } else if (isLogoutEnd && loginRequired) {
+        this.redirect('/');
+      }
+      this.auth_lastAction = auth_lastAction;
+      this.lastAuth_isLoading = auth_isLoading;
+    }
+
+    redirect = (route) => {
+      this.setState({ displayRedirect: true });
+      setTimeout(() => {
+        Router.push(route);
+      }, 1000);
+      logger.debug(`
+      route is ${loginRequired ? 'loginRequired' : (logoutRequired ? 'logoutRequired' : (adminRequired ? 'adminRequired' : ''))}
+      and user is ${this.props.auth_isTokenValid ? 'Logged' : 'Not Logged'}, navigate to ${route}`);
+    }
+
+
+    checkAbility() {
+      const { auth_isTokenValid } = this.props;
+      const isLoggedIn = auth_isTokenValid === true;
+      if (loginRequired && !isLoggedIn) {
+        this.redirect(`${ROUTES.SIGNIN_ROUTE}?next=${Router.router.pathname}`);
+      } else if (!this.checkAbilityRun && logoutRequired && isLoggedIn) {
+        this.redirect('/');
+      }
+      this.checkAbilityRun = true;
+      this.setState({
+        checkAbilityEnd: true,
+      });
+    }
+
+    render() {
+      const { displayRedirect, checkAbilityEnd } = this.state;
+      if (displayRedirect) return 'Redirect...';
+      if (!checkAbilityEnd) return 'Loading...';
+      return (
+        <React.Fragment>
+          <BaseComponent {...this.props} />
+        </React.Fragment>
+      );
+    }
+  }
 
   const mapStateToProps = (store) => ({
     auth_isLoading: isLoading(store),
-    auth_tokenValidateState: getTokenValidateState(store),
+    auth_isTokenValid: getTokenValidateState(store),
     auth_lastAction: getLastAction(store),
     global_isOnline: isOnline(store),
   });
 
-  return connect(mapStateToProps)(WithAuth);
-};
+  return connect(mapStateToProps)(App);
+}

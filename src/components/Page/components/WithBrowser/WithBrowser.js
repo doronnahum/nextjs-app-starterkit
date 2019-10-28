@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setNetworkOnline, setWindowSize } from 'src/redux/global/global.actions';
 import throttle from 'lodash/throttle';
 import Typography from '@material-ui/core/Typography';
+import LocalButton from 'src/components/LocalButton';
 
 
 const offLineStyle = {
@@ -20,87 +21,102 @@ const offLineStyle = {
   zIndex: 10000,
 };
 
-class ReactBrowser extends PureComponent {
-  handleWindowSize = throttle(() => {
-    const { actions } = this.props;
-    actions.setWindowSize(window.innerWidth, window.innerHeight);
-  }, 100);
 
-  componentDidMount() {
-    const { actions } = this.props;
-    if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && navigator) {
-      actions.setNetworkOnline(navigator.onLine);
-      this.handleWindowSize();
+export default (BaseComponent, { showLocalButton, i18n }) => {
+  class ReactBrowser extends PureComponent {
+    handleWindowSize = throttle(() => {
+      const { actions } = this.props;
+      actions.setWindowSize(window.innerWidth, window.innerHeight);
+    }, 100);
+
+    static async getInitialProps(ctx) {
+      // const isFromServer = !!ctx.req;
+      const props = {
+        namespacesRequired: i18n,
+      };
+
+      if (BaseComponent.getInitialProps) {
+        Object.assign(props, (await BaseComponent.getInitialProps(ctx)) || {});
+      }
+
+      return props;
     }
 
-    window.addEventListener('online', this.handleOnline);
-    window.addEventListener('offline', this.handleOffline);
-    window.addEventListener('resize', this.handleWindowSize);
-  }
+    componentDidMount() {
+      const { actions } = this.props;
+      if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && navigator) {
+        actions.setNetworkOnline(navigator.onLine);
+        this.handleWindowSize();
+      }
 
-  componentWillUnmount() {
-    window.removeEventListener('online', this.handleOnline);
-    window.removeEventListener('offline', this.handleOffline);
-    window.removeEventListener('resize', this.handleWindowSize);
-  }
+      window.addEventListener('online', this.handleOnline);
+      window.addEventListener('offline', this.handleOffline);
+      window.addEventListener('resize', this.handleWindowSize);
+    }
 
-  handleOnline = () => {
-    const { actions } = this.props;
-    actions.setNetworkOnline(true);
-  };
+    componentWillUnmount() {
+      window.removeEventListener('online', this.handleOnline);
+      window.removeEventListener('offline', this.handleOffline);
+      window.removeEventListener('resize', this.handleWindowSize);
+    }
 
-  handleOffline = () => {
-    const { actions } = this.props;
-    actions.setNetworkOnline(false);
-  };
+    handleOnline = () => {
+      const { actions } = this.props;
+      actions.setNetworkOnline(true);
+    };
 
-  render() {
-    const { networkOnline } = this.props;
-    if (!networkOnline && networkOnline !== null) {
+    handleOffline = () => {
+      const { actions } = this.props;
+      actions.setNetworkOnline(false);
+    };
+
+    renderOffline = () => {
+      const { networkOnline } = this.props;
+      if (!networkOnline && networkOnline !== null) {
+        return (
+          <div style={offLineStyle}>
+            <Typography color="textSecondary"> No Network</Typography>
+          </div>
+        );
+      }
+      return null;
+    }
+
+    render() {
       return (
-        <div style={offLineStyle}>
-          <Typography color="textSecondary"> No Network</Typography>
-        </div>
+        <React.Fragment>
+          <BaseComponent {...this.props} />
+          {showLocalButton && <LocalButton />}
+          {this.renderOffline()}
+        </React.Fragment>
       );
     }
-    return null;
   }
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({ setNetworkOnline, setWindowSize }, dispatch),
+  function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators({ setNetworkOnline, setWindowSize }, dispatch),
+    };
+  }
+
+  const mapStateToProps = (store) => ({
+    networkOnline: store.global.networkOnline,
+  });
+
+  ReactBrowser.defaultProps = {
+    networkOnline: null,
   };
-}
 
-const mapStateToProps = (store) => ({
-  networkOnline: store.global.networkOnline,
-});
+  ReactBrowser.propTypes = {
+    actions: PropTypes.shape({
+      setNetworkOnline: PropTypes.func.isRequired,
+      setWindowSize: PropTypes.func.isRequired,
+    }).isRequired,
+    networkOnline: PropTypes.bool,
+  };
 
-ReactBrowser.defaultProps = {
-  networkOnline: null,
-};
-
-ReactBrowser.propTypes = {
-  actions: PropTypes.shape({
-    setNetworkOnline: PropTypes.func.isRequired,
-    setWindowSize: PropTypes.func.isRequired,
-  }).isRequired,
-  networkOnline: PropTypes.bool,
-};
-
-const Extend = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ReactBrowser);
-
-export default (WrappedComponent) => {
-  const WithBrowser = (props) => (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <React.Fragment>
-      <WrappedComponent {...props} />
-      <Extend />
-    </React.Fragment>
-  );
-  return WithBrowser;
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(ReactBrowser);
 };
