@@ -23,7 +23,7 @@ import { END_POINTS } from 'src/services/api';
 import Link from 'next/link';
 import { ROUTES } from 'src/enums';
 import PrivateContent from 'src/components/PrivateContent';
-
+import sendNotification from 'src/services/notification';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
@@ -160,6 +160,18 @@ function ExampleScreen({
         <PrivateContent checkContext={user => user.isAdmin}>
           <p>Only Authenticate admin user can see this message</p>
         </PrivateContent>
+      </Card>
+      {/*
+      // --------------------------------------------------------------------
+      // Example of send notification
+      // --------------------------------------------------------------------
+      */}
+      <Card className={classes.card}>
+        <Typography variant="h3" component="h3">Example of send notification</Typography>
+        <Typography variant="p" component="p">You can send notification from any place in your code</Typography>
+        <Button variant="contained" color="primary" type="button" onClick={() => sendNotification(`current count ${count}`)}>
+          Send Notification
+        </Button>
       </Card>
     </Paper>
   );

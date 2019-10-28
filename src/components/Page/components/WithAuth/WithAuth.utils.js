@@ -6,7 +6,7 @@ import logger from 'src/services/logger';
 import Button from '@material-ui/core/Button';
 import { reAuthenticate } from 'src/redux/auth/auth.actions';
 
-export const onRedirect = () => {
+export const onRedirectToSignIn = () => {
   setTimeout(() => {
     Router.push(`${ROUTES.SIGNIN_ROUTE}?next=${Router.router.pathname}`);
     /*
@@ -15,6 +15,16 @@ export const onRedirect = () => {
     */
   }, 1000);
   logger.debug('User is not authenticate, navigate to signin page');
+};
+export const onRedirectToHome = () => {
+  setTimeout(() => {
+    Router.push('/');
+    /*
+     This delay is important,
+     for some reason Router.push is not always navigate without this delay
+    */
+  }, 1000);
+  logger.debug('User is authenticate, navigate home page');
 };
 
 export const DisplayLoader = () => 'Loading...';

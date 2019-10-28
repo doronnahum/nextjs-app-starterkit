@@ -7,7 +7,9 @@ import Page from 'src/components/Page';
 import Head from 'next/head';
 
 export default Page({
-  isPrivate: false,
+  loginRequired: true,
+  logoutRequired: false,
+  adminRequired: false,
   i18n: ['common'],
   showLocalButton: true,
   displayName: 'AdminnPage',

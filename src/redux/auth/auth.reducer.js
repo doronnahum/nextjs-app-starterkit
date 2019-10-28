@@ -69,6 +69,13 @@ export default function authReducer(state = initialState, action) {
       });
       return nextState;
     }
+    case actionsType.SET_LOADING: {
+      const nextState = produce(state, (draftState) => {
+        draftState.lastAction = action.type;
+        draftState.loading = action.payload;
+      });
+      return nextState;
+    }
     default:
       return state;
   }

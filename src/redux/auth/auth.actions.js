@@ -18,6 +18,7 @@ export const actionsType = {
   SEND_VERIFY_ACCOUNT: `${NAME_SPACE}/SEND_VERIFY_ACCOUNT`,
   ON_LOGIN_END: `${NAME_SPACE}/ON_LOGIN_END`,
   ON_REGISTER_END: `${NAME_SPACE}/ON_REGISTER_END`,
+  SET_LOADING: `${NAME_SPACE}/SET_LOADING`,
 };
 
 export const onCheckTokenStart = () => ({
@@ -25,6 +26,10 @@ export const onCheckTokenStart = () => ({
 });
 export const onCheckTokenEnd = () => ({
   type: actionsType.ON_CHECK_TOKEN_END,
+});
+export const setLoading = (payload) => ({
+  type: actionsType.SET_LOADING,
+  payload,
 });
 export const onCheckTokenFailed = () => ({
   type: actionsType.ON_CHECK_TOKEN_FAILED,

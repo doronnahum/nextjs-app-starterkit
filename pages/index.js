@@ -4,7 +4,9 @@ import Page from 'src/components/Page';
 import Head from 'next/head';
 
 export default Page({
-  isPrivate: false,
+  loginRequired: false,
+  logoutRequired: false,
+  adminRequired: false,
   i18n: ['home', 'common'],
   showLocalButton: true,
   displayName: 'omePage',

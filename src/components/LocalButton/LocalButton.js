@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => createStyles({
   },
 }));
 
-function Local() {
+function LocalButton() {
   const classes = useStyles();
   if (!i18n.language) return null;
   return (
@@ -57,13 +57,4 @@ function Local() {
   );
 }
 
-export default (WrappedComponent) => {
-  const WithLocal = (props) => (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <React.Fragment>
-      <WrappedComponent {...props} />
-      <Local />
-    </React.Fragment>
-  );
-  return WithLocal;
-};
+export default LocalButton;
