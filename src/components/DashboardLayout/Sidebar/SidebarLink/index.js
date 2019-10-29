@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Inbox as InboxIcon } from '@material-ui/icons';
-
+import Router from 'next/router';
 
 import classnames from 'classnames';
 
@@ -21,20 +21,16 @@ import useStyles from './styles';
 // components
 import Dot from '../Dot';
 
-const Link = () => (
-  <div>
-    LINK
-  </div>
-);
+
 export default function SidebarLink({
   link,
   icon,
   label,
   children,
-  location,
   isSidebarOpened,
   nested,
   type,
+  isLinkActive,
 }) {
   const classes = useStyles();
 
@@ -47,8 +43,6 @@ export default function SidebarLink({
     }
   }
 
-  const isLinkActive = link
-    && false;
 
   if (type === 'title') {
     return (
@@ -68,8 +62,12 @@ export default function SidebarLink({
     return (
       <ListItem
         button
-        component={link && Link}
         to={link}
+        onClick={() => {
+          if (link) {
+            Router.push(link);
+          }
+        }}
         className={classes.link}
         classes={{
           root: classnames(classes.linkRoot, {
@@ -98,55 +96,5 @@ export default function SidebarLink({
       </ListItem>
     );
   }
-
-  return (
-    <>
-      <ListItem
-        button
-        component={link && Link}
-        onClick={toggleCollapse}
-        className={classes.link}
-        to={link}
-        disableRipple
-      >
-        <ListItemIcon
-          className={classnames(classes.linkIcon, {
-            [classes.linkIconActive]: isLinkActive,
-          })}
-        >
-          {icon || <InboxIcon />}
-        </ListItemIcon>
-        <ListItemText
-          classes={{
-            primary: classnames(classes.linkText, {
-              [classes.linkTextActive]: isLinkActive,
-              [classes.linkTextHidden]: !isSidebarOpened,
-            }),
-          }}
-          primary={label}
-        />
-      </ListItem>
-      {children && (
-        <Collapse
-          in={isOpen && isSidebarOpened}
-          timeout="auto"
-          unmountOnExit
-          className={classes.nestedList}
-        >
-          <List component="div" disablePadding>
-            {children.map((childrenLink) => (
-              <SidebarLink
-                key={childrenLink && childrenLink.link}
-                location={location}
-                isSidebarOpened={isSidebarOpened}
-                classes={classes}
-                nested
-                {...childrenLink}
-              />
-            ))}
-          </List>
-        </Collapse>
-      )}
-    </>
-  );
+  return children;
 }

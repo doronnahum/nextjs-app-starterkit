@@ -2,11 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   AppBar,
   Toolbar,
   IconButton,
-  InputBase,
+  // InputBase,
   Menu,
   MenuItem,
   Fab,
@@ -16,7 +18,7 @@ import {
   MailOutline as MailIcon,
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
-  Search as SearchIcon,
+  // Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons';
@@ -29,6 +31,7 @@ import useStyles from './styles';
 import { Badge, Typography } from '../Wrappers';
 import Notification from './components/Notification';
 import UserAvatar from './components/UserAvatar';
+import { logout } from 'src/redux/auth/auth.actions';
 
 // context
 import {
@@ -36,64 +39,64 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from '../LayoutContext';
-import { signOut } from '../UserContext';
+import { getUser } from 'src/redux/user/user.selectors';
 
 const messages = [
-  {
-    id: 0,
-    variant: 'warning',
-    name: 'Jane Hew',
-    message: 'Hey! How is it going?',
-    time: '9:32',
-  },
-  {
-    id: 1,
-    variant: 'success',
-    name: 'Lloyd Brown',
-    message: 'Check out my new Dashboard',
-    time: '9:18',
-  },
-  {
-    id: 2,
-    variant: 'primary',
-    name: 'Mark Winstein',
-    message: 'I want rearrange the appointment',
-    time: '9:15',
-  },
-  {
-    id: 3,
-    variant: 'secondary',
-    name: 'Liana Dutti',
-    message: 'Good news from sale department',
-    time: '9:09',
-  },
+  // {
+  //   id: 0,
+  //   variant: 'warning',
+  //   name: 'Jane Hew',
+  //   message: 'Hey! How is it going?',
+  //   time: '9:32',
+  // },
+  // {
+  //   id: 1,
+  //   variant: 'success',
+  //   name: 'Lloyd Brown',
+  //   message: 'Check out my new Dashboard',
+  //   time: '9:18',
+  // },
+  // {
+  //   id: 2,
+  //   variant: 'primary',
+  //   name: 'Mark Winstein',
+  //   message: 'I want rearrange the appointment',
+  //   time: '9:15',
+  // },
+  // {
+  //   id: 3,
+  //   variant: 'secondary',
+  //   name: 'Liana Dutti',
+  //   message: 'Good news from sale department',
+  //   time: '9:09',
+  // },
 ];
 
 const notifications = [
-  { id: 0, color: 'warning', message: 'Check out this awesome ticket' },
-  {
-    id: 1,
-    color: 'success',
-    type: 'info',
-    message: 'What is the best way to get ...',
-  },
-  {
-    id: 2,
-    color: 'secondary',
-    type: 'notification',
-    message: 'This is just a simple notification',
-  },
-  {
-    id: 3,
-    color: 'primary',
-    type: 'e-commerce',
-    message: '12 new orders has arrived today',
-  },
+  // { id: 0, color: 'warning', message: 'Check out this awesome ticket' },
+  // {
+  //   id: 1,
+  //   color: 'success',
+  //   type: 'info',
+  //   message: 'What is the best way to get ...',
+  // },
+  // {
+  //   id: 2,
+  //   color: 'secondary',
+  //   type: 'notification',
+  //   message: 'This is just a simple notification',
+  // },
+  // {
+  //   id: 3,
+  //   color: 'primary',
+  //   type: 'e-commerce',
+  //   message: '12 new orders has arrived today',
+  // },
 ];
 
-export default function Header() {
+function Header({ user }) {
   const classes = useStyles();
-
+  const hasUser = user && user._id;
   // global
   const layoutState = useLayoutState();
   const layoutDispatch = useLayoutDispatch();
@@ -104,7 +107,7 @@ export default function Header() {
   const [notificationsMenu, setNotificationsMenu] = useState(null);
   const [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   const [profileMenu, setProfileMenu] = useState(null);
-  const [isSearchOpen, setSearchOpen] = useState(false);
+  // const [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -127,20 +130,21 @@ export default function Header() {
               }}
             />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-            />
-          )}
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }}
+              />
+            )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          React Material Admin
+          Dashboard
         </Typography>
-        <div className={classes.grow} />
+        {/*
+          <div className={classes.grow} />
         <div
           className={classNames(classes.search, {
             [classes.searchFocused]: isSearchOpen,
@@ -161,7 +165,8 @@ export default function Header() {
               input: classes.inputInput,
             }}
           />
-        </div>
+          </div>
+        */}
         <IconButton
           color="inherit"
           aria-haspopup="true"
@@ -328,7 +333,7 @@ export default function Header() {
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={signOut}
+              onClick={logout}
             >
               Sign Out
             </Typography>
@@ -338,3 +343,16 @@ export default function Header() {
     </AppBar>
   );
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ logout }, dispatch)
+  };
+}
+
+function mapStateToProps(store) {
+  return {
+    user: getUser(store),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

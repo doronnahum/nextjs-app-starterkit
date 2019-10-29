@@ -1,6 +1,12 @@
+:root {
+  --distanceFromTopList: 215px !important;
+  --distanceFromTopDoc: 145px !important;
+}
+
 body {
   height: 100vh;
-  & > div {
+
+  &>div {
     height: 100%;
   }
 }
@@ -9,8 +15,8 @@ body {
 $header-height: #7d7098;
 
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
