@@ -5,11 +5,11 @@ const common = {
 
 const dev = {
   ...common,
-  serverUrl: 'https://xsctrl-dev-server-19.herokuapp.com',
+  serverUrl: '',
 };
 const prod = {
   ...common,
-  serverUrl: 'https://xsctrl-server-19.herokuapp.com',
+  serverUrl: '',
 };
 const local = {
   ...common,
