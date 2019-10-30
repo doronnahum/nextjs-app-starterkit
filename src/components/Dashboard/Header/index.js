@@ -2,11 +2,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import {
   AppBar,
   Toolbar,
   IconButton,
-  InputBase,
+  // InputBase,
   Menu,
   MenuItem,
   Fab,
@@ -16,13 +19,17 @@ import {
   MailOutline as MailIcon,
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
-  Search as SearchIcon,
+  // Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons';
 import classNames from 'classnames';
 
 // styles
+import { logout } from 'src/redux/auth/auth.actions';
+import { getUser } from 'src/redux/user/user.selectors';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import useStyles from './styles';
 
 // components
@@ -36,64 +43,64 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from '../LayoutContext';
-import { signOut } from '../UserContext';
 
 const messages = [
-  {
-    id: 0,
-    variant: 'warning',
-    name: 'Jane Hew',
-    message: 'Hey! How is it going?',
-    time: '9:32',
-  },
-  {
-    id: 1,
-    variant: 'success',
-    name: 'Lloyd Brown',
-    message: 'Check out my new Dashboard',
-    time: '9:18',
-  },
-  {
-    id: 2,
-    variant: 'primary',
-    name: 'Mark Winstein',
-    message: 'I want rearrange the appointment',
-    time: '9:15',
-  },
-  {
-    id: 3,
-    variant: 'secondary',
-    name: 'Liana Dutti',
-    message: 'Good news from sale department',
-    time: '9:09',
-  },
+  // {
+  //   id: 0,
+  //   variant: 'warning',
+  //   name: 'Jane Hew',
+  //   message: 'Hey! How is it going?',
+  //   time: '9:32',
+  // },
+  // {
+  //   id: 1,
+  //   variant: 'success',
+  //   name: 'Lloyd Brown',
+  //   message: 'Check out my new Dashboard',
+  //   time: '9:18',
+  // },
+  // {
+  //   id: 2,
+  //   variant: 'primary',
+  //   name: 'Mark Winstein',
+  //   message: 'I want rearrange the appointment',
+  //   time: '9:15',
+  // },
+  // {
+  //   id: 3,
+  //   variant: 'secondary',
+  //   name: 'Liana Dutti',
+  //   message: 'Good news from sale department',
+  //   time: '9:09',
+  // },
 ];
 
 const notifications = [
-  { id: 0, color: 'warning', message: 'Check out this awesome ticket' },
-  {
-    id: 1,
-    color: 'success',
-    type: 'info',
-    message: 'What is the best way to get ...',
-  },
-  {
-    id: 2,
-    color: 'secondary',
-    type: 'notification',
-    message: 'This is just a simple notification',
-  },
-  {
-    id: 3,
-    color: 'primary',
-    type: 'e-commerce',
-    message: '12 new orders has arrived today',
-  },
+  // { id: 0, color: 'warning', message: 'Check out this awesome ticket' },
+  // {
+  //   id: 1,
+  //   color: 'success',
+  //   type: 'info',
+  //   message: 'What is the best way to get ...',
+  // },
+  // {
+  //   id: 2,
+  //   color: 'secondary',
+  //   type: 'notification',
+  //   message: 'This is just a simple notification',
+  // },
+  // {
+  //   id: 3,
+  //   color: 'primary',
+  //   type: 'e-commerce',
+  //   message: '12 new orders has arrived today',
+  // },
 ];
 
-export default function Header() {
+function Header({ user = {}, actions }) {
   const classes = useStyles();
-
+  const router = useRouter();
+  const { t } = useTranslation('common');
   // global
   const layoutState = useLayoutState();
   const layoutDispatch = useLayoutDispatch();
@@ -104,7 +111,7 @@ export default function Header() {
   const [notificationsMenu, setNotificationsMenu] = useState(null);
   const [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   const [profileMenu, setProfileMenu] = useState(null);
-  const [isSearchOpen, setSearchOpen] = useState(false);
+  // const [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -138,9 +145,11 @@ export default function Header() {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          React Material Admin
+          {t('dashboard_title')}
         </Typography>
         <div className={classes.grow} />
+        {/*
+          <div className={classes.grow} />
         <div
           className={classNames(classes.search, {
             [classes.searchFocused]: isSearchOpen,
@@ -161,7 +170,8 @@ export default function Header() {
               input: classes.inputInput,
             }}
           />
-        </div>
+          </div>
+        */}
         <IconButton
           color="inherit"
           aria-haspopup="true"
@@ -217,14 +227,14 @@ export default function Header() {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              New Messages
+              {t('dashboard_new_messages')}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
               component="a"
               color="secondary"
             >
-              {messages.length} New Messages
+              {messages.length} {t('dashboard_new_messages')}
             </Typography>
           </div>
           {messages.map((message) => (
@@ -250,7 +260,8 @@ export default function Header() {
               </div>
             </MenuItem>
           ))}
-          <Fab
+          {/*
+            <Fab
             variant="extended"
             color="primary"
             aria-label="Add"
@@ -259,6 +270,7 @@ export default function Header() {
             Send New Message
             <SendIcon className={classes.sendButtonIcon} />
           </Fab>
+          */}
         </Menu>
         <Menu
           id="notifications-menu"
@@ -289,7 +301,7 @@ export default function Header() {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+              {user.email}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
@@ -297,7 +309,7 @@ export default function Header() {
               color="primary"
               href="https://flatlogic.com"
             >
-              Flalogic.com
+              {`${user.firstName || ''} ${user.lastName || ''}`}
             </Typography>
           </div>
           <MenuItem
@@ -305,32 +317,17 @@ export default function Header() {
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
+            onClick={() => router.push('/profile')}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Tasks
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Messages
+            <AccountIcon className={classes.profileMenuIcon} /> {t('dashboard_profile_link')}
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={signOut}
+              onClick={actions.logout}
             >
-              Sign Out
+              {t('dashboard_sign_out_link')}
             </Typography>
           </div>
         </Menu>
@@ -338,3 +335,35 @@ export default function Header() {
     </AppBar>
   );
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ logout }, dispatch),
+  };
+}
+
+function mapStateToProps(store) {
+  return {
+    user: getUser(store),
+  };
+}
+
+Header.defaultProps = {
+  user: {
+    email: '',
+    firstName: '',
+    lastName: '',
+  }
+};
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }),
+  actions: PropTypes.shape({
+    logout: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

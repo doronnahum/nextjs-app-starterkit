@@ -65,6 +65,7 @@ export default function withAuth(
       const { auth_isLoading, dispatch } = this.props;
       const isTokenCheckNotStart = auth_isLoading === null;
       const isTokenCheckEnds = auth_isLoading === false;
+      return
       const tokenFromStorage = getTokenFromStorage();
       if (isTokenCheckNotStart) {
         if (tokenFromStorage) {

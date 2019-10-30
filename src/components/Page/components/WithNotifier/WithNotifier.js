@@ -104,5 +104,4 @@ export default (BaseComponent) => {
     mapStateToProps,
     mapDispatchToProps,
   )(Notifier));
-
 };

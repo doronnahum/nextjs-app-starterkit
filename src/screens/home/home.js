@@ -1,52 +1,5 @@
-
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import { makeStyles, createStyles } from '@material-ui/core';
-// import './home.scss';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { withTranslation } from 'src/i18n';
-// import Link from 'next/link';
-
-// const useStyles = makeStyles(() => createStyles({
-//   root: {
-//     backgroundColor: 'red',
-//   },
-// }));
-
-// function homeScreen({ t }) {
-//   const classes = useStyles();
-//   return (
-//     <div className={`${classes.root} home_screen`}>
-//     <Container maxWidth="lg">
-//     </Container>
-//     <h2>I am a home screen</h2>
-//       <h2>name from i18n {t('screenName')}</h2>
-//       <Link href="/example/public"><a>Example Public screen</a></Link>
-//       <Link href="/example/private"><a>Example Private screen</a></Link>
-//     </div>
-//   );
-// }
-
-// const Extended = withTranslation('home')(homeScreen);
-
-// function mapStateToProps(store) {
-//   return {
-//     store,
-//   };
-// }
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators({}, dispatch),
-//   };
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Extended);
-// homeScreen.propTypes = {
-//   t: PropTypes.func.isRequired,
-// };
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
@@ -80,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/user/erondu)',
+    backgroundImage: 'url(./static/example.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -96,10 +49,6 @@ const useStyles = makeStyles((theme) => ({
   mainFeaturedPostContent: {
     position: 'relative',
     padding: theme.spacing(3),
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(6),
-      paddingRight: 0,
-    },
   },
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -115,11 +64,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function HomeScreen({ isAuth, actions }) {
+function HomeScreen({ t, isAuth, actions }) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <CssBaseline />
       <Container maxWidth="lg">
         <Toolbar className={classes.toolbar}>
           <Typography
@@ -162,14 +110,6 @@ function HomeScreen({ isAuth, actions }) {
         </Toolbar>
         <main>
           <Paper className={classes.mainFeaturedPost}>
-            {/* Increase the priority of the hero background image */}
-            {
-              <img
-                style={{ display: 'none' }}
-                src="https://source.unsplash.com/user/erondu"
-                alt="background"
-              />
-            }
             <div className={classes.overlay} />
             <Grid container>
               <Grid item md={6}>
@@ -181,9 +121,15 @@ function HomeScreen({ isAuth, actions }) {
               </Grid>
             </Grid>
           </Paper>
+          <p>{t('screenName')}</p>
+          <br />
+          <img src="/static/lamp.png" alt="Example of media from static." />
+          <br />
           <Link href="/example/public"><a>Example Public screen</a></Link>
           <br />
           <Link href="/example/private"><a>Example Private screen</a></Link>
+          <br />
+          <Link href="/example/dashboard/dashboard-posts"><a>Example Dashboard screen</a></Link>
         </main>
       </Container>
       {/* Footer */}
@@ -217,5 +163,6 @@ HomeScreen.propTypes = {
   actions: PropTypes.shape({
     logout: PropTypes.func.isRequired,
   }).isRequired,
+  t: PropTypes.func.isRequired,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Extended);

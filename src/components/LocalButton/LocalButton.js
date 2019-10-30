@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { makeStyles, createStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -27,18 +27,23 @@ const useStyles = makeStyles(() => createStyles({
 }));
 
 function LocalButton() {
+  const [isMount, setState] = useState(false);
+  useEffect(() => {
+    // Update the document title using the browser API
+    setState(true);
+  });
   const classes = useStyles();
-  if (!i18n.language) return null;
+  if (!isMount) return <div className={`${classes.root} local_component`} />;
   return (
     <div className={`${classes.root} local_component`}>
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
             <Button className={classes.button} variant="contained" {...bindTrigger(popupState)}>
-              {i18n.language}
+              {i18n.language || ''}
             </Button>
             <Menu {...bindMenu(popupState)}>
-              {i18Config.otherLanguages.map((lang) => (
+              {(Object.keys(i18Config.localeSubpaths)).map((lang) => (
                 <MenuItem
                   key={lang}
                   onClick={() => {
