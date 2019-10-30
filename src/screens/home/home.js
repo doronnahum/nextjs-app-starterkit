@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { isAuthenticated } from 'src/redux/auth/auth.selectors';
 import { logout } from 'src/redux/auth/auth.actions';
 import { title } from '../../../siteConfig';
+
 import './home.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -130,6 +131,8 @@ function HomeScreen({ t, isAuth, actions }) {
           <Link href="/example/private"><a>Example Private screen</a></Link>
           <br />
           <Link href="/example/dashboard/dashboard-posts"><a>Example Dashboard screen</a></Link>
+          <br />
+          <Link href="/example/nextjs-material-kit-master"><a>Example nextjs-material-kit-master</a></Link>
         </main>
       </Container>
       {/* Footer */}

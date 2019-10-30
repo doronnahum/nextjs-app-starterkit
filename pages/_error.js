@@ -10,6 +10,9 @@ ErrorPage.getInitialProps = async () => ({
 
 export default ErrorPage;
 
+ErrorPage.defaultProps = {
+  errorCode: 404,
+};
 ErrorPage.propTypes = {
-  errorCode: PropTypes.number.isRequired,
+  errorCode: PropTypes.number,
 };
