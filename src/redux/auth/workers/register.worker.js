@@ -20,17 +20,17 @@ function* register(action) {
     yield put(startLoading({ loaderType: LoaderTypes.REGISTER }));
     let response = yield httpRequest(
       ApiService.createUser,
-      email,
+      email.trim().toLowerCase(),
       mobile,
-      password, /* firstName, lastName */
+      password.trim(), /* firstName, lastName */
     );
     if (
       (response.data.verifiedRequired && !response.data.isVerified)
-        || (
-          response.data.user
-          && response.data.user.verifiedRequired
-          && !response.data.user.isVerified
-        )
+      || (
+        response.data.user
+        && response.data.user.verifiedRequired
+        && !response.data.user.isVerified
+      )
     ) {
       Router.replace({ pathname: '/verify-account', query: { email, mobile } });
       return;

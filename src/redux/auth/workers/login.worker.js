@@ -14,7 +14,7 @@ function* signIn(action) {
   } = action.payload;
   try {
     yield put(startLoading({ loaderType: LoaderTypes.LOGIN }));
-    const response = yield httpRequest(ApiService.login, email, mobile, password);
+    const response = yield httpRequest(ApiService.login, email.trim().toLowerCase(), mobile, password.trim());
     const { accessToken, user } = response.data;
     setToken(accessToken);
     yield put(setUser(user));
