@@ -10,11 +10,16 @@ import { onLoginEnd } from '../auth.actions';
 
 function* signIn(action) {
   const {
-    email, mobile, password, nextRoute,
+    values, nextRoute,
   } = action.payload;
   try {
     yield put(startLoading({ loaderType: LoaderTypes.LOGIN }));
-    const response = yield httpRequest(ApiService.login, email.trim().toLowerCase(), mobile, password.trim());
+    const response = yield httpRequest(
+      ApiService.login,
+      values.email.trim().toLowerCase(),
+      values.mobile,
+      values.password.trim(),
+    );
     const { accessToken, user } = response.data;
     setToken(accessToken);
     yield put(setUser(user));

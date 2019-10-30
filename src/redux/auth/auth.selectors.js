@@ -5,9 +5,7 @@ export const getState = (state) => state.auth;
 export const getToken = createSelector(getState, (authState) => (
   authState.token
 ));
-export const isAuthenticated = createSelector(getState, (authState) => {
-  return authState.valid;
-});
+export const isAuthenticated = createSelector(getState, (authState) => authState.valid);
 export const getTokenValidateState = createSelector(getState, (authState) => (
   authState.valid
 ));

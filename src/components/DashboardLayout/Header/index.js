@@ -12,7 +12,7 @@ import {
   // InputBase,
   Menu,
   MenuItem,
-  Fab,
+  // Fab,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
@@ -20,7 +20,7 @@ import {
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   // Search as SearchIcon,
-  Send as SendIcon,
+  // Send as SendIcon,
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons';
 import classNames from 'classnames';
@@ -29,14 +29,13 @@ import classNames from 'classnames';
 import { logout } from 'src/redux/auth/auth.actions';
 import { getUser } from 'src/redux/user/user.selectors';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'src/i18n';
 import useStyles from './styles';
 
 // components
 import { Badge, Typography } from '../Wrappers';
 import Notification from './components/Notification';
 import UserAvatar from './components/UserAvatar';
-import { logout } from 'src/redux/auth/auth.actions';
 
 // context
 import {
@@ -135,15 +134,15 @@ function Header({ user = {}, actions }) {
               }}
             />
           ) : (
-              <MenuIcon
-                classes={{
-                  root: classNames(
-                    classes.headerIcon,
-                    classes.headerIconCollapse,
-                  ),
-                }}
-              />
-            )}
+            <MenuIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse,
+                ),
+              }}
+            />
+          )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           {t('dashboard_title')}
@@ -353,7 +352,7 @@ Header.defaultProps = {
     email: '',
     firstName: '',
     lastName: '',
-  }
+  },
 };
 
 Header.propTypes = {

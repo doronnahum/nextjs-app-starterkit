@@ -39,7 +39,7 @@ function SignUp({ actions, t }) {
   const onSubmit = (values, e) => {
     e.preventDefault();
     const actionPayload = {
-      ...values,
+      values,
       nextRoute: router.query.next || '/',
     };
     actions.register(actionPayload);

@@ -157,7 +157,7 @@ function ExampleScreen({
         <PrivateContent>
           <p>Only Authenticate user can see this message</p>
         </PrivateContent>
-        <PrivateContent checkContext={user => user.isAdmin}>
+        <PrivateContent checkContext={(user) => user.isAdmin}>
           <p>Only Authenticate admin user can see this message</p>
         </PrivateContent>
       </Card>
