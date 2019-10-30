@@ -36,6 +36,7 @@ import useStyles from './styles';
 import { Badge, Typography } from '../Wrappers';
 import Notification from './components/Notification';
 import UserAvatar from './components/UserAvatar';
+import { logout } from 'src/redux/auth/auth.actions';
 
 // context
 import {
@@ -134,15 +135,15 @@ function Header({ user = {}, actions }) {
               }}
             />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-            />
-          )}
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }}
+              />
+            )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           {t('dashboard_title')}
