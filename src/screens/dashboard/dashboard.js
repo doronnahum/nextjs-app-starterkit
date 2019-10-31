@@ -102,8 +102,8 @@ class Dashboard extends React.Component {
     if (!data) return 'Loading dashboard...';
     const currentLang = i18n.language;
     const fullLangName = fullLangsName[currentLang];
-    setLocal(locals[fullLangName] || locals.en);
-    setLocalDashboard(localsDashboard[fullLangName] || localsDashboard.en);
+    setLocal(locals[fullLangName] || locals.enUS);
+    setLocalDashboard(localsDashboard[fullLangName] || localsDashboard.enUS);
     const isRtl = i18n.dir() === 'rtl';
     const DashboardApp = isRtl ? RtlDashBoard : LtrDashboard;
     return (

@@ -90,7 +90,7 @@ function HomeScreen({ t, isAuth, actions }) {
                   component="a"
                   onClick={actions.logout}
                 >
-                    LOGOUT
+                  LOGOUT
                 </Button>
               )
               : (
@@ -125,6 +125,8 @@ function HomeScreen({ t, isAuth, actions }) {
           <p>{t('screenName')}</p>
           <br />
           <img src="/static/lamp.png" alt="Example of media from static." />
+          <br />
+          <Link href="/dashboard"><a>dashboard</a></Link>
           <br />
           <Link href="/example/public"><a>Example Public screen</a></Link>
           <br />
