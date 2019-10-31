@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "local": "npm run clean-cache && cross-env CONFIG_ENV=local node server.js",
-    "dev": "npm run clean-cache && cross-env CONFIG_ENV=dev node server.js",
+    "dev": "npm run clean-cache && cross-env CONFIG_ENV=development node server.js",
     "qa": "npm run clean-cache && cross-env CONFIG_ENV=qa node server.js",
     "lint": "eslint --ext .js pages src",
     "format": "eslint --fix --ext .js pages src",
@@ -85,5 +85,13 @@
     "nodemon": "^1.19.4",
     "now": "^16.3.1",
     "rimraf": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix --ext .js pages src"
   }
 }
