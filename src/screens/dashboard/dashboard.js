@@ -21,7 +21,7 @@ import dynamic from 'next/dynamic';
 import { Icon } from 'antd';
 
 import 'feathers-mongoose-casl-dashboard/lib/style.css';
-import 'antd/dist/antd.less';
+import 'antd/dist/antd.min.css';
 
 const fullLangsName = {
   en: 'enUS',
