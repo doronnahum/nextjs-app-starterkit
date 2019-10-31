@@ -134,15 +134,15 @@ function Header({ user = {}, actions }) {
               }}
             />
           ) : (
-              <MenuIcon
-                classes={{
-                  root: classNames(
-                    classes.headerIcon,
-                    classes.headerIconCollapse,
-                  ),
-                }}
-              />
-            )}
+            <MenuIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse,
+                ),
+              }}
+            />
+          )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           {t('dashboard_title')}

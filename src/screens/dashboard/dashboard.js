@@ -103,24 +103,26 @@ class Dashboard extends React.Component {
           renderMain={() => (
             screenName ? <DashboardApp url={screenName} /> : this.renderBoxes()
           )}
-          renderSidebarBody={({ isSidebarOpened }) => data.filter((item) => item.schema).map((item) => {
-            const icon = getDeep(
-              item,
-              'data.dashboardConfig.sideBarIconName',
-            );
-            const localName = getDeep(item, `data.dashboardConfig.i18n.${fullLangName}.serviceName`);
-            return (
-              <SidebarLink
-                key={item.result.name}
-                isSidebarOpened={isSidebarOpened}
-                id={item.result.name}
-                label={localName || item.result.name}
-                link={`/dashboard?screen=${item.result.name}`}
-                icon={icon ? <Icon type={icon} /> : <TableChartIcon />}
-                isLinkActive={item.result.name === screenName}
-              />
-            );
-          })}
+          renderSidebarBody={({ isSidebarOpened }) => {
+            data.filter((item) => item.schema).map((item) => {
+              const icon = getDeep(
+                item,
+                'data.dashboardConfig.sideBarIconName',
+              );
+              const localName = getDeep(item, `data.dashboardConfig.i18n.${fullLangName}.serviceName`);
+              return (
+                <SidebarLink
+                  key={item.result.name}
+                  isSidebarOpened={isSidebarOpened}
+                  id={item.result.name}
+                  label={localName || item.result.name}
+                  link={`/dashboard?screen=${item.result.name}`}
+                  icon={icon ? <Icon type={icon} /> : <TableChartIcon />}
+                  isLinkActive={item.result.name === screenName}
+                />
+              );
+            });
+          }}
         />
       </LayoutProvider>
     );

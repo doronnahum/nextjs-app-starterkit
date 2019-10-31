@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+
 /* eslint-disable no-restricted-syntax */
 import {
   setApiInstance, setDispatch, setDefaultIdKey, setErrorHandler,
@@ -9,15 +11,16 @@ import { setRouteConfig } from 'redux-admin';
 import Router from 'next/router';
 
 const serialize = function serialize(obj) {
-  let str = [];
-  for (let p in obj) {
+  const str = [];
+  for (const p in obj) {
     if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
     }
   }
   return str.join('&');
 };
 
+// eslint-disable-next-line func-names
 const getSerializePathnameAndParams = function (paramsToSet) {
   const pathname = Router.pathname || '/';
   const query = { ...Router.query, ...paramsToSet };
