@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     '& .ant-breadcrumb': {
       padding: 15,
       paddingBottom: 0,
-    }
+    },
   },
   contentShift: {
     width: `calc(100vw - ${240 + theme.spacing(6)}px)`,

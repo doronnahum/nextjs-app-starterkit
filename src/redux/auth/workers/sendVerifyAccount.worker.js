@@ -6,10 +6,10 @@ import { sendNotification } from 'src/redux/global/global.actions';
 import { startLoading, stopLoading, LoaderTypes } from '../../loaders';
 
 function* sendVerifyAccount(action) {
-  const { email, mobile, notificationMessage } = action.payload;
+  const { values, notificationMessage } = action.payload;
   try {
     yield put(startLoading({ loaderType: LoaderTypes.VERIFY_ACCOUNT }));
-    yield httpRequest(ApiService.resendVerifyAccount, email, mobile);
+    yield httpRequest(ApiService.resendVerifyAccount, values.email, values.mobile);
     yield put(stopLoading({ loaderType: LoaderTypes.VERIFY_ACCOUNT }));
     yield put(sendNotification(notificationMessage, 'success'));
   } catch (error) {

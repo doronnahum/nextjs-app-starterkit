@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Collapse,
+  // Collapse,
   Divider,
-  List,
+  // List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Typography,
 } from '@material-ui/core';
-import { Inbox as InboxIcon } from '@material-ui/icons';
+// import { Inbox as InboxIcon } from '@material-ui/icons';
 import Router from 'next/router';
 
 import classnames from 'classnames';
@@ -35,13 +35,13 @@ export default function SidebarLink({
   const classes = useStyles();
 
   // local
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleCollapse(e) {
-    if (isSidebarOpened) {
-      e.preventDefault();
-      setIsOpen(!isOpen);
-    }
-  }
+  // const [isOpen, setIsOpen] = useState(false);
+  // function toggleCollapse(e) {
+  //   if (isSidebarOpened) {
+  //     e.preventDefault();
+  //     setIsOpen(!isOpen);
+  //   }
+  // }
 
 
   if (type === 'title') {

@@ -2,7 +2,7 @@
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
-const withLess = require('@zeit/next-less');
+const withImages = require('next-images');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 
 const env = process.env.CONFIG_ENV || process.env.NODE_ENV || 'development';
@@ -30,10 +30,5 @@ const nextConfig = {
 };
 
 module.exports = withPlugins([
-  [withCSS], [withSass], [withLess, {
-    cssLoaderOptions: { modules: false },
-    lessLoaderOptions: {
-      javascriptEnabled: true,
-    },
-  }], [withBundleAnalyzer],
+  withCSS, withSass, withBundleAnalyzer, withImages,
 ], nextConfig);

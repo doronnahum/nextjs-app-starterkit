@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import {
   AppBar,
   Toolbar,
@@ -11,7 +12,7 @@ import {
   // InputBase,
   Menu,
   MenuItem,
-  Fab,
+  // Fab,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
@@ -19,19 +20,22 @@ import {
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   // Search as SearchIcon,
-  Send as SendIcon,
+  // Send as SendIcon,
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons';
 import classNames from 'classnames';
 
 // styles
+import { logout } from 'src/redux/auth/auth.actions';
+import { getUser } from 'src/redux/user/user.selectors';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'src/i18n';
 import useStyles from './styles';
 
 // components
 import { Badge, Typography } from '../Wrappers';
 import Notification from './components/Notification';
 import UserAvatar from './components/UserAvatar';
-import { logout } from 'src/redux/auth/auth.actions';
 
 // context
 import {
@@ -39,7 +43,6 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from '../LayoutContext';
-import { getUser } from 'src/redux/user/user.selectors';
 
 const messages = [
   // {
@@ -94,9 +97,10 @@ const notifications = [
   // },
 ];
 
-function Header({ user }) {
+function Header({ user = {}, actions }) {
   const classes = useStyles();
-  const hasUser = user && user._id;
+  const router = useRouter();
+  const { t } = useTranslation('common');
   // global
   const layoutState = useLayoutState();
   const layoutDispatch = useLayoutDispatch();
@@ -141,8 +145,9 @@ function Header({ user }) {
             )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Dashboard
+          {t('dashboard_title')}
         </Typography>
+        <div className={classes.grow} />
         {/*
           <div className={classes.grow} />
         <div
@@ -222,14 +227,14 @@ function Header({ user }) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              New Messages
+              {t('dashboard_new_messages')}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
               component="a"
               color="secondary"
             >
-              {messages.length} New Messages
+              {messages.length} {t('dashboard_new_messages')}
             </Typography>
           </div>
           {messages.map((message) => (
@@ -255,7 +260,8 @@ function Header({ user }) {
               </div>
             </MenuItem>
           ))}
-          <Fab
+          {/*
+            <Fab
             variant="extended"
             color="primary"
             aria-label="Add"
@@ -264,6 +270,7 @@ function Header({ user }) {
             Send New Message
             <SendIcon className={classes.sendButtonIcon} />
           </Fab>
+          */}
         </Menu>
         <Menu
           id="notifications-menu"
@@ -294,7 +301,7 @@ function Header({ user }) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+              {user.email}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
@@ -302,7 +309,7 @@ function Header({ user }) {
               color="primary"
               href="https://flatlogic.com"
             >
-              Flalogic.com
+              {`${user.firstName || ''} ${user.lastName || ''}`}
             </Typography>
           </div>
           <MenuItem
@@ -310,32 +317,17 @@ function Header({ user }) {
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
+            onClick={() => router.push('/profile')}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Tasks
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Messages
+            <AccountIcon className={classes.profileMenuIcon} /> {t('dashboard_profile_link')}
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={logout}
+              onClick={actions.logout}
             >
-              Sign Out
+              {t('dashboard_sign_out_link')}
             </Typography>
           </div>
         </Menu>
@@ -345,7 +337,7 @@ function Header({ user }) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ logout }, dispatch)
+    actions: bindActionCreators({ logout }, dispatch),
   };
 }
 
@@ -354,5 +346,24 @@ function mapStateToProps(store) {
     user: getUser(store),
   };
 }
+
+Header.defaultProps = {
+  user: {
+    email: '',
+    firstName: '',
+    lastName: '',
+  },
+};
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }),
+  actions: PropTypes.shape({
+    logout: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

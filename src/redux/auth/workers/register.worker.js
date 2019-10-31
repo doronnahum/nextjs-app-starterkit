@@ -11,26 +11,26 @@ import { startLoading, stopLoading, LoaderTypes } from '../../loaders';
 
 function* register(action) {
   const {
-    email,
-    mobile,
-    password,
+    values,
     nextRoute, /* firstName, lastName */
   } = action.payload;
+  const { email, password, mobile } = values;
   try {
     yield put(startLoading({ loaderType: LoaderTypes.REGISTER }));
     let response = yield httpRequest(
       ApiService.createUser,
-      email,
+      email.trim().toLowerCase(),
+      password.trim(),
+      /* firstName, lastName */
       mobile,
-      password, /* firstName, lastName */
     );
     if (
       (response.data.verifiedRequired && !response.data.isVerified)
-        || (
-          response.data.user
-          && response.data.user.verifiedRequired
-          && !response.data.user.isVerified
-        )
+      || (
+        response.data.user
+        && response.data.user.verifiedRequired
+        && !response.data.user.isVerified
+      )
     ) {
       Router.replace({ pathname: '/verify-account', query: { email, mobile } });
       return;

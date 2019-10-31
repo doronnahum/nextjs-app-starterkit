@@ -39,7 +39,7 @@ function verifyAccount({ actions, t }) {
   const onSubmit = (values, e) => {
     e.preventDefault();
     const actionPayload = {
-      ...values,
+      values,
       notificationMessage: emailIsMainField ? t('verifyEmailNotificationMessage') : t('verifyMobileNotificationMessage'),
     };
     actions.sendVerifyAccount(actionPayload);
