@@ -4,5 +4,5 @@ module.exports = [
     type: 'input',
     message: 'Name of your screen?',
     required: true,
-  }
+  },
 ];
