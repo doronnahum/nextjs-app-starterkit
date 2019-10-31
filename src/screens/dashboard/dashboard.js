@@ -60,9 +60,18 @@ class Dashboard extends React.Component {
     Router.router.events.off('beforeHistoryChange', this.handleRouteChange);
   }
 
-  handleRouteChange = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const screenName = urlParams.get('screen');
+  handleRouteChange = (url) => {
+    function getParameterByName(name) {
+      // eslint-disable-next-line no-param-reassign
+      // eslint-disable-next-line no-useless-escape
+      const nameStr = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp(`[?&]${nameStr}(=([^&#]*)|&|#|$)`);
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    const screenName = getParameterByName('screen');
     // eslint-disable-next-line react/destructuring-assignment
     if (screenName !== this.state.screenName) {
       this.setState({ screenName });
@@ -93,8 +102,8 @@ class Dashboard extends React.Component {
     if (!data) return 'Loading dashboard...';
     const currentLang = i18n.language;
     const fullLangName = fullLangsName[currentLang];
-    setLocal(locals[fullLangsName[currentLang]]);
-    setLocalDashboard(localsDashboard[fullLangsName[currentLang]]);
+    setLocal(locals[fullLangName] || locals.en);
+    setLocalDashboard(localsDashboard[fullLangName] || localsDashboard.en);
     const isRtl = i18n.dir() === 'rtl';
     const DashboardApp = isRtl ? RtlDashBoard : LtrDashboard;
     return (
@@ -104,7 +113,8 @@ class Dashboard extends React.Component {
             screenName ? <DashboardApp url={screenName} /> : this.renderBoxes()
           )}
           renderSidebarBody={({ isSidebarOpened }) => {
-            data.filter((item) => item.schema).map((item) => {
+            const dataToRender = data.filter((item) => item.schema);
+            return dataToRender.map((item) => {
               const icon = getDeep(
                 item,
                 'data.dashboardConfig.sideBarIconName',

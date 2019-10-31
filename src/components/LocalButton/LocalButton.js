@@ -43,7 +43,11 @@ function LocalButton() {
               {i18n.language || ''}
             </Button>
             <Menu {...bindMenu(popupState)}>
-              {(Object.keys(i18Config.localeSubpaths)).map((lang) => (
+              {((
+                i18Config.localeSubpaths
+                  ? Object.keys(i18Config.localeSubpaths)
+                  : i18Config.otherLanguages)
+              ).map((lang) => (
                 <MenuItem
                   key={lang}
                   onClick={() => {
