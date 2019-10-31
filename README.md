@@ -19,3 +19,5 @@ npm run dev
 ## The idea behind the example
 
 [Next.js](https://github.com/zeit/next.js) is a framework for server-rendered React apps.
+
+"antd": "^3.24.3","feathers-mongoose-casl-dashboard": "^1.2.2", "formik": "^2.0.2","redux-admin": "^1.6.2",

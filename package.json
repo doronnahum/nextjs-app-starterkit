@@ -13,6 +13,7 @@
     "create-comp": "hygen generator component",
     "create-page": "hygen generator page",
     "create-reducer": "hygen generator reducer",
+    "cli": "hygen",
     "clean-cache": "rimraf -rf ./node_modules/.cache",
     "analyze": "cross-env BUNDLE_ANALYZE=both npm run build",
     "build:static_export": "rimraf -rf ./out && npm run build && next export",
