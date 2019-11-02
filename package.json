@@ -17,8 +17,8 @@
     "clean-cache": "rimraf -rf ./node_modules/.cache",
     "analyze": "cross-env BUNDLE_ANALYZE=both npm run build",
     "build:static_export": "rimraf -rf ./out &&npm run build &&next export",
-    "build:serve-static": "npm run build:static_export &&http-server ./out",
-    "server-static": "http-server ./out",
+    "build:serve-static": "npm run build:static_export &&npm run serve-static",
+    "serve-static": "http-server -i ./out/index.html",
     "heroku-postbuild": "npm run build",
     "now-login": "now login",
     "now-deploy": "now --prod"
