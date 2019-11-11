@@ -1,5 +1,5 @@
 import {
-  setApiInstance, setDispatch, setDefaultIdKey, setErrorHandler, setDefaultUpdateMethod
+  setApiInstance, setDispatch, setDefaultIdKey, setErrorHandler, setDefaultUpdateMethod,
 } from 'net-provider';
 import ApiService from 'src/services/api';
 import { setDispatch as setNotificationDispatch } from 'src/services/notification/notification';
