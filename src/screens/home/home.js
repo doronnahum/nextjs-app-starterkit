@@ -14,8 +14,8 @@ import { withTranslation } from 'src/i18n';
 import Link from 'next/link';
 import { isAuthenticated } from 'src/redux/auth/auth.selectors';
 import { logout } from 'src/redux/auth/auth.actions';
+import TypographyExample from 'src/example/components/TypographyExample/TypographyExample'
 import { title } from '../../../siteConfig';
-
 import './home.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -134,6 +134,7 @@ function HomeScreen({ t, isAuth, actions }) {
           <br />
           <Link href="/example/nextjs-material-kit-master"><a>Example nextjs-material-kit-master</a></Link>
         </main>
+        <TypographyExample />
       </Container>
       {/* Footer */}
       <footer className={classes.footer}>
