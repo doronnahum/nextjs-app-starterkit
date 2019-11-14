@@ -30,6 +30,7 @@ import { logout } from 'src/redux/auth/auth.actions';
 import { getUser } from 'src/redux/user/user.selectors';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'src/i18n';
+import Logo from 'src/components/Logo';
 import useStyles from './styles';
 
 // components
@@ -134,20 +135,22 @@ function Header({ user = {}, actions }) {
               }}
             />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-            />
-          )}
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }}
+              />
+            )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           {t('dashboard_title')}
         </Typography>
-        <div className={classes.grow} />
+        <div className={classes.grow}>
+          <Logo appName />
+        </div>
         {/*
           <div className={classes.grow} />
         <div
