@@ -10,7 +10,7 @@ export default (theme) => ({
     padding: '10px 20px',
     margin: '0 0 20px',
     fontSize: '17.5px',
-    borderLeft: `5px solid ${theme.palette.grey[10]}`,
+    borderLeft: `5px solid ${theme.palette.grey[50]}`,
   },
   quoteText: {
     margin: '0 0 10px',
@@ -20,10 +20,10 @@ export default (theme) => ({
     display: 'block',
     fontSize: '80%',
     lineHeight: '1.42857143',
-    color: theme.palette.grey[1],
+    color: theme.palette.grey.A700,
   },
   mutedText: {
-    color: theme.palette.grey[1],
+    color: theme.palette.grey[50],
   },
   primaryText: {
     color: theme.palette.primary.main,

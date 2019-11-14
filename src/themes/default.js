@@ -132,16 +132,16 @@ export default {
 };
 
 /*
-{ 
-   "breakpoints":{ 
-      "keys":[ 
+{
+   "breakpoints":{
+      "keys":[
          "xs",
          "sm",
          "md",
          "lg",
          "xl"
       ],
-      "values":{ 
+      "values":{
          "xs":0,
          "sm":600,
          "md":960,
@@ -150,95 +150,95 @@ export default {
       }
    },
    "direction":"ltr",
-   "mixins":{ 
-      "toolbar":{ 
+   "mixins":{
+      "toolbar":{
          "minHeight":56,
-         "@media (min-width:0px) and (orientation: landscape)":{ 
+         "@media (min-width:0px) and (orientation: landscape)":{
             "minHeight":48
          },
-         "@media (min-width:600px)":{ 
+         "@media (min-width:600px)":{
             "minHeight":64
          }
       }
    },
-   "overrides":{ 
-      "MuiBackdrop":{ 
-         "root":{ 
+   "overrides":{
+      "MuiBackdrop":{
+         "root":{
             "backgroundColor":"#4A4A4A1A"
          }
       },
-      "MuiMenu":{ 
-         "paper":{ 
+      "MuiMenu":{
+         "paper":{
             "boxShadow":"0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A"
          }
       },
-      "MuiSelect":{ 
-         "icon":{ 
+      "MuiSelect":{
+         "icon":{
             "color":"#B9B9B9"
          }
       },
-      "MuiListItem":{ 
-         "root":{ 
-            "&$selected":{ 
+      "MuiListItem":{
+         "root":{
+            "&$selected":{
                "backgroundColor":"#F3F5FF !important",
-               "&:focus":{ 
+               "&:focus":{
                   "backgroundColor":"#F3F5FF"
                }
             }
          },
-         "button":{ 
-            "&:hover, &:focus":{ 
+         "button":{
+            "&:hover, &:focus":{
                "backgroundColor":"#F3F5FF"
             }
          }
       },
-      "MuiTouchRipple":{ 
-         "child":{ 
+      "MuiTouchRipple":{
+         "child":{
             "backgroundColor":"white"
          }
       },
-      "MuiTableRow":{ 
-         "root":{ 
+      "MuiTableRow":{
+         "root":{
             "height":56
          }
       },
-      "MuiTableCell":{ 
-         "root":{ 
+      "MuiTableCell":{
+         "root":{
             "borderBottom":"1px solid rgba(224, 224, 224, .5)"
          },
-         "head":{ 
+         "head":{
             "fontSize":"0.95rem"
          },
-         "body":{ 
+         "body":{
             "fontSize":"0.95rem"
          }
       }
    },
-   "palette":{ 
-      "common":{ 
+   "palette":{
+      "common":{
          "black":"#000",
          "white":"#fff"
       },
       "type":"light",
-      "primary":{ 
+      "primary":{
          "main":"#536DFE",
          "light":"#798dfe",
          "dark":"#072cfe",
          "contrastText":"#fff"
       },
-      "secondary":{ 
+      "secondary":{
          "main":"#FF5C93",
          "light":"#ff82ac",
          "dark":"#ff0f60",
          "contrastText":"#FFFFFF"
       },
-      "error":{ 
+      "error":{
          "light":"#e57373",
          "main":"#f44336",
          "dark":"#d32f2f",
          "contrastText":"#fff"
       },
-      "grey":{ 
+      "grey":{
          "50":"#fafafa",
          "100":"#f5f5f5",
          "200":"#eeeeee",
@@ -256,19 +256,19 @@ export default {
       },
       "contrastThreshold":3,
       "tonalOffset":0.2,
-      "text":{ 
+      "text":{
          "primary":"#4A4A4A",
          "secondary":"#6E6E6E",
          "disabled":"rgba(0, 0, 0, 0.38)",
          "hint":"#B9B9B9"
       },
       "divider":"rgba(0, 0, 0, 0.12)",
-      "background":{ 
+      "background":{
          "paper":"#fff",
          "default":"#F6F7FF",
          "light":"#F3F5FF"
       },
-      "action":{ 
+      "action":{
          "active":"rgba(0, 0, 0, 0.54)",
          "hover":"rgba(0, 0, 0, 0.08)",
          "hoverOpacity":0.08,
@@ -276,26 +276,26 @@ export default {
          "disabled":"rgba(0, 0, 0, 0.26)",
          "disabledBackground":"rgba(0, 0, 0, 0.12)"
       },
-      "warning":{ 
+      "warning":{
          "main":"#FFC260",
          "light":"#ffd186",
          "dark":"#ffa513"
       },
-      "success":{ 
+      "success":{
          "main":"#3CD4A0",
          "light":"#5bdbaf",
          "dark":"#23a075"
       },
-      "info":{ 
+      "info":{
          "main":"#9013FE",
          "light":"#a239fe",
          "dark":"#6801c4"
       }
    },
-   "props":{ 
+   "props":{
 
    },
-   "shadows":[ 
+   "shadows":[
       "none",
       "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
       "0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)",
@@ -322,7 +322,7 @@ export default {
       "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
       "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)"
    ],
-   "typography":{ 
+   "typography":{
       "htmlFontSize":16,
       "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
       "fontSize":14,
@@ -330,77 +330,77 @@ export default {
       "fontWeightRegular":400,
       "fontWeightMedium":500,
       "fontWeightBold":700,
-      "h1":{ 
+      "h1":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":300,
          "fontSize":"3rem",
          "lineHeight":1,
          "letterSpacing":"-0.01562em"
       },
-      "h2":{ 
+      "h2":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":300,
          "fontSize":"2rem",
          "lineHeight":1,
          "letterSpacing":"-0.00833em"
       },
-      "h3":{ 
+      "h3":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"1.64rem",
          "lineHeight":1.04,
          "letterSpacing":"0em"
       },
-      "h4":{ 
+      "h4":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"1.5rem",
          "lineHeight":1.17,
          "letterSpacing":"0.00735em"
       },
-      "h5":{ 
+      "h5":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"1.285rem",
          "lineHeight":1.33,
          "letterSpacing":"0em"
       },
-      "h6":{ 
+      "h6":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":500,
          "fontSize":"1.142rem",
          "lineHeight":1.6,
          "letterSpacing":"0.0075em"
       },
-      "subtitle1":{ 
+      "subtitle1":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"1rem",
          "lineHeight":1.75,
          "letterSpacing":"0.00938em"
       },
-      "subtitle2":{ 
+      "subtitle2":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":500,
          "fontSize":"0.875rem",
          "lineHeight":1.57,
          "letterSpacing":"0.00714em"
       },
-      "body1":{ 
+      "body1":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"1rem",
          "lineHeight":1.5,
          "letterSpacing":"0.00938em"
       },
-      "body2":{ 
+      "body2":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"0.875rem",
          "lineHeight":1.43,
          "letterSpacing":"0.01071em"
       },
-      "button":{ 
+      "button":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":500,
          "fontSize":"0.875rem",
@@ -408,14 +408,14 @@ export default {
          "letterSpacing":"0.02857em",
          "textTransform":"uppercase"
       },
-      "caption":{ 
+      "caption":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"0.75rem",
          "lineHeight":1.66,
          "letterSpacing":"0.03333em"
       },
-      "overline":{ 
+      "overline":{
          "fontFamily":"\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
          "fontWeight":400,
          "fontSize":"0.75rem",
@@ -424,17 +424,17 @@ export default {
          "textTransform":"uppercase"
       }
    },
-   "shape":{ 
+   "shape":{
       "borderRadius":4
    },
-   "transitions":{ 
-      "easing":{ 
+   "transitions":{
+      "easing":{
          "easeInOut":"cubic-bezier(0.4, 0, 0.2, 1)",
          "easeOut":"cubic-bezier(0.0, 0, 0.2, 1)",
          "easeIn":"cubic-bezier(0.4, 0, 1, 1)",
          "sharp":"cubic-bezier(0.4, 0, 0.6, 1)"
       },
-      "duration":{ 
+      "duration":{
          "shortest":150,
          "shorter":200,
          "short":250,
@@ -444,7 +444,7 @@ export default {
          "leavingScreen":195
       }
    },
-   "zIndex":{ 
+   "zIndex":{
       "mobileStepper":1000,
       "speedDial":1050,
       "appBar":1100,
@@ -453,7 +453,7 @@ export default {
       "snackbar":1400,
       "tooltip":1500
    },
-   "customShadows":{ 
+   "customShadows":{
       "widget":"0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
       "widgetDark":"0px 3px 18px 0px #4558A3B3, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
       "widgetWide":"0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A"

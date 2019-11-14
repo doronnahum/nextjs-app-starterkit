@@ -14,7 +14,8 @@ import { withTranslation } from 'src/i18n';
 import Link from 'next/link';
 import { isAuthenticated } from 'src/redux/auth/auth.selectors';
 import { logout } from 'src/redux/auth/auth.actions';
-import TypographyExample from 'src/example/components/TypographyExample/TypographyExample'
+import TypographyExample from 'src/example/components/TypographyExample/TypographyExample';
+import ButtonExample from 'src/example/components/ButtonExample/ButtonExample';
 import { title } from '../../../siteConfig';
 import './home.scss';
 
@@ -135,6 +136,7 @@ function HomeScreen({ t, isAuth, actions }) {
           <Link href="/example/nextjs-material-kit-master"><a>Example nextjs-material-kit-master</a></Link>
         </main>
         <TypographyExample />
+        <ButtonExample />
       </Container>
       {/* Footer */}
       <footer className={classes.footer}>
