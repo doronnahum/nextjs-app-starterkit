@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import tinycolor from 'tinycolor2';
 
 export const primary = '#536DFE';
