@@ -2,8 +2,25 @@
   "h1": "3A simple example",
   "defaultErrorMessage": "אופס! משהו השתבש",
   "example": "תורגמתי בעזרת 18nNext",
-  "dashboard_title": "בק אופיס",
-  "dashboard_profile_link": "פרופיל",
-  "dashboard_sign_out_link": "יציאה",
-  "dashboard_new_messages": "הודעות חדשות"
+
+  "privateContent": {
+    "You_are_not_able_to_see_this_content": "אינך רשאי לצפות בתוכן זה",
+    "You_need_to_logged_in_to_see_this_content": "אתה צריך להיות מחובר בכדי לצפות בתוכן זה"
+  },
+  "dashboardLayout": {
+    "title": "בק אופיס",
+    "profile_link": "פרופיל",
+    "sign_out_link": "יציאה",
+    "new_messages": "הודעות חדשות",
+    "empty_notifications": "אין עדכונים"
+  },
+  "account": {
+    "title": "פרופיל",
+    "subTitle": "שדות אישיים לערכיה",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "email": "דואר אלקטרוני",
+    "mobile": "טלפון נייד",
+    "save": "שמור פרטים"
+  }
 }

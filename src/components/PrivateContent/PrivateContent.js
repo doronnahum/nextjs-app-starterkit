@@ -40,13 +40,13 @@ function PrivateContent({
   if (checkContext && isAuthenticated) {
     return (
       <div className={`${classes.root} privateContent_component alert-info`}>
-        <p>{t('You_are_not_able_to_see_this_content')}</p>
+        <p>{t('privateContent.You_are_not_able_to_see_this_content')}</p>
       </div>
     );
   }
   return (
     <div className={`${classes.root} privateContent_component alert-info`}>
-      <p>{t('You_need_to_logged_in_to_see_this_content')}</p>
+      <p>{t('privateContent.You_need_to_logged_in_to_see_this_content')}</p>
       <Link href={`${ROUTES.SIGNIN_ROUTE}?next=${router.pathname}`}><a>SIGNIN</a></Link>
     </div>
   );

@@ -146,7 +146,7 @@ function Header({ user = {}, actions }) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          {t('dashboard_title')}
+          {t('dashboardLayout.title')}
         </Typography>
         <div className={classes.grow}>
           <Logo appName />
@@ -230,14 +230,14 @@ function Header({ user = {}, actions }) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              {t('dashboard_new_messages')}
+              {t('dashboardLayout.new_messages')}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
               component="a"
               color="secondary"
             >
-              {messages.length} {t('dashboard_new_messages')}
+              {messages.length} {t('dashboardLayout.new_messages')}
             </Typography>
           </div>
           {messages.map((message) => (
@@ -292,6 +292,16 @@ function Header({ user = {}, actions }) {
               <Notification {...notification} typographyVariant="inherit" />
             </MenuItem>
           ))}
+          {
+            (!notifications || !notifications.length)
+            && (
+              <div className={classes.profileMenuUser}>
+                <Typography variant="h4" weight="medium">
+                  {t('dashboardLayout.empty_notifications')}
+                </Typography>
+              </div>
+            )
+          }
         </Menu>
         <Menu
           id="profile-menu"
@@ -307,10 +317,8 @@ function Header({ user = {}, actions }) {
               {user.email}
             </Typography>
             <Typography
-              className={classes.profileMenuLink}
-              component="a"
+              component="span"
               color="primary"
-              href="https://flatlogic.com"
             >
               {`${user.firstName || ''} ${user.lastName || ''}`}
             </Typography>
@@ -320,9 +328,9 @@ function Header({ user = {}, actions }) {
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
-            onClick={() => router.push('/profile')}
+            onClick={() => router.push('/dashboard/account')}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> {t('dashboard_profile_link')}
+            <AccountIcon className={classes.profileMenuIcon} /> {t('dashboardLayout.profile_link')}
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
@@ -330,7 +338,7 @@ function Header({ user = {}, actions }) {
               color="primary"
               onClick={actions.logout}
             >
-              {t('dashboard_sign_out_link')}
+              {t('dashboardLayout.sign_out_link')}
             </Typography>
           </div>
         </Menu>

@@ -7,11 +7,11 @@ import { updateMe } from 'src/redux/user/user.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PrivateContent from 'src/components/PrivateContent';
-import { AccountProfile, AccountDetails } from './components';
+import { AccountDetails } from './components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -40,15 +40,6 @@ const Account = ({ user, actions }) => {
           container
           spacing={4}
         >
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={4}
-            xs={12}
-          >
-            <AccountProfile user={userToDisplay} onUpdate={onUpdate} />
-          </Grid>
           <Grid
             item
             lg={8}

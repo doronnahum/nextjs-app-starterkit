@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import { useTranslation } from 'src/i18n';
 import {
   Card,
   CardHeader,
@@ -22,7 +23,7 @@ const AccountDetails = (props) => {
     className, user, onUpdate, disabled, onSave,
     ...rest
   } = props;
-
+  const { t } = useTranslation('common');
   const classes = useStyles();
 
   const values = user;
@@ -43,8 +44,8 @@ const AccountDetails = (props) => {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader={t('account.subTitle')}
+          title={t('account.title')}
         />
         <Divider />
         <CardContent>
@@ -59,8 +60,7 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                label={t('account.firstName')}
                 margin="dense"
                 name="firstName"
                 onChange={handleChange}
@@ -76,7 +76,7 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label={t('account.lastName')}
                 margin="dense"
                 name="lastName"
                 onChange={handleChange}
@@ -92,7 +92,7 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label={t('account.email')}
                 margin="dense"
                 name="email"
                 disabled
@@ -109,7 +109,7 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Phone Number"
+                label={t('account.mobile')}
                 margin="dense"
                 name="mobile"
                 onChange={handleChange}
@@ -128,7 +128,7 @@ const AccountDetails = (props) => {
             disabled={disabled}
             onClick={onSave}
           >
-            Save details
+            {t('account.save')}
           </Button>
         </CardActions>
       </form>
