@@ -1,22 +1,22 @@
 const common = {
-  userTokenKey: 'userTokenKey',
+  userTokenKey: 'someUniqueTokenKey',
 };
 
 const dev = {
   ...common,
-  serverUrl: 'https://barak19.herokuapp.com',
+  serverUrl: 'http://localhost:3030',
 };
 const qa = {
   ...common,
-  serverUrl: 'https://barak19.herokuapp.com',
+  serverUrl: 'http://localhost:3030',
 };
 const prod = {
   ...common,
-  serverUrl: 'https://barak19.herokuapp.com',
+  serverUrl: 'http://localhost:3030',
 };
 const local = {
   ...common,
-  serverUrl: 'https://barak19.herokuapp.com',
+  serverUrl: 'http://localhost:3030',
 };
 
 const configByEnv = {

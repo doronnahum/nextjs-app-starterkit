@@ -40,7 +40,8 @@ function Layout({ renderMain, renderSidebarBody, ...resProps }) {
 
 Layout.propTypes = {
   renderMain: PropTypes.func.isRequired,
-  renderSidebarBody: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  renderSidebarBody: PropTypes.any.isRequired,
 };
 
 export default Layout;

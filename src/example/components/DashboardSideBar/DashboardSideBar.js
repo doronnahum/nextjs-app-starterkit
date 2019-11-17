@@ -28,6 +28,15 @@ function DashboardSideBar({ isSidebarOpened }) {
         icon={<TableChartIcon />}
         isLinkActive={router.pathname === '/example/dashboard/dashboard-users'}
       />
+      <SidebarLink
+        key="Account"
+        id="Account"
+        label="Account"
+        link="/example/dashboard/dashboard-account"
+        isSidebarOpened={isSidebarOpened}
+        icon={<TableChartIcon />}
+        isLinkActive={router.pathname === '/example/dashboard/dashboard-users'}
+      />
     </React.Fragment>
   );
 }

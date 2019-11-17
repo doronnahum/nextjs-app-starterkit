@@ -2,7 +2,7 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 // nodejs library that concatenates classes
-import classNames from 'classnames';
+import clsx from 'clsx';
 // nodejs library to set properties for components
 import PropTypes from 'prop-types';
 
@@ -30,7 +30,7 @@ export default function RegularButton(props) {
     muiClasses,
     ...rest
   } = props;
-  const btnClasses = classNames({
+  const btnClasses = clsx({
     [classes.button]: true,
     [classes[size]]: size,
     [classes[color]]: color,

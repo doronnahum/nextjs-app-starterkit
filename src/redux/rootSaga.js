@@ -5,6 +5,7 @@ import example from 'src/example/redux/example.saga';
 
 import global from './global/global.saga';
 import auth from './auth/auth.saga';
+import user from './user/user.saga';
 
 // Add your saga here
 const rootSaga = function* rootSaga() {
@@ -13,6 +14,7 @@ const rootSaga = function* rootSaga() {
     call(example, 'exampleWatcher'),
     call(global, 'global'),
     call(auth, 'authWatcher'),
+    call(user, 'userWatcher'),
   ]);
 };
 

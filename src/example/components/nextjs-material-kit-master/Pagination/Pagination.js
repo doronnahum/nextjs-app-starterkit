@@ -31,13 +31,13 @@ export default function Pagination(props) {
                 {prop.text}
               </Button>
             ) : (
-              <Button
-                onClick={() => alert(`you've clicked ${prop.text}`)}
-                className={paginationLink}
-              >
-                {prop.text}
-              </Button>
-            )}
+                <Button
+                  onClick={() => alert(`you've clicked ${prop.text}`)}
+                  className={paginationLink}
+                >
+                  {prop.text}
+                </Button>
+              )}
           </li>
         );
       })}

@@ -8,6 +8,9 @@ export const LoaderTypes = {
   REGISTER: 'REGISTER',
   VERIFY_ACCOUNT: 'VERIFY_ACCOUNT',
   FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  // USER
+  FETCH_ME: 'FETCH_ME',
+  UPDATE_ME: 'UPDATE_ME',
 };
 
 export const LoaderStatus = {

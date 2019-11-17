@@ -48,6 +48,13 @@ export const END_POINTS = {
     url: 'me',
     getErrMessage: (error) => error.response.data.message,
   },
+  // User
+  fetchMe: {
+    url: 'me',
+  },
+  updateMe: {
+    url: 'me',
+  },
 };
 
 
@@ -87,6 +94,21 @@ export default class ApiService {
       headers: {
         Authorization: token,
       },
+    });
+  }
+
+  static fetchMe() {
+    return ApiService.getAxios().request({
+      url: END_POINTS.fetchMe.url,
+      method: METHODS.GET,
+    });
+  }
+
+  static updateMe(data) {
+    return ApiService.getAxios().request({
+      url: END_POINTS.updateMe.url,
+      method: METHODS.PATCH,
+      data,
     });
   }
 

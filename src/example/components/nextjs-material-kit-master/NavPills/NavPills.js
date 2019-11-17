@@ -73,18 +73,18 @@ export default function NavPills(props) {
     </Tabs>
   );
   const tabContent = () => <div>1</div>
-  
+
   return horizontal !== undefined ? (
     <GridContainer>
       <GridItem {...horizontal.tabsGrid}>{tabButtons}</GridItem>
       <GridItem {...horizontal.contentGrid}>{tabContent}</GridItem>
     </GridContainer>
   ) : (
-    <div>
-      {tabButtons}
-      {tabContent}
-    </div>
-  );
+      <div>
+        {tabButtons}
+        {tabContent}
+      </div>
+    );
 }
 
 NavPills.defaultProps = {
