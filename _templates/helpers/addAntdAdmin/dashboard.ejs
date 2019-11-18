@@ -87,6 +87,7 @@ class Dashboard extends React.Component {
       return (
         <Link
           href={`/dashboard?screen=${item.result.name}`}
+          key={item.result.name}
         >
           <Button variant="contained" component="a" className={classes.button}>
             {localName || item.result.name}
