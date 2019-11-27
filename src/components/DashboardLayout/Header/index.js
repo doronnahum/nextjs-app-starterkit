@@ -100,6 +100,8 @@ const notifications = [
 ];
 
 function Header({ user = {}, actions }) {
+  const userData = user || {};
+
   const classes = useStyles();
   const router = useRouter();
   const { t } = useTranslation('common');
@@ -136,15 +138,15 @@ function Header({ user = {}, actions }) {
               }}
             />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-            />
-          )}
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }}
+              />
+            )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           {t('dashboardLayout.title')}
@@ -315,13 +317,13 @@ function Header({ user = {}, actions }) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              {user.email}
+              {userData.email}
             </Typography>
             <Typography
               component="span"
               color="primary"
             >
-              {`${user.firstName || ''} ${user.lastName || ''}`}
+              {`${userData.firstName || ''} ${userData.lastName || ''}`}
             </Typography>
           </div>
           <MenuItem
