@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { makeStyles, createStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -11,12 +11,15 @@ import { i18n } from 'src/i18n';
 import i18Config from 'src/i18n/config';
 
 const useStyles = makeStyles(() => createStyles({
-  root: {
+  stick: {
     position: 'absolute',
     top: 0,
     right: 0,
     opacity: 0.5,
     zIndex: 10000,
+  },
+  default: {
+
   },
   button: {
     fontSize: 10,
@@ -26,36 +29,34 @@ const useStyles = makeStyles(() => createStyles({
   },
 }));
 
-function LocalButton() {
+function SwitchLang(props) {
+  const { stick } = props;
   const [isMount, setState] = useState(false);
   useEffect(() => {
     // Update the document title using the browser API
     setState(true);
   });
-  const classes = useStyles();
+  const classes = useStyles(props);
   if (!isMount) return <div className={`${classes.root} local_component`} />;
+  const currentLang = (i18Config.available || []).find((item) => item.lang === i18n.language);
   return (
-    <div className={`${classes.root} local_component`}>
+    <div className={`${classes[stick ? 'stick' : 'default']} local_component`}>
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
           <React.Fragment>
             <Button className={classes.button} variant="contained" {...bindTrigger(popupState)}>
-              {i18n.language || ''}
+              {currentLang ? currentLang.name : ''}
             </Button>
             <Menu {...bindMenu(popupState)}>
-              {((
-                i18Config.localeSubpaths
-                  ? Object.keys(i18Config.localeSubpaths)
-                  : i18Config.otherLanguages)
-              ).map((lang) => (
+              {i18Config.available.map((item) => (
                 <MenuItem
-                  key={lang}
+                  key={item.lang}
                   onClick={() => {
                     popupState.close();
-                    i18n.changeLanguage(lang);
+                    i18n.changeLanguage(item.lang);
                   }}
                 >
-                  {lang}
+                  {item.name}
                 </MenuItem>
               ))}
             </Menu>
@@ -66,4 +67,12 @@ function LocalButton() {
   );
 }
 
-export default LocalButton;
+export default SwitchLang;
+
+SwitchLang.defaultProps = {
+  stick: false,
+};
+
+SwitchLang.propTypes = {
+  stick: PropTypes.bool,
+};

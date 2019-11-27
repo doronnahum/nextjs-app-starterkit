@@ -35,7 +35,8 @@ export default function authReducer(state = initialState, action) {
       });
       return nextState;
     }
-    case actionsType.ON_CHECK_TOKEN_FAILED: {
+    case actionsType.ON_CHECK_TOKEN_FAILED:
+    case actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR: {
       const nextState = produce(state, (draftState) => {
         draftState.loading = false;
         draftState.valid = false;
@@ -59,12 +60,6 @@ export default function authReducer(state = initialState, action) {
         draftState.loading = initialState.loading;
         draftState.valid = initialState.valid;
         draftState.token = initialState.token;
-        draftState.lastAction = action.type;
-      });
-      return nextState;
-    }
-    case actionsType.ON_CHECK_TOKEN_FAILED_NETWORK_ERROR: {
-      const nextState = produce(state, (draftState) => {
         draftState.lastAction = action.type;
       });
       return nextState;

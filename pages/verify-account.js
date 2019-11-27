@@ -8,7 +8,7 @@ export default Page({
   logoutRequired: true,
   adminRequired: false,
   i18n: ['verifyAccount'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'verifyAccountPage',
 })(() => (
   <React.Fragment>

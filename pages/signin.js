@@ -8,7 +8,7 @@ export default Page({
   logoutRequired: true,
   adminRequired: false,
   i18n: ['signin'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'SigninPage',
 })(() => (
   <React.Fragment>

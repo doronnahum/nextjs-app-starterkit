@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { setNetworkOnline, setWindowSize } from 'src/redux/global/global.actions';
 import throttle from 'lodash/throttle';
 import Typography from '@material-ui/core/Typography';
-import LocalButton from 'src/components/LocalButton';
+import SwitchLang from 'src/components/SwitchLang';
 
 
 const offLineStyle = {
@@ -22,7 +22,7 @@ const offLineStyle = {
 };
 
 
-export default (BaseComponent, { showLocalButton, i18n }) => {
+export default (BaseComponent, { showSwitchLangBtn, i18n }) => {
   class ReactBrowser extends PureComponent {
     handleWindowSize = throttle(() => {
       const { actions } = this.props;
@@ -86,7 +86,7 @@ export default (BaseComponent, { showLocalButton, i18n }) => {
       return (
         <React.Fragment>
           <BaseComponent {...this.props} />
-          {showLocalButton && <LocalButton />}
+          {showSwitchLangBtn && <SwitchLang stick />}
           {this.renderOffline()}
         </React.Fragment>
       );

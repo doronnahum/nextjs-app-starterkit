@@ -8,7 +8,7 @@ export default Page({
   logoutRequired: false,
   adminRequired: false,
   i18n: ['common'],
-  showLocalButton: false,
+  showSwitchLangBtn: false,
   displayName: 'nextjs-material-kit-master',
 })(() => (
   <React.Fragment>

@@ -8,7 +8,7 @@ export default Page({
   logoutRequired: false,
   adminRequired: false,
   i18n: ['home', 'common'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'omePage',
 })(() => (
   <React.Fragment>

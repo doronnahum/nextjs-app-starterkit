@@ -9,7 +9,7 @@ export default Page({
   logoutRequired: false,
   adminRequired: false,
   i18n: ['dashboard', 'common'],
-  showLocalButton: true,
+  showSwitchLangBtn: false,
   displayName: 'DashboardAccount',
 })(() => (
   <React.Fragment>

@@ -24,6 +24,7 @@ import {
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons';
 import classNames from 'classnames';
+import SwitchLang from 'src/components/SwitchLang';
 
 // styles
 import { logout } from 'src/redux/auth/auth.actions';
@@ -332,6 +333,7 @@ function Header({ user = {}, actions }) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> {t('dashboardLayout.profile_link')}
           </MenuItem>
+          <SwitchLang />
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

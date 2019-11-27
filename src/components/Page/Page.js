@@ -9,13 +9,13 @@ const Page = (config) => (WrappedComponent) => {
   if (!config) throw new Error('Config is required');
   // eslint-disable-next-line no-unused-vars
   const {
-    loginRequired, logoutRequired, adminRequired, i18n, showLocalButton, displayName,
+    loginRequired, logoutRequired, adminRequired, i18n, showSwitchLangBtn, displayName,
   } = config;
   const _displayName = displayName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   const Extended1 = WithAuth(WrappedComponent, { loginRequired, logoutRequired, adminRequired });
   const Extended2 = WithNotifier(Extended1);
-  const Extended3 = WithBrowser(Extended2, { showLocalButton, i18n });
+  const Extended3 = WithBrowser(Extended2, { showSwitchLangBtn, i18n });
 
   Extended3.displayName = _displayName;
 

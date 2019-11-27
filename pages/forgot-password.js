@@ -8,7 +8,7 @@ export default Page({
   logoutRequired: true,
   adminRequired: false,
   i18n: ['forgotPassword'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'forgotPassword',
 })(() => (
   <React.Fragment>

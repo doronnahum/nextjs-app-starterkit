@@ -144,7 +144,7 @@ export default Page({
   logoutRequired: false,
   adminRequired: false,
   i18n: ['common'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'ExamplePrivatePage',
 })(() => (
   <React.Fragment>
@@ -173,7 +173,7 @@ export default Page({
   logoutRequired: true,
   adminRequired: false,
   i18n: ['forgotPassword'],
-  showLocalButton: true,
+  showSwitchLangBtn: true,
   displayName: 'forgotPassword',
 })(() => (
   <React.Fragment>
