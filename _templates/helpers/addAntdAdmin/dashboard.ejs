@@ -41,6 +41,10 @@ class Dashboard extends React.Component {
     this.state = {
       screenName: null,
     };
+    if (i18n.language) {
+      setLocal(locals[fullLangsName[i18n.language]] || locals.heIl);
+      setLocalDashboard(localsDashboard[fullLangsName[i18n.language]] || localsDashboard.heIL);
+    }
   }
 
   componentDidMount() {
