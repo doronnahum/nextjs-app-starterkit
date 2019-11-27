@@ -2,7 +2,7 @@
   "screenName": "signin",
   "title": "כניסה",
   "emailFieldLabel": "דואר אלקטרוני",
-  "emailPasswordLabel": "סיסמא",
+  "passwordLabel": "סיסמא",
   "signinRememberMe": "זכור אותי",
   "submitButton": "כניסה",
   "forgotPasswordButton": "שכחת סיסמא?",

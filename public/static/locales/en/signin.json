@@ -2,7 +2,7 @@
   "screenName": "signin",
   "title": "Sign In",
   "emailFieldLabel": "Email Address",
-  "emailPasswordLabel": "Password",
+  "passwordLabel": "Password",
   "signinRememberMe": "Remember Me",
   "submitButton": "Sign In",
   "forgotPasswordButton": "Forgot password?",

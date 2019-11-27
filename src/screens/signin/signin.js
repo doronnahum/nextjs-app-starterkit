@@ -72,7 +72,7 @@ function SignIn({ actions, t }) {
             required
             fullWidth
             name="password"
-            label={t('emailPasswordLabel')}
+            label={t('passwordLabel')}
             type="password"
             id="password"
             autoComplete="current-password"
