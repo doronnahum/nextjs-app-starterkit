@@ -63,7 +63,7 @@ function SignIn({ actions, t }) {
             autoComplete="email"
             autoFocus
             inputRef={register}
-            error={errors.email}
+            error={!!errors.email}
             helperText={errors.email && errors.email.message}
           />
           <TextField
@@ -77,7 +77,7 @@ function SignIn({ actions, t }) {
             id="password"
             autoComplete="current-password"
             inputRef={register}
-            error={errors.password}
+            error={!!errors.password}
             helperText={errors.password && errors.password.message}
           />
           {/* <FormControlLabel

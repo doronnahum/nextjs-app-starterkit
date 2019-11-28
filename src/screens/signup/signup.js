@@ -62,7 +62,7 @@ function SignUp({ actions, t }) {
                 label={t('firstNameFieldLabel')}
                 autoFocus
                 inputRef={register}
-                error={errors.firstName}
+                error={!!errors.firstName}
                 helperText={errors.firstName && errors.firstName.message}
               />
             </Grid>
@@ -74,7 +74,7 @@ function SignUp({ actions, t }) {
                 label={t('lastNameFieldLabel')}
                 name="lastName"
                 inputRef={register}
-                error={errors.lastName}
+                error={!!errors.lastName}
                 helperText={errors.lastName && errors.lastName.message}
               />
             </Grid>
@@ -89,7 +89,7 @@ function SignUp({ actions, t }) {
             name="email"
             autoComplete="email"
             inputRef={register}
-            error={errors.email}
+            error={!!errors.email}
             helperText={errors.email && errors.email.message}
           />
           <TextField
@@ -103,7 +103,7 @@ function SignUp({ actions, t }) {
             id="password"
             autoComplete="new-password"
             inputRef={register}
-            error={errors.password}
+            error={!!errors.password}
             helperText={errors.password && errors.password.message}
           />
           <FormControlLabel
